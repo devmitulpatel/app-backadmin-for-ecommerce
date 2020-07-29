@@ -26,9 +26,21 @@ Route::middleware('auth')->group(function () {
 
 
 
+    Route::prefix('profile')->group(function () {
+
+        Route::match(['get','post'],'/',"Profile@index")->name('profile');
+        Route::match(['post'],'/save',"Profile@save")->name('profile.save');
+
+
+
+    });
+
+
+
     Route::prefix('settings')->group(function () {
 
-            Route::get('/general',"Settings\\General@index")->name('settings.general');
+            Route::match(['get','post'],'/general',"Settings\\General@index")->name('settings.general');
+            Route::match(['post'],'/general/save',"Settings\\General@save")->name('settings.general.save');
 
 
     });

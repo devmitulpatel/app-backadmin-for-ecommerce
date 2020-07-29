@@ -11572,5 +11572,23 @@ body {
   background-color: rgba(255, 255, 255, 0.12);
 }
 
+.logoSample {
+  max-width: 120px;
+  max-height: 80px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.inputLogo {
+  margin-top: -35px;
+  padding-right: 30px;
+}
+
+.error-file {
+  margin-top: 18px;
+}
+
 
 /*# sourceMappingURL=app.css.map*/
