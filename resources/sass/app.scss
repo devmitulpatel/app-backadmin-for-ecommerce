@@ -110,6 +110,7 @@ body{
     top: 0;
     //right: 25px;
     font-size: 36px;
+    z-index: 1;
   //      margin-left: 50px;
 }
 
@@ -130,12 +131,14 @@ body{
     top: 0;
     background-color: $base-color-2;
     text-align: center;
+    z-index: 1;
     #sidebarlogo{
         max-width: 215px;
         max-height: 80px;
         margin-bottom: 10px;
         border-radius: 10px;
         border: 2px outset rgba(255,255,255,0.2);
+        background-color: aliceblue;
     }
 
 
@@ -222,4 +225,29 @@ body{
 }
 .error-file{
     margin-top:18px;
+}
+
+#headerlogo{
+    display: block;
+    max-height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: 400ms all ease-in;
+    //width: 50%;
+}
+.headerlogo-small{
+
+    max-height: 40px!important;
+    transition: 400ms all ease-in;
+
+    //width: 50%;
+}
+.header{
+    position: sticky;
+    top: 0px;
+    z-index: 1200;
+}
+#vuemain{
+    position: relative;
+    z-index: 200;
 }

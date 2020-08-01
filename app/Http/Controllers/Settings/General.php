@@ -36,6 +36,7 @@ class General extends Controller
 
         try {
 
+
             $m->updateOrInsert(['id'=>1],$r->all());
             $response=[
                 'status'=>200,

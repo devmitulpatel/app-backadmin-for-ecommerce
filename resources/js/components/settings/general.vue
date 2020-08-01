@@ -40,7 +40,7 @@
                                 </div>
 
                                 <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-3">
-                                    <label for="websiteLogo"> Website Logo </label>
+                                    <label for="websiteLogo"> Admin Panel Logo </label>
 
                                     <div class="row">
                                         <div class="col-8">

@@ -27,6 +27,7 @@ Vue.use(Toasted)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('setting-general', require('./components/settings/general').default);
+Vue.component('setting-website', require('./components/settings/website').default);
 Vue.component('profile', require('./components/profile').default);
 
 /**
@@ -39,10 +40,11 @@ window.validate = require("validate.js");
 const app = new Vue({
     el: '#app',
     data:{
-      sideBar:false,
+        sideBar:false,
         shortSideBar:false,
         fullSidenar:false,
-        liveComponent:null
+        liveComponent:null,
+        winDown:false
 
     },
     components: {
@@ -53,7 +55,6 @@ const app = new Vue({
               toggleSidebar(){
                   this.sideBar=(this.sideBar)?false:true;
               },
-
               openNav() {
                   var width="250px";
                   var marginLeft="250px";
@@ -70,10 +71,8 @@ const app = new Vue({
                   main.style.pointerEvents  = "none";
                   main.style.opacity="0.5";
                   overlay.style.opacity="1";
-                  overlay.style.zIndex="1";
+                  overlay.style.zIndex="1990";
                 },
-
-                /* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
               closeNav() {
 
                   var width="0";
@@ -95,7 +94,7 @@ const app = new Vue({
                     overlay.style.zIndex="-1";
                   //  document.body.style.backgroundColor = "white";
                 },
-                 clickEventFromSideBar(url,raw=false,target="main"){
+              clickEventFromSideBar(url,raw=false,target="main"){
                      var mian=document.getElementById("main");
                      var th =this;
 
@@ -148,16 +147,21 @@ const app = new Vue({
 
 
 
-                     }
+                     },
+              updateScroll() {
+                        this.winDown=(window.scrollY > 100)?true:false;
+                    }
 
     },
 
     watch:{
         sideBar(NewVal,OldVal){
-
             (NewVal)?this.openNav():this.closeNav();
+        },
 
-        }
+    },
+    mounted(){
+        window.addEventListener('scroll', this.updateScroll);
     }
 
 

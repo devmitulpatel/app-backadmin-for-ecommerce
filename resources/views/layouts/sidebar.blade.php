@@ -1,4 +1,4 @@
-<div id="mySidenav" class="sidenav "  >
+<div id="mySidenav" class="sidenav " style="z-index: 1990" >
 
 
     <section  class="container-fluid sidenav-company-details " >
@@ -199,6 +199,10 @@
 
         <a class="btn btn-link btn-block text-left" >
             <i class="fas fa-level-up-alt fa-rotate-90"></i>  Roles Setting
+        </a>
+
+        <a class="btn btn-link btn-block text-left" v-on:click="clickEventFromSideBar('{{route('settings.website',['compact'=>true])}}')">
+            <i class="fas fa-level-up-alt fa-rotate-90"></i>  Website Setting
         </a>
 
 

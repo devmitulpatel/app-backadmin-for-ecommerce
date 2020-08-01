@@ -11478,6 +11478,7 @@ body {
   position: absolute;
   top: 0;
   font-size: 36px;
+  z-index: 1;
 }
 
 #main {
@@ -11503,6 +11504,7 @@ body {
   top: 0;
   background-color: #11151e;
   text-align: center;
+  z-index: 1;
   border-bottom: 1px solid black;
 }
 
@@ -11512,6 +11514,7 @@ body {
   margin-bottom: 10px;
   border-radius: 10px;
   border: 2px outset rgba(255, 255, 255, 0.2);
+  background-color: aliceblue;
 }
 
 #overlay {
@@ -11588,6 +11591,31 @@ body {
 
 .error-file {
   margin-top: 18px;
+}
+
+#headerlogo {
+  display: block;
+  max-height: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: 400ms all ease-in;
+}
+
+.headerlogo-small {
+  max-height: 40px !important;
+  transition: 400ms all ease-in;
+}
+
+.header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  z-index: 1200;
+}
+
+#vuemain {
+  position: relative;
+  z-index: 200;
 }
 
 

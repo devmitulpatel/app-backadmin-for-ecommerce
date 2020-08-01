@@ -27,22 +27,36 @@
 
     <div id="app" >
 
-        <div id="overlay" v-on:click="toggleSidebar()">
+        <div id="overlay" v-on:click="toggleSidebar()" >
 
         </div>
 
     @include('layouts.sidebar')
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm header">
             <div class="container-fluid">
                 <!--            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 -->
-                <div  class="btn btn-outline-info">
-                    <span  v-on:click="toggleSidebar()">  <i class="fas fa-bars"></i> Menu</span>
+                <div  class="btn btn-outline-info" style="z-index: 2;" v-on:click="toggleSidebar()">
+                    <span    >
+                        <i class="fas fa-bars" style="display: inline-block;padding-right:10px"></i>
+                        <span style="display: inline-block">Menu</span>
+                        </span>
                 </div>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                    <div   style="width: 98%;position: absolute;z-index: 1;" class="d-flex justify-content-center" >
+
+                    <div>
+                        <img  id="headerlogo" :class="{ 'headerlogo-small':winDown}"  src="{{ settings()->get('websiteLogo') }}">
+                    </div>
+
+
+
+                    </div>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent" style="z-index: 1;">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 
@@ -90,7 +104,7 @@
 
 
         <main class="py-4" id="main" >
-            <div id="vuemain">
+            <div id="vuemain" >
                 @yield('content')
             </div>
 

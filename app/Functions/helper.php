@@ -8,7 +8,14 @@ if(!function_exists ('settings')){
             case 'general':
                $re =new \App\Helper\Settings(new \App\Model\Settings\General());
                 break;
+            case 'website':
+               $re =new \App\Helper\Settings(new \App\Model\Settings\Website());
+                break;
         }
+
+
+
+
         return $re;
     }
 }
