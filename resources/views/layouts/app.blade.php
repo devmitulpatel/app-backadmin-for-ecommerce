@@ -26,7 +26,11 @@
 
 
     <div id="app" >
+@php
 
+
+
+@endphp
         <div id="overlay" v-on:click="toggleSidebar()" >
 
         </div>
