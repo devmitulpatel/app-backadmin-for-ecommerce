@@ -5,11 +5,11 @@
 
         <div >
             <div >
-            <img id="sidebarlogo"  src="{{ settings()->get('websiteLogo') }}">
+{{--            <img id="sidebarlogo"  src="{{ settings()->get('websiteLogo') }}">--}}
             </div>
         </div>
 
-        <h3 >{{ settings()->get('CompanyName') }}</h3>
+{{--        <h3 >{{ settings()->get('CompanyName') }}</h3>--}}
     </section>
 
 
