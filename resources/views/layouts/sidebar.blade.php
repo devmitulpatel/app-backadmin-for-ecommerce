@@ -30,7 +30,7 @@
     <div class="collapse sidebarsub" id="sales">
 
         <a class="btn btn-link btn-block text-left" >
-            <i class="fas fa-level-up-alt fa-rotate-90"></i>  Add Customer
+            <i class="fas fa-level-up-alt fa-rotate-90"></i>  Add Order
         </a>
 
         <a class="btn btn-link btn-block text-left" >
@@ -39,8 +39,8 @@
 
         <a class="btn btn-link btn-block text-left" >
             <i class="fas fa-level-up-alt fa-rotate-90"></i>  Completed Orders
-        </a>
 
+        </a>
 
 
 

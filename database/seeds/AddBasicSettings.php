@@ -45,5 +45,52 @@ class AddBasicSettings extends Seeder
         $user->updateOrInsert(['id'=>1],$root_user);
 
 
+        $product_unit=new \App\Model\Settings\Product\Units();
+
+        $product_unit_default=[
+            [
+                'name'=>'Pieces',
+                'shortname'=>'pcs',
+                'uunit'=>0,
+                'uunitId'=>0,
+                'dunit'=>0,
+                'dunitId'=>0,
+                'created_at'=>now(),
+                'updated_at'=>now(),
+                'status'=>true
+            ],
+            [
+                'name'=>'Gram',
+                'shortname'=>'gms',
+                'uunit'=>1000,
+                'uunitId'=>3,
+                'dunit'=>0,
+                'dunitId'=>0,
+                'created_at'=>now(),
+                'updated_at'=>now(),
+                'status'=>true
+            ],
+            [
+                'name'=>'Kilo Gram',
+                'shortname'=>'kgs',
+                'uunit'=>0,
+                'uunitId'=>0,
+                'dunit'=>0.001,
+                'dunitId'=>2,
+                'created_at'=>now(),
+                'updated_at'=>now(),
+                'status'=>true
+            ]
+
+        ];
+        foreach ($product_unit_default as $unit){
+
+            $product_unit->insert($unit);
+
+        }
+
+
+
+
     }
 }

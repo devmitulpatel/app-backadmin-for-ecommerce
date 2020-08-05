@@ -53,6 +53,8 @@ Route::middleware('auth')->group(function () {
             Route::match(['get','post'],'/product',"Settings\\Product@index")->name('settings.product');
             Route::match(['post'],'/product/save',"Settings\\Website@save")->name('settings.website.save');
 
+        Route::match(['post'],'/product/get/units/all',"Settings\\Product@getAllUnits")->name('settings.Product.Units.all');
+
 
 
             Route::fallback(function (){

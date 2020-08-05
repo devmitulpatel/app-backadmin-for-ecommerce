@@ -2875,6 +2875,111 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "product",
@@ -2893,15 +2998,27 @@ __webpack_require__.r(__webpack_exports__);
           }
         }
       },
-      currentFormTab: 0
+      currentFormTab: 0,
+      allUnitsFromServer: null
     };
   },
   props: ['msData'],
   beforeMount: function beforeMount() {
     if (this.msData.hasOwnProperty('inputData')) this.input = this.msData.inputData;
     this.updateInput();
+    this.input.dunitId = 0;
+    this.input.uunitId = 0;
   },
   methods: {
+    checkisValidSelect: function checkisValidSelect(type, current) {
+      var check = this.input[type] == 0;
+
+      if (check && this.input.hasOwnProperty(current)) {
+        this.input[current] = "";
+      }
+
+      return check ? false : true;
+    },
     changeTab: function changeTab(tab) {
       if (this.currentFormTab != tab) this.currentFormTab = tab;
     },
@@ -2971,6 +3088,15 @@ __webpack_require__.r(__webpack_exports__);
       var oldInput = this.inputError;
       this.inputError = null;
       this.inputError = oldInput;
+    },
+    allUnits: function allUnits() {
+      var forced = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      var url = this.msData.path['get.allUnits'];
+      var th = this;
+      if (th.allUnitsFromServer == null || forced) axios.post(url).then(function (res) {
+        th.allUnitsFromServer = res.data.ResponseData;
+      });
+      return th.allUnitsFromServer;
     }
   },
   watch: {
@@ -41487,11 +41613,11 @@ var render = function() {
                       "div",
                       {
                         staticClass:
-                          "form-group col-xs-12 col-sm-12 col-md-6 col-lg-6"
+                          "form-group col-xs-12 col-sm-12 col-md-3 col-lg-3"
                       },
                       [
-                        _c("label", { attrs: { for: "title" } }, [
-                          _vm._v("Title ")
+                        _c("label", { attrs: { for: "name" } }, [
+                          _vm._v("Name ")
                         ]),
                         _vm._v(" "),
                         _c("input", {
@@ -41499,41 +41625,36 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.input.title,
-                              expression: "input.title"
+                              value: _vm.input.name,
+                              expression: "input.name"
                             }
                           ],
-                          ref: "title",
+                          ref: "name",
                           staticClass: "form-control",
                           class: {
                             "is-valid":
-                              _vm.validateInputs.includes("title") &&
-                              !_vm.validateInputCheck("title"),
+                              _vm.validateInputs.includes("name") &&
+                              !_vm.validateInputCheck("name"),
                             "is-invalid":
-                              _vm.validateInputs.includes("title") &&
-                              _vm.validateInputCheck("title")
+                              _vm.validateInputs.includes("name") &&
+                              _vm.validateInputCheck("name")
                           },
-                          attrs: {
-                            type: "text",
-                            name: "title",
-                            id: "title",
-                            "aria-describedby": "titleHelp"
-                          },
-                          domProps: { value: _vm.input.title },
+                          attrs: { type: "text", name: "name", id: "name" },
+                          domProps: { value: _vm.input.name },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
-                              _vm.$set(_vm.input, "title", $event.target.value)
+                              _vm.$set(_vm.input, "name", $event.target.value)
                             }
                           }
                         }),
                         _vm._v(" "),
-                        _vm.inputError.hasOwnProperty("title")
+                        _vm.inputError.hasOwnProperty("name")
                           ? _c(
                               "div",
-                              _vm._l(_vm.inputError.title, function(er) {
+                              _vm._l(_vm.inputError.name, function(er) {
                                 return _c(
                                   "div",
                                   {
@@ -41559,11 +41680,11 @@ var render = function() {
                       "div",
                       {
                         staticClass:
-                          "form-group col-xs-12 col-sm-12 col-md-6 col-lg-6"
+                          "form-group col-xs-12 col-sm-12 col-md-3 col-lg-3"
                       },
                       [
-                        _c("label", { attrs: { for: "description" } }, [
-                          _vm._v("Description ")
+                        _c("label", { attrs: { for: "sortname" } }, [
+                          _vm._v("Short Name ")
                         ]),
                         _vm._v(" "),
                         _c("input", {
@@ -41571,27 +41692,26 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.input.description,
-                              expression: "input.description"
+                              value: _vm.input.sortname,
+                              expression: "input.sortname"
                             }
                           ],
-                          ref: "description",
+                          ref: "sortname",
                           staticClass: "form-control",
                           class: {
                             "is-valid":
-                              _vm.validateInputs.includes("description") &&
-                              !_vm.validateInputCheck("description"),
+                              _vm.validateInputs.includes("sortname") &&
+                              !_vm.validateInputCheck("sortname"),
                             "is-invalid":
-                              _vm.validateInputs.includes("description") &&
-                              _vm.validateInputCheck("description")
+                              _vm.validateInputs.includes("sortname") &&
+                              _vm.validateInputCheck("sortname")
                           },
                           attrs: {
                             type: "text",
-                            name: "description",
-                            id: "description",
-                            "aria-describedby": "descriptionHelp"
+                            name: "sortname",
+                            id: "sortname"
                           },
-                          domProps: { value: _vm.input.description },
+                          domProps: { value: _vm.input.sortname },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
@@ -41599,17 +41719,17 @@ var render = function() {
                               }
                               _vm.$set(
                                 _vm.input,
-                                "description",
+                                "sortname",
                                 $event.target.value
                               )
                             }
                           }
                         }),
                         _vm._v(" "),
-                        _vm.inputError.hasOwnProperty("description")
+                        _vm.inputError.hasOwnProperty("sortname")
                           ? _c(
                               "div",
-                              _vm._l(_vm.inputError.description, function(er) {
+                              _vm._l(_vm.inputError.sortname, function(er) {
                                 return _c(
                                   "div",
                                   {
@@ -41635,11 +41755,11 @@ var render = function() {
                       "div",
                       {
                         staticClass:
-                          "form-group col-xs-12 col-sm-12 col-md-6 col-lg-6"
+                          "form-group col-xs-12 col-sm-12 col-md-3 col-lg-3"
                       },
                       [
-                        _c("label", { attrs: { for: "keywords" } }, [
-                          _vm._v("Keywords ")
+                        _c("label", { attrs: { for: "unit" } }, [
+                          _vm._v("Unit ")
                         ]),
                         _vm._v(" "),
                         _c("input", {
@@ -41647,45 +41767,36 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.input.keywords,
-                              expression: "input.keywords"
+                              value: _vm.input.unit,
+                              expression: "input.unit"
                             }
                           ],
-                          ref: "keywords",
+                          ref: "unit",
                           staticClass: "form-control",
                           class: {
                             "is-valid":
-                              _vm.validateInputs.includes("keywords") &&
-                              !_vm.validateInputCheck("keywords"),
+                              _vm.validateInputs.includes("unit") &&
+                              !_vm.validateInputCheck("unit"),
                             "is-invalid":
-                              _vm.validateInputs.includes("keywords") &&
-                              _vm.validateInputCheck("keywords")
+                              _vm.validateInputs.includes("unit") &&
+                              _vm.validateInputCheck("unit")
                           },
-                          attrs: {
-                            type: "text",
-                            name: "keywords",
-                            id: "keywords",
-                            "aria-describedby": "keywordsHelp"
-                          },
-                          domProps: { value: _vm.input.keywords },
+                          attrs: { type: "number", name: "unit", id: "unit" },
+                          domProps: { value: _vm.input.unit },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
-                              _vm.$set(
-                                _vm.input,
-                                "keywords",
-                                $event.target.value
-                              )
+                              _vm.$set(_vm.input, "unit", $event.target.value)
                             }
                           }
                         }),
                         _vm._v(" "),
-                        _vm.inputError.hasOwnProperty("keywords")
+                        _vm.inputError.hasOwnProperty("unit")
                           ? _c(
                               "div",
-                              _vm._l(_vm.inputError.keywords, function(er) {
+                              _vm._l(_vm.inputError.unit, function(er) {
                                 return _c(
                                   "div",
                                   {
@@ -41711,66 +41822,77 @@ var render = function() {
                       "div",
                       {
                         staticClass:
-                          "form-group col-xs-12 col-sm-12 col-md-4 col-lg-3"
+                          "form-check col-xs-12 col-sm-12 col-md-3 col-lg-3"
                       },
                       [
-                        _c("label", { attrs: { for: "logo" } }, [
-                          _vm._v(" Webiste Logo ")
+                        _c("label", { attrs: { for: "status" } }, [
+                          _vm._v("Visibilty ")
                         ]),
                         _vm._v(" "),
-                        _c("div", { staticClass: "row" }, [
-                          _c("div", { staticClass: "col-8" }, [
+                        _c("div", { staticClass: "form-control " }, [
+                          _c("label", { staticClass: "radio" }, [
                             _c("input", {
-                              staticClass: "form-control-file",
-                              class: {
-                                "is-valid":
-                                  _vm.validateInputs.includes("logo") &&
-                                  !_vm.validateInputCheck("logo"),
-                                "is-invalid":
-                                  _vm.validateInputs.includes("logo") &&
-                                  _vm.validateInputCheck("logo")
-                              },
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.input.status,
+                                  expression: "input.status"
+                                }
+                              ],
                               attrs: {
-                                type: "file",
-                                name: "logo",
-                                id: "logo",
-                                "aria-describedby": "logoHelp"
+                                name: "status",
+                                type: "radio",
+                                value: "1"
+                              },
+                              domProps: {
+                                checked: _vm._q(_vm.input.status, "1")
                               },
                               on: {
                                 change: function($event) {
-                                  return _vm.fileInput($event, "logo")
+                                  return _vm.$set(_vm.input, "status", "1")
                                 }
                               }
-                            })
+                            }),
+                            _c("span", { staticClass: "pl-2" }, [
+                              _vm._v("Public")
+                            ])
                           ]),
                           _vm._v(" "),
-                          _c("div", { staticClass: "col-4 inputLogo" }, [
-                            _c(
-                              "small",
-                              {
-                                staticClass: "form-text text-muted text-center",
-                                attrs: { id: "logoHelp" }
+                          _c("label", { staticClass: "radio pl-2 " }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.input.status,
+                                  expression: "input.status"
+                                }
+                              ],
+                              attrs: {
+                                name: "status",
+                                type: "radio",
+                                value: "0"
                               },
-                              [_vm._v("Preview")]
-                            ),
-                            _vm._v(" "),
-                            _vm.input.hasOwnProperty("logo")
-                              ? _c("img", {
-                                  staticClass: "logoSample",
-                                  attrs: { src: _vm.input.logo }
-                                })
-                              : _c("img", {
-                                  staticClass: "logoSample",
-                                  attrs: { src: _vm.msData.img.logo }
-                                })
+                              domProps: {
+                                checked: _vm._q(_vm.input.status, "0")
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.$set(_vm.input, "status", "0")
+                                }
+                              }
+                            }),
+                            _c("span", { staticClass: "pl-2" }, [
+                              _vm._v("Private")
+                            ])
                           ])
                         ]),
                         _vm._v(" "),
-                        _vm.inputError.hasOwnProperty("logo")
+                        _vm.inputError.hasOwnProperty("status")
                           ? _c(
                               "div",
-                              { staticClass: "error-file" },
-                              _vm._l(_vm.inputError.logo, function(er) {
+                              _vm._l(_vm.inputError.status, function(er) {
                                 return _c(
                                   "div",
                                   {
@@ -41796,66 +41918,338 @@ var render = function() {
                       "div",
                       {
                         staticClass:
-                          "form-group col-xs-12 col-sm-12 col-md-4 col-lg-3"
+                          "form-group col-xs-12 col-sm-12 col-md-3 col-lg-3"
                       },
                       [
-                        _c("label", { attrs: { for: "favico" } }, [
-                          _vm._v(" Webiste Favico ")
+                        _c("label", { attrs: { for: "dunitId" } }, [
+                          _vm._v("Down Unit ")
                         ]),
                         _vm._v(" "),
-                        _c("div", { staticClass: "row" }, [
-                          _c("div", { staticClass: "col-8" }, [
-                            _c("input", {
-                              staticClass: "form-control-file",
-                              class: {
-                                "is-valid":
-                                  _vm.validateInputs.includes("favico") &&
-                                  !_vm.validateInputCheck("favico"),
-                                "is-invalid":
-                                  _vm.validateInputs.includes("favico") &&
-                                  _vm.validateInputCheck("favico")
-                              },
-                              attrs: {
-                                type: "file",
-                                name: "favico",
-                                id: "favico",
-                                "aria-describedby": "favicoHelp"
-                              },
-                              on: {
-                                change: function($event) {
-                                  return _vm.fileInput($event, "favico")
-                                }
-                              }
-                            })
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col-4 inputLogo" }, [
-                            _c(
-                              "small",
+                        _c(
+                          "select",
+                          {
+                            directives: [
                               {
-                                staticClass: "form-text text-muted text-center",
-                                attrs: { id: "invoiceLogoHelp" }
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.input.dunitId,
+                                expression: "input.dunitId"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-valid":
+                                _vm.validateInputs.includes("dunitId") &&
+                                !_vm.validateInputCheck("dunitId"),
+                              "is-invalid":
+                                _vm.validateInputs.includes("dunitId") &&
+                                _vm.validateInputCheck("dunitId")
+                            },
+                            on: {
+                              change: [
+                                function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.input,
+                                    "dunitId",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                },
+                                function($event) {
+                                  return _vm.updateInput()
+                                }
+                              ]
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              {
+                                attrs: { selected: "" },
+                                domProps: { value: 0 }
                               },
-                              [_vm._v("Preview")]
+                              [_vm._v("No Down Unit")]
                             ),
                             _vm._v(" "),
-                            _vm.input.hasOwnProperty("favico")
-                              ? _c("img", {
-                                  staticClass: "logoSample",
-                                  attrs: { src: _vm.input.favico }
-                                })
-                              : _c("img", {
-                                  staticClass: "logoSample",
-                                  attrs: { src: _vm.msData.img.favico }
-                                })
-                          ])
-                        ]),
+                            _vm._l(_vm.allUnits(), function(unit) {
+                              return _c(
+                                "option",
+                                { domProps: { value: unit.id } },
+                                [_vm._v(_vm._s(unit.name))]
+                              )
+                            })
+                          ],
+                          2
+                        ),
                         _vm._v(" "),
-                        _vm.inputError.hasOwnProperty("favico")
+                        _vm.inputError.hasOwnProperty("dunitId")
                           ? _c(
                               "div",
-                              { staticClass: "error-file" },
-                              _vm._l(_vm.inputError.favico, function(er) {
+                              _vm._l(_vm.inputError.dunitId, function(er) {
+                                return _c(
+                                  "div",
+                                  {
+                                    staticClass: "alert alert-danger",
+                                    attrs: { role: "alert" }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                        " +
+                                        _vm._s(er) +
+                                        "\n                                    "
+                                    )
+                                  ]
+                                )
+                              }),
+                              0
+                            )
+                          : _vm._e()
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.checkisValidSelect("dunitId", "dunit"),
+                            expression: "checkisValidSelect('dunitId','dunit')"
+                          }
+                        ],
+                        staticClass:
+                          "form-group col-xs-12 col-sm-12 col-md-3 col-lg-3"
+                      },
+                      [
+                        _c("label", { attrs: { for: "dunit" } }, [
+                          _vm._v("Down Unit Conversation")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.input.dunit,
+                              expression: "input.dunit"
+                            }
+                          ],
+                          ref: "dunit",
+                          staticClass: "form-control",
+                          class: {
+                            "is-valid":
+                              _vm.validateInputs.includes("dunit") &&
+                              !_vm.validateInputCheck("dunit"),
+                            "is-invalid":
+                              _vm.validateInputs.includes("dunit") &&
+                              _vm.validateInputCheck("dunit")
+                          },
+                          attrs: { type: "number", name: "dunit", id: "dunit" },
+                          domProps: { value: _vm.input.dunit },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.input, "dunit", $event.target.value)
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.inputError.hasOwnProperty("dunit")
+                          ? _c(
+                              "div",
+                              _vm._l(_vm.inputError.dunit, function(er) {
+                                return _c(
+                                  "div",
+                                  {
+                                    staticClass: "alert alert-danger",
+                                    attrs: { role: "alert" }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                        " +
+                                        _vm._s(er) +
+                                        "\n                                    "
+                                    )
+                                  ]
+                                )
+                              }),
+                              0
+                            )
+                          : _vm._e()
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "form-group col-xs-12 col-sm-12 col-md-3 col-lg-3"
+                      },
+                      [
+                        _c("label", { attrs: { for: "uunitId" } }, [
+                          _vm._v("Up Unit ")
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.input.uunitId,
+                                expression: "input.uunitId"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-valid":
+                                _vm.validateInputs.includes("uunitId") &&
+                                !_vm.validateInputCheck("uunitId"),
+                              "is-invalid":
+                                _vm.validateInputs.includes("uunitId") &&
+                                _vm.validateInputCheck("uunitId")
+                            },
+                            attrs: { id: "uunitId" },
+                            on: {
+                              change: [
+                                function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.input,
+                                    "uunitId",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                },
+                                function($event) {
+                                  return _vm.updateInput()
+                                }
+                              ]
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              {
+                                attrs: { selected: "" },
+                                domProps: { value: 0 }
+                              },
+                              [_vm._v("No Down Unit")]
+                            ),
+                            _vm._v(" "),
+                            _vm._l(_vm.allUnits(), function(unit) {
+                              return _c(
+                                "option",
+                                { domProps: { value: unit.id } },
+                                [_vm._v(_vm._s(unit.name))]
+                              )
+                            })
+                          ],
+                          2
+                        ),
+                        _vm._v(" "),
+                        _vm.inputError.hasOwnProperty("uunitId")
+                          ? _c(
+                              "div",
+                              _vm._l(_vm.inputError.uunitId, function(er) {
+                                return _c(
+                                  "div",
+                                  {
+                                    staticClass: "alert alert-danger",
+                                    attrs: { role: "alert" }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                        " +
+                                        _vm._s(er) +
+                                        "\n                                    "
+                                    )
+                                  ]
+                                )
+                              }),
+                              0
+                            )
+                          : _vm._e()
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.checkisValidSelect("uunitId", "uunit"),
+                            expression: "checkisValidSelect('uunitId','uunit')"
+                          }
+                        ],
+                        staticClass:
+                          "form-group col-xs-12 col-sm-12 col-md-3 col-lg-3"
+                      },
+                      [
+                        _c("label", { attrs: { for: "uunit" } }, [
+                          _vm._v("Up Unit Conversation ")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.input.uunit,
+                              expression: "input.uunit"
+                            }
+                          ],
+                          ref: "uunit",
+                          staticClass: "form-control",
+                          class: {
+                            "is-valid":
+                              _vm.validateInputs.includes("dunit") &&
+                              !_vm.validateInputCheck("dunit"),
+                            "is-invalid":
+                              _vm.validateInputs.includes("dunit") &&
+                              _vm.validateInputCheck("dunit")
+                          },
+                          attrs: { type: "number", name: "uunit", id: "uunit" },
+                          domProps: { value: _vm.input.uunit },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.input, "uunit", $event.target.value)
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.inputError.hasOwnProperty("uunit")
+                          ? _c(
+                              "div",
+                              _vm._l(_vm.inputError.uunit, function(er) {
                                 return _c(
                                   "div",
                                   {
@@ -41878,7 +42272,44 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(1)
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row mt-3" }, [
+                    _c("div", { staticClass: "col-12" }, [
+                      _c(
+                        "div",
+                        { staticClass: "bg-info text-center pt-2 pb-2" },
+                        [_vm._v(" All Units ")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "table",
+                        { staticClass: "table table-bordered" },
+                        [
+                          _vm._m(2),
+                          _vm._v(" "),
+                          _vm._l(_vm.allUnits(), function(unit) {
+                            return _c("tr", [
+                              _c("td", [_vm._v(_vm._s(unit.name))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(unit.shortname))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(unit.unit))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(unit.uunitName))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(unit.uunit))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(unit.dunitName))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(unit.dunit))])
+                            ])
+                          })
+                        ],
+                        2
+                      )
+                    ])
+                  ])
                 ]
               )
             ]
@@ -41913,6 +42344,26 @@ var staticRenderFns = [
         staticClass: "btn btn-secondary col-12",
         attrs: { type: "submit", name: "submit" }
       })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", [_vm._v("Name")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Short Name")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Unit Rate")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Up Unit Name")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Up Unit")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Down Unit Name")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Down Unit")])
     ])
   },
   function() {
