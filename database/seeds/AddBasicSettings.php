@@ -40,7 +40,7 @@ class AddBasicSettings extends Seeder
         $root_user=[
             'name'=>'Test Admin',
             'email'=>'test@admin.ms',
-            'password'=>'$2y$10$idMWr1xTbxAWjDjc24zHN.PhISs32fnK3rowbd..M4C/QKescKMki'
+            'password'=>'$2y$10$j..CBYEl9VQI7.hKLX8bMOlsUBDo.lfhrQcApEca2tI5Np3Wg9IQ.'//123456789
         ];
         $user->updateOrInsert(['id'=>1],$root_user);
 

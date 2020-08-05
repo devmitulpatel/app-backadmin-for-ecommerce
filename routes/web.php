@@ -49,6 +49,12 @@ Route::middleware('auth')->group(function () {
 
             Route::match(['get','post'],'/website',"Settings\\Website@index")->name('settings.website');
             Route::match(['post'],'/website/save',"Settings\\Website@save")->name('settings.website.save');
+
+            Route::match(['get','post'],'/product',"Settings\\Product@index")->name('settings.product');
+            Route::match(['post'],'/product/save',"Settings\\Website@save")->name('settings.website.save');
+
+
+
             Route::fallback(function (){
                 return response()->json(['Sorry but we are not able find what you are looking'],422);
             });

@@ -28,6 +28,7 @@ Vue.use(Toasted)
 
 Vue.component('setting-general', require('./components/settings/general').default);
 Vue.component('setting-website', require('./components/settings/website').default);
+Vue.component('setting-product', require('./components/settings/product').default);
 Vue.component('profile', require('./components/profile').default);
 
 /**
@@ -138,7 +139,9 @@ const app = new Vue({
                              //prevents browser from storing history with each change:
                              var statedata={};
                              var title='changes';
-                             window.history.replaceState(statedata, title, url);
+
+
+                             let urlFinal = new URL(url);urlFinal.searchParams.delete('compact');window.history.replaceState(statedata, title, urlFinal.toString());
                          }
 
                      }).catch(e=>console.log(e));

@@ -5,11 +5,11 @@
 
         <div >
             <div >
-{{--            <img id="sidebarlogo"  src="{{ settings()->get('websiteLogo') }}">--}}
+            <img id="sidebarlogo"  src="{{ settings()->get('websiteLogo') }}">
             </div>
         </div>
 
-{{--        <h3 >{{ settings()->get('CompanyName') }}</h3>--}}
+        <h3 >{{ settings()->get('CompanyName') }}</h3>
     </section>
 
 
@@ -25,7 +25,7 @@
 
 
     <a class="btn btn-link btn-block text-left"  data-toggle="collapse" data-target="#sales">
-        <i class="fas fa-cogs"></i>  Sales <i class="fas fa-chevron-right right p-fix"></i>
+        <i class="fas fa-store"></i>  Sales <i class="fas fa-chevron-right right p-fix"></i>
     </a>
     <div class="collapse sidebarsub" id="sales">
 
@@ -56,7 +56,7 @@
 
 
     <a class="btn btn-link btn-block text-left"  data-toggle="collapse" data-target="#product">
-        <i class="fas fa-cogs"></i>  Product <i class="fas fa-chevron-right right p-fix"></i>
+        <i class="fas fa-tags"></i>  Product <i class="fas fa-chevron-right right p-fix"></i>
     </a>
     <div class="collapse sidebarsub" id="product">
         <a class="btn btn-link btn-block text-left" >
@@ -96,7 +96,7 @@
 
 
     <a class="btn btn-link btn-block text-left"  data-toggle="collapse" data-target="#services">
-        <i class="fas fa-cogs"></i>  Services <i class="fas fa-chevron-right right p-fix"></i>
+        <i class="fas fa-map-marked"></i>  Services <i class="fas fa-chevron-right right p-fix"></i>
     </a>
     <div class="collapse sidebarsub" id="services">
         <a class="btn btn-link btn-block text-left" >
@@ -130,7 +130,7 @@
 
 
     <a class="btn btn-link btn-block text-left"  data-toggle="collapse" data-target="#customer">
-        <i class="fas fa-cogs"></i>  Customer <i class="fas fa-chevron-right right p-fix"></i>
+        <i class="fas fa-users"></i>  Customer <i class="fas fa-chevron-right right p-fix"></i>
     </a>
     <div class="collapse sidebarsub" id="customer">
         <a class="btn btn-link btn-block text-left" >
@@ -177,7 +177,7 @@
             <i class="fas fa-level-up-alt fa-rotate-90"></i>  General Setting
         </a>
 
-        <a class="btn btn-link btn-block text-left" >
+        <a class="btn btn-link btn-block text-left"  v-on:click="clickEventFromSideBar('{{route('settings.product',['compact'=>true])}}')">
             <i class="fas fa-level-up-alt fa-rotate-90"></i>  Product Setting
         </a>
 

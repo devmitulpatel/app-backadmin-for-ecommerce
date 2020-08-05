@@ -11618,5 +11618,34 @@ body {
   z-index: 200;
 }
 
+.formtab-fixed {
+  margin-top: 5px;
+  margin-bottom: -13px;
+  cursor: pointer;
+}
+
+.formtab-fixed .nav-item .nav-link.active {
+  background-color: #6cb2eb;
+  color: rgba(255, 255, 255, 0.8);
+  transition: all ease-in-out 500ms;
+  cursor: disabled;
+}
+
+.formtab-fixed .nav-item .nav-link {
+  background-color: rgba(200, 200, 200, 0.5);
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.formtab-fixed .nav-item .nav-link:hover {
+  background-color: #c6e1f7;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.formtab-fixed .nav-item .nav-link.active {
+  background-color: #6cb2eb;
+  color: rgba(255, 255, 255, 0.8);
+  transition: all ease-in-out 500ms;
+}
+
 
 /*# sourceMappingURL=app.css.map*/
