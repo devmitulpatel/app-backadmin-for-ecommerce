@@ -4,21 +4,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ settings()->get('CompanyName') }}</title>
 
-    <!-- Scripts -->
-
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <link href="{{asset('css/comman.css')  }}" rel="stylesheet">
+    <link href="{{asset('css/all.css')  }}" rel="stylesheet">
+
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet" id="mainCss">
+    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
 </head>
 <body>
 
@@ -31,12 +28,12 @@
 
 
 @endphp
-        <div id="overlay" v-on:click="toggleSidebar()" >
+        <div id="overlay"  v-on:click="toggleSidebar()">
 
         </div>
 
     @include('layouts.sidebar')
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm header">
+        <nav class="navbar navbar-expand-md navbar-light shadow-sm header">
             <div class="container-fluid">
                 <!--            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -69,6 +66,15 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+
+                        <li class="nav-item p-2 darkmode-btn">
+                            <div class="custom-control custom-switch" >
+                                <input type="checkbox" class="custom-control-input" id="customSwitch1" v-model="darkMode">
+                                <label class="custom-control-label" for="customSwitch1">Dark @{{ (darkMode)?'on':'off' }}</label>
+                            </div>
+                        </li>
+
+
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -115,7 +121,10 @@
         </main>
     </div>
 
+    <script src="{{ mix('js/manifest.js')."?".date('Ydmis') }}" defer></script>
+    <script src="{{ mix('js/vendor.js')."?".date('Ydmis') }}" defer></script>
     <script src="{{ mix('js/app.js')."?".date('Ydmis') }}" defer></script>
+
     <script src="https://kit.fontawesome.com/613c299ae6.js" crossorigin="anonymous"></script>
 </body>
 </html>

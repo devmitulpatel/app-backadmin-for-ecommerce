@@ -196,7 +196,7 @@
 
 
 
-                        <form @submit.prevent="processForm(msData.path['save.website'])">
+                        <form @submit.prevent="processForm(msData.path['save.units'],input1,inputError1,'updateAllUnits')">
 
                             <div class="row">
 
@@ -209,11 +209,11 @@
                                                 'is-invalid':validateInputs.includes('name') && validateInputCheck('name')
                                                 }"
 
-                                           type="text" v-model="input.name" name="name" class="form-control" id="name">
+                                           type="text" v-model="input1.name" name="name" class="form-control" id="name">
 
-                                    <div v-if="inputError.hasOwnProperty('name')">
+                                    <div v-if="inputError1.hasOwnProperty('name')">
 
-                                        <div class="alert alert-danger" role="alert" v-for="er in inputError.name">
+                                        <div class="alert alert-danger" role="alert" v-for="er in inputError1.name">
                                             {{er}}
                                         </div>
 
@@ -225,19 +225,19 @@
 
                                 </div>
                                 <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                                    <label for="sortname">Short Name </label>
-                                    <input ref="sortname"
+                                    <label for="shortname">Short Name </label>
+                                    <input ref="shortname"
 
                                            :class="{
-                                                'is-valid':validateInputs.includes('sortname') && !validateInputCheck('sortname'),
-                                                'is-invalid':validateInputs.includes('sortname') && validateInputCheck('sortname')
+                                                'is-valid':validateInputs.includes('shortname') && !validateInputCheck('shortname'),
+                                                'is-invalid':validateInputs.includes('shortname') && validateInputCheck('shortname')
                                                 }"
 
-                                           type="text" v-model="input.sortname" name="sortname" class="form-control" id="sortname">
+                                           type="text" v-model="input1.shortname" name="shortname" class="form-control" id="shortname">
 
-                                    <div v-if="inputError.hasOwnProperty('sortname')">
+                                    <div v-if="inputError1.hasOwnProperty('shortname')">
 
-                                        <div class="alert alert-danger" role="alert" v-for="er in inputError.sortname">
+                                        <div class="alert alert-danger" role="alert" v-for="er in inputError1.shortname">
                                             {{er}}
                                         </div>
 
@@ -257,11 +257,11 @@
                                                 'is-invalid':validateInputs.includes('unit') && validateInputCheck('unit')
                                                 }"
 
-                                           type="number" v-model="input.unit" name="unit" class="form-control" id="unit">
+                                           type="number" v-model="input1.unit" name="unit" class="form-control" id="unit">
 
-                                    <div v-if="inputError.hasOwnProperty('unit')">
+                                    <div v-if="inputError1.hasOwnProperty('unit')">
 
-                                        <div class="alert alert-danger" role="alert" v-for="er in inputError.unit">
+                                        <div class="alert alert-danger" role="alert" v-for="er in inputError1.unit">
                                             {{er}}
                                         </div>
 
@@ -276,7 +276,7 @@
                                     <label for="status">Visibilty </label>
                                 <div class="form-control ">
 
-                                    <label class="radio"><input  v-model="input.status" name="status" type="radio" value="1" ><span class="pl-2">Public</span></label>
+                                    <label class="radio"><input  v-model="input1.status" id="status" name="status" type="radio" value="1" ><span class="pl-2">Public</span></label>
                                     <label class="radio pl-2 "><input  v-model="input.status" name="status" type="radio" value="0"><span class="pl-2">Private</span></label>
 
                                 </div>
@@ -286,9 +286,9 @@
 
 
 
-                                    <div v-if="inputError.hasOwnProperty('status')">
+                                    <div v-if="inputError1.hasOwnProperty('status')">
 
-                                        <div class="alert alert-danger" role="alert" v-for="er in inputError.status">
+                                        <div class="alert alert-danger" role="alert" v-for="er in inputError1.status">
                                             {{er}}
                                         </div>
 
@@ -302,7 +302,7 @@
 
                                 <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                     <label for="dunitId">Down Unit </label>
-                                    <select v-on:change="updateInput()" v-model="input.dunitId" class="form-control"  :class="{
+                                    <select v-on:change="updateInput()" v-model="input1.dunitId" class="form-control"  :class="{
                                                 'is-valid':validateInputs.includes('dunitId') && !validateInputCheck('dunitId'),
                                                 'is-invalid':validateInputs.includes('dunitId') && validateInputCheck('dunitId')
                                                 }">
@@ -313,9 +313,9 @@
 
 
 
-                                    <div v-if="inputError.hasOwnProperty('dunitId')">
+                                    <div v-if="inputError1.hasOwnProperty('dunitId')">
 
-                                        <div class="alert alert-danger" role="alert" v-for="er in inputError.dunitId">
+                                        <div class="alert alert-danger" role="alert" v-for="er in inputError1.dunitId">
                                             {{er}}
                                         </div>
 
@@ -327,7 +327,7 @@
 
                                 </div>
 
-                                <div v-show="checkisValidSelect('dunitId','dunit')" class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                <div v-show="checkisValidSelect('dunitId','dunit',input1)" class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                     <label for="dunit">Down Unit Conversation</label>
                                     <input ref="dunit"
 
@@ -336,11 +336,11 @@
                                                 'is-invalid':validateInputs.includes('dunit') && validateInputCheck('dunit')
                                                 }"
 
-                                           type="number" v-model="input.dunit" name="dunit" class="form-control" id="dunit">
+                                           type="number" v-model="input1.dunit" name="dunit" class="form-control" id="dunit">
 
-                                    <div v-if="inputError.hasOwnProperty('dunit')">
+                                    <div v-if="inputError1.hasOwnProperty('dunit')">
 
-                                        <div class="alert alert-danger" role="alert" v-for="er in inputError.dunit">
+                                        <div class="alert alert-danger" role="alert" v-for="er in inputError1.dunit">
                                             {{er}}
                                         </div>
 
@@ -356,7 +356,7 @@
 
                                 <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                     <label for="uunitId">Up Unit </label>
-                                    <select v-on:change="updateInput()" v-model="input.uunitId" class="form-control"  id="uunitId" :class="{
+                                    <select v-on:change="updateInput()" v-model="input1.uunitId" class="form-control"  id="uunitId" :class="{
                                                 'is-valid':validateInputs.includes('uunitId') && !validateInputCheck('uunitId'),
                                                 'is-invalid':validateInputs.includes('uunitId') && validateInputCheck('uunitId')
                                                 }">
@@ -367,9 +367,9 @@
 
 
 
-                                    <div v-if="inputError.hasOwnProperty('uunitId')">
+                                    <div v-if="inputError1.hasOwnProperty('uunitId')">
 
-                                        <div class="alert alert-danger" role="alert" v-for="er in inputError.uunitId">
+                                        <div class="alert alert-danger" role="alert" v-for="er in inputError1.uunitId">
                                             {{er}}
                                         </div>
 
@@ -381,7 +381,7 @@
 
                                 </div>
 
-                                <div  v-show="checkisValidSelect('uunitId','uunit')" class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                <div  v-show="checkisValidSelect('uunitId','uunit',input1)" class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                     <label for="uunit">Up Unit Conversation </label>
                                     <input ref="uunit"
 
@@ -390,11 +390,11 @@
                                                 'is-invalid':validateInputs.includes('dunit') && validateInputCheck('dunit')
                                                 }"
 
-                                           type="number" v-model="input.uunit" name="uunit" class="form-control" id="uunit">
+                                           type="number" v-model="input1.uunit" name="uunit" class="form-control" id="uunit">
 
-                                    <div v-if="inputError.hasOwnProperty('uunit')">
+                                    <div v-if="inputError1.hasOwnProperty('uunit')">
 
-                                        <div class="alert alert-danger" role="alert" v-for="er in inputError.uunit">
+                                        <div class="alert alert-danger" role="alert" v-for="er in inputError1.uunit">
                                             {{er}}
                                         </div>
 
@@ -485,6 +485,8 @@
                 },
                 input: {},
                 inputError: {},
+                input1: {},
+                inputError1: {},
                 validateInputs: ['CompanyName'],
                 validationRules:{
                     'CompanyName':{ presence: {allowEmpty: false}}
@@ -499,16 +501,16 @@
 
             if(this.msData.hasOwnProperty('inputData'))this.input=this.msData.inputData;
             this.updateInput();
-            this.input.dunitId=0;
-            this.input.uunitId=0;
+            this.input1.dunitId=0;
+            this.input1.uunitId=0;
 
         },
         methods: {
-            checkisValidSelect(type,current){
+            checkisValidSelect(type,current,input=this.input){
 
-                var check=this.input[type] == 0;
-                if(check && this.input.hasOwnProperty(current)){
-                    this.input[current]="";
+                var check=input[type] == 0;
+                if(check && input.hasOwnProperty(current)){
+                    input[current]="";
                 }
 
                return (check)? false:true;
@@ -539,16 +541,22 @@
                 return er;
             },
 
+            updateAllUnits(){
+                this.input1={};
+                this.inputError1={};
 
-            processForm(url) {
+                this.allUnits(true);
+            },
+
+            processForm(url,input=this.input,error=this.inputError,callback=null) {
                 var th = this;
-                th.inputError = {};
-                axios.post(url, this.input).then(function (res) {
+                error = {};
+                axios.post(url, input).then(function (res) {
                     var data = res.data;
 
 
                     Vue.toasted.success(data.msg,{duration:1000});
-
+                    if(callback!=null)th[callback]();
                     if(data.hasOwnProperty('nextUrl')){
                         window.VueApp.clickEventFromSideBar(data.nextUrl);
                     }
@@ -559,7 +567,9 @@
                         Vue.toasted.error(e.response.data.message,{duration:1000});
                         th.updateError();
                     }
-                );
+                ).then(function(){
+
+                });
                 //  alert(url)
 
             },

@@ -1,0 +1,316 @@
+// Fonts
+
+// Variables
+@import 'DarkVariables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// Fonts
+
+
+@import "comman";
+input{
+    background-color: $dark!important;
+}
+input[type=file]{
+    color: $light!important;
+}
+.text-muted{
+    color: $dark!important;
+}
+.ck-editor__main,.ck-content{
+    background-color: $dark!important;
+    color: $light!important;
+}
+
+.darkmode-btn{
+
+    background-color: rgba(255,255,255,0.8);
+    color: rgba(0,0,0,0.8);
+    border: 0.5px solid rgba(0,0,0 ,0.8);
+
+}
+
+
+
+
+.sidenav::-webkit-scrollbar{
+    background:rgba(255,255,255,0.3) ;
+    width: 5px;
+}
+.sidenav::-webkit-scrollbar-button       {
+
+    background:rgba(255,255,255,0.8) ;
+}
+.sidenav::-webkit-scrollbar-track        {
+
+    background:rgba(255,255,255,0.8) ;
+}
+.sidenav::-webkit-scrollbar-track-piece  {
+
+    background:rgba(255,255,255,0.8) ;
+
+}
+.sidenav::-webkit-scrollbar-thumb        {
+
+    height: 50px;
+    background:rgba(255,255,255,0.8) ;
+}
+.sidenav::-webkit-scrollbar-corner       { /* 6 */ }
+.sidenav::-webkit-resizer                { /* 7 */ }
+
+
+$base-color-1: lighten(rgb(26,32,46,1),10);
+$base-color-2: darken(rgb(26,32,46,1),5);
+$base-color-3: lighten(rgb(26,32,46,1),3);
+
+
+body{
+    font-family: "Roboto";
+
+}
+
+.sidenav {
+
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 2;
+    //top: 58px;
+    top: 0px;
+    left: 0;
+    background: rgb(131,58,180);
+    background: linear-gradient(186deg, $base-color-1 0%, $base-color-2 50%, $base-color-3 100%);
+    overflow-x: hidden;
+    overflow-y: scroll;
+    transition: 0.5s;
+    // padding-top: 60px;
+    color: #fff;
+    // padding-top: 240px;
+
+}
+
+.sidenav >a {
+    padding: 8px 8px 8px 10px;
+    text-decoration: none;
+    font-size: 15px;
+    //   color:rgba(0,0,0,0.8);
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav >i {
+    padding-right: 10px;
+
+}
+.sidenav >i:hover {
+    padding-right: 15px;
+
+}
+
+.sidenav >a:hover {
+    //  color: rgba(0,0,0,1);
+    font-size: 20px;
+    background-color: hsla(0,0%,100%,.12);
+}
+
+.sidenav >span:hover {
+    color: #f1f1f1;
+
+}.sidenav >span {
+     padding: 8px 8px 8px 32px;
+     text-decoration: none;
+     font-size: 15px;
+     color: #818181;
+     display: block;
+     transition: 0.3s;
+     cursor: pointer;
+
+ }
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    //right: 25px;
+    font-size: 36px;
+    z-index: 1;
+    //      margin-left: 50px;
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 16px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+.sidenav-company-details{
+    position: sticky;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    top: 0;
+    background-color: $base-color-2;
+    text-align: center;
+    z-index: 1;
+    #sidebarlogo{
+        max-width: 215px;
+        max-height: 80px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        border: 2px outset rgba(255,255,255,0.2);
+        background-color: aliceblue;
+    }
+
+
+    border-bottom: 1px solid rgba(0,0,0,1);
+
+
+}
+
+#overlay{
+
+    z-index: -1;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.8);
+    opacity: 0;
+    transition: 0.3s;
+
+}
+#closebtn{
+    position: sticky;
+    max-width: 250px;
+    top: 149px;
+    text-align:center;
+    //  padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 15px;
+    transition: 0.3s;
+    color: rgba(255,255,255,1);
+
+    background-color: $base-color-2;
+
+}
+#closebtn:hover{
+
+    background-color: hsla(0,0%,100%,.12);
+}
+
+
+.right{
+    text-align: right;
+    float: right;
+}
+.p-fix{
+    padding:5px;
+}
+.sidebarsub{
+
+}
+.sidebarsub > a{
+    padding: 4px 4px 4px 10px;
+    text-decoration: none;
+    font-size: 12px;
+    //   color:rgba(0,0,0,0.8);
+    display: block;
+    transition: 0.3s;
+    i{
+        padding: 5px;
+        padding-right: 10px;
+    }
+}
+.sidebarsub > a:hover{
+    padding: 4px 4px 4px 15px;
+    text-decoration: none;
+    font-size: 15px;
+    //   color:rgba(0,0,0,0.8);
+    display: block;
+    transition: 0.3s;
+    background-color: hsla(0,0%,100%,.12);
+}
+
+.logoSample{
+    max-width: 120px;
+    max-height: 80px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.inputLogo{
+    margin-top: -35px;
+    padding-right: 30px;
+}
+.error-file{
+    margin-top:18px;
+}
+
+#headerlogo{
+    display: block;
+    max-height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: 400ms all ease-in;
+    //width: 50%;
+}
+.headerlogo-small{
+
+    max-height: 40px!important;
+    transition: 400ms all ease-in;
+
+    //width: 50%;
+}
+.header{
+    position: sticky;
+    top: 0px;
+    z-index: 1200;
+}
+#vuemain{
+    position: relative;
+    z-index: 200;
+}
+
+.formtab-fixed{
+    margin-top: 5px;
+    margin-bottom:-13px;
+    cursor:pointer;
+
+    .nav-item{
+        .nav-link.active {
+            background-color: #6cb2eb;
+            color:rgba(255,255,255,0.8);
+            transition:all ease-in-out 500ms;
+            cursor: disabled;
+        }
+        .nav-link{
+            background-color: rgba(200,200,200,0.5) ;
+            color:rgba(0,0,0,0.8)
+        }
+
+        .nav-link:hover{
+            background-color: lighten(#6cb2eb,20%) ;
+            color:rgba(0,0,0,0.8)
+        }
+
+        .nav-link.active {
+            background-color: #6cb2eb;
+            color:rgba(255,255,255,0.8);
+            transition:all ease-in-out 500ms;
+        }
+    }
+
+
+}
+
+.navbar{
+    background-color: $dark;
+    color: $light;
+}
+
+

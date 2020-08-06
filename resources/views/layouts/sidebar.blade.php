@@ -14,9 +14,22 @@
 
 
 
-    <div class="btn btn-link btn-block text-center" id="closebtn" v-on:click="toggleSidebar()">
-        <i class="far fa-window-close" ></i> Close Menu
+    <div class="btn btn-link btn-block text-center " id="closebtn" >
+        <div class="row">
+
+            <div class="col-6"  v-on:click="toggleSidebar()">Menu <i class="far fa-window-close" ></i> </div>
+            <div class="col-6 darkmode-btn-nomargin"><div class="custom-control custom-switch" >
+                    <input type="checkbox" class="custom-control-input" id="customSwitch1" v-model="darkMode">
+                    <label class="custom-control-label" for="customSwitch1">Dark @{{ (darkMode)?'on':'off' }}</label>
+                </div></div>
+
+        </div>
+
+
+
+
     </div>
+
 
     <a class="btn btn-link btn-block text-left" >
         <i class="fas fa-bars"></i>  Dashboard

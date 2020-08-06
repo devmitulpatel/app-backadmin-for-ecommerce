@@ -12,7 +12,7 @@ const mix = require('laravel-mix');
  */
 let productionSourceMaps = true;
 
-mix.js('resources/js/app.js', 'public/js').sourceMaps(productionSourceMaps, 'source-map')
-    .sass('resources/sass/app.scss', 'public/css');
+mix.js('resources/js/app.js', 'public/js').extract(['vue','jquery','bootstrap','axios','validate.js'])
+    .sass('resources/sass/app.scss', 'public/css') .sass('resources/sass/dark.scss', 'public/css').sass('resources/sass/comman.scss', 'public/css');
 
 mix.disableNotifications();

@@ -1,0 +1,34 @@
+.darkmode-btn{
+    z-index: 1200;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 20px;
+    margin-right: 10px;
+
+    cursor: pointer!important;
+    div,input,label{
+        cursor: pointer!important;
+    }
+
+
+}
+
+
+.darkmode-btn-nomargin{
+
+    z-index: 1200;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 20px;
+
+
+    cursor: pointer!important;
+    div,input,label{
+        cursor: pointer!important;
+    }
+
+}
+
+//@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+//@import "~@fortawesome/fontawesome-free/scss/solid";
+//@import "~@fortawesome/fontawesome-free/scss/brands";

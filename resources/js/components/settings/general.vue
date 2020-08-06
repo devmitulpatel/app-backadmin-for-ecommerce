@@ -173,14 +173,43 @@
 
 <script>
     import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-
-    export default {
+     export default {
         name: "general",
         data() {
             return {
                 editor: ClassicEditor,
                 editorConfig: {
-                    // The configuration of the editor.
+                    toolbar: {
+                        items: [
+                            'heading',
+                            '|',
+                            'bold',
+                            'italic',
+                            '|',
+                            'bulletedList',
+                            'numberedList',
+                            '|',
+                            'insertTable',
+                            '|',
+                        //    'imageUpload',
+                           // '|',
+                            'undo',
+                            'redo'
+                        ]
+                    },
+                    // image: {
+                    //     toolbar: [
+                    //      //   'imageStyle:full',
+                    //   //      'imageStyle:side',
+                    //    //     '|',
+                    //     //    'imageTextAlternative'
+                    //     ]
+                    // },
+                    table: {
+                        contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells' ]
+                    },
+                    language: 'en'
+
                 },
                 input: {},
                 inputError: {},

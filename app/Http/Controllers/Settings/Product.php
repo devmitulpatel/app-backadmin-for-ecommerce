@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Settings;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Settings\generalSave;
+
+use App\Http\Requests\Settings\Product\SaveUnit;
 use App\Http\Requests\Settings\websiteSave;
+use App\Model\Settings\Product\Units;
 use Illuminate\Http\Request;
 
 class Product extends Controller
@@ -27,7 +29,7 @@ class Product extends Controller
         $Vuedata=[
             'path'=>[
 
-                'save.website'=>route('settings.website.save'),
+                'save.units'=>route('settings.Product.Units.save'),
                 'get.allUnits'=>route('settings.Product.Units.all'),
             ],
 
@@ -68,6 +70,40 @@ class Product extends Controller
                 'status'=>422,
                 'action'=>false,
                 'msg'=>"General Setting Not Updated",
+                'msgDebug'=>$e->getMessage()
+
+            ];
+
+
+        }
+        return response()->json($response,$response['status']);
+
+    }
+
+    public function saveUnit(SaveUnit $r){
+
+       // dd($r->all());
+
+        $response=[];
+
+        $m=new Units();
+
+        try {
+
+            $m->updateOrInsert($r->all());
+            $response=[
+                'status'=>200,
+                'action'=>true,
+                'msg'=>"New Unit successfully added.",
+             //   'nextUrl'=>route('settings.website',['compact'=>true])
+
+            ];
+
+        }catch (\Exception $e){
+            $response=[
+                'status'=>422,
+                'action'=>false,
+                'msg'=>"Unit not added",
                 'msgDebug'=>$e->getMessage()
 
             ];

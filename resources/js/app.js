@@ -45,7 +45,8 @@ const app = new Vue({
         shortSideBar:false,
         fullSidenar:false,
         liveComponent:null,
-        winDown:false
+        winDown:false,
+        darkMode:false
 
     },
     components: {
@@ -53,6 +54,12 @@ const app = new Vue({
        // ckeditor: CKEditor.component
     },
     methods:{
+
+
+            toggleDarkMode(){
+               this.darkMode=(this.darkMode)?false:true;
+
+            },
               toggleSidebar(){
                   this.sideBar=(this.sideBar)?false:true;
               },
@@ -161,6 +168,10 @@ const app = new Vue({
         sideBar(NewVal,OldVal){
             (NewVal)?this.openNav():this.closeNav();
         },
+
+        darkMode(NewVal){
+            if (NewVal){document.getElementById('mainCss').href='/css/dark.css';}else{document.getElementById('mainCss').href='/css/app.css';}
+        }
 
     },
     mounted(){
