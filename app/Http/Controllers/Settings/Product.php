@@ -44,7 +44,7 @@ class Product extends Controller
 
         ];
 
-   
+
         return view('settings.product')->with('data',$data)->with('Vuedata',$Vuedata);
 
 
