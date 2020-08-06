@@ -44,8 +44,7 @@ class Product extends Controller
 
         ];
 
-
-
+   
         return view('settings.product')->with('data',$data)->with('Vuedata',$Vuedata);
 
 
@@ -210,13 +209,15 @@ class Product extends Controller
 
         $model=\App\Model\Settings\Product\Units::where('status',1)->orderBy('id','desc')->get();
 
-        $model->map(function ($ar){
+        $m2=new \App\Model\Settings\Product\Units();
+
+        $model->map(function ($ar)use($m2){
           //  $ar->uunitName=\App\Model\Settings\Product\Units::where('id',$ar->uunitId)->get()->first()->pluck('name');
             //$ar->uunitName="hello";
 
 
-                $dUniname=\App\Model\Settings\Product\Units::where('id',$ar->dunitId)->get()->first();
-                $uUniname=\App\Model\Settings\Product\Units::where('id',$ar->uunitId)->get()->first();
+                $dUniname=$m2->where('id',$ar->dunitId)->get()->first();
+                $uUniname=$m2->where('id',$ar->uunitId)->get()->first();
 
                 $ar->uunitName=($ar->uunitId!=0 && $uUniname!=null)?$uUniname->toArray()['name']:"No Up Unit Defined";
                 $ar->dunitName=($ar->dunitId!=0 && $dUniname!=null)?$dUniname->toArray()['name']:"No Up Unit Defined";
