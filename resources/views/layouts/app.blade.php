@@ -125,6 +125,6 @@
     <script src="{{ mix('js/vendor.js')."?".date('Ydmis') }}" defer></script>
     <script src="{{ mix('js/app.js')."?".date('Ydmis') }}" defer></script>
 
-    <script src="https://kit.fontawesome.com/613c299ae6.js" crossorigin="anonymous"></script>
+{{--    <script src="https://kit.fontawesome.com/613c299ae6.js" crossorigin="anonymous"></script>--}}
 </body>
 </html>

@@ -47,6 +47,20 @@ if(!function_exists ('settings')){
                     if(!session()->has('settings.website.data'))session()->put(['settings.website.data'=>$re]);
 
                 }
+
+            case 'product':
+                if(session()->has('settings.product.data')){
+                    $re=session()->get('settings.product.data');
+                    goto Fixed;
+                }else{
+                    Fixed:
+                    $model=(!session()->has('settings.product.model'))?new \App\Model\Settings\Product():session()->get('settings.product.model');
+                    if(!session()->has('settings.product.model'))session()->put(['settings.product.model'=>$model]);
+                    //$re=(!session()->has('settings.product.data') || true)?new \App\Helper\Settings($model):session()->get('settings.product.data');
+                    $re=new \App\Helper\Settings($model);
+                    if(!session()->has('settings.product.data'))session()->put(['settings.product.data'=>$re]);
+
+                }
                 break;
         }
 

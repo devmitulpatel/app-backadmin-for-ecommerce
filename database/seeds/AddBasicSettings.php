@@ -35,6 +35,13 @@ class AddBasicSettings extends Seeder
         ];
         $website_general->updateOrInsert(['id'=>1],$website_general_default);
 
+        $product_settung=new \App\Model\Settings\Product();
+
+        $product_settung_default=[
+                'defaultUnit'=>1,
+                         ];
+        $product_settung->updateOrInsert(['id'=>1],$product_settung_default);
+
 
         $user=new \App\User();
         $root_user=[
