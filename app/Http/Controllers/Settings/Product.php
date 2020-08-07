@@ -145,11 +145,15 @@ class Product extends Controller
         if(array_key_exists('uunitName',$input))unset($input['uunitName']);
         if(array_key_exists('dunitName',$input))unset($input['dunitName']);
         if(array_key_exists('updated_at',$input) && $input['updated_at'])$input['updated_at']=now();
+        if(array_key_exists('created_at',$input) && $input['created_at'])unset($input['created_at']);
 
+        if(!array_key_exists('uunit',$input))$input['uunit']=0;
+
+       // dd($input);
         try {
             $id=$input['id'];
             unset($input['id']);
-            $input=array_filter($input);
+          //  $input=array_filter($input);
             //dd($input);
             $response=[
                 'status'=>200,

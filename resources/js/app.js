@@ -29,6 +29,7 @@ Vue.use(Toasted)
 Vue.component('setting-general', require('./components/settings/general').default);
 Vue.component('setting-website', require('./components/settings/website').default);
 Vue.component('setting-product', require('./components/settings/product').default);
+Vue.component('product-category', require('./components/product/category').default);
 Vue.component('profile', require('./components/profile').default);
 
 /**

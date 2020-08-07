@@ -39,6 +39,15 @@ Route::middleware('auth')->group(function () {
 
     });
 
+    Route::prefix('product')->group(function () {
+
+        Route::match(['get','post'],'/product/category',"Product\\Category@index")->name('product.category.manage');
+        Route::match(['post'],'/save',"Profile@save")->name('profile.save');
+
+
+
+    });
+
 
 
     Route::prefix('settings')->group(function () {

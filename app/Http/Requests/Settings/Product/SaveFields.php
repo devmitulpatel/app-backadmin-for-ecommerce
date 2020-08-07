@@ -24,7 +24,14 @@ class SaveFields extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name'=>'required|unique:extra__fields',
+            'dname'=>'required',
+            'cat'=>'required',
+            'scat'=>'required',
+            'type'=>'required',
+            'dvalue'=>'required',
+            'required'=>'required',
+            'status'=>'required',
         ];
     }
 }

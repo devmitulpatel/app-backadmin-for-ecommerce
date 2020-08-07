@@ -24,7 +24,7 @@ class DeleteFields extends FormRequest
     public function rules()
     {
         return [
-            //
+            'id'=>"required|exists:extra__fields"
         ];
     }
 }

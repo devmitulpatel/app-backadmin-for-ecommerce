@@ -93,7 +93,7 @@
 
 
 
-                        <form @submit.prevent="processForm((editUnitDataPost)?msData.path['edit.units']:msData.path['save.units'],input1,inputError1,'updateAllUnits')">
+                        <form @submit.prevent="processForm((editUnitDataPost)?msData.path['edit.units']:msData.path['save.units'],input1,'inputError1','updateAllUnits')">
 
                             <div class="row">
 
@@ -370,7 +370,7 @@
 
 
 
-                        <form @submit.prevent="processForm((editFielsDataPost)?msData.path['edit.extraFields']:msData.path['save.extraFields'],input2,inputError2,'updateAllFiedsa')">
+                        <form @submit.prevent="processForm((editFielsDataPost)?msData.path['edit.extraFields']:msData.path['save.extraFields'],input2,'inputError2','updateAllFiedsa')">
 
                             <div class="row">
 
@@ -798,9 +798,9 @@
                 if(this.editFielsDataPost)this.editFielsDataPost=false;
             },
 
-            processForm(url,input=this.input,error=this.inputError,callback=null) {
+            processForm(url,input=this.input,error='inputError',callback=null) {
                 var th = this;
-                error = {};
+                this[error] = {};
 
                 axios.post(url, input).then(function (res) {
                     var data = res.data;
@@ -815,7 +815,7 @@
                 }).catch(
                     function (e) {
 
-                        th.inputError = e.response.data.errors;
+                        th[error] = e.response.data.errors;
                         Vue.toasted.error(e.response.data.message,{duration:1000});
                         th.updateError();
                     }

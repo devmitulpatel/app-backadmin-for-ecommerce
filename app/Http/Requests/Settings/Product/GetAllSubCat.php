@@ -24,7 +24,7 @@ class GetAllSubCat extends FormRequest
     public function rules()
     {
         return [
-            //
+            'id'=>"required|exists:product_categories"
         ];
     }
 }

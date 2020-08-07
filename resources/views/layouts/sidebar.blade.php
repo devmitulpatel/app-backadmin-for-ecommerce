@@ -80,21 +80,17 @@
             <i class="fas fa-level-up-alt fa-rotate-90"></i>  Product List
         </a>
 
-        <a class="btn btn-link btn-block text-left" >
-            <i class="fas fa-level-up-alt fa-rotate-90"></i>  Add Category
+        <a class="btn btn-link btn-block text-left"  v-on:click="clickEventFromSideBar('{{route('product.category.manage',['compact'=>true])}}')">
+            <i class="fas fa-level-up-alt fa-rotate-90"></i>  Manage Category
         </a>
 
-        <a class="btn btn-link btn-block text-left" >
-            <i class="fas fa-level-up-alt fa-rotate-90"></i>  Category List
-        </a>
+
 
         <a class="btn btn-link btn-block text-left" >
-            <i class="fas fa-level-up-alt fa-rotate-90"></i>  Add Sub Category
+            <i class="fas fa-level-up-alt fa-rotate-90"></i>  Mange Sub Category
         </a>
 
-        <a class="btn btn-link btn-block text-left" >
-            <i class="fas fa-level-up-alt fa-rotate-90"></i>  Sub Category List
-        </a>
+
 
 
 
