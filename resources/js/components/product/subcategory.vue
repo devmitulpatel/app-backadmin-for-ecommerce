@@ -21,7 +21,7 @@
 
 
 
-                        <form @submit.prevent="processForm((editCatDataPost)?msData.path['edit.cat']:msData.path['save.cat'],input1,'inputError1','updateAllcategory')">
+                        <form @submit.prevent="processForm((editCatDataPost)?msData.path['edit.scat']:msData.path['save.scat'],input1,'inputError1','updateAllSubcategory')">
 
                             <div class="row">
 
@@ -51,6 +51,32 @@
                                 </div>
 
 
+                                <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <label for="ParentCategoryId">Parent Category </label>
+                                    <select v-on:change="allSubCategory(input1.ParentCategoryId,true)" v-model="input1.ParentCategoryId" name="ParentCategoryId" class="form-control"  id="ParentCategoryId" :class="{
+                                                'is-valid':validateInputs.includes('ParentCategoryId') && !validateInputCheck('ParentCategoryId'),
+                                                'is-invalid':validateInputs.includes('ParentCategoryId') && validateInputCheck('ParentCategoryId')
+                                                }">
+
+                                        <option v-for="unit in allCategory()" :value="unit.id">{{unit.name}}</option>
+
+                                    </select>
+
+
+
+                                    <div v-if="inputError1.hasOwnProperty('cat')">
+
+                                        <div class="alert alert-danger" role="alert" v-for="er in inputError1.cat">
+                                            {{er}}
+                                        </div>
+
+
+                                    </div>
+
+
+
+
+                                </div>
 
 
 
@@ -72,12 +98,14 @@
                                     <table class="table table-bordered">
                                         <tr>
                                             <th>Name</th>
+                                            <th>Parent Category</th>
                                             <th class="text-center">Action</th>
                                         </tr>
 
-                                        <tr v-for="unit in allCategory()">
+                                        <tr v-for="unit in allSubCategory()">
 
                                             <td>{{unit.name}}</td>
+                                            <td>{{unit.catName}}</td>
 
                                             <td>
 
@@ -149,17 +177,17 @@
                 document.body.scrollTop = 0; // For Safari
                 document.documentElement.scrollTop = 0;
 
-                Vue.toasted.success("Edit Category: "+unit.name,{duration:1000});
+                Vue.toasted.success("Edit Sub Category: "+unit.name,{duration:1000});
                 if(!this.editCatDataPost)this.editCatDataPost=true;
             },
             deletecat(unit){
                 var data={};
                 data.id=unit.id;
-                var url=this.msData.path['delete.cat'];
+                var url=this.msData.path['delete.scat'];
 
                 if (confirm("Are you sure, You want to delete "+unit.name+"?") == true){
 
-                    this.processForm(url,data,{},'updateAllcategory');
+                    this.processForm(url,data,{},'updateAllSubcategory');
                 }
 
 
@@ -182,6 +210,11 @@
                 this.input1={};
                 this.inputError1={};
                 this.allCategory(true);
+            },
+            updateAllSubcategory(){
+                this.input1={};
+                this.inputError1={};
+                this.allSubCategory(true);
             }
             ,restForm(){
 
@@ -201,7 +234,26 @@
 
                 return th.allCategoryFromServer;
 
-            }, updateInput() {
+            },
+            allSubCategory(forced=false){
+                var url=this.msData.path['get.allSubCat'];
+                var th=this;
+
+
+
+                if(th.allSubCategoryFromServer==null ||  forced)axios.post(url).then(function (res) {
+
+                    th.allSubCategoryFromServer=res.data.ResponseData;
+
+
+                });
+
+                return th.allSubCategoryFromServer;
+
+            },
+
+
+            updateInput() {
                 var oldInput = this.input1;
                 this.input1 = null;
                 this.input1 = oldInput;

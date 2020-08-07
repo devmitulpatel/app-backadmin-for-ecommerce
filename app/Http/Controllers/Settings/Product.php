@@ -4,17 +4,20 @@ namespace App\Http\Controllers\Settings;
 
 use App\Http\Controllers\Controller;
 
+
 use App\Http\Requests\Settings\Product\DeleteFields;
 use App\Http\Requests\Settings\Product\DeleteUnit;
 use App\Http\Requests\Settings\Product\EditFields;
 use App\Http\Requests\Settings\Product\EditUnit;
-use App\Http\Requests\Settings\Product\GetAllSubCat;
+
+use App\Http\Requests\Settings\Product\GetAllSubWithoutId;
 use App\Http\Requests\Settings\Product\SaveFields;
 use App\Http\Requests\Settings\Product\SaveUnit;
 use App\Http\Requests\Settings\websiteSave;
 use App\Model\Settings\Product\Extra_Field;
 use App\Model\Settings\Product\Units;
 use Illuminate\Http\Request;
+
 
 class Product extends Controller
 {
@@ -414,18 +417,27 @@ class Product extends Controller
 
         return throwData(['All Category fetched successfully'],$model->toArray());
     }
-    public function getAllSubCategory(GetAllSubCat $r){
+    public function getAllSubCategory(GetAllSubWithoutId $r){
         $input=$r->all();
 
+        if(array_key_exists('id',$input)){
+            $model=\App\Model\Product\ProductCategory::where('status',1)->where('ParentCategoryId',$input['id'])->orderBy('id','desc')->get();
+        }else{
+            $model=\App\Model\Product\ProductCategory::where('status',1)->whereNotNull('ParentCategoryId')->orderBy('id','desc')->get();
+        }
 
-        $model=\App\Model\Product\ProductCategory::where('status',1)->where('ParentCategoryId',$input['id'])->orderBy('id','desc')->get();
+
 
         $m2=new \App\Model\Product\ProductCategory();
 
 
         $model->map(function ($ar)use($m2){
-            //  $ar->uunitName=\App\Model\Settings\Product\Units::where('id',$ar->uunitId)->get()->first()->pluck('name');
-            //$ar->uunitName="hello";
+         if($ar->ParentCategoryId!=null){
+          $data=$m2->where('id',$ar->ParentCategoryId)->get();
+
+             if($data->count()>0)$ar->catName=$data->first()->toArray()['name'];
+         }
+
             return $ar;
         });
 
