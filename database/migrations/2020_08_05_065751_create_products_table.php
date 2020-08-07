@@ -26,6 +26,7 @@ class CreateProductsTable extends Migration
             $table->string('pimg');
             $table->string('inStock');
             $table->string('stock');
+            $table->json('extraFields');
             $table->boolean('status');
             $table->timestamps();
         });

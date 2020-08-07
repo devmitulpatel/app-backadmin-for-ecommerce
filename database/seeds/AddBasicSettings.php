@@ -97,6 +97,66 @@ class AddBasicSettings extends Seeder
         }
 
 
+        $product_cat=new \App\Model\Product\ProductCategory();
+
+        $product_cat_default=[
+            [
+                'name'=>'Electronics',
+                'created_at'=>now(),
+                'updated_at'=>now(),
+                'status'=>true
+            ],
+            [
+                'name'=>'Cloths',
+                'created_at'=>now(),
+                'updated_at'=>now(),
+                'status'=>true
+            ],
+            [
+                'name'=>'Medicine',
+                'created_at'=>now(),
+                'updated_at'=>now(),
+                'status'=>true
+            ],
+
+
+            [
+                'name'=>'Mobile',
+                'ParentCategoryId'=>1,
+                'created_at'=>now(),
+                'updated_at'=>now(),
+                'status'=>true
+            ],
+            [
+                'name'=>'Computer',
+                'ParentCategoryId'=>1,
+                'created_at'=>now(),
+                'updated_at'=>now(),
+                'status'=>true
+            ],
+            [
+                'name'=>'Men',
+                'ParentCategoryId'=>2,
+                'created_at'=>now(),
+                'updated_at'=>now(),
+                'status'=>true
+            ],
+            [
+                'name'=>'Women',
+                'ParentCategoryId'=>2,
+                'created_at'=>now(),
+                'updated_at'=>now(),
+                'status'=>true
+            ],
+
+        ];
+        foreach ($product_cat_default as $cat){
+
+            $product_cat->insert($cat);
+
+        }
+
+
 
 
     }

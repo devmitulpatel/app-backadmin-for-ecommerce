@@ -16,10 +16,10 @@ class CreateProductCategoriesTable extends Migration
         Schema::create('product_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('cimg');
-            $table->string('description');
-            $table->string('ParentCategoryId');
-            $table->boolean('status');
+            $table->string('cimg')->nullable();
+            $table->string('description')->nullable();
+            $table->string('ParentCategoryId')->nullable();
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }
