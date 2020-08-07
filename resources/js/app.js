@@ -30,6 +30,7 @@ Vue.component('setting-general', require('./components/settings/general').defaul
 Vue.component('setting-website', require('./components/settings/website').default);
 Vue.component('setting-product', require('./components/settings/product').default);
 Vue.component('product-category', require('./components/product/category').default);
+Vue.component('product-subcategory', require('./components/product/subcategory').default);
 Vue.component('profile', require('./components/profile').default);
 
 /**

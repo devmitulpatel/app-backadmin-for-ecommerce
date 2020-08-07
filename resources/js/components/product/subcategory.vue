@@ -3,7 +3,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Mange Categories
+                    <div class="card-header">Mange Sub Categories
 
 
 
@@ -67,7 +67,7 @@
                             <div class="row mt-3">
 
                                 <div class="col-12">
-                                    <div class="bg-info text-center pt-2 pb-2"> All Product Categories </div>
+                                    <div class="bg-info text-center pt-2 pb-2"> All Product Sub Categories </div>
 
                                     <table class="table table-bordered">
                                         <tr>
@@ -113,10 +113,8 @@
 </template>
 
 <script>
-    import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-
     export default {
-        name: "category",
+        name: "subcategory",
         props: ['msData'],
         data(){
             return {
@@ -187,7 +185,7 @@
             }
             ,restForm(){
 
-        },
+            },
             allCategory(forced=false){
                 var url=this.msData.path['get.allCat'];
                 var th=this;

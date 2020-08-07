@@ -44,6 +44,10 @@ Route::middleware('auth')->group(function () {
         Route::match(['get','post'],'/product/category',"Product\\Category@index")->name('product.category.manage');
         Route::match(['post'],'/category/save',"Product\\Category@save")->name('product.category.save');
         Route::match(['post'],'/category/delete',"Product\\Category@delete")->name('product.category.delete');
+        Route::match(['post'],'/category/edit',"Product\\Category@edit")->name('product.category.edit');
+
+        Route::match(['get','post'],'/product/subcategory',"Product\\Category@indexForSub")->name('product.subcategory.manage');
+
 
 
 

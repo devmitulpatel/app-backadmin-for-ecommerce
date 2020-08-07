@@ -86,7 +86,7 @@
 
 
 
-        <a class="btn btn-link btn-block text-left" >
+        <a class="btn btn-link btn-block text-left"  v-on:click="clickEventFromSideBar('{{route('product.subcategory.manage',['compact'=>true])}}')">
             <i class="fas fa-level-up-alt fa-rotate-90"></i>  Mange Sub Category
         </a>
 
