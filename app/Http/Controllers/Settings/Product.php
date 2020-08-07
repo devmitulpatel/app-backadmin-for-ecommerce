@@ -398,13 +398,14 @@ class Product extends Controller
 
     }
 
-    public function getAllCategory(){
+    public function getAllCategory(Request $r){
         $model=\App\Model\Product\ProductCategory::where('status',1)->where('ParentCategoryId',null)->orderBy('id','desc')->get();
 
-        $m2=new \App\Model\Product\ProductCategory();
 
 
-        $model->map(function ($ar)use($m2){
+
+
+        $model->map(function ($ar){
             //  $ar->uunitName=\App\Model\Settings\Product\Units::where('id',$ar->uunitId)->get()->first()->pluck('name');
             //$ar->uunitName="hello";
             return $ar;

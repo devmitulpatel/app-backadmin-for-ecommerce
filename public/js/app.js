@@ -157,8 +157,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "category",
@@ -177,16 +175,91 @@ __webpack_require__.r(__webpack_exports__);
       },
       currentFormTab: 0,
       allUnitsFromServer: {},
-      editUnitDataPost: false,
+      editCatDataPost: false,
       allExtraFieldsFromServer: null,
       allCategoryFromServer: null,
       allSubCategoryFromServer: null,
       editFielsDataPost: false
     };
   },
+  beforeMount: function beforeMount() {
+    this.allCategory();
+  },
   methods: {
+    deletecat: function deletecat(unit) {
+      var data = {};
+      data.id = unit.id;
+      var url = this.msData.path['delete.cat'];
+
+      if (confirm("Are you sure, You want to delete " + unit.name + "?") == true) {
+        this.processForm(url, data, {}, 'updateAllcategory');
+      }
+    },
     allUnits: function allUnits() {
       return this.allUnitsFromServer;
+    },
+    validateInputCheck: function validateInputCheck(name) {
+      var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var er = true;
+      var input = data == null ? this.input : data;
+      var validatedData = window.validate.single(input[name], this.validationRules[name]);
+      if (er && validatedData === undefined) er = false; //   console.log(er);
+
+      return er;
+    },
+    updateAllcategory: function updateAllcategory() {
+      this.input1 = {};
+      this.inputError1 = {};
+      this.allCategory(true);
+    },
+    restForm: function restForm() {},
+    allCategory: function allCategory() {
+      var forced = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      var url = this.msData.path['get.allCat'];
+      var th = this;
+      if (th.allCategoryFromServer == null || forced) axios.post(url).then(function (res) {
+        th.allCategoryFromServer = res.data.ResponseData;
+      });
+      return th.allCategoryFromServer;
+    },
+    updateInput: function updateInput() {
+      var oldInput = this.input1;
+      this.input1 = null;
+      this.input1 = oldInput;
+    },
+    updateError: function updateError() {
+      var oldInput = this.inputError1;
+      this.inputError1 = null;
+      this.inputError1 = oldInput;
+    },
+    processForm: function processForm(url) {
+      var input = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.input;
+      var error = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'inputError';
+      var callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+      var th = this;
+      this[error] = {};
+      axios.post(url, input).then(function (res) {
+        var data = res.data;
+        Vue.toasted.success(data.msg, {
+          duration: 1000
+        });
+        if (data.hasOwnProperty('ResponseMessage') && typeof data.ResponseMessage == "array") Vue.toasted.success(data.ResponseMessage[0], {
+          duration: 1000
+        });
+        if (callback != null) th[callback]();
+
+        if (data.hasOwnProperty('nextUrl')) {
+          window.VueApp.clickEventFromSideBar(data.nextUrl);
+        }
+      })["catch"](function (e) {
+        th[error] = e.response.data.errors;
+        Vue.toasted.error(e.response.data.message, {
+          duration: 1000
+        });
+        th.updateError();
+      }).then(function () {
+        th.restForm();
+      }); //  alert(url)
     }
   }
 });
@@ -22270,8 +22343,8 @@ var render = function() {
                 {
                   name: "show",
                   rawName: "v-show",
-                  value: _vm.currentFormTab == 1,
-                  expression: "currentFormTab== 1"
+                  value: _vm.currentFormTab == 0,
+                  expression: "currentFormTab== 0"
                 }
               ],
               staticClass: "card-body"
@@ -22284,12 +22357,12 @@ var render = function() {
                     submit: function($event) {
                       $event.preventDefault()
                       _vm.processForm(
-                        _vm.editUnitDataPost
+                        _vm.editCatDataPost
                           ? _vm.msData.path["edit.units"]
-                          : _vm.msData.path["save.units"],
+                          : _vm.msData.path["save.cat"],
                         _vm.input1,
                         "inputError1",
-                        "updateAllUnits"
+                        "updateAllcategory"
                       )
                     }
                   }
@@ -22371,7 +22444,7 @@ var render = function() {
                       _c(
                         "div",
                         { staticClass: "bg-info text-center pt-2 pb-2" },
-                        [_vm._v(" All Units ")]
+                        [_vm._v(" All Product Categories ")]
                       ),
                       _vm._v(" "),
                       _c(
@@ -22380,8 +22453,10 @@ var render = function() {
                         [
                           _vm._m(1),
                           _vm._v(" "),
-                          _vm._l(_vm.allUnits(), function(unit) {
+                          _vm._l(_vm.allCategory(), function(unit) {
                             return _c("tr", [
+                              _c("td", [_vm._v(_vm._s(unit.name))]),
+                              _vm._v(" "),
                               _c("td", [
                                 _c(
                                   "div",
@@ -22400,7 +22475,7 @@ var render = function() {
                                         attrs: { type: "button" },
                                         on: {
                                           click: function($event) {
-                                            return _vm.deleteUnit(unit)
+                                            return _vm.deletecat(unit)
                                           }
                                         }
                                       },
@@ -22461,18 +22536,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("th", [_vm._v("Name")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Short Name")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Unit Rate")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Up Unit Name")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Up Unit")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Down Unit Name")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Down Unit")]),
       _vm._v(" "),
       _c("th", { staticClass: "text-center" }, [_vm._v("Action")])
     ])
