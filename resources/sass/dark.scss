@@ -313,4 +313,14 @@ body{
     color: $light;
 }
 
+.natoication-drawer,.list-group-item-action {
+    color: rgba(255,255,255,0.9)!important;
 
+}
+
+.list-group-item{
+    border: 1px solid rgba(255,255,255,0.6);
+}
+.natoication-drawer{
+box-shadow: 0 .5rem 1rem rgba(255,255,255,.25)!important;
+}

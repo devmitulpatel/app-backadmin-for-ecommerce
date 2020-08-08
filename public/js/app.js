@@ -27668,12 +27668,36 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     liveComponent: null,
     winDown: false,
     darkMode: false,
-    globalVar: {}
+    darkModeToogle: false,
+    globalVar: {},
+    newNotification: false,
+    notificationDrawer: false,
+    notificationAll: [{
+      id: 1,
+      title: 'Motification 1',
+      description: 'Motification 1',
+      actions: {
+        view: 'demo',
+        "goto": 'demo'
+      }
+    }, {
+      id: 2,
+      title: 'Motification 2',
+      description: 'Motification 2',
+      actions: {
+        view: 'demo',
+        "delete": 'demo',
+        "goto": 'demo'
+      }
+    }]
   },
   components: {// Use the <ckeditor> component in this view.
     // ckeditor: CKEditor.component
   },
   methods: {
+    toggleNotification: function toggleNotification() {
+      this.notificationDrawer = this.notificationDrawer ? false : true;
+    },
     setGlob: function setGlob(name, val) {
       this.globalVar[name] = val;
     },

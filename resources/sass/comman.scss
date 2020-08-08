@@ -4,3 +4,81 @@
 @import "~@fortawesome/fontawesome-free/scss/solid";
 @import "~@fortawesome/fontawesome-free/scss/brands";
 
+@import "~animate.css";
+
+
+.collapsing,.show{
+
+
+    .nav-item{
+        margin-top: 10px;
+        transition: all 100ms ease-in;
+    }
+
+
+    .natoication-drawer {
+        position: absolute;
+        background-color: #6cb2eb;
+        z-index: 1300;
+        right: 0;
+        max-height: 60vh;
+        min-width: 100vw;
+
+        top:125px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        display: block;
+        background-color: rgba(255,255,255,1);
+        border:  1px solid rgba(0, 0, 0, 0.125);
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+
+    }
+
+
+}
+
+
+
+
+    .natoication-drawer {
+        position: absolute;
+        width: 350px;
+        max-height: 205px;
+        background-color: #6cb2eb;
+        z-index: 1300;
+        right: 125px;
+        top:60px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        display: block;
+        background-color: rgba(255,255,255,1);
+        border:  1px solid rgba(0, 0, 0, 0.125);
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    }
+    .slideDown {
+        -moz-transform: scaleY(1) scaleX(1);
+        -ms-transform: scaleY(1)scaleX(1);
+        -o-transform: scaleY(1)scaleX(1);
+        -webkit-transform: scaleY(1)scaleX(1);
+        transform: scaleY(1)scaleX(1);
+        transition: all 500ms ease-out;
+    }
+
+    .slideUp{
+        top: -50px;
+        right: -100px;
+        -moz-transform: scaleY(0)scaleX(0);
+        -ms-transform: scaleY(0)scaleX(0);
+        -o-transform: scaleY(0)scaleX(0);
+        -webkit-transform: scaleY(0)scaleX(0);
+        transform: scaleY(0)scaleX(0);
+        transition: all 500ms ease-out;
+        z-index: -1;
+    }
+
+
+.natoication-drawer::-webkit-scrollbar {
+                          width: 0px;
+                          height: 8px;
+                      }
+

@@ -51,7 +51,25 @@ const app = new Vue({
         liveComponent:null,
         winDown:false,
         darkMode:false,
-        globalVar:{}
+        darkModeToogle:false,
+        globalVar:{},
+        newNotification:false,
+        notificationDrawer:false,
+        notificationAll:[
+            {
+                id:1,
+                title:'Motification 1',
+                description:'Motification 1',
+                actions:{view:'demo',goto:'demo'},
+            },
+            {
+                id:2,
+                title:'Motification 2',
+                description:'Motification 2',
+                actions:{view:'demo',delete:'demo',goto:'demo'},
+            }
+
+        ],
 
     },
     components: {
@@ -60,6 +78,9 @@ const app = new Vue({
     },
     methods:{
 
+                toggleNotification(){
+                  this.notificationDrawer=(this.notificationDrawer)?false:true;
+                },
 
                 setGlob(name,val){
                     this.globalVar[name]=val;

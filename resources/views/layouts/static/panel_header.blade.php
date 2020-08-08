@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-light shadow-sm header">
-    <div class="container-fluid">
+    <li class="container-fluid">
     <!--            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -7,24 +7,31 @@
 
         @auth
 
-            <div  class="btn btn-outline-info" style="z-index: 2;" v-on:click="toggleSidebar()">
-                    <span    >
-                        <i class="fas fa-bars" style="display: inline-block;padding-right:10px"></i>
-                        <span style="display: inline-block">Menu</span>
-                        </span>
+            <button  type="button"  class="btn" style="z-index: 2;border-color: rgba(0, 0, 0, 0.1);" v-on:click="toggleSidebar()">
+
+                        <span class="navbar-toggler-icon" style="display: inline-block"></span>
+
+            </button>
+
+
+            <div   style="z-index: 1;" class="d-flex justify-content-center" >
+
+                <div>
+                    <img  id="headerlogo" :class="{ 'headerlogo-small':winDown}"  src="{{ settings()->get('websiteLogo') }}">
+                </div>
+
+
+
+
             </div>
+
+
+
 
         @endauth
-
-        <div   style="width: 98%;position: absolute;z-index: 1;" class="d-flex justify-content-center" >
-
-            <div>
-                <img  id="headerlogo" :class="{ 'headerlogo-small':winDown}"  src="{{ settings()->get('websiteLogo') }}">
-            </div>
-
-
-
-        </div>
+        <button class="navbar-toggler" type="button" style="z-index:5;" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent" style="z-index: 1;">
             <!-- Left Side Of Navbar -->
@@ -36,12 +43,63 @@
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
                 @auth
-                <li class="nav-item p-2 darkmode-btn">
-                    <div class="custom-control custom-switch" >
-                        <input type="checkbox" class="custom-control-input" id="customSwitch1" v-model="darkMode">
-                        <label class="custom-control-label" for="customSwitch1">Dark @{{ (darkMode)?'on':'off' }}</label>
+                    <li class="nav-item"   >
+                    <div class="natoication-drawer" :class="{'slideDown':notificationDrawer,'slideUp':!notificationDrawer}">
+
+
+                        <ul class="list-group" style="border-radius: 0px">
+                            <li class="list-group-item list-group-item-action" v-for="noti in notificationAll">@{{noti.title}}
+
+
+                                <div class="btn-group float-right " role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-outline-danger"  v-if="noti.hasOwnProperty('actions')&&noti.actions.hasOwnProperty('delete')"> <i class="far fa-trash-alt"></i></button>
+                                    <button type="button" class="btn btn-outline-info" v-if="noti.hasOwnProperty('actions')&&noti.actions.hasOwnProperty('goto')"> <i class="far fa-arrow-alt-circle-right"></i></button>
+                                </div>
+
+
+
+                                <small class="text-muted"><br>@{{noti.description}}</small> </li>
+                            <li class="list-group-item list-group-item-action">Dapibus ac facilisis in</li>
+                            <li class="list-group-item list-group-item-action">Morbi leo risus</li>
+                            <li class="list-group-item list-group-item-action">Porta ac consectetur ac</li>
+                            <li class="list-group-item list-group-item-action">Vestibulum at eros</li>
+
+
+                        </ul>
+
                     </div>
-                </li>
+                    </li>
+                    <li class="nav-item p-2 px-3 mr-2 btn dropdown"
+                    :class="{
+                    'btn-outline-info':!newNotification,
+                    'btn-info':newNotification
+
+
+                    }" v-on:click="toggleNotification"
+                    >
+
+                        <i :class="{
+                    'far fa-bell shadow':!newNotification,
+                    'fas fa-bell animate__animated animate__swing animate__infinite infinite':newNotification
+
+                        }"></i>
+
+
+
+
+
+                    </li>
+
+
+                    <li class="nav-item p-2 btn darkmode-btn">
+                        <div class="custom-control custom-switch" >
+                            <input type="checkbox" class="custom-control-input" id="customSwitch1" v-model="darkMode">
+                            <label class="custom-control-label" for="customSwitch1" v-if="darkMode">Dark on</label>
+                            <label class="custom-control-label" for="customSwitch1" v-if="!darkMode">Dark off</label>
+                        </div>
+                    </li>
+
+
                 @endauth
                 @guest
                     <li class="nav-item">
@@ -53,8 +111,8 @@
                         </li>
                     @endif
                 @else
-                    <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    <li class="nav-item dropdown ">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle btn"  style="border-color: rgba(0, 0, 0, 0.1);" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 
