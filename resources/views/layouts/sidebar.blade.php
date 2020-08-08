@@ -1,4 +1,4 @@
-<div id="mySidenav" class="sidenav " style="z-index: 1990" >
+<div id="mySidenav" class="sidenav " style="z-index: 1990" @mouseleave="autoHideSideBar()" >
 
 
     <section  class="container-fluid sidenav-company-details " >

@@ -82,3 +82,33 @@
                           height: 8px;
                       }
 
+#headerlogo{
+    padding-left: 20px;
+    display: block;
+    max-height: 37px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: 400ms all ease-in;
+    opacity: 0.8;
+    //width: 50%;
+}
+
+.headerlogo-small{
+
+    filter: drop-shadow(5px 5px 5px rgba(255,255,255,0.8)) invert(0%);;
+    transition: 400ms all ease-in;
+
+    //width: 50%;
+}
+.header{
+    position: sticky!important;
+    top: 0px;
+    z-index: 1200;
+}
+#vuemain{
+    position: relative;
+    z-index: 200;
+}
+
+
+

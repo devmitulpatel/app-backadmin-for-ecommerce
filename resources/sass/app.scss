@@ -245,30 +245,6 @@ body{
     margin-top:18px;
 }
 
-#headerlogo{
-    display: block;
-    max-height: 50px;
-    margin-left: auto;
-    margin-right: auto;
-    transition: 400ms all ease-in;
-    //width: 50%;
-}
-.headerlogo-small{
-
-    max-height: 40px!important;
-    transition: 400ms all ease-in;
-
-    //width: 50%;
-}
-.header{
-    position: sticky;
-    top: 0px;
-    z-index: 1200;
-}
-#vuemain{
-    position: relative;
-    z-index: 200;
-}
 
 .formtab-fixed{
     margin-top: 5px;

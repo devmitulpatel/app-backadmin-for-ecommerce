@@ -10675,3 +10675,31 @@ readers do not read off random characters that represent icons */
   height: 8px;
 }
 
+#headerlogo {
+  padding-left: 20px;
+  display: block;
+  max-height: 37px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: 400ms all ease-in;
+  opacity: 0.8;
+}
+
+.headerlogo-small {
+  -webkit-filter: drop-shadow(5px 5px 5px rgba(255, 255, 255, 0.8)) invert(0%);
+          filter: drop-shadow(5px 5px 5px rgba(255, 255, 255, 0.8)) invert(0%);
+  transition: 400ms all ease-in;
+}
+
+.header {
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 0px;
+  z-index: 1200;
+}
+
+#vuemain {
+  position: relative;
+  z-index: 200;
+}
+

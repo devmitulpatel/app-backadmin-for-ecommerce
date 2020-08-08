@@ -27689,12 +27689,31 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
         "delete": 'demo',
         "goto": 'demo'
       }
-    }]
+    }],
+    notificationLastActive: null
   },
   components: {// Use the <ckeditor> component in this view.
     // ckeditor: CKEditor.component
   },
   methods: {
+    autoHideNotification: function autoHideNotification() {
+      var th = this;
+      setTimeout(function () {
+        th.notificationDrawer = false;
+      }, 5000);
+    },
+    autoHideSideBar: function autoHideSideBar() {
+      var th = this;
+      setTimeout(function () {
+        th.closeNav();
+      }, 5000);
+    },
+    registerExitNotificationDriver: function registerExitNotificationDriver() {
+      var th = this;
+      setTimeout(function () {
+        th.notificationDrawer = false;
+      }, 1000);
+    },
     toggleNotification: function toggleNotification() {
       this.notificationDrawer = this.notificationDrawer ? false : true;
     },

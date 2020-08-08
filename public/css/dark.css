@@ -10931,6 +10931,11 @@ a.text-dark:focus {
   }
 }
 
+#headerlogo {
+  -webkit-filter: grayscale(100%);
+          filter: grayscale(100%);
+}
+
 .darkmode-btn {
   z-index: 1200;
   border-radius: 5px;
@@ -11185,31 +11190,6 @@ body {
 
 .error-file {
   margin-top: 18px;
-}
-
-#headerlogo {
-  display: block;
-  max-height: 50px;
-  margin-left: auto;
-  margin-right: auto;
-  transition: 400ms all ease-in;
-}
-
-.headerlogo-small {
-  max-height: 40px !important;
-  transition: 400ms all ease-in;
-}
-
-.header {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0px;
-  z-index: 1200;
-}
-
-#vuemain {
-  position: relative;
-  z-index: 200;
 }
 
 .formtab-fixed {

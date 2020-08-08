@@ -70,6 +70,7 @@ const app = new Vue({
             }
 
         ],
+        notificationLastActive:null,
 
     },
     components: {
@@ -77,6 +78,27 @@ const app = new Vue({
        // ckeditor: CKEditor.component
     },
     methods:{
+                autoHideNotification(){
+                    var th=this;
+                    setTimeout(function() {
+                        th.notificationDrawer=false;
+                    }, 5000);
+
+                },
+
+        autoHideSideBar(){
+            var th=this;
+            setTimeout(function() {
+                th.closeNav();
+            }, 5000);
+        },
+        registerExitNotificationDriver(){
+                    var th=this;
+                    setTimeout(function() {
+                        th.notificationDrawer=false;
+                    }, 1000);
+
+                },
 
                 toggleNotification(){
                   this.notificationDrawer=(this.notificationDrawer)?false:true;
@@ -92,7 +114,7 @@ const app = new Vue({
                     this.globalVar[name]=null;
                 },
 
-            toggleDarkMode(){
+              toggleDarkMode(){
                this.darkMode=(this.darkMode)?false:true;
 
             },
