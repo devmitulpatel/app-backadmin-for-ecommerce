@@ -12,7 +12,7 @@ if(!function_exists ('settings')){
         $re=[];
         switch ($type){
             case 'general':
-                if(session()->has('settings.general.data')){
+                if(session()->has('settings.general.data')  && false){
                     $re=session()->get('settings.general.data');
 
 
@@ -21,7 +21,7 @@ if(!function_exists ('settings')){
 
 
 
-                    $model=(!\Config::has('settings.general.model'))?new \App\Model\Settings\General():\Config::get('settings.general.model');
+                    $model=(!\Config::has('settings.general.model'))?getModel(\App\Model\Settings\General::class):\Config::get('settings.general.model');
                     if(!\Config::has('settings.general.model'))
                     {
 
@@ -38,24 +38,29 @@ if(!function_exists ('settings')){
                 break;
 
             case 'website':
-                if(session()->has('settings.website.data')){
+                if(session()->has('settings.website.data')  && false){
                     $re=session()->get('settings.website.data');
                 }else{
-                    $model=(!session()->has('settings.website.model'))?new \App\Model\Settings\Website():session()->get('settings.website.model');
+                    $model=(!session()->has('settings.website.model'))?getModel(\App\Model\Settings\Website::class):session()->get('settings.website.model');
                     if(!session()->has('settings.website.model'))session()->put(['settings.website.model'=>$model]);
                     $re=(!session()->has('settings.website.data'))?new \App\Helper\Settings($model):session()->get('settings.website.data');
                     if(!session()->has('settings.website.data'))session()->put(['settings.website.data'=>$re]);
 
                 }
+                break;
 
             case 'product':
-                if(session()->has('settings.product.data')){
+
+                if(session()->has('settings.product.data') && false){
                     $re=session()->get('settings.product.data');
-                    goto Fixed;
+
                 }else{
-                    Fixed:
-                    $model=(!session()->has('settings.product.model'))?new \App\Model\Settings\Product():session()->get('settings.product.model');
+
+
+                    $model=(!session()->has('settings.product.model'))?getModel(\App\Model\Settings\Product::class):session()->get('settings.product.model');
+
                     if(!session()->has('settings.product.model'))session()->put(['settings.product.model'=>$model]);
+
                     //$re=(!session()->has('settings.product.data') || true)?new \App\Helper\Settings($model):session()->get('settings.product.data');
                     $re=new \App\Helper\Settings($model);
                     if(!session()->has('settings.product.data'))session()->put(['settings.product.data'=>$re]);

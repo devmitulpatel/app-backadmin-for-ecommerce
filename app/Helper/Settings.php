@@ -5,6 +5,7 @@ namespace App\Helper;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Settings
 {
@@ -26,7 +27,7 @@ class Settings
 
         $this->model=$model;
         $modelexp=explode('\\',get_class($model));
-        $this->driverName=strtolower(end($modelexp));
+        $this->driverName= Str::slug(get_class($model)) ;
        // $this->model=new $model()   ;
 
 

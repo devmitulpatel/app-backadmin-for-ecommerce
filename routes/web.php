@@ -24,8 +24,14 @@ Route::get('/',function (){
    return view('layouts.front');
 });
 Route::get('/test',function (){
+   $setin=settings('general');
+   $setin2=settings('website');
+   $setin3=settings('product');
+    \Debugbar::info($setin);
+    \Debugbar::info($setin2);
+    \Debugbar::info($setin3);
 
-    dd(getModel(Units::class));
+    return view('layouts.app');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
