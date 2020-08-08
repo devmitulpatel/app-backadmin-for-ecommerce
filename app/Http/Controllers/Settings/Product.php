@@ -16,7 +16,9 @@ use App\Http\Requests\Settings\Product\SaveUnit;
 use App\Http\Requests\Settings\websiteSave;
 use App\Model\Settings\Product\Extra_Field;
 use App\Model\Settings\Product\Units;
+use App\Model\Product\ProductCategory;
 use Illuminate\Http\Request;
+
 
 
 class Product extends Controller
@@ -229,26 +231,78 @@ class Product extends Controller
     {
 
 
-        $model=\App\Model\Settings\Product\Units::where('status',1)->orderBy('id','desc')->get();
 
-        $m2=new \App\Model\Settings\Product\Units();
 
-        $model->map(function ($ar)use($m2){
+        $m2=getModel(Units::class);
+
+        $model=$m2->where('status',1)->orderBy('id','desc')->get();
+
+
+        $data=$model->pluck('name','id')->toArray();
+        $rowData=[];
+
+       // \Debugbar::info($model->pluck('id','name'));
+
+        $model->map(function ($ar)use(&$m2,&$data,&$rowData){
           //  $ar->uunitName=\App\Model\Settings\Product\Units::where('id',$ar->uunitId)->get()->first()->pluck('name');
             //$ar->uunitName="hello";
+            if(array_key_exists($ar->id,$data))$data[$ar->id]=$ar->name;
+
+                if($ar->dunitId!=0){
+
+                    if(array_key_exists($ar->dunitId,$data)){
+                        $dUniname=$data[$ar->dunitId];
+                    }else{
+                        $dUniname=$m2->where('id',$ar->dunitId)->get()->first();
+                        if($dUniname!=null){
+                            $dUniname=$dUniname->toArray();
+                            $data[$ar->dunitId]=$dUniname['name'];
+
+                        }
+                    }
+
+                $ar->dunitName=$data[$ar->dunitId];
+                    if($dUniname==null)$ar->dunit=0.0;
+
+                }else{
+                    $ar->dunitName="No Unit Defined";
+                }
+                if($ar->uunitId!=0){
+
+                    if(array_key_exists($ar->uunitId,$data)){
+                        $uUniname=$data[$ar->uunitId];
+                    }else{
+                        $uUniname=$m2->where('id',$ar->uunitId)->get()->first();
+                        if($uUniname!=null){
+                            $uUniname=$uUniname->toArray();
+                            $data[$ar->uunitId]=$uUniname['name'];
+
+                        }
+                    }
+
+                    $ar->uunitName= $data[$ar->uunitId];
+                    if($uUniname==null)$ar->unit=0.0;
+
+                }else{
+                    $ar->uunitName="No Unit Defined";
+                }
+
+               // $data[]=;
+//                $dUniname=$m2->where('id',$ar->dunitId)->get()->first();
+//                $uUniname=$m2->where('id',$ar->uunitId)->get()->first();
+//
+//                $ar->uunitName=($ar->uunitId!=0 && $uUniname!=null)?$uUniname->toArray()['name']:"No Up Unit Defined";
+//                $ar->dunitName=($ar->dunitId!=0 && $dUniname!=null)?$dUniname->toArray()['name']:"No Up Unit Defined";
 
 
-                $dUniname=$m2->where('id',$ar->dunitId)->get()->first();
-                $uUniname=$m2->where('id',$ar->uunitId)->get()->first();
 
-                $ar->uunitName=($ar->uunitId!=0 && $uUniname!=null)?$uUniname->toArray()['name']:"No Up Unit Defined";
-                $ar->dunitName=($ar->dunitId!=0 && $dUniname!=null)?$dUniname->toArray()['name']:"No Up Unit Defined";
-
-                if($dUniname==null)$ar->dunit=0.0;
-                if($uUniname==null)$ar->unit=0.0;
 
             return $ar;
         });
+
+        \Debugbar::info($data);
+
+
 
 
         return throwData(['All unir fetched successfully'],$model->toArray());
@@ -258,21 +312,22 @@ class Product extends Controller
 
 
     public function getAllExtra(){
-        $model=\App\Model\Settings\Product\Extra_Field::orderBy('id','desc')->get();
 
-        $m2=new \App\Model\Product\ProductCategory();
+        $masterModel1=getModel(Extra_Field::class);
+        $masterModel2=getModel(ProductCategory::class);
 
-
-        $model->map(function ($ar)use($m2){
-            //  $ar->uunitName=\App\Model\Settings\Product\Units::where('id',$ar->uunitId)->get()->first()->pluck('name');
-            //$ar->uunitName="hello";
+        $model=$masterModel1::orderBy('id','desc')->get();
 
 
-            $catName=$m2->where('id',$ar->cat)->get()->first();
-            $scatName=$m2->where('ParentCategoryId',$ar->cat)->where('id',$ar->scat)->get()->first();
+        $m2=$masterModel2;
+
+        $produvctCategory=$m2->all();
 
 
+        $model->map(function ($ar)use($produvctCategory){
 
+            $catName=$produvctCategory->where('id',$ar->cat)->first();
+            $scatName=$produvctCategory->where('ParentCategoryId',$ar->cat)->where('id',$ar->scat)->first();
 
             $ar->catName=($ar->cat!=0 && $catName!=null)?$catName->toArray()['name']:"No Category Defined";
             $ar->scatName=($ar->scat!=0 && $scatName!=null)?$scatName->toArray()['name']:"No Sub Category Defined";

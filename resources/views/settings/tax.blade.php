@@ -17,7 +17,7 @@
 
 
 
-    <product-addproduct :ms-data="{{$jsonData}}"></product-addproduct>
+    <setting-tax :ms-data="{{$jsonData}}"></setting-tax>
 
 
 

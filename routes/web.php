@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use \App\Model\Settings\Product\Units;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,10 @@ Auth::routes();
 Route::get('/',function (){
    return view('layouts.front');
 });
+Route::get('/test',function (){
+
+    dd(getModel(Units::class));
+});
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -40,6 +45,9 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::prefix('product')->group(function () {
+
+        Route::match(['get','post'],'/product',"Product\\Product@index")->name('product.add');
+
 
         Route::match(['get','post'],'/product/category',"Product\\Category@index")->name('product.category.manage');
         Route::match(['post'],'/category/save',"Product\\Category@save")->name('product.category.save');
@@ -89,7 +97,11 @@ Route::middleware('auth')->group(function () {
 
 
 
-            Route::fallback(function (){
+        Route::match(['get','post'],'/tax',"Settings\\tax@index")->name('settings.tax');
+
+
+
+        Route::fallback(function (){
                 return response()->json(['Sorry but we are not able find what you are looking'],422);
             });
 

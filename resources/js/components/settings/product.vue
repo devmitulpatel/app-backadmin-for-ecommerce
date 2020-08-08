@@ -537,7 +537,7 @@
                                                 'is-invalid':validateInputs.includes('cat') && validateInputCheck('cat')
                                                 }">
                                         <option  :value="0" selected>All Category</option>
-                                        <option v-for="unit in allCategory()" :value="unit.id">{{unit.name}}</option>
+                                        <option v-for="unit in allCategory(false,'From Line 540')" :value="unit.id">{{unit.name}}</option>
 
                                     </select>
 
@@ -686,11 +686,17 @@
                 allExtraFieldsFromServer:null,
                 allCategoryFromServer:null,
                 allSubCategoryFromServer:null,
-                editFielsDataPost:false
+                editFielsDataPost:false,
+                getingCat:false,
+                getingSubCat:false,
+                getingExtra:false,
+                getingUnit:false
+
+
             }
         },
         props: ['msData'],
-        beforeMount() {
+        created() {
 
             if(this.msData.hasOwnProperty('inputData'))this.input=this.msData.inputData;
             this.updateInput();
@@ -698,6 +704,11 @@
             this.input1.uunitId=0;
 
         },
+        beforeMount() {
+
+
+        }
+        ,
         methods: {
             deleteUnit(unit){
 
@@ -859,12 +870,16 @@
 
 
 
-                if(th.allUnitsFromServer==null ||  forced)axios.post(url).then(function (res) {
+                if((th.allUnitsFromServer==null && !th.getingUnit) ||  forced){
+                    th.getingUnit=true;
+                    axios.post(url).then(function (res) {
 
                     th.allUnitsFromServer=res.data.ResponseData;
 
-
-                });
+                }).catch().then(function () {
+                        th.getingUnit=false;
+                    });
+                }
 
                 return th.allUnitsFromServer;
 
@@ -877,12 +892,18 @@
 
 
 
-                if(th.allExtraFieldsFromServer==null ||  forced)axios.post(url).then(function (res) {
+                if((th.allExtraFieldsFromServer==null && !th.getingExtra) ||  forced){
+
+                    th.getingExtra=true;
+                    axios.post(url).then(function (res) {
 
                     th.allExtraFieldsFromServer=res.data.ResponseData;
 
 
-                });
+                }).catch().then(function () {
+                        th.getingExtra=false;
+                    });
+                }
 
                 return th.allExtraFieldsFromServer;
 
@@ -890,18 +911,26 @@
 
             },
 
-            allCategory(forced=false){
+            allCategory(forced=false,fromPlaace=null){
                 var url=this.msData.path['get.allCat'];
                 var th=this;
+                var rootAp=window.VueApp;
 
 
+                if((th.allCategoryFromServer==null && !th.getingCat ) ||  forced){
+                    th.getingCat=true;
 
-                if(th.allCategoryFromServer==null ||  forced)axios.post(url).then(function (res) {
-
+                    axios.post(url).then(function (res) {
                     th.allCategoryFromServer=res.data.ResponseData;
+                }).catch(function (e) {
 
-
+                }).then(function () {
+                        th.getingCat=false;
+                 //   console.log( window.VueApp.getGlob('allCategories'));
                 });
+
+                }
+
 
                 return th.allCategoryFromServer;
 
@@ -914,14 +943,19 @@
                     id:parentId,
                 };
 
-                if((th.allSubCategoryFromServer==null && this.input2.hasOwnProperty('cat') && (this.input2.cat!=null||this.input2.cat!=0 )) ||  forced)axios.post(url,data).then(function (res) {
-
+                if(( !th.getingSubCat &&th.allSubCategoryFromServer==null && this.input2.hasOwnProperty('cat') && (this.input2.cat!=null||this.input2.cat!=0 )) ||  forced){
+                    th.getingSubCat=true;
+                    axios.post(url,data).then(function (res) {
+                console.log('Api Call');
                     th.allSubCategoryFromServer=res.data.ResponseData;
 
 
                 }).catch(function (e) {
                     th.allSubCategoryFromServer=[];
-                });
+                }).then(function () {
+                        th.getingSubCat=false;
+                    });
+                }
 
                 return th.allSubCategoryFromServer;
 

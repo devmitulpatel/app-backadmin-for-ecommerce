@@ -162,6 +162,8 @@
                 allCategoryFromServer:null,
                 allSubCategoryFromServer:null,
                 editFielsDataPost:false,
+                getingCat:false,
+                getingSubCat:false,
 
             }
 
@@ -222,14 +224,16 @@
             allCategory(forced=false){
                 var url=this.msData.path['get.allCat'];
                 var th=this;
+                th.getingCat=true;
 
 
-
-                if(th.allCategoryFromServer==null ||  forced)axios.post(url).then(function (res) {
+                if((th.allCategoryFromServer==null && !th.getingCat) ||  forced)axios.post(url).then(function (res) {
 
                     th.allCategoryFromServer=res.data.ResponseData;
 
 
+                }).catch().then(function () {
+                    th.getingCat=false;
                 });
 
                 return th.allCategoryFromServer;
@@ -241,12 +245,16 @@
 
 
 
-                if(th.allSubCategoryFromServer==null ||  forced)axios.post(url).then(function (res) {
+                if((th.allSubCategoryFromServer==null && !th.getingSubCat) ||  forced){
+                    th.getingSubCat=true;
+                    axios.post(url).then(function (res) {
 
                     th.allSubCategoryFromServer=res.data.ResponseData;
 
 
-                });
+                }).catch().then(function () {
+                        th.getingSubCat=false;
+                    });}
 
                 return th.allSubCategoryFromServer;
 

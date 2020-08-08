@@ -29,6 +29,7 @@ Vue.use(Toasted)
 Vue.component('setting-general', require('./components/settings/general').default);
 Vue.component('setting-website', require('./components/settings/website').default);
 Vue.component('setting-product', require('./components/settings/product').default);
+Vue.component('setting-tax', require('./components/settings/tax').default);
 Vue.component('product-category', require('./components/product/category').default);
 Vue.component('product-subcategory', require('./components/product/subcategory').default);
 Vue.component('product-addproduct', require('./components/product/addproduct').default);
@@ -49,7 +50,8 @@ const app = new Vue({
         fullSidenar:false,
         liveComponent:null,
         winDown:false,
-        darkMode:false
+        darkMode:false,
+        globalVar:{}
 
     },
     components: {
@@ -58,6 +60,16 @@ const app = new Vue({
     },
     methods:{
 
+
+                setGlob(name,val){
+                    this.globalVar[name]=val;
+                },
+                getGlob(name){
+                    return (this.globalVar.hasOwnProperty(name))?this.globalVar[name]:null;
+                },
+                resetGlob(name){
+                    this.globalVar[name]=null;
+                },
 
             toggleDarkMode(){
                this.darkMode=(this.darkMode)?false:true;

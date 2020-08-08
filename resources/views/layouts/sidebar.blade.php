@@ -72,7 +72,7 @@
         <i class="fas fa-tags"></i>  Product <i class="fas fa-chevron-right right p-fix"></i>
     </a>
     <div class="collapse sidebarsub" id="product">
-        <a class="btn btn-link btn-block text-left" >
+        <a class="btn btn-link btn-block text-left" v-on:click="clickEventFromSideBar('{{route('product.add',['compact'=>true])}}')">
             <i class="fas fa-level-up-alt fa-rotate-90"></i>  Add Product
         </a>
 
@@ -198,7 +198,7 @@
             <i class="fas fa-level-up-alt fa-rotate-90"></i>  Customer Setting
         </a>
 
-        <a class="btn btn-link btn-block text-left" >
+        <a class="btn btn-link btn-block text-left" v-on:click="clickEventFromSideBar('{{route('settings.tax',['compact'=>true])}}')">
             <i class="fas fa-level-up-alt fa-rotate-90"></i>  Tax Setting
         </a>
 

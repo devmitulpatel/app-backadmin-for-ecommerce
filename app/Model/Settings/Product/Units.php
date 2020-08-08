@@ -9,5 +9,10 @@ class Units extends Model
     //
 
 
+    protected static function boot(){
+        parent::boot();
+
+
+    }
 
 }

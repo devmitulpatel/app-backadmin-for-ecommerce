@@ -136,6 +136,7 @@
                 allCategoryFromServer:null,
                 allSubCategoryFromServer:null,
                 editFielsDataPost:false,
+                getingCat:false
 
             }
 
@@ -194,12 +195,17 @@
 
 
 
-                if(th.allCategoryFromServer==null ||  forced)axios.post(url).then(function (res) {
+                if(th.allCategoryFromServer==null ||  forced){
+                    th.getingCat=true;
+                    axios.post(url).then(function (res) {
 
                     th.allCategoryFromServer=res.data.ResponseData;
 
 
-                });
+                }).catch().then(function () {
+                        th.getingCat=false;
+                    });
+                }
 
                 return th.allCategoryFromServer;
 

@@ -158,3 +158,24 @@ if(!function_exists ('decodeLimit')){
     }
 
 }
+
+if(!function_exists ('getModel')){
+    function getModel($str){
+        $key=\Illuminate\Support\Str::slug($str);
+        $masterModel=(cache()->has('masterModel'))?cache()->get('masterModel'):[];
+
+
+        if(array_key_exists($key,$masterModel)){
+          //  \Debugbar::info('from cache');
+            return $masterModel[$key];
+        }else{
+        //    \Debugbar::info('from new ');
+            $masterModel[$key]=new $str();
+            cache()->put('masterModel',$masterModel);
+            return $masterModel[$key];
+        }
+    }
+
+}
+
+
