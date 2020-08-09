@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Model\Settings\Tax as Taxes;
 
 if(!function_exists ('settings')){
 
@@ -179,6 +180,56 @@ if(!function_exists ('getModel')){
             cache()->put('masterModel',$masterModel);
             return $masterModel[$key];
         }
+    }
+
+}
+if(!function_exists ('saveToModel')){
+
+    function saveToModel($m,$r,$name=""){
+        $input=$r->all();
+        $m=getModel($m);
+        try {
+
+            $m->updateOrInsert($input);
+
+            return throwData(["New ".$name." successfully added"]);
+
+        }catch (\Exception $e){
+
+            return throwError([$name." not added",$e->getMessage()]);
+
+        }
+    }
+
+}
+if(!function_exists ('deleteToModel')){
+
+    function deleteToModel($m,$r,$name=""){
+        $input=$r->all();
+
+        //  dd($input);
+
+        $m=getModel($m);
+
+
+
+
+        try {
+
+            $m->where('id',$input['id'])->delete();
+
+            return throwData([$name." removed successfully"]);
+            //   'nextUrl'=>route('settings.website',['compact'=>true])
+
+
+        }catch (\Exception $e){
+
+            return throwError([$name.' not removed']);
+
+
+        }
+
+
     }
 
 }

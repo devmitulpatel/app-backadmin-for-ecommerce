@@ -16,7 +16,7 @@ class CreateTaxCodesTable extends Migration
         Schema::create('tax_codes', function (Blueprint $table) {
             $table->id();
             $table->integer('code');
-            $table->json('tax')->default('[]');
+            $table->longText('tax')->nullable();
             $table->boolean('status')->default(1);
             $table->timestamps();
         });

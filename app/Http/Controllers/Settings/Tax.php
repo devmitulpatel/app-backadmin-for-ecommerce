@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Settings;
 
+use App\Http\Requests\Settings\Tax\taxDelete;
+use App\Http\Requests\Settings\Tax\taxSave;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\Settings\Tax as Taxes;
+
 class Tax extends Controller
 {
     /**
@@ -40,6 +44,11 @@ class Tax extends Controller
                 'get.allCat'=>route('settings.Product.Category.all'),
                 'get.allSCat'=>route('settings.Product.SubCategory.all'),
 
+                'get.allTaxes'=>route('settings.tax.all'),
+                'save.Tax'=>route('settings.tax.save'),
+                'edit.Tax'=>route('settings.tax.edit'),
+                'delete.Tax'=>route('settings.tax.delete'),
+
 
 
             ],
@@ -56,5 +65,45 @@ class Tax extends Controller
 
     }
 
+    public function getAllTaxes(){
+
+        $m2=getModel(Taxes::class);
+
+        $model=$m2->where('status',1)->orderBy('id','desc')->get();
+
+
+        $data=$model->toArray();
+        $rowData=[];
+
+        // \Debugbar::info($model->pluck('id','name'));
+
+        $model->map(function ($ar)use(&$m2,&$data,&$rowData){
+
+
+
+
+            return $ar;
+        });
+
+        \Debugbar::info($data);
+
+
+
+
+        return throwData(['All unir fetched successfully'],$model->toArray());
+
+    }
+
+    public function save(taxSave $r){
+
+       return saveToModel(Taxes::class,$r,'Tax');
+
+    }
+    public function edit(){
+
+    }
+    public function delete(taxDelete $r){
+        return deleteToModel(Taxes::class,$r,'Tax');
+    }
 
 }
