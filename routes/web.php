@@ -110,6 +110,8 @@ Route::middleware('auth')->group(function () {
         Route::match(['post'],'/tax/edit',"Settings\\tax@edit")->name('settings.tax.edit');
         Route::match(['post'],'/tax/delete',"Settings\\tax@delete")->name('settings.tax.delete');
 
+        Route::match(['post'],'/tax/code/get/all',"Settings\\tax@getAllCodes")->name('settings.tax.code.all');
+
 
 
 

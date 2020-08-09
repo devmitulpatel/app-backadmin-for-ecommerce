@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Settings;
 use App\Http\Requests\Settings\Tax\taxDelete;
 use App\Http\Requests\Settings\Tax\taxEdit;
 use App\Http\Requests\Settings\Tax\taxSave;
+use App\Model\Settings\TaxCodes;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Settings\Tax as Taxes;
@@ -50,6 +51,9 @@ class Tax extends Controller
                 'edit.Tax'=>route('settings.tax.edit'),
                 'delete.Tax'=>route('settings.tax.delete'),
 
+                'get.allTaxesCodes'=>route('settings.tax.code.all'),
+
+
 
 
             ],
@@ -87,6 +91,37 @@ class Tax extends Controller
         });
 
         \Debugbar::info($data);
+
+
+
+
+        return throwData(['All unir fetched successfully'],$model->toArray());
+
+    }
+    public function getAllCodes(){
+
+        $m2=getModel(TaxCodes::class);
+
+        $model=$m2->where('status',1)->orderBy('id','desc')->get();
+
+        $m1=getModel(Taxes::class);
+        $m1=$m1->get();
+
+        $data=$model->toArray();
+        $rowData=[];
+
+        // \Debugbar::info($model->pluck('id','name'));
+
+        $model->map(function ($ar)use($m1){
+            $decodeTax=json_decode($ar->tax,true);
+            foreach ($decodeTax as $taxId=>$taxper){
+                $name=$m1->where('id',$taxId)->first()->toArray()['name'];
+                $ar->$name=$taxper;
+            }
+            return $ar;
+        });
+
+      //  \Debugbar::info($model->toArray());
 
 
 

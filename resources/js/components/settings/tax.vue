@@ -166,9 +166,9 @@
                                                 'is-invalid':validateInputs.includes('code') && validateInputCheck('code')
                                                 }"
 
-                                           type="text" v-model="input1.name" name="code" class="form-control" id="code">
+                                           type="text" v-model="input2.code" name="code" class="form-control" id="code">
 
-                                    <div v-if="inputError1.hasOwnProperty('code')">
+                                    <div v-if="inputError2.hasOwnProperty('code')">
 
                                         <div class="alert alert-danger" role="alert" v-for="er in inputError1.code">
                                             {{er}}
@@ -186,19 +186,19 @@
                             <div class="row">
 
                                 <div class="form-group col-xs-12 col-sm-12 col-md-2 col-lg-2" v-for="tax in allTaxes()">
-                                    <label for="code">{{tax.name}}</label>
-                                    <input ref="code"
+                                    <label :for="tax.name">{{tax.name}}</label>
+                                    <input :ref="tax.name"
 
                                            :class="{
                                                 'is-valid':validateInputs.includes('code') && !validateInputCheck('code'),
                                                 'is-invalid':validateInputs.includes('code') && validateInputCheck('code')
                                                 }"
 
-                                           type="text" v-model="input1.name" name="code" class="form-control" id="code">
+                                           type="number" v-model="input2[tax.name]" :name="tax.name" class="form-control" :id="tax.name">
 
-                                    <div v-if="inputError1.hasOwnProperty('code')">
+                                    <div v-if="inputError2.hasOwnProperty(tax.name)">
 
-                                        <div class="alert alert-danger" role="alert" v-for="er in inputError1.code">
+                                        <div class="alert alert-danger" role="alert" v-for="er in inputError2[tax.name]">
                                             {{er}}
                                         </div>
 
@@ -225,7 +225,7 @@
                             <div class="row mt-3">
 
                                 <div class="col-12">
-                                    <div class="bg-info text-center pt-2 pb-2"> All Units </div>
+                                    <div class="bg-info text-center pt-2 pb-2"> All Codes </div>
 
                                     <table class="table table-bordered">
                                         <tr>
@@ -234,14 +234,14 @@
                                             <th class="text-center">Action</th>
                                         </tr>
 
-                                        <tr v-for="unit in allUnits()">
-                                            <td>{{unit.name}}</td>
+                                        <tr v-for="unit in allTaxeCodes()">
+                                            <td>{{unit.code}}</td>
                                             <td v-for="tax in allTaxes()">{{ unit[tax.name]}}</td>
                                             <td>
 
                                                 <div class="btn-group col-12" role="group" aria-label="Basic example">
                                                     <button type="button" class="btn btn-outline-danger" v-on:click="deleteUnit(unit)" > <i class="fa fa-trash-alt"></i></button>
-                                                    <button type="button" class="btn btn-outline-info" v-on:click="editUnit(unit)"> <i class="fa fa-edit"></i></button>
+                                                    <button type="button" class="btn btn-outline-info" v-on:click="editTaxCode(unit)"> <i class="fa fa-edit"></i></button>
                                                 </div>
 
                                             </td>
@@ -298,11 +298,13 @@
                 allExtraFieldsFromServer:null,
                 allCategoryFromServer:null,
                 allSubCategoryFromServer:null,
+                allTaxesCodesFromServer:null,
                 editFielsDataPost:false,
                 getingCat:false,
                 getingSubCat:false,
                 getingExtra:false,
-                getingUnit:false
+                getingUnit:false,
+                editTaxCodesDataPost:false
 
 
             }
@@ -395,6 +397,15 @@
                 if(!this.editFielsDataPost)this.editFielsDataPost=true;
 
             },
+            editTaxCode(unit){
+                this.input2=unit;
+                document.body.scrollTop = 0; // For Safari
+                document.documentElement.scrollTop = 0;
+
+                Vue.toasted.success("Edit GST Code: "+unit.code,{duration:1000});
+                if(!this.editTaxCodesDataPost)this.editTaxCodesDataPost=true;
+
+            },
             checkisValidSelect(type,current,input=this.input){
 
                 var check=input[type] == 0;
@@ -447,6 +458,7 @@
                 this.inputError2={};
                 this.allExtraFields(true);
             },
+
             restForm(){
                 if(this.editUnitDataPost)this.editUnitDataPost=false;
                 if(this.editFielsDataPost)this.editFielsDataPost=false;
@@ -551,6 +563,28 @@
                 }
 
                 return th.allTaxesFromServer;
+
+
+
+            },
+            allTaxeCodes(forced=false){
+                var url=this.msData.path['get.allTaxesCodes'];
+                var th=this;
+
+
+
+                if((th.allTaxesCodesFromServer==null && !th.getingUnit) ||  forced){
+                    th.getingUnit=true;
+                    axios.post(url).then(function (res) {
+
+                        th.allTaxesCodesFromServer=res.data.ResponseData;
+
+                    }).catch().then(function () {
+                        th.getingUnit=false;
+                    });
+                }
+
+                return th.allTaxesCodesFromServer;
 
 
 

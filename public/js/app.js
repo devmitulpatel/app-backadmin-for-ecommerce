@@ -2756,11 +2756,13 @@ __webpack_require__.r(__webpack_exports__);
       allExtraFieldsFromServer: null,
       allCategoryFromServer: null,
       allSubCategoryFromServer: null,
+      allTaxesCodesFromServer: null,
       editFielsDataPost: false,
       getingCat: false,
       getingSubCat: false,
       getingExtra: false,
-      getingUnit: false
+      getingUnit: false,
+      editTaxCodesDataPost: false
     };
   },
   props: ['msData'],
@@ -2832,6 +2834,16 @@ __webpack_require__.r(__webpack_exports__);
         duration: 1000
       });
       if (!this.editFielsDataPost) this.editFielsDataPost = true;
+    },
+    editTaxCode: function editTaxCode(unit) {
+      this.input2 = unit;
+      document.body.scrollTop = 0; // For Safari
+
+      document.documentElement.scrollTop = 0;
+      Vue.toasted.success("Edit GST Code: " + unit.code, {
+        duration: 1000
+      });
+      if (!this.editTaxCodesDataPost) this.editTaxCodesDataPost = true;
     },
     checkisValidSelect: function checkisValidSelect(type, current) {
       var input = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.input;
@@ -2972,6 +2984,22 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return th.allTaxesFromServer;
+    },
+    allTaxeCodes: function allTaxeCodes() {
+      var forced = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      var url = this.msData.path['get.allTaxesCodes'];
+      var th = this;
+
+      if (th.allTaxesCodesFromServer == null && !th.getingUnit || forced) {
+        th.getingUnit = true;
+        axios.post(url).then(function (res) {
+          th.allTaxesCodesFromServer = res.data.ResponseData;
+        })["catch"]().then(function () {
+          th.getingUnit = false;
+        });
+      }
+
+      return th.allTaxesCodesFromServer;
     },
     allExtraFields: function allExtraFields() {
       var forced = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
@@ -27928,8 +27956,8 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.input1.name,
-                              expression: "input1.name"
+                              value: _vm.input2.code,
+                              expression: "input2.code"
                             }
                           ],
                           ref: "code",
@@ -27943,18 +27971,18 @@ var render = function() {
                               _vm.validateInputCheck("code")
                           },
                           attrs: { type: "text", name: "code", id: "code" },
-                          domProps: { value: _vm.input1.name },
+                          domProps: { value: _vm.input2.code },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
-                              _vm.$set(_vm.input1, "name", $event.target.value)
+                              _vm.$set(_vm.input2, "code", $event.target.value)
                             }
                           }
                         }),
                         _vm._v(" "),
-                        _vm.inputError1.hasOwnProperty("code")
+                        _vm.inputError2.hasOwnProperty("code")
                           ? _c(
                               "div",
                               _vm._l(_vm.inputError1.code, function(er) {
@@ -27991,7 +28019,7 @@ var render = function() {
                             "form-group col-xs-12 col-sm-12 col-md-2 col-lg-2"
                         },
                         [
-                          _c("label", { attrs: { for: "code" } }, [
+                          _c("label", { attrs: { for: tax.name } }, [
                             _vm._v(_vm._s(tax.name))
                           ]),
                           _vm._v(" "),
@@ -28000,11 +28028,11 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.input1.name,
-                                expression: "input1.name"
+                                value: _vm.input2[tax.name],
+                                expression: "input2[tax.name]"
                               }
                             ],
-                            ref: "code",
+                            ref: tax.name,
                             refInFor: true,
                             staticClass: "form-control",
                             class: {
@@ -28015,26 +28043,30 @@ var render = function() {
                                 _vm.validateInputs.includes("code") &&
                                 _vm.validateInputCheck("code")
                             },
-                            attrs: { type: "text", name: "code", id: "code" },
-                            domProps: { value: _vm.input1.name },
+                            attrs: {
+                              type: "number",
+                              name: tax.name,
+                              id: tax.name
+                            },
+                            domProps: { value: _vm.input2[tax.name] },
                             on: {
                               input: function($event) {
                                 if ($event.target.composing) {
                                   return
                                 }
                                 _vm.$set(
-                                  _vm.input1,
-                                  "name",
+                                  _vm.input2,
+                                  tax.name,
                                   $event.target.value
                                 )
                               }
                             }
                           }),
                           _vm._v(" "),
-                          _vm.inputError1.hasOwnProperty("code")
+                          _vm.inputError2.hasOwnProperty(tax.name)
                             ? _c(
                                 "div",
-                                _vm._l(_vm.inputError1.code, function(er) {
+                                _vm._l(_vm.inputError2[tax.name], function(er) {
                                   return _c(
                                     "div",
                                     {
@@ -28066,7 +28098,7 @@ var render = function() {
                       _c(
                         "div",
                         { staticClass: "bg-info text-center pt-2 pb-2" },
-                        [_vm._v(" All Units ")]
+                        [_vm._v(" All Codes ")]
                       ),
                       _vm._v(" "),
                       _c(
@@ -28089,11 +28121,11 @@ var render = function() {
                             2
                           ),
                           _vm._v(" "),
-                          _vm._l(_vm.allUnits(), function(unit) {
+                          _vm._l(_vm.allTaxeCodes(), function(unit) {
                             return _c(
                               "tr",
                               [
-                                _c("td", [_vm._v(_vm._s(unit.name))]),
+                                _c("td", [_vm._v(_vm._s(unit.code))]),
                                 _vm._v(" "),
                                 _vm._l(_vm.allTaxes(), function(tax) {
                                   return _c("td", [
@@ -28137,7 +28169,7 @@ var render = function() {
                                           attrs: { type: "button" },
                                           on: {
                                             click: function($event) {
-                                              return _vm.editUnit(unit)
+                                              return _vm.editTaxCode(unit)
                                             }
                                           }
                                         },

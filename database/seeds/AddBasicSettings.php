@@ -18,11 +18,34 @@ class AddBasicSettings extends Seeder
         $this->feed_setting_product_units();
         $this->feed_product_cat();
         $this->feedTax();
+        $this->feedTaxCode();
 
 
     }
 
 
+    private function feedTaxCode(){
+        $model=getModel(\App\Model\Settings\TaxCodes::class);
+
+        $data=[
+            [
+            'code'=>'401610',
+            'tax'=>collect([
+                '1'=>2.5,
+                '2'=>2.5,
+                '3'=>5,
+
+            ]),
+            'status'=>true
+            ]
+        ];
+
+        foreach ($data as $row){
+
+            $model->insert($row);
+
+        }
+    }
     private function feedTax(){
         $model=getModel(\App\Model\Settings\Tax::class);
 
