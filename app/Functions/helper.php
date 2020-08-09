@@ -233,5 +233,33 @@ if(!function_exists ('deleteToModel')){
     }
 
 }
+if(!function_exists ('editToModel')){
+
+    function editToModel($m,$r,$name="",$unset=[]){
+        $response=[];
+        $input=$r->all();
+        $m=getModel($m);
+        $id=$input['id'];
+
+        if(array_key_exists('created_at',$input) && !in_array('created_at',$unset))$unset[]='created_at';
+        if(array_key_exists('id',$input) && !in_array('id',$unset))$unset[]='id';
+        foreach ($unset as $n){
+            if(array_key_exists($n,$input))unset($input[$n]);
+        }
+        if(array_key_exists('updated_at',$input) && $input['updated_at'])$input['updated_at']=now();
+
+        try {
+            $m->where('id',$id)->update($input);
+            return throwData([$name." updated successfully"]);
+        }catch (\Exception $e){
+            return throwError([$name." not updated"]);
+
+
+        }
+
+
+    }
+
+}
 
 

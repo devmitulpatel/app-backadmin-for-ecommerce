@@ -34,7 +34,7 @@
 
 
 
-                        <form @submit.prevent="processForm((editUnitDataPost)?msData.path['edit.Tax']:msData.path['save.Tax'],input1,'inputError1','updateAllTax')">
+                        <form @submit.prevent="processForm((editTaxDataPost)?msData.path['edit.Tax']:msData.path['save.Tax'],input1,'inputError1','updateAllTax')">
 
                             <div class="row">
 
@@ -127,7 +127,7 @@
 
                                                 <div class="btn-group col-12" role="group" aria-label="Basic example">
                                                     <button type="button" class="btn btn-outline-danger" v-on:click="deleteTax(unit)" > <i class="fa fa-trash-alt"></i></button>
-                                                    <button type="button" class="btn btn-outline-info" v-on:click="editUnit(unit)"> <i class="fa fa-edit"></i></button>
+                                                    <button type="button" class="btn btn-outline-info" v-on:click="editTax(unit)"> <i class="fa fa-edit"></i></button>
                                                 </div>
 
                                             </td>
@@ -158,19 +158,19 @@
                             <div class="row">
 
                                 <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                                    <label for="name">Name </label>
-                                    <input ref="name"
+                                    <label for="code">Code</label>
+                                    <input ref="code"
 
                                            :class="{
-                                                'is-valid':validateInputs.includes('name') && !validateInputCheck('name'),
-                                                'is-invalid':validateInputs.includes('name') && validateInputCheck('name')
+                                                'is-valid':validateInputs.includes('code') && !validateInputCheck('code'),
+                                                'is-invalid':validateInputs.includes('code') && validateInputCheck('code')
                                                 }"
 
-                                           type="text" v-model="input1.name" name="name" class="form-control" id="name">
+                                           type="text" v-model="input1.name" name="code" class="form-control" id="code">
 
-                                    <div v-if="inputError1.hasOwnProperty('name')">
+                                    <div v-if="inputError1.hasOwnProperty('code')">
 
-                                        <div class="alert alert-danger" role="alert" v-for="er in inputError1.name">
+                                        <div class="alert alert-danger" role="alert" v-for="er in inputError1.code">
                                             {{er}}
                                         </div>
 
@@ -181,20 +181,24 @@
 
 
                                 </div>
-                                <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                                    <label for="shortname">Short Name </label>
-                                    <input ref="shortname"
+
+                            </div>
+                            <div class="row">
+
+                                <div class="form-group col-xs-12 col-sm-12 col-md-2 col-lg-2" v-for="tax in allTaxes()">
+                                    <label for="code">{{tax.name}}</label>
+                                    <input ref="code"
 
                                            :class="{
-                                                'is-valid':validateInputs.includes('shortname') && !validateInputCheck('shortname'),
-                                                'is-invalid':validateInputs.includes('shortname') && validateInputCheck('shortname')
+                                                'is-valid':validateInputs.includes('code') && !validateInputCheck('code'),
+                                                'is-invalid':validateInputs.includes('code') && validateInputCheck('code')
                                                 }"
 
-                                           type="text" v-model="input1.shortname" name="shortname" class="form-control" id="shortname">
+                                           type="text" v-model="input1.name" name="code" class="form-control" id="code">
 
-                                    <div v-if="inputError1.hasOwnProperty('shortname')">
+                                    <div v-if="inputError1.hasOwnProperty('code')">
 
-                                        <div class="alert alert-danger" role="alert" v-for="er in inputError1.shortname">
+                                        <div class="alert alert-danger" role="alert" v-for="er in inputError1.code">
                                             {{er}}
                                         </div>
 
@@ -205,167 +209,11 @@
 
 
                                 </div>
-                                <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                                    <label for="unit">Unit </label>
-                                    <input ref="unit"
-
-                                           :class="{
-                                                'is-valid':validateInputs.includes('unit') && !validateInputCheck('unit'),
-                                                'is-invalid':validateInputs.includes('unit') && validateInputCheck('unit')
-                                                }"
-
-                                           type="number" v-model="input1.unit" name="unit" class="form-control" id="unit">
-
-                                    <div v-if="inputError1.hasOwnProperty('unit')">
-
-                                        <div class="alert alert-danger" role="alert" v-for="er in inputError1.unit">
-                                            {{er}}
-                                        </div>
-
-
-                                    </div>
-
-
-
-
-                                </div>
-                                <div class="form-check col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                                    <label for="status">Visibilty </label>
-                                    <div class="form-control ">
-
-                                        <label class="radio"><input  v-model="input1.status" id="status" name="status" type="radio" value="1" ><span class="pl-2">Public</span></label>
-                                        <label class="radio pl-2 "><input  v-model="input.status" name="status" type="radio" value="0"><span class="pl-2">Private</span></label>
-
-                                    </div>
-
-
-
-
-
-
-                                    <div v-if="inputError1.hasOwnProperty('status')">
-
-                                        <div class="alert alert-danger" role="alert" v-for="er in inputError1.status">
-                                            {{er}}
-                                        </div>
-
-
-                                    </div>
-
-
-
-
-                                </div>
-
-                                <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                                    <label for="dunitId">Down Unit </label>
-                                    <select v-on:change="updateInput()" v-model="input1.dunitId" class="form-control"  :class="{
-                                                'is-valid':validateInputs.includes('dunitId') && !validateInputCheck('dunitId'),
-                                                'is-invalid':validateInputs.includes('dunitId') && validateInputCheck('dunitId')
-                                                }">
-                                        <option  :value="0" selected>No Down Unit</option>
-                                        <option v-for="unit in allUnits()" :value="unit.id">{{unit.name}}</option>
-
-                                    </select>
-
-
-
-                                    <div v-if="inputError1.hasOwnProperty('dunitId')">
-
-                                        <div class="alert alert-danger" role="alert" v-for="er in inputError1.dunitId">
-                                            {{er}}
-                                        </div>
-
-
-                                    </div>
-
-
-
-
-                                </div>
-
-                                <div v-show="checkisValidSelect('dunitId','dunit',input1)" class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                                    <label for="dunit">Down Unit Conversation</label>
-                                    <input ref="dunit"
-
-                                           :class="{
-                                                'is-valid':validateInputs.includes('dunit') && !validateInputCheck('dunit'),
-                                                'is-invalid':validateInputs.includes('dunit') && validateInputCheck('dunit')
-                                                }"
-
-                                           type="text" v-model="input1.dunit" name="dunit" class="form-control" id="dunit">
-
-                                    <div v-if="inputError1.hasOwnProperty('dunit')">
-
-                                        <div class="alert alert-danger" role="alert" v-for="er in inputError1.dunit">
-                                            {{er}}
-                                        </div>
-
-
-                                    </div>
-
-
-
-
-                                </div>
-
-
-
-                                <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                                    <label for="uunitId">Up Unit </label>
-                                    <select v-on:change="updateInput()" v-model="input1.uunitId" class="form-control"  id="uunitId" :class="{
-                                                'is-valid':validateInputs.includes('uunitId') && !validateInputCheck('uunitId'),
-                                                'is-invalid':validateInputs.includes('uunitId') && validateInputCheck('uunitId')
-                                                }">
-                                        <option  :value="0" selected>No Down Unit</option>
-                                        <option v-for="unit in allUnits()" :value="unit.id">{{unit.name}}</option>
-
-                                    </select>
-
-
-
-                                    <div v-if="inputError1.hasOwnProperty('uunitId')">
-
-                                        <div class="alert alert-danger" role="alert" v-for="er in inputError1.uunitId">
-                                            {{er}}
-                                        </div>
-
-
-                                    </div>
-
-
-
-
-                                </div>
-
-                                <div  v-show="checkisValidSelect('uunitId','uunit',input1)" class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                                    <label for="uunit">Up Unit Conversation </label>
-                                    <input ref="uunit"
-
-                                           :class="{
-                                                'is-valid':validateInputs.includes('dunit') && !validateInputCheck('dunit'),
-                                                'is-invalid':validateInputs.includes('dunit') && validateInputCheck('dunit')
-                                                }"
-
-                                           type="text" v-model="input1.uunit" name="uunit" class="form-control" id="uunit">
-
-                                    <div v-if="inputError1.hasOwnProperty('uunit')">
-
-                                        <div class="alert alert-danger" role="alert" v-for="er in inputError1.uunit">
-                                            {{er}}
-                                        </div>
-
-
-                                    </div>
-
-
-
-
-                                </div>
-
 
 
                             </div>
+
+
 
                             <div class="mt-3">
 
@@ -381,24 +229,14 @@
 
                                     <table class="table table-bordered">
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Short Name</th>
-                                            <th>Unit Rate</th>
-                                            <th>Up Unit Name</th>
-                                            <th>Up Unit</th>
-                                            <th>Down Unit Name</th>
-                                            <th>Down Unit</th>
+                                            <th>Code</th>
+                                            <th v-for="tax in allTaxes()">{{tax.name}}</th>
                                             <th class="text-center">Action</th>
                                         </tr>
 
                                         <tr v-for="unit in allUnits()">
                                             <td>{{unit.name}}</td>
-                                            <td>{{unit.shortname}}</td>
-                                            <td>{{unit.unit}}</td>
-                                            <td>{{unit.uunitName}}</td>
-                                            <td>{{unit.uunit}}</td>
-                                            <td>{{unit.dunitName}}</td>
-                                            <td>{{unit.dunit}}</td>
+                                            <td v-for="tax in allTaxes()">{{ unit[tax.name]}}</td>
                                             <td>
 
                                                 <div class="btn-group col-12" role="group" aria-label="Basic example">
@@ -539,6 +377,15 @@
                 if(!this.editUnitDataPost)this.editUnitDataPost=true;
 
             },
+            editTax(unit){
+                this.input1=unit;
+                document.body.scrollTop = 0; // For Safari
+                document.documentElement.scrollTop = 0;
+
+                Vue.toasted.success("Edit Tax: "+unit.name,{duration:1000});
+                if(!this.editTaxDataPost)this.editTaxDataPost=true;
+
+            },
             editExtra(unit){
                 this.input2=unit;
                 document.body.scrollTop = 0; // For Safari
@@ -612,9 +459,9 @@
                 axios.post(url, input).then(function (res) {
                     var data = res.data;
 
-                    Vue.toasted.success(data.msg,{duration:1000});
+                   if(data.hasOwnProperty('msg')) Vue.toasted.success(data.msg,{duration:1000});
 
-                    if(data.hasOwnProperty('ResponseMessage') && typeof data.ResponseMessage == "array")Vue.toasted.success(data.ResponseMessage[0],{duration:1000});
+                    if(data.hasOwnProperty('ResponseMessage') )Vue.toasted.success(data.ResponseMessage[0],{duration:1000});
                     if(callback!=null)th[callback]();
                     if(data.hasOwnProperty('nextUrl')){
                         window.VueApp.clickEventFromSideBar(data.nextUrl);
@@ -624,6 +471,7 @@
 
 
                         th[error] = e.response.data.errors;
+
                         Vue.toasted.error(e.response.data.message,{duration:1000});
                         th.updateError();
                     }

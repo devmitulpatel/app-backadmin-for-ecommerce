@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Settings;
 
 use App\Http\Requests\Settings\Tax\taxDelete;
+use App\Http\Requests\Settings\Tax\taxEdit;
 use App\Http\Requests\Settings\Tax\taxSave;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -95,12 +96,10 @@ class Tax extends Controller
     }
 
     public function save(taxSave $r){
-
-       return saveToModel(Taxes::class,$r,'Tax');
-
+        return saveToModel(Taxes::class,$r,'Tax');
     }
-    public function edit(){
-
+    public function edit(taxEdit $r){
+        return editToModel(Taxes::class,$r,'tax');
     }
     public function delete(taxDelete $r){
         return deleteToModel(Taxes::class,$r,'Tax');

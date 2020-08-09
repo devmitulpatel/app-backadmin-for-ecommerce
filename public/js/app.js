@@ -2726,168 +2726,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "tax",
@@ -2975,6 +2813,16 @@ __webpack_require__.r(__webpack_exports__);
       });
       if (!this.editUnitDataPost) this.editUnitDataPost = true;
     },
+    editTax: function editTax(unit) {
+      this.input1 = unit;
+      document.body.scrollTop = 0; // For Safari
+
+      document.documentElement.scrollTop = 0;
+      Vue.toasted.success("Edit Tax: " + unit.name, {
+        duration: 1000
+      });
+      if (!this.editTaxDataPost) this.editTaxDataPost = true;
+    },
     editExtra: function editExtra(unit) {
       this.input2 = unit;
       document.body.scrollTop = 0; // For Safari
@@ -3048,10 +2896,10 @@ __webpack_require__.r(__webpack_exports__);
       this[error] = {};
       axios.post(url, input).then(function (res) {
         var data = res.data;
-        Vue.toasted.success(data.msg, {
+        if (data.hasOwnProperty('msg')) Vue.toasted.success(data.msg, {
           duration: 1000
         });
-        if (data.hasOwnProperty('ResponseMessage') && typeof data.ResponseMessage == "array") Vue.toasted.success(data.ResponseMessage[0], {
+        if (data.hasOwnProperty('ResponseMessage')) Vue.toasted.success(data.ResponseMessage[0], {
           duration: 1000
         });
         if (callback != null) th[callback]();
@@ -27755,7 +27603,7 @@ var render = function() {
                     submit: function($event) {
                       $event.preventDefault()
                       _vm.processForm(
-                        _vm.editUnitDataPost
+                        _vm.editTaxDataPost
                           ? _vm.msData.path["edit.Tax"]
                           : _vm.msData.path["save.Tax"],
                         _vm.input1,
@@ -28010,7 +27858,7 @@ var render = function() {
                                         attrs: { type: "button" },
                                         on: {
                                           click: function($event) {
-                                            return _vm.editUnit(unit)
+                                            return _vm.editTax(unit)
                                           }
                                         }
                                       },
@@ -28071,8 +27919,8 @@ var render = function() {
                           "form-group col-xs-12 col-sm-12 col-md-3 col-lg-3"
                       },
                       [
-                        _c("label", { attrs: { for: "name" } }, [
-                          _vm._v("Name ")
+                        _c("label", { attrs: { for: "code" } }, [
+                          _vm._v("Code")
                         ]),
                         _vm._v(" "),
                         _c("input", {
@@ -28084,17 +27932,17 @@ var render = function() {
                               expression: "input1.name"
                             }
                           ],
-                          ref: "name",
+                          ref: "code",
                           staticClass: "form-control",
                           class: {
                             "is-valid":
-                              _vm.validateInputs.includes("name") &&
-                              !_vm.validateInputCheck("name"),
+                              _vm.validateInputs.includes("code") &&
+                              !_vm.validateInputCheck("code"),
                             "is-invalid":
-                              _vm.validateInputs.includes("name") &&
-                              _vm.validateInputCheck("name")
+                              _vm.validateInputs.includes("code") &&
+                              _vm.validateInputCheck("code")
                           },
-                          attrs: { type: "text", name: "name", id: "name" },
+                          attrs: { type: "text", name: "code", id: "code" },
                           domProps: { value: _vm.input1.name },
                           on: {
                             input: function($event) {
@@ -28106,616 +27954,10 @@ var render = function() {
                           }
                         }),
                         _vm._v(" "),
-                        _vm.inputError1.hasOwnProperty("name")
+                        _vm.inputError1.hasOwnProperty("code")
                           ? _c(
                               "div",
-                              _vm._l(_vm.inputError1.name, function(er) {
-                                return _c(
-                                  "div",
-                                  {
-                                    staticClass: "alert alert-danger",
-                                    attrs: { role: "alert" }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                        " +
-                                        _vm._s(er) +
-                                        "\n                                    "
-                                    )
-                                  ]
-                                )
-                              }),
-                              0
-                            )
-                          : _vm._e()
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "form-group col-xs-12 col-sm-12 col-md-3 col-lg-3"
-                      },
-                      [
-                        _c("label", { attrs: { for: "shortname" } }, [
-                          _vm._v("Short Name ")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.input1.shortname,
-                              expression: "input1.shortname"
-                            }
-                          ],
-                          ref: "shortname",
-                          staticClass: "form-control",
-                          class: {
-                            "is-valid":
-                              _vm.validateInputs.includes("shortname") &&
-                              !_vm.validateInputCheck("shortname"),
-                            "is-invalid":
-                              _vm.validateInputs.includes("shortname") &&
-                              _vm.validateInputCheck("shortname")
-                          },
-                          attrs: {
-                            type: "text",
-                            name: "shortname",
-                            id: "shortname"
-                          },
-                          domProps: { value: _vm.input1.shortname },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.input1,
-                                "shortname",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.inputError1.hasOwnProperty("shortname")
-                          ? _c(
-                              "div",
-                              _vm._l(_vm.inputError1.shortname, function(er) {
-                                return _c(
-                                  "div",
-                                  {
-                                    staticClass: "alert alert-danger",
-                                    attrs: { role: "alert" }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                        " +
-                                        _vm._s(er) +
-                                        "\n                                    "
-                                    )
-                                  ]
-                                )
-                              }),
-                              0
-                            )
-                          : _vm._e()
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "form-group col-xs-12 col-sm-12 col-md-3 col-lg-3"
-                      },
-                      [
-                        _c("label", { attrs: { for: "unit" } }, [
-                          _vm._v("Unit ")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.input1.unit,
-                              expression: "input1.unit"
-                            }
-                          ],
-                          ref: "unit",
-                          staticClass: "form-control",
-                          class: {
-                            "is-valid":
-                              _vm.validateInputs.includes("unit") &&
-                              !_vm.validateInputCheck("unit"),
-                            "is-invalid":
-                              _vm.validateInputs.includes("unit") &&
-                              _vm.validateInputCheck("unit")
-                          },
-                          attrs: { type: "number", name: "unit", id: "unit" },
-                          domProps: { value: _vm.input1.unit },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(_vm.input1, "unit", $event.target.value)
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.inputError1.hasOwnProperty("unit")
-                          ? _c(
-                              "div",
-                              _vm._l(_vm.inputError1.unit, function(er) {
-                                return _c(
-                                  "div",
-                                  {
-                                    staticClass: "alert alert-danger",
-                                    attrs: { role: "alert" }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                        " +
-                                        _vm._s(er) +
-                                        "\n                                    "
-                                    )
-                                  ]
-                                )
-                              }),
-                              0
-                            )
-                          : _vm._e()
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "form-check col-xs-12 col-sm-12 col-md-3 col-lg-3"
-                      },
-                      [
-                        _c("label", { attrs: { for: "status" } }, [
-                          _vm._v("Visibilty ")
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-control " }, [
-                          _c("label", { staticClass: "radio" }, [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.input1.status,
-                                  expression: "input1.status"
-                                }
-                              ],
-                              attrs: {
-                                id: "status",
-                                name: "status",
-                                type: "radio",
-                                value: "1"
-                              },
-                              domProps: {
-                                checked: _vm._q(_vm.input1.status, "1")
-                              },
-                              on: {
-                                change: function($event) {
-                                  return _vm.$set(_vm.input1, "status", "1")
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "pl-2" }, [
-                              _vm._v("Public")
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("label", { staticClass: "radio pl-2 " }, [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.input.status,
-                                  expression: "input.status"
-                                }
-                              ],
-                              attrs: {
-                                name: "status",
-                                type: "radio",
-                                value: "0"
-                              },
-                              domProps: {
-                                checked: _vm._q(_vm.input.status, "0")
-                              },
-                              on: {
-                                change: function($event) {
-                                  return _vm.$set(_vm.input, "status", "0")
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "pl-2" }, [
-                              _vm._v("Private")
-                            ])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _vm.inputError1.hasOwnProperty("status")
-                          ? _c(
-                              "div",
-                              _vm._l(_vm.inputError1.status, function(er) {
-                                return _c(
-                                  "div",
-                                  {
-                                    staticClass: "alert alert-danger",
-                                    attrs: { role: "alert" }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                        " +
-                                        _vm._s(er) +
-                                        "\n                                    "
-                                    )
-                                  ]
-                                )
-                              }),
-                              0
-                            )
-                          : _vm._e()
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "form-group col-xs-12 col-sm-12 col-md-3 col-lg-3"
-                      },
-                      [
-                        _c("label", { attrs: { for: "dunitId" } }, [
-                          _vm._v("Down Unit ")
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.input1.dunitId,
-                                expression: "input1.dunitId"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            class: {
-                              "is-valid":
-                                _vm.validateInputs.includes("dunitId") &&
-                                !_vm.validateInputCheck("dunitId"),
-                              "is-invalid":
-                                _vm.validateInputs.includes("dunitId") &&
-                                _vm.validateInputCheck("dunitId")
-                            },
-                            on: {
-                              change: [
-                                function($event) {
-                                  var $$selectedVal = Array.prototype.filter
-                                    .call($event.target.options, function(o) {
-                                      return o.selected
-                                    })
-                                    .map(function(o) {
-                                      var val =
-                                        "_value" in o ? o._value : o.value
-                                      return val
-                                    })
-                                  _vm.$set(
-                                    _vm.input1,
-                                    "dunitId",
-                                    $event.target.multiple
-                                      ? $$selectedVal
-                                      : $$selectedVal[0]
-                                  )
-                                },
-                                function($event) {
-                                  return _vm.updateInput()
-                                }
-                              ]
-                            }
-                          },
-                          [
-                            _c(
-                              "option",
-                              {
-                                attrs: { selected: "" },
-                                domProps: { value: 0 }
-                              },
-                              [_vm._v("No Down Unit")]
-                            ),
-                            _vm._v(" "),
-                            _vm._l(_vm.allUnits(), function(unit) {
-                              return _c(
-                                "option",
-                                { domProps: { value: unit.id } },
-                                [_vm._v(_vm._s(unit.name))]
-                              )
-                            })
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _vm.inputError1.hasOwnProperty("dunitId")
-                          ? _c(
-                              "div",
-                              _vm._l(_vm.inputError1.dunitId, function(er) {
-                                return _c(
-                                  "div",
-                                  {
-                                    staticClass: "alert alert-danger",
-                                    attrs: { role: "alert" }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                        " +
-                                        _vm._s(er) +
-                                        "\n                                    "
-                                    )
-                                  ]
-                                )
-                              }),
-                              0
-                            )
-                          : _vm._e()
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.checkisValidSelect(
-                              "dunitId",
-                              "dunit",
-                              _vm.input1
-                            ),
-                            expression:
-                              "checkisValidSelect('dunitId','dunit',input1)"
-                          }
-                        ],
-                        staticClass:
-                          "form-group col-xs-12 col-sm-12 col-md-3 col-lg-3"
-                      },
-                      [
-                        _c("label", { attrs: { for: "dunit" } }, [
-                          _vm._v("Down Unit Conversation")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.input1.dunit,
-                              expression: "input1.dunit"
-                            }
-                          ],
-                          ref: "dunit",
-                          staticClass: "form-control",
-                          class: {
-                            "is-valid":
-                              _vm.validateInputs.includes("dunit") &&
-                              !_vm.validateInputCheck("dunit"),
-                            "is-invalid":
-                              _vm.validateInputs.includes("dunit") &&
-                              _vm.validateInputCheck("dunit")
-                          },
-                          attrs: { type: "text", name: "dunit", id: "dunit" },
-                          domProps: { value: _vm.input1.dunit },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(_vm.input1, "dunit", $event.target.value)
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.inputError1.hasOwnProperty("dunit")
-                          ? _c(
-                              "div",
-                              _vm._l(_vm.inputError1.dunit, function(er) {
-                                return _c(
-                                  "div",
-                                  {
-                                    staticClass: "alert alert-danger",
-                                    attrs: { role: "alert" }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                        " +
-                                        _vm._s(er) +
-                                        "\n                                    "
-                                    )
-                                  ]
-                                )
-                              }),
-                              0
-                            )
-                          : _vm._e()
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "form-group col-xs-12 col-sm-12 col-md-3 col-lg-3"
-                      },
-                      [
-                        _c("label", { attrs: { for: "uunitId" } }, [
-                          _vm._v("Up Unit ")
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.input1.uunitId,
-                                expression: "input1.uunitId"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            class: {
-                              "is-valid":
-                                _vm.validateInputs.includes("uunitId") &&
-                                !_vm.validateInputCheck("uunitId"),
-                              "is-invalid":
-                                _vm.validateInputs.includes("uunitId") &&
-                                _vm.validateInputCheck("uunitId")
-                            },
-                            attrs: { id: "uunitId" },
-                            on: {
-                              change: [
-                                function($event) {
-                                  var $$selectedVal = Array.prototype.filter
-                                    .call($event.target.options, function(o) {
-                                      return o.selected
-                                    })
-                                    .map(function(o) {
-                                      var val =
-                                        "_value" in o ? o._value : o.value
-                                      return val
-                                    })
-                                  _vm.$set(
-                                    _vm.input1,
-                                    "uunitId",
-                                    $event.target.multiple
-                                      ? $$selectedVal
-                                      : $$selectedVal[0]
-                                  )
-                                },
-                                function($event) {
-                                  return _vm.updateInput()
-                                }
-                              ]
-                            }
-                          },
-                          [
-                            _c(
-                              "option",
-                              {
-                                attrs: { selected: "" },
-                                domProps: { value: 0 }
-                              },
-                              [_vm._v("No Down Unit")]
-                            ),
-                            _vm._v(" "),
-                            _vm._l(_vm.allUnits(), function(unit) {
-                              return _c(
-                                "option",
-                                { domProps: { value: unit.id } },
-                                [_vm._v(_vm._s(unit.name))]
-                              )
-                            })
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _vm.inputError1.hasOwnProperty("uunitId")
-                          ? _c(
-                              "div",
-                              _vm._l(_vm.inputError1.uunitId, function(er) {
-                                return _c(
-                                  "div",
-                                  {
-                                    staticClass: "alert alert-danger",
-                                    attrs: { role: "alert" }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                        " +
-                                        _vm._s(er) +
-                                        "\n                                    "
-                                    )
-                                  ]
-                                )
-                              }),
-                              0
-                            )
-                          : _vm._e()
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.checkisValidSelect(
-                              "uunitId",
-                              "uunit",
-                              _vm.input1
-                            ),
-                            expression:
-                              "checkisValidSelect('uunitId','uunit',input1)"
-                          }
-                        ],
-                        staticClass:
-                          "form-group col-xs-12 col-sm-12 col-md-3 col-lg-3"
-                      },
-                      [
-                        _c("label", { attrs: { for: "uunit" } }, [
-                          _vm._v("Up Unit Conversation ")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.input1.uunit,
-                              expression: "input1.uunit"
-                            }
-                          ],
-                          ref: "uunit",
-                          staticClass: "form-control",
-                          class: {
-                            "is-valid":
-                              _vm.validateInputs.includes("dunit") &&
-                              !_vm.validateInputCheck("dunit"),
-                            "is-invalid":
-                              _vm.validateInputs.includes("dunit") &&
-                              _vm.validateInputCheck("dunit")
-                          },
-                          attrs: { type: "text", name: "uunit", id: "uunit" },
-                          domProps: { value: _vm.input1.uunit },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(_vm.input1, "uunit", $event.target.value)
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.inputError1.hasOwnProperty("uunit")
-                          ? _c(
-                              "div",
-                              _vm._l(_vm.inputError1.uunit, function(er) {
+                              _vm._l(_vm.inputError1.code, function(er) {
                                 return _c(
                                   "div",
                                   {
@@ -28738,6 +27980,85 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "row" },
+                    _vm._l(_vm.allTaxes(), function(tax) {
+                      return _c(
+                        "div",
+                        {
+                          staticClass:
+                            "form-group col-xs-12 col-sm-12 col-md-2 col-lg-2"
+                        },
+                        [
+                          _c("label", { attrs: { for: "code" } }, [
+                            _vm._v(_vm._s(tax.name))
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.input1.name,
+                                expression: "input1.name"
+                              }
+                            ],
+                            ref: "code",
+                            refInFor: true,
+                            staticClass: "form-control",
+                            class: {
+                              "is-valid":
+                                _vm.validateInputs.includes("code") &&
+                                !_vm.validateInputCheck("code"),
+                              "is-invalid":
+                                _vm.validateInputs.includes("code") &&
+                                _vm.validateInputCheck("code")
+                            },
+                            attrs: { type: "text", name: "code", id: "code" },
+                            domProps: { value: _vm.input1.name },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.input1,
+                                  "name",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.inputError1.hasOwnProperty("code")
+                            ? _c(
+                                "div",
+                                _vm._l(_vm.inputError1.code, function(er) {
+                                  return _c(
+                                    "div",
+                                    {
+                                      staticClass: "alert alert-danger",
+                                      attrs: { role: "alert" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(er) +
+                                          "\n                                    "
+                                      )
+                                    ]
+                                  )
+                                }),
+                                0
+                              )
+                            : _vm._e()
+                        ]
+                      )
+                    }),
+                    0
+                  ),
+                  _vm._v(" "),
                   _vm._m(4),
                   _vm._v(" "),
                   _c("div", { staticClass: "row mt-3" }, [
@@ -28752,70 +28073,82 @@ var render = function() {
                         "table",
                         { staticClass: "table table-bordered" },
                         [
-                          _vm._m(5),
+                          _c(
+                            "tr",
+                            [
+                              _c("th", [_vm._v("Code")]),
+                              _vm._v(" "),
+                              _vm._l(_vm.allTaxes(), function(tax) {
+                                return _c("th", [_vm._v(_vm._s(tax.name))])
+                              }),
+                              _vm._v(" "),
+                              _c("th", { staticClass: "text-center" }, [
+                                _vm._v("Action")
+                              ])
+                            ],
+                            2
+                          ),
                           _vm._v(" "),
                           _vm._l(_vm.allUnits(), function(unit) {
-                            return _c("tr", [
-                              _c("td", [_vm._v(_vm._s(unit.name))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(unit.shortname))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(unit.unit))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(unit.uunitName))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(unit.uunit))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(unit.dunitName))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(unit.dunit))]),
-                              _vm._v(" "),
-                              _c("td", [
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass: "btn-group col-12",
-                                    attrs: {
-                                      role: "group",
-                                      "aria-label": "Basic example"
-                                    }
-                                  },
-                                  [
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass: "btn btn-outline-danger",
-                                        attrs: { type: "button" },
-                                        on: {
-                                          click: function($event) {
-                                            return _vm.deleteUnit(unit)
+                            return _c(
+                              "tr",
+                              [
+                                _c("td", [_vm._v(_vm._s(unit.name))]),
+                                _vm._v(" "),
+                                _vm._l(_vm.allTaxes(), function(tax) {
+                                  return _c("td", [
+                                    _vm._v(_vm._s(unit[tax.name]))
+                                  ])
+                                }),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "btn-group col-12",
+                                      attrs: {
+                                        role: "group",
+                                        "aria-label": "Basic example"
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-outline-danger",
+                                          attrs: { type: "button" },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.deleteUnit(unit)
+                                            }
                                           }
-                                        }
-                                      },
-                                      [
-                                        _c("i", {
-                                          staticClass: "fa fa-trash-alt"
-                                        })
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass: "btn btn-outline-info",
-                                        attrs: { type: "button" },
-                                        on: {
-                                          click: function($event) {
-                                            return _vm.editUnit(unit)
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass: "fa fa-trash-alt"
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-outline-info",
+                                          attrs: { type: "button" },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.editUnit(unit)
+                                            }
                                           }
-                                        }
-                                      },
-                                      [_c("i", { staticClass: "fa fa-edit" })]
-                                    )
-                                  ]
-                                )
-                              ])
-                            ])
+                                        },
+                                        [_c("i", { staticClass: "fa fa-edit" })]
+                                      )
+                                    ]
+                                  )
+                                ])
+                              ],
+                              2
+                            )
                           })
                         ],
                         2
@@ -28880,28 +28213,6 @@ var staticRenderFns = [
         staticClass: "btn btn-secondary col-12",
         attrs: { type: "submit", name: "submit" }
       })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("th", [_vm._v("Name")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Short Name")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Unit Rate")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Up Unit Name")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Up Unit")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Down Unit Name")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Down Unit")]),
-      _vm._v(" "),
-      _c("th", { staticClass: "text-center" }, [_vm._v("Action")])
     ])
   }
 ]
