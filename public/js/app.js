@@ -41,6 +41,10 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ckeditor/ckeditor5-build-classic */ "./node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js");
+/* harmony import */ var _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 //
 //
 //
@@ -215,42 +219,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "addproduct",
   props: ['msData'],
   data: function data() {
     return {
-      input1: {},
-      inputError1: {},
+      editor: _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0___default.a,
+      editorConfig: {
+        toolbar: {
+          items: ['heading', '|', 'bold', 'italic', '|', 'bulletedList', 'numberedList', '|', 'insertTable', '|', //    'imageUpload',
+          // '|',
+          'undo', 'redo']
+        },
+        // image: {
+        //     toolbar: [
+        //      //   'imageStyle:full',
+        //   //      'imageStyle:side',
+        //    //     '|',
+        //     //    'imageTextAlternative'
+        //     ]
+        // },
+        table: {
+          contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells']
+        },
+        language: 'en'
+      },
+      input: {},
+      inputError: {},
       validateInputs: ['CompanyName'],
       validationRules: {
         'CompanyName': {
@@ -273,6 +269,65 @@ __webpack_require__.r(__webpack_exports__);
     this.allCategory();
   },
   methods: {
+    removeAllInputData: function removeAllInputData(input, inputName) {
+      //console.log(this.hasOwnProperty(input)&& this[input].hasOwnProperty(inputName));
+      if (this.hasOwnProperty(input) && this[input].hasOwnProperty(inputName)) {
+        this[input][inputName] = [];
+        this.updateInput();
+      }
+
+      document.getElementById(inputName).value = '';
+    },
+    fileInputs: function fileInputs(e, inputName) {
+      var _this = this;
+
+      var limit = 6;
+      var file = e.target.files;
+      if (!this.input.hasOwnProperty(inputName)) this.input[inputName] = [];
+
+      if (file.length > limit || this.input[inputName] != null && this.input[inputName].length > limit - 1) {
+        alert('Only ' + limit + ' image allowed to upload, and You selected more ' + limit + ' images');
+
+        if (file.length > limit) {
+          e.target.value = ''; //this.input[inputName]=[];
+        }
+
+        e.target.value = '';
+        this.updateInput();
+      } else {
+        var count = 1;
+
+        for (var i in file) {
+          var reader = new FileReader();
+
+          reader.onload = function (e) {
+            if (!_this.input.hasOwnProperty(inputName)) _this.input[inputName] = [];
+
+            _this.input[inputName].push(e.target.result);
+
+            _this.updateInput();
+          };
+
+          count = count + 1;
+          if (_typeof(file[i]) == "object") reader.readAsDataURL(file[i]);
+        }
+      } // console.log(file[0])
+
+    },
+    fileInput: function fileInput(e, inputName) {
+      var _this2 = this;
+
+      var file = e.target.files;
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        _this2.input[inputName] = e.target.result;
+
+        _this2.updateInput();
+      };
+
+      reader.readAsDataURL(file[0]); // console.log(file[0])
+    },
     editCat: function editCat(unit) {
       this.input1 = unit;
       document.body.scrollTop = 0; // For Safari
@@ -327,9 +382,9 @@ __webpack_require__.r(__webpack_exports__);
       return th.allCategoryFromServer;
     },
     updateInput: function updateInput() {
-      var oldInput = this.input1;
-      this.input1 = null;
-      this.input1 = oldInput;
+      var oldInput = this.input;
+      this.input = null;
+      this.input = oldInput;
     },
     updateError: function updateError() {
       var oldInput = this.inputError1;
@@ -23523,7 +23578,7 @@ var render = function() {
                         _vm.editCatDataPost
                           ? _vm.msData.path["edit.cat"]
                           : _vm.msData.path["save.cat"],
-                        _vm.input1,
+                        _vm.input,
                         "inputError1",
                         "updateAllcategory"
                       )
@@ -23536,7 +23591,7 @@ var render = function() {
                       "div",
                       {
                         staticClass:
-                          "form-group col-xs-12 col-sm-12 col-md-3 col-lg-3"
+                          "form-group col-xs-12 col-sm-12 col-md-4 col-lg-4"
                       },
                       [
                         _c("label", { attrs: { for: "name" } }, [
@@ -23548,8 +23603,8 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.input1.name,
-                              expression: "input1.name"
+                              value: _vm.input.name,
+                              expression: "input.name"
                             }
                           ],
                           ref: "name",
@@ -23563,21 +23618,21 @@ var render = function() {
                               _vm.validateInputCheck("name")
                           },
                           attrs: { type: "text", name: "name", id: "name" },
-                          domProps: { value: _vm.input1.name },
+                          domProps: { value: _vm.input.name },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
-                              _vm.$set(_vm.input1, "name", $event.target.value)
+                              _vm.$set(_vm.input, "name", $event.target.value)
                             }
                           }
                         }),
                         _vm._v(" "),
-                        _vm.inputError1.hasOwnProperty("name")
+                        _vm.inputError.hasOwnProperty("name")
                           ? _c(
                               "div",
-                              _vm._l(_vm.inputError1.name, function(er) {
+                              _vm._l(_vm.inputError.name, function(er) {
                                 return _c(
                                   "div",
                                   {
@@ -23606,45 +23661,251 @@ var render = function() {
                           "form-group col-xs-12 col-sm-12 col-md-3 col-lg-3"
                       },
                       [
-                        _c("label", { attrs: { for: "name" } }, [
+                        _c("label", { attrs: { for: "productLogo" } }, [
+                          _vm._v(" Product Image ")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-8" }, [
+                            _c("input", {
+                              staticClass: "form-control-file",
+                              class: {
+                                "is-valid":
+                                  _vm.validateInputs.includes("productLogo") &&
+                                  !_vm.validateInputCheck("productLogo"),
+                                "is-invalid":
+                                  _vm.validateInputs.includes("productLogo") &&
+                                  _vm.validateInputCheck("productLogo")
+                              },
+                              attrs: {
+                                type: "file",
+                                name: "productLogo",
+                                id: "productLogo",
+                                "aria-describedby": "productLogoHelp"
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.fileInput($event, "productLogo")
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "text-muted" }, [
+                              _vm._v(" png, jpg, jpeg  allowed ")
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-4 inputLogo" }, [
+                            _c(
+                              "small",
+                              {
+                                staticClass: "form-text text-muted text-center",
+                                attrs: { id: "productLogoHelp" }
+                              },
+                              [_vm._v("Preview")]
+                            ),
+                            _vm._v(" "),
+                            _vm.input.hasOwnProperty("productLogo")
+                              ? _c("img", {
+                                  staticClass:
+                                    "logoSample border shadow-sm bg-white",
+                                  attrs: { src: _vm.input.productLogo }
+                                })
+                              : _c("img", {
+                                  staticClass: "logoSample",
+                                  attrs: { src: _vm.msData.img.productLogo }
+                                })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _vm.inputError.hasOwnProperty("invoiceLogo")
+                          ? _c(
+                              "div",
+                              { staticClass: "error-file" },
+                              _vm._l(_vm.inputError.invoiceLogo, function(er) {
+                                return _c(
+                                  "div",
+                                  {
+                                    staticClass: "alert alert-danger",
+                                    attrs: { role: "alert" }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                        " +
+                                        _vm._s(er) +
+                                        "\n                                    "
+                                    )
+                                  ]
+                                )
+                              }),
+                              0
+                            )
+                          : _vm._e()
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "form-group col-xs-12 col-sm-12 col-md-3 col-lg-5"
+                      },
+                      [
+                        _c("label", { attrs: { for: "productLogoOther" } }, [
+                          _vm._v(" Product Other Images ")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-4" }, [
+                            _c("input", {
+                              staticClass: "form-control-file",
+                              class: {
+                                "is-valid":
+                                  _vm.validateInputs.includes(
+                                    "productLogoOther"
+                                  ) &&
+                                  !_vm.validateInputCheck("productLogoOther"),
+                                "is-invalid":
+                                  _vm.validateInputs.includes(
+                                    "productLogoOther"
+                                  ) &&
+                                  _vm.validateInputCheck("productLogoOther")
+                              },
+                              attrs: {
+                                multiple: "",
+                                type: "file",
+                                name: "productLogoOther",
+                                id: "productLogoOther",
+                                "aria-describedby": "productLogoOtherHelp"
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.fileInputs(
+                                    $event,
+                                    "productLogoOther"
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "text-muted" }, [
+                              _vm._v(" Max 6 Image File  ")
+                            ]),
+                            _c("br"),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "text-muted" }, [
+                              _vm._v(" png, jpg, jpeg  allowed ")
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-8 inputLogo " }, [
+                            _c(
+                              "small",
+                              {
+                                staticClass: "form-text text-muted text-center",
+                                attrs: { id: "productLogoOtherHelp" }
+                              },
+                              [_vm._v("Preview ")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "row" },
+                              [
+                                _vm._l(_vm.input.productLogoOther, function(
+                                  img
+                                ) {
+                                  return _vm.input.hasOwnProperty(
+                                    "productLogoOther"
+                                  )
+                                    ? _c("img", {
+                                        staticClass:
+                                          "zoomOut-img mt-1 col-3 border shadow-sm bg-white",
+                                        attrs: { src: img }
+                                      })
+                                    : _vm._e()
+                                }),
+                                _vm._v(" "),
+                                _vm.input.hasOwnProperty("productLogoOther") &&
+                                _vm.input.productLogoOther.length > 0
+                                  ? _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "btn btn-sm btn-outline-danger col-12",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.removeAllInputData(
+                                              "input",
+                                              "productLogoOther"
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("X Remove All Images")]
+                                    )
+                                  : _vm._e()
+                              ],
+                              2
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _vm.inputError.hasOwnProperty("invoiceLogo")
+                          ? _c(
+                              "div",
+                              { staticClass: "error-file" },
+                              _vm._l(_vm.inputError.invoiceLogo, function(er) {
+                                return _c(
+                                  "div",
+                                  {
+                                    staticClass: "alert alert-danger",
+                                    attrs: { role: "alert" }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                        " +
+                                        _vm._s(er) +
+                                        "\n                                    "
+                                    )
+                                  ]
+                                )
+                              }),
+                              0
+                            )
+                          : _vm._e()
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "form-group col-xs-12 col-sm-12 col-md-6 col-lg-12"
+                      },
+                      [
+                        _c("label", { attrs: { for: "description" } }, [
                           _vm._v("Description")
                         ]),
                         _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.input1.name,
-                              expression: "input1.name"
-                            }
-                          ],
-                          ref: "name",
-                          staticClass: "form-control",
-                          class: {
-                            "is-valid":
-                              _vm.validateInputs.includes("name") &&
-                              !_vm.validateInputCheck("name"),
-                            "is-invalid":
-                              _vm.validateInputs.includes("name") &&
-                              _vm.validateInputCheck("name")
+                        _c("ckeditor", {
+                          attrs: {
+                            editor: _vm.editor,
+                            config: _vm.editorConfig
                           },
-                          attrs: { type: "text", name: "name", id: "name" },
-                          domProps: { value: _vm.input1.name },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(_vm.input1, "name", $event.target.value)
-                            }
+                          model: {
+                            value: _vm.input.description,
+                            callback: function($$v) {
+                              _vm.$set(_vm.input, "description", $$v)
+                            },
+                            expression: "input.description"
                           }
                         }),
                         _vm._v(" "),
-                        _vm.inputError1.hasOwnProperty("name")
+                        _vm.inputError.hasOwnProperty("description")
                           ? _c(
                               "div",
-                              _vm._l(_vm.inputError1.name, function(er) {
+                              _vm._l(_vm.inputError.description, function(er) {
                                 return _c(
                                   "div",
                                   {
@@ -23663,275 +23924,8 @@ var render = function() {
                               0
                             )
                           : _vm._e()
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "form-group col-xs-12 col-sm-12 col-md-3 col-lg-3"
-                      },
-                      [
-                        _c("label", { attrs: { for: "name" } }, [
-                          _vm._v("Sell Price")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.input1.name,
-                              expression: "input1.name"
-                            }
-                          ],
-                          ref: "name",
-                          staticClass: "form-control",
-                          class: {
-                            "is-valid":
-                              _vm.validateInputs.includes("name") &&
-                              !_vm.validateInputCheck("name"),
-                            "is-invalid":
-                              _vm.validateInputs.includes("name") &&
-                              _vm.validateInputCheck("name")
-                          },
-                          attrs: { type: "text", name: "name", id: "name" },
-                          domProps: { value: _vm.input1.name },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(_vm.input1, "name", $event.target.value)
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.inputError1.hasOwnProperty("name")
-                          ? _c(
-                              "div",
-                              _vm._l(_vm.inputError1.name, function(er) {
-                                return _c(
-                                  "div",
-                                  {
-                                    staticClass: "alert alert-danger",
-                                    attrs: { role: "alert" }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                        " +
-                                        _vm._s(er) +
-                                        "\n                                    "
-                                    )
-                                  ]
-                                )
-                              }),
-                              0
-                            )
-                          : _vm._e()
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "form-group col-xs-12 col-sm-12 col-md-3 col-lg-3"
-                      },
-                      [
-                        _c("label", { attrs: { for: "name" } }, [
-                          _vm._v("Seller Name")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.input1.name,
-                              expression: "input1.name"
-                            }
-                          ],
-                          ref: "name",
-                          staticClass: "form-control",
-                          class: {
-                            "is-valid":
-                              _vm.validateInputs.includes("name") &&
-                              !_vm.validateInputCheck("name"),
-                            "is-invalid":
-                              _vm.validateInputs.includes("name") &&
-                              _vm.validateInputCheck("name")
-                          },
-                          attrs: { type: "text", name: "name", id: "name" },
-                          domProps: { value: _vm.input1.name },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(_vm.input1, "name", $event.target.value)
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.inputError1.hasOwnProperty("name")
-                          ? _c(
-                              "div",
-                              _vm._l(_vm.inputError1.name, function(er) {
-                                return _c(
-                                  "div",
-                                  {
-                                    staticClass: "alert alert-danger",
-                                    attrs: { role: "alert" }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                        " +
-                                        _vm._s(er) +
-                                        "\n                                    "
-                                    )
-                                  ]
-                                )
-                              }),
-                              0
-                            )
-                          : _vm._e()
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "form-group col-xs-12 col-sm-12 col-md-3 col-lg-3"
-                      },
-                      [
-                        _c("label", { attrs: { for: "name" } }, [
-                          _vm._v("Opening Stock")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.input1.name,
-                              expression: "input1.name"
-                            }
-                          ],
-                          ref: "name",
-                          staticClass: "form-control",
-                          class: {
-                            "is-valid":
-                              _vm.validateInputs.includes("name") &&
-                              !_vm.validateInputCheck("name"),
-                            "is-invalid":
-                              _vm.validateInputs.includes("name") &&
-                              _vm.validateInputCheck("name")
-                          },
-                          attrs: { type: "text", name: "name", id: "name" },
-                          domProps: { value: _vm.input1.name },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(_vm.input1, "name", $event.target.value)
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.inputError1.hasOwnProperty("name")
-                          ? _c(
-                              "div",
-                              _vm._l(_vm.inputError1.name, function(er) {
-                                return _c(
-                                  "div",
-                                  {
-                                    staticClass: "alert alert-danger",
-                                    attrs: { role: "alert" }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                        " +
-                                        _vm._s(er) +
-                                        "\n                                    "
-                                    )
-                                  ]
-                                )
-                              }),
-                              0
-                            )
-                          : _vm._e()
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "form-group col-xs-12 col-sm-12 col-md-3 col-lg-3"
-                      },
-                      [
-                        _c("label", { attrs: { for: "name" } }, [
-                          _vm._v("Discount")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.input1.name,
-                              expression: "input1.name"
-                            }
-                          ],
-                          ref: "name",
-                          staticClass: "form-control",
-                          class: {
-                            "is-valid":
-                              _vm.validateInputs.includes("name") &&
-                              !_vm.validateInputCheck("name"),
-                            "is-invalid":
-                              _vm.validateInputs.includes("name") &&
-                              _vm.validateInputCheck("name")
-                          },
-                          attrs: { type: "text", name: "name", id: "name" },
-                          domProps: { value: _vm.input1.name },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(_vm.input1, "name", $event.target.value)
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.inputError1.hasOwnProperty("name")
-                          ? _c(
-                              "div",
-                              _vm._l(_vm.inputError1.name, function(er) {
-                                return _c(
-                                  "div",
-                                  {
-                                    staticClass: "alert alert-danger",
-                                    attrs: { role: "alert" }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                        " +
-                                        _vm._s(er) +
-                                        "\n                                    "
-                                    )
-                                  ]
-                                )
-                              }),
-                              0
-                            )
-                          : _vm._e()
-                      ]
+                      ],
+                      1
                     )
                   ]),
                   _vm._v(" "),

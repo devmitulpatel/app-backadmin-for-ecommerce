@@ -21,11 +21,11 @@
 
 
 
-                        <form @submit.prevent="processForm((editCatDataPost)?msData.path['edit.cat']:msData.path['save.cat'],input1,'inputError1','updateAllcategory')">
+                        <form @submit.prevent="processForm((editCatDataPost)?msData.path['edit.cat']:msData.path['save.cat'],input,'inputError1','updateAllcategory')">
 
                             <div class="row">
 
-                                <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                     <label for="name">Name </label>
                                     <input ref="name"
 
@@ -34,11 +34,11 @@
                                                 'is-invalid':validateInputs.includes('name') && validateInputCheck('name')
                                                 }"
 
-                                           type="text" v-model="input1.name" name="name" class="form-control" id="name">
+                                           type="text" v-model="input.name" name="name" class="form-control" id="name">
 
-                                    <div v-if="inputError1.hasOwnProperty('name')">
+                                    <div v-if="inputError.hasOwnProperty('name')">
 
-                                        <div class="alert alert-danger" role="alert" v-for="er in inputError1.name">
+                                        <div class="alert alert-danger" role="alert" v-for="er in inputError.name">
                                             {{er}}
                                         </div>
 
@@ -50,19 +50,87 @@
 
                                 </div>
                                 <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                                    <label for="name">Description</label>
-                                    <input ref="name"
-
-                                           :class="{
-                                                'is-valid':validateInputs.includes('name') && !validateInputCheck('name'),
-                                                'is-invalid':validateInputs.includes('name') && validateInputCheck('name')
+                                    <label for="productLogo"> Product Image </label>
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <input
+                                                :class="{
+                                                'is-valid':validateInputs.includes('productLogo') && !validateInputCheck('productLogo'),
+                                                'is-invalid':validateInputs.includes('productLogo') && validateInputCheck('productLogo')
                                                 }"
+                                                type="file"  v-on:change="fileInput($event,'productLogo')"name="productLogo" class="form-control-file" id="productLogo" aria-describedby="productLogoHelp">
+                                            <span class="text-muted"> png, jpg, jpeg  allowed </span>
+                                        </div>
+                                        <div class="col-4 inputLogo"> <small id="productLogoHelp" class="form-text text-muted text-center">Preview</small>
+                                            <img  v-if="input.hasOwnProperty('productLogo')"  :src="input.productLogo" class="logoSample border shadow-sm bg-white">
+                                            <img  v-else :src="msData.img.productLogo" class="logoSample">
 
-                                           type="text" v-model="input1.name" name="name" class="form-control" id="name">
 
-                                    <div v-if="inputError1.hasOwnProperty('name')">
+                                        </div>
+                                    </div>
 
-                                        <div class="alert alert-danger" role="alert" v-for="er in inputError1.name">
+                                    <div v-if="inputError.hasOwnProperty('invoiceLogo')" class="error-file">
+
+                                        <div class="alert alert-danger" role="alert" v-for="er in inputError.invoiceLogo">
+                                            {{er}}
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-5">
+                                    <label for="productLogoOther"> Product Other Images </label>
+
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <input
+                                                multiple
+                                                :class="{
+                                                'is-valid':validateInputs.includes('productLogoOther') && !validateInputCheck('productLogoOther'),
+                                                'is-invalid':validateInputs.includes('productLogoOther') && validateInputCheck('productLogoOther')
+                                                }"
+                                                type="file"  v-on:change="fileInputs($event,'productLogoOther')"name="productLogoOther" class="form-control-file" id="productLogoOther" aria-describedby="productLogoOtherHelp">
+
+                                            <span class="text-muted"> Max 6 Image File  </span><br>
+                                            <span class="text-muted"> png, jpg, jpeg  allowed </span>
+                                        </div>
+                                        <div class="col-8 inputLogo "> <small id="productLogoOtherHelp" class="form-text text-muted text-center">Preview </small>
+
+                                            <div class="row">
+
+                                                <img  v-for="img in input.productLogoOther" v-if="input.hasOwnProperty('productLogoOther')"  :src="img" class="zoomOut-img mt-1 col-3 border shadow-sm bg-white">
+                                                <div v-on:click="removeAllInputData('input','productLogoOther')"  v-if="input.hasOwnProperty('productLogoOther') && input.productLogoOther.length>0"  class="btn btn-sm btn-outline-danger col-12">X Remove All Images</div>
+                                            </div>
+
+
+
+
+
+
+                                        </div>
+                                    </div>
+
+
+
+                                    <div v-if="inputError.hasOwnProperty('invoiceLogo')" class="error-file">
+
+                                        <div class="alert alert-danger" role="alert" v-for="er in inputError.invoiceLogo">
+                                            {{er}}
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-12">
+                                    <label for="description">Description</label>
+
+
+                                    <ckeditor :editor="editor" v-model="input.description" :config="editorConfig"></ckeditor>
+
+
+                                    <div v-if="inputError.hasOwnProperty('description')">
+
+                                        <div class="alert alert-danger" role="alert" v-for="er in inputError.description">
                                             {{er}}
                                         </div>
 
@@ -73,103 +141,6 @@
 
 
                                 </div>
-                                <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                                    <label for="name">Sell Price</label>
-                                    <input ref="name"
-
-                                           :class="{
-                                                'is-valid':validateInputs.includes('name') && !validateInputCheck('name'),
-                                                'is-invalid':validateInputs.includes('name') && validateInputCheck('name')
-                                                }"
-
-                                           type="text" v-model="input1.name" name="name" class="form-control" id="name">
-
-                                    <div v-if="inputError1.hasOwnProperty('name')">
-
-                                        <div class="alert alert-danger" role="alert" v-for="er in inputError1.name">
-                                            {{er}}
-                                        </div>
-
-
-                                    </div>
-
-
-
-
-                                </div>
-                                <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                                    <label for="name">Seller Name</label>
-                                    <input ref="name"
-
-                                           :class="{
-                                                'is-valid':validateInputs.includes('name') && !validateInputCheck('name'),
-                                                'is-invalid':validateInputs.includes('name') && validateInputCheck('name')
-                                                }"
-
-                                           type="text" v-model="input1.name" name="name" class="form-control" id="name">
-
-                                    <div v-if="inputError1.hasOwnProperty('name')">
-
-                                        <div class="alert alert-danger" role="alert" v-for="er in inputError1.name">
-                                            {{er}}
-                                        </div>
-
-
-                                    </div>
-
-
-
-
-                                </div>
-                                <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                                    <label for="name">Opening Stock</label>
-                                    <input ref="name"
-
-                                           :class="{
-                                                'is-valid':validateInputs.includes('name') && !validateInputCheck('name'),
-                                                'is-invalid':validateInputs.includes('name') && validateInputCheck('name')
-                                                }"
-
-                                           type="text" v-model="input1.name" name="name" class="form-control" id="name">
-
-                                    <div v-if="inputError1.hasOwnProperty('name')">
-
-                                        <div class="alert alert-danger" role="alert" v-for="er in inputError1.name">
-                                            {{er}}
-                                        </div>
-
-
-                                    </div>
-
-
-
-
-                                </div>
-                                <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                                    <label for="name">Discount</label>
-                                    <input ref="name"
-
-                                           :class="{
-                                                'is-valid':validateInputs.includes('name') && !validateInputCheck('name'),
-                                                'is-invalid':validateInputs.includes('name') && validateInputCheck('name')
-                                                }"
-
-                                           type="text" v-model="input1.name" name="name" class="form-control" id="name">
-
-                                    <div v-if="inputError1.hasOwnProperty('name')">
-
-                                        <div class="alert alert-danger" role="alert" v-for="er in inputError1.name">
-                                            {{er}}
-                                        </div>
-
-
-                                    </div>
-
-
-
-
-                                </div>
-
 
 
 
@@ -202,15 +173,50 @@
 </template>
 
 <script>
+    import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
     export default {
+
         name: "addproduct",
         props: ['msData'],
         data(){
             return {
 
+                editor: ClassicEditor,
+                editorConfig: {
+                    toolbar: {
+                        items: [
+                            'heading',
+                            '|',
+                            'bold',
+                            'italic',
+                            '|',
+                            'bulletedList',
+                            'numberedList',
+                            '|',
+                            'insertTable',
+                            '|',
+                            //    'imageUpload',
+                            // '|',
+                            'undo',
+                            'redo'
+                        ]
+                    },
+                    // image: {
+                    //     toolbar: [
+                    //      //   'imageStyle:full',
+                    //   //      'imageStyle:side',
+                    //    //     '|',
+                    //     //    'imageTextAlternative'
+                    //     ]
+                    // },
+                    table: {
+                        contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells' ]
+                    },
+                    language: 'en'
 
-                input1: {},
-                inputError1: {},
+                },
+                input: {},
+                inputError: {},
 
                 validateInputs: ['CompanyName'],
                 validationRules:{
@@ -233,6 +239,75 @@
             this.allCategory();
         },
         methods:{
+
+            removeAllInputData(input,inputName){
+                //console.log(this.hasOwnProperty(input)&& this[input].hasOwnProperty(inputName));
+                if(this.hasOwnProperty(input)&& this[input].hasOwnProperty(inputName)){
+                    this[input][inputName]=[];
+                    this.updateInput();
+
+                }
+                document.getElementById(inputName).value='';
+            },
+            fileInputs(e, inputName) {
+                var limit=6
+                const file = e.target.files;
+
+
+               if(!this.input.hasOwnProperty(inputName))this.input[inputName]=[];
+
+                if(file.length >limit || (this.input[inputName]!=null && this.input[inputName].length>limit-1)){
+                    alert('Only '+limit+' image allowed to upload, and You selected more '+limit+' images');
+                   if(file.length >limit){
+                       e.target.value=''
+                       //this.input[inputName]=[];
+                   }
+                    e.target.value=''
+                    this.updateInput();
+                }else{
+
+                    var count =1;
+                    for (var i in file){
+
+                        var reader = new FileReader;
+                        reader.onload = e => {
+                            if(!this.input.hasOwnProperty(inputName))this.input[inputName]=[];
+
+                            this.input[inputName].push(e.target.result)
+                            this.updateInput();
+                        }
+
+                        count=count+1;
+                        if(typeof file[i] =="object")reader.readAsDataURL(file[i])
+
+
+                    }
+
+                }
+
+
+
+
+
+                // console.log(file[0])
+
+
+            },
+            fileInput(e, inputName) {
+
+                const file = e.target.files;
+                let reader = new FileReader;
+                reader.onload = e => {
+                    this.input[inputName] = e.target.result
+                    this.updateInput();
+                }
+                reader.readAsDataURL(file[0])
+
+
+                // console.log(file[0])
+
+
+            },
             editCat(unit){
 
                 this.input1=unit;
@@ -297,9 +372,9 @@
                 return th.allCategoryFromServer;
 
             }, updateInput() {
-                var oldInput = this.input1;
-                this.input1 = null;
-                this.input1 = oldInput;
+                var oldInput = this.input;
+                this.input = null;
+                this.input = oldInput;
             },
             updateError() {
                 var oldInput = this.inputError1;
