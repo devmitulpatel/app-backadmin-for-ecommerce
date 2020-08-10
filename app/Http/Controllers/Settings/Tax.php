@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Settings;
 
+use App\Http\Requests\Settings\Tax\taxCodeSave;
 use App\Http\Requests\Settings\Tax\taxDelete;
 use App\Http\Requests\Settings\Tax\taxEdit;
 use App\Http\Requests\Settings\Tax\taxSave;
@@ -52,6 +53,9 @@ class Tax extends Controller
                 'delete.Tax'=>route('settings.tax.delete'),
 
                 'get.allTaxesCodes'=>route('settings.tax.code.all'),
+                'save.TaxCodes'=>route('settings.tax.code.save'),
+                'edit.TaxCodes'=>route('settings.tax.code.edit'),
+                'delete.TaxCodes'=>route('settings.tax.code.delete'),
 
 
 
@@ -115,8 +119,11 @@ class Tax extends Controller
         $model->map(function ($ar)use($m1){
             $decodeTax=json_decode($ar->tax,true);
             foreach ($decodeTax as $taxId=>$taxper){
-                $name=$m1->where('id',$taxId)->first()->toArray()['name'];
-                $ar->$name=$taxper;
+                $data=$m1->where('id',$taxId)->first();
+                if($data!=null){
+                    $name=$data->toArray()['name'];
+                    $ar->$name=$taxper;
+                }
             }
             return $ar;
         });
@@ -138,6 +145,48 @@ class Tax extends Controller
     }
     public function delete(taxDelete $r){
         return deleteToModel(Taxes::class,$r,'Tax');
+    }
+
+    public function saveCode(taxCodeSave $r){
+        $input=$this->makeDataforTaxCode($r);
+
+        return saveToModel(TaxCodes::class,$r,'GST Code',$input);
+    }
+    public function editCode(taxEdit $r){
+        $input=$this->makeDataforTaxCode($r);
+
+        return editToModel(TaxCodes::class,$r,'GST Code',[],$input );
+    }
+    public function deleteCode(taxDelete $r){
+        return deleteToModel(TaxCodes::class,$r,'GST Code');
+    }
+
+    private function makeDataforTaxCode($r){
+        $input=$r->all();
+        $m1=getModel(Taxes::class);
+        $m1=$m1->get()->pluck('id','name');
+        if(!array_key_exists('tax',$input)){
+            foreach ($m1 as $name=>$id){
+            $input['tax'][$id]=$input[$name];
+            unset($input[$name]);
+            }
+        }else{
+            $input['tax']=json_decode($input['tax'],true);
+            $newTax=[];
+            foreach ($m1 as $name=>$id){
+                $newTax[$id]=$input[$name];
+                unset($input[$name]);
+            }
+            $input['tax']=$newTax;
+          //  dd($input);
+        }
+
+
+        if(array_key_exists('tax',$input)&& gettype($input['tax']))$input['tax']=collect($input['tax'])->toJson();
+
+    //    dd($input);
+        return $input;
+
     }
 
 }

@@ -153,7 +153,7 @@
 
 
 
-                        <form @submit.prevent="processForm((editUnitDataPost)?msData.path['edit.units']:msData.path['save.units'],input1,'inputError1','updateAllUnits')">
+                        <form @submit.prevent="processForm((editTaxCodesDataPost)?msData.path['edit.TaxCodes']:msData.path['save.TaxCodes'],input2,'inputError2','updateAllTaxCodes')">
 
                             <div class="row">
 
@@ -166,11 +166,11 @@
                                                 'is-invalid':validateInputs.includes('code') && validateInputCheck('code')
                                                 }"
 
-                                           type="text" v-model="input2.code" name="code" class="form-control" id="code">
+                                           type="number" v-model="input2.code" name="code" class="form-control" id="code">
 
                                     <div v-if="inputError2.hasOwnProperty('code')">
 
-                                        <div class="alert alert-danger" role="alert" v-for="er in inputError1.code">
+                                        <div class="alert alert-danger" role="alert" v-for="er in inputError2.code">
                                             {{er}}
                                         </div>
 
@@ -240,7 +240,7 @@
                                             <td>
 
                                                 <div class="btn-group col-12" role="group" aria-label="Basic example">
-                                                    <button type="button" class="btn btn-outline-danger" v-on:click="deleteUnit(unit)" > <i class="fa fa-trash-alt"></i></button>
+                                                    <button type="button" class="btn btn-outline-danger" v-on:click="deleteTaxCodes(unit)" > <i class="fa fa-trash-alt"></i></button>
                                                     <button type="button" class="btn btn-outline-info" v-on:click="editTaxCode(unit)"> <i class="fa fa-edit"></i></button>
                                                 </div>
 
@@ -314,6 +314,7 @@
 
             if(this.msData.hasOwnProperty('inputData'))this.input=this.msData.inputData;
             this.updateInput();
+          //  this.input2.tax={};
 
 
         },
@@ -367,6 +368,21 @@
                 }
 
                 this.processForm(url,data,{},'updateAllFiedsa');
+
+
+            },
+            deleteTaxCodes(unit){
+
+                var url=this.msData.path['delete.TaxCodes'];
+                var data={};
+                data.id=unit.id;
+
+                if (confirm("Are you sure, You want to delete "+unit.code+"?") == true){
+
+                    if(!this.editTaxCodesDataPost)this.editTaxCodesDataPost=false;
+                }
+
+                this.processForm(url,data,{},'updateAllTaxCodes');
 
 
             },
@@ -453,10 +469,11 @@
 
                 this.allTaxes(true);
             },
-            updateAllFiedsa(){
+            updateAllTaxCodes(){
                 this.input2={};
                 this.inputError2={};
-                this.allExtraFields(true);
+
+                this.allTaxeCodes(true);
             },
 
             restForm(){

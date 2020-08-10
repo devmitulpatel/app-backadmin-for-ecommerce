@@ -185,9 +185,11 @@ if(!function_exists ('getModel')){
 }
 if(!function_exists ('saveToModel')){
 
-    function saveToModel($m,$r,$name=""){
-        $input=$r->all();
+    function saveToModel($m,$r,$name="",$data=[]){
+        $input=(count($data)<1)?$r->all():$data;
         $m=getModel($m);
+        if(!array_key_exists('created_at',$input))$input['created_at']=now();
+        if(!array_key_exists('updated_at',$input))$input['updated_at']=now();
         try {
 
             $m->updateOrInsert($input);
@@ -235,9 +237,9 @@ if(!function_exists ('deleteToModel')){
 }
 if(!function_exists ('editToModel')){
 
-    function editToModel($m,$r,$name="",$unset=[]){
+    function editToModel($m,$r,$name="",$unset=[],$data=[]){
         $response=[];
-        $input=$r->all();
+        $input=(count($data)<1)?$r->all():$data;
         $m=getModel($m);
         $id=$input['id'];
 
@@ -252,7 +254,7 @@ if(!function_exists ('editToModel')){
             $m->where('id',$id)->update($input);
             return throwData([$name." updated successfully"]);
         }catch (\Exception $e){
-            return throwError([$name." not updated"]);
+            return throwError([$name." not updated",$e->getMessage()]);
 
 
         }

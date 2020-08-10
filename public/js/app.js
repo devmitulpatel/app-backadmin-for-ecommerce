@@ -2768,7 +2768,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ['msData'],
   created: function created() {
     if (this.msData.hasOwnProperty('inputData')) this.input = this.msData.inputData;
-    this.updateInput();
+    this.updateInput(); //  this.input2.tax={};
   },
   beforeMount: function beforeMount() {},
   methods: {
@@ -2804,6 +2804,17 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       this.processForm(url, data, {}, 'updateAllFiedsa');
+    },
+    deleteTaxCodes: function deleteTaxCodes(unit) {
+      var url = this.msData.path['delete.TaxCodes'];
+      var data = {};
+      data.id = unit.id;
+
+      if (confirm("Are you sure, You want to delete " + unit.code + "?") == true) {
+        if (!this.editTaxCodesDataPost) this.editTaxCodesDataPost = false;
+      }
+
+      this.processForm(url, data, {}, 'updateAllTaxCodes');
     },
     editUnit: function editUnit(unit) {
       this.input1 = unit;
@@ -2891,10 +2902,10 @@ __webpack_require__.r(__webpack_exports__);
       this.inputError1 = {};
       this.allTaxes(true);
     },
-    updateAllFiedsa: function updateAllFiedsa() {
+    updateAllTaxCodes: function updateAllTaxCodes() {
       this.input2 = {};
       this.inputError2 = {};
-      this.allExtraFields(true);
+      this.allTaxeCodes(true);
     },
     restForm: function restForm() {
       if (this.editUnitDataPost) this.editUnitDataPost = false;
@@ -27928,12 +27939,12 @@ var render = function() {
                     submit: function($event) {
                       $event.preventDefault()
                       _vm.processForm(
-                        _vm.editUnitDataPost
-                          ? _vm.msData.path["edit.units"]
-                          : _vm.msData.path["save.units"],
-                        _vm.input1,
-                        "inputError1",
-                        "updateAllUnits"
+                        _vm.editTaxCodesDataPost
+                          ? _vm.msData.path["edit.TaxCodes"]
+                          : _vm.msData.path["save.TaxCodes"],
+                        _vm.input2,
+                        "inputError2",
+                        "updateAllTaxCodes"
                       )
                     }
                   }
@@ -27970,7 +27981,7 @@ var render = function() {
                               _vm.validateInputs.includes("code") &&
                               _vm.validateInputCheck("code")
                           },
-                          attrs: { type: "text", name: "code", id: "code" },
+                          attrs: { type: "number", name: "code", id: "code" },
                           domProps: { value: _vm.input2.code },
                           on: {
                             input: function($event) {
@@ -27985,7 +27996,7 @@ var render = function() {
                         _vm.inputError2.hasOwnProperty("code")
                           ? _c(
                               "div",
-                              _vm._l(_vm.inputError1.code, function(er) {
+                              _vm._l(_vm.inputError2.code, function(er) {
                                 return _c(
                                   "div",
                                   {
@@ -28151,7 +28162,7 @@ var render = function() {
                                           attrs: { type: "button" },
                                           on: {
                                             click: function($event) {
-                                              return _vm.deleteUnit(unit)
+                                              return _vm.deleteTaxCodes(unit)
                                             }
                                           }
                                         },
@@ -29787,10 +29798,10 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\Pojects\Live\app-backadmin-for-ecommerce\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! E:\Pojects\Live\app-backadmin-for-ecommerce\resources\sass\app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! E:\Pojects\Live\app-backadmin-for-ecommerce\resources\sass\dark.scss */"./resources/sass/dark.scss");
-module.exports = __webpack_require__(/*! E:\Pojects\Live\app-backadmin-for-ecommerce\resources\sass\comman.scss */"./resources/sass/comman.scss");
+__webpack_require__(/*! F:\xamp\htdocs\mitul\app-backadmin-for-ecommerce\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! F:\xamp\htdocs\mitul\app-backadmin-for-ecommerce\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! F:\xamp\htdocs\mitul\app-backadmin-for-ecommerce\resources\sass\dark.scss */"./resources/sass/dark.scss");
+module.exports = __webpack_require__(/*! F:\xamp\htdocs\mitul\app-backadmin-for-ecommerce\resources\sass\comman.scss */"./resources/sass/comman.scss");
 
 
 /***/ })
