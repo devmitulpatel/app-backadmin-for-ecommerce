@@ -65,7 +65,7 @@ class Tax extends Controller
             'img'=>[
 
             ],
-            'inputData'=>settings('product')->all(),
+           // 'inputData'=>settings('product')->all(),
 
         ];
 
@@ -178,8 +178,16 @@ class Tax extends Controller
                 unset($input[$name]);
             }
             $input['tax']=$newTax;
-          //  dd($input);
+       }
+        \Debugbar::info($m1);
+        $allowed=['id','code','tax','status'];
+        $finalInput=[];
+
+        foreach ($input as $c=>$v){
+            if(in_array($c,$allowed))$finalInput[$c]=$v;
         }
+
+        $input=$finalInput;
 
 
         if(array_key_exists('tax',$input)&& gettype($input['tax']))$input['tax']=collect($input['tax'])->toJson();

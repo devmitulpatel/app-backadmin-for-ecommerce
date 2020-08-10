@@ -70,7 +70,7 @@
                                             <i class="fa fa-check text-success" ></i>
                                         </span></label>
 
-                                        <label class="radio pl-2 "><input  v-model="input.status" name="status" type="radio" value="0"><span class="pl-2">    <i class="fa fa-times text-danger"  ></i></span></label>
+                                        <label class="radio pl-2 "><input  v-model="input1.status" name="status" type="radio" value="0"><span class="pl-2">    <i class="fa fa-times text-danger"  ></i></span></label>
 
                                     </div>
 
@@ -270,18 +270,12 @@
 </template>
 
 <script>
-    import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
     export default {
         name: "tax",
         data() {
             return {
-                editor: ClassicEditor,
-                editorConfig: {
-                    // The configuration of the editor.
-                },
-                input: {},
-                inputError: {},
+
                 input1: {},
                 inputError1: {},
                 input2: {},
@@ -291,20 +285,16 @@
                     'CompanyName':{ presence: {allowEmpty: false}}
                 },
                 currentFormTab:0,
-                allUnitsFromServer:null,
                 allTaxesFromServer:null,
-                editUnitDataPost:false,
-                editTaxDataPost:false,
-                allExtraFieldsFromServer:null,
-                allCategoryFromServer:null,
-                allSubCategoryFromServer:null,
                 allTaxesCodesFromServer:null,
-                editFielsDataPost:false,
-                getingCat:false,
-                getingSubCat:false,
-                getingExtra:false,
-                getingUnit:false,
-                editTaxCodesDataPost:false
+                editTaxDataPost:false,
+                editTaxCodesDataPost:false,
+
+
+
+
+                getingTaxes:false,
+                getingTaxCodes:false,
 
 
             }
@@ -324,21 +314,7 @@
         }
         ,
         methods: {
-            deleteUnit(unit){
 
-                var url=this.msData.path['delete.units'];
-                var data={};
-                data.id=unit.id;
-
-                if (confirm("Are you sure, You want to delete "+unit.name+"?") == true){
-
-                    if(!this.editUnitDataPost)this.editUnitDataPost=true;
-                }
-
-                this.processForm(url,data,{},'updateAllUnits');
-
-
-            },
             deleteTax(unit){
 
                 var url=this.msData.path['delete.Tax'];
@@ -347,27 +323,12 @@
 
                 if (confirm("Are you sure, You want to delete "+unit.name+"?") == true){
 
-                    console.log('triggers');
+
                     if(!this.allTaxesFromServer)this.allTaxesFromServer=true;
                     this.processForm(url,data,{},'updateAllTax');
                 }
 
 
-
-
-            },
-            deleteExtra(unit){
-
-                var url=this.msData.path['delete.extraFields'];
-                var data={};
-                data.id=unit.id;
-
-                if (confirm("Are you sure, You want to delete "+unit.name+"?") == true){
-
-                    if(!this.editFielsDataPost)this.editFielsDataPost=true;
-                }
-
-                this.processForm(url,data,{},'updateAllFiedsa');
 
 
             },
@@ -380,21 +341,14 @@
                 if (confirm("Are you sure, You want to delete "+unit.code+"?") == true){
 
                     if(!this.editTaxCodesDataPost)this.editTaxCodesDataPost=false;
+                    this.processForm(url,data,{},'updateAllTaxCodes');
                 }
 
-                this.processForm(url,data,{},'updateAllTaxCodes');
 
 
-            },
-            editUnit(unit){
-                this.input1=unit;
-                document.body.scrollTop = 0; // For Safari
-                document.documentElement.scrollTop = 0;
-
-                Vue.toasted.success("Edit unit: "+unit.name,{duration:1000});
-                if(!this.editUnitDataPost)this.editUnitDataPost=true;
 
             },
+
             editTax(unit){
                 this.input1=unit;
                 document.body.scrollTop = 0; // For Safari
@@ -402,15 +356,6 @@
 
                 Vue.toasted.success("Edit Tax: "+unit.name,{duration:1000});
                 if(!this.editTaxDataPost)this.editTaxDataPost=true;
-
-            },
-            editExtra(unit){
-                this.input2=unit;
-                document.body.scrollTop = 0; // For Safari
-                document.documentElement.scrollTop = 0;
-
-                Vue.toasted.success("Edit unit: "+unit.name,{duration:1000});
-                if(!this.editFielsDataPost)this.editFielsDataPost=true;
 
             },
             editTaxCode(unit){
@@ -422,15 +367,7 @@
                 if(!this.editTaxCodesDataPost)this.editTaxCodesDataPost=true;
 
             },
-            checkisValidSelect(type,current,input=this.input){
 
-                var check=input[type] == 0;
-                if(check && input.hasOwnProperty(current)){
-                    input[current]="";
-                }
-
-                return (check)? false:true;
-            },
 
             changeTab(tab){
                 if(this.currentFormTab!=tab)this.currentFormTab=tab;
@@ -457,12 +394,6 @@
                 return er;
             },
 
-            updateAllUnits(){
-                this.input1={};
-                this.inputError1={};
-
-                this.allUnits(true);
-            },
             updateAllTax(){
                 this.input1={};
                 this.inputError1={};
@@ -510,21 +441,6 @@
                 //  alert(url)
 
             },
-            fileInput(e, inputName) {
-
-                const file = e.target.files;
-                let reader = new FileReader;
-                reader.onload = e => {
-                    this.input[inputName] = e.target.result
-                    this.updateInput();
-                }
-                reader.readAsDataURL(file[0])
-
-
-                // console.log(file[0])
-
-
-            },
 
             updateInput() {
                 var oldInput = this.input;
@@ -538,44 +454,20 @@
             },
 
 
-            allUnits(forced=false){
-                var url=this.msData.path['get.allUnits'];
-                var th=this;
-
-
-
-                if((th.allUnitsFromServer==null && !th.getingUnit) ||  forced){
-                    th.getingUnit=true;
-                    axios.post(url).then(function (res) {
-
-                        th.allUnitsFromServer=res.data.ResponseData;
-
-                    }).catch().then(function () {
-                        th.getingUnit=false;
-                    });
-                }
-
-                return th.allUnitsFromServer;
-
-
-
-            },
-
-
             allTaxes(forced=false){
                 var url=this.msData.path['get.allTaxes'];
                 var th=this;
 
 
 
-                if((th.allTaxesFromServer==null && !th.getingUnit) ||  forced){
-                    th.getingUnit=true;
+                if((th.allTaxesFromServer==null && !th.getingTaxes) ||  forced){
+                    th.getingTaxes=true;
                     axios.post(url).then(function (res) {
 
                         th.allTaxesFromServer=res.data.ResponseData;
 
                     }).catch().then(function () {
-                        th.getingUnit=false;
+                        th.getingTaxes=false;
                     });
                 }
 
@@ -590,14 +482,14 @@
 
 
 
-                if((th.allTaxesCodesFromServer==null && !th.getingUnit) ||  forced){
-                    th.getingUnit=true;
+                if((th.allTaxesCodesFromServer==null && !th.getingTaxCodes) ||  forced){
+                    th.getingTaxCodes=true;
                     axios.post(url).then(function (res) {
 
                         th.allTaxesCodesFromServer=res.data.ResponseData;
 
                     }).catch().then(function () {
-                        th.getingUnit=false;
+                        th.getingTaxCodes=false;
                     });
                 }
 
@@ -607,80 +499,6 @@
 
             },
 
-            allExtraFields(forced=false){
-                var url=this.msData.path['get.allExtra'];
-                var th=this;
-
-
-
-                if((th.allExtraFieldsFromServer==null && !th.getingExtra) ||  forced){
-
-                    th.getingExtra=true;
-                    axios.post(url).then(function (res) {
-
-                        th.allExtraFieldsFromServer=res.data.ResponseData;
-
-
-                    }).catch().then(function () {
-                        th.getingExtra=false;
-                    });
-                }
-
-                return th.allExtraFieldsFromServer;
-
-
-
-            },
-
-            allCategory(forced=false,fromPlaace=null){
-                var url=this.msData.path['get.allCat'];
-                var th=this;
-                var rootAp=window.VueApp;
-
-
-                if((th.allCategoryFromServer==null && !th.getingCat ) ||  forced){
-                    th.getingCat=true;
-
-                    axios.post(url).then(function (res) {
-                        th.allCategoryFromServer=res.data.ResponseData;
-                    }).catch(function (e) {
-
-                    }).then(function () {
-                        th.getingCat=false;
-                        //   console.log( window.VueApp.getGlob('allCategories'));
-                    });
-
-                }
-
-
-                return th.allCategoryFromServer;
-
-            },
-            allSubCategory(parentId,forced=false){
-                var url=this.msData.path['get.allSCat'];
-                var th=this;
-
-                var data={
-                    id:parentId,
-                };
-
-                if(( !th.getingSubCat &&th.allSubCategoryFromServer==null && this.input2.hasOwnProperty('cat') && (this.input2.cat!=null||this.input2.cat!=0 )) ||  forced){
-                    th.getingSubCat=true;
-                    axios.post(url,data).then(function (res) {
-                        console.log('Api Call');
-                        th.allSubCategoryFromServer=res.data.ResponseData;
-
-
-                    }).catch(function (e) {
-                        th.allSubCategoryFromServer=[];
-                    }).then(function () {
-                        th.getingSubCat=false;
-                    });
-                }
-
-                return th.allSubCategoryFromServer;
-
-            }
         },
         watch: {
             input(newVal) {

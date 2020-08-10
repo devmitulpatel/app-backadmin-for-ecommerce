@@ -2453,8 +2453,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ckeditor/ckeditor5-build-classic */ "./node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js");
-/* harmony import */ var _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2726,16 +2724,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "tax",
   data: function data() {
     return {
-      editor: _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0___default.a,
-      editorConfig: {// The configuration of the editor.
-      },
-      input: {},
-      inputError: {},
       input1: {},
       inputError1: {},
       input2: {},
@@ -2749,20 +2741,12 @@ __webpack_require__.r(__webpack_exports__);
         }
       },
       currentFormTab: 0,
-      allUnitsFromServer: null,
       allTaxesFromServer: null,
-      editUnitDataPost: false,
-      editTaxDataPost: false,
-      allExtraFieldsFromServer: null,
-      allCategoryFromServer: null,
-      allSubCategoryFromServer: null,
       allTaxesCodesFromServer: null,
-      editFielsDataPost: false,
-      getingCat: false,
-      getingSubCat: false,
-      getingExtra: false,
-      getingUnit: false,
-      editTaxCodesDataPost: false
+      editTaxDataPost: false,
+      editTaxCodesDataPost: false,
+      getingTaxes: false,
+      getingTaxCodes: false
     };
   },
   props: ['msData'],
@@ -2772,38 +2756,15 @@ __webpack_require__.r(__webpack_exports__);
   },
   beforeMount: function beforeMount() {},
   methods: {
-    deleteUnit: function deleteUnit(unit) {
-      var url = this.msData.path['delete.units'];
-      var data = {};
-      data.id = unit.id;
-
-      if (confirm("Are you sure, You want to delete " + unit.name + "?") == true) {
-        if (!this.editUnitDataPost) this.editUnitDataPost = true;
-      }
-
-      this.processForm(url, data, {}, 'updateAllUnits');
-    },
     deleteTax: function deleteTax(unit) {
       var url = this.msData.path['delete.Tax'];
       var data = {};
       data.id = unit.id;
 
       if (confirm("Are you sure, You want to delete " + unit.name + "?") == true) {
-        console.log('triggers');
         if (!this.allTaxesFromServer) this.allTaxesFromServer = true;
         this.processForm(url, data, {}, 'updateAllTax');
       }
-    },
-    deleteExtra: function deleteExtra(unit) {
-      var url = this.msData.path['delete.extraFields'];
-      var data = {};
-      data.id = unit.id;
-
-      if (confirm("Are you sure, You want to delete " + unit.name + "?") == true) {
-        if (!this.editFielsDataPost) this.editFielsDataPost = true;
-      }
-
-      this.processForm(url, data, {}, 'updateAllFiedsa');
     },
     deleteTaxCodes: function deleteTaxCodes(unit) {
       var url = this.msData.path['delete.TaxCodes'];
@@ -2812,19 +2773,8 @@ __webpack_require__.r(__webpack_exports__);
 
       if (confirm("Are you sure, You want to delete " + unit.code + "?") == true) {
         if (!this.editTaxCodesDataPost) this.editTaxCodesDataPost = false;
+        this.processForm(url, data, {}, 'updateAllTaxCodes');
       }
-
-      this.processForm(url, data, {}, 'updateAllTaxCodes');
-    },
-    editUnit: function editUnit(unit) {
-      this.input1 = unit;
-      document.body.scrollTop = 0; // For Safari
-
-      document.documentElement.scrollTop = 0;
-      Vue.toasted.success("Edit unit: " + unit.name, {
-        duration: 1000
-      });
-      if (!this.editUnitDataPost) this.editUnitDataPost = true;
     },
     editTax: function editTax(unit) {
       this.input1 = unit;
@@ -2836,16 +2786,6 @@ __webpack_require__.r(__webpack_exports__);
       });
       if (!this.editTaxDataPost) this.editTaxDataPost = true;
     },
-    editExtra: function editExtra(unit) {
-      this.input2 = unit;
-      document.body.scrollTop = 0; // For Safari
-
-      document.documentElement.scrollTop = 0;
-      Vue.toasted.success("Edit unit: " + unit.name, {
-        duration: 1000
-      });
-      if (!this.editFielsDataPost) this.editFielsDataPost = true;
-    },
     editTaxCode: function editTaxCode(unit) {
       this.input2 = unit;
       document.body.scrollTop = 0; // For Safari
@@ -2855,16 +2795,6 @@ __webpack_require__.r(__webpack_exports__);
         duration: 1000
       });
       if (!this.editTaxCodesDataPost) this.editTaxCodesDataPost = true;
-    },
-    checkisValidSelect: function checkisValidSelect(type, current) {
-      var input = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.input;
-      var check = input[type] == 0;
-
-      if (check && input.hasOwnProperty(current)) {
-        input[current] = "";
-      }
-
-      return check ? false : true;
     },
     changeTab: function changeTab(tab) {
       if (this.currentFormTab != tab) this.currentFormTab = tab;
@@ -2891,11 +2821,6 @@ __webpack_require__.r(__webpack_exports__);
       if (er && validatedData === undefined) er = false; //   console.log(er);
 
       return er;
-    },
-    updateAllUnits: function updateAllUnits() {
-      this.input1 = {};
-      this.inputError1 = {};
-      this.allUnits(true);
     },
     updateAllTax: function updateAllTax() {
       this.input1 = {};
@@ -2940,20 +2865,6 @@ __webpack_require__.r(__webpack_exports__);
         th.restForm();
       }); //  alert(url)
     },
-    fileInput: function fileInput(e, inputName) {
-      var _this = this;
-
-      var file = e.target.files;
-      var reader = new FileReader();
-
-      reader.onload = function (e) {
-        _this.input[inputName] = e.target.result;
-
-        _this.updateInput();
-      };
-
-      reader.readAsDataURL(file[0]); // console.log(file[0])
-    },
     updateInput: function updateInput() {
       var oldInput = this.input;
       this.input = null;
@@ -2964,33 +2875,17 @@ __webpack_require__.r(__webpack_exports__);
       this.inputError = null;
       this.inputError = oldInput;
     },
-    allUnits: function allUnits() {
-      var forced = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-      var url = this.msData.path['get.allUnits'];
-      var th = this;
-
-      if (th.allUnitsFromServer == null && !th.getingUnit || forced) {
-        th.getingUnit = true;
-        axios.post(url).then(function (res) {
-          th.allUnitsFromServer = res.data.ResponseData;
-        })["catch"]().then(function () {
-          th.getingUnit = false;
-        });
-      }
-
-      return th.allUnitsFromServer;
-    },
     allTaxes: function allTaxes() {
       var forced = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
       var url = this.msData.path['get.allTaxes'];
       var th = this;
 
-      if (th.allTaxesFromServer == null && !th.getingUnit || forced) {
-        th.getingUnit = true;
+      if (th.allTaxesFromServer == null && !th.getingTaxes || forced) {
+        th.getingTaxes = true;
         axios.post(url).then(function (res) {
           th.allTaxesFromServer = res.data.ResponseData;
         })["catch"]().then(function () {
-          th.getingUnit = false;
+          th.getingTaxes = false;
         });
       }
 
@@ -3001,72 +2896,16 @@ __webpack_require__.r(__webpack_exports__);
       var url = this.msData.path['get.allTaxesCodes'];
       var th = this;
 
-      if (th.allTaxesCodesFromServer == null && !th.getingUnit || forced) {
-        th.getingUnit = true;
+      if (th.allTaxesCodesFromServer == null && !th.getingTaxCodes || forced) {
+        th.getingTaxCodes = true;
         axios.post(url).then(function (res) {
           th.allTaxesCodesFromServer = res.data.ResponseData;
         })["catch"]().then(function () {
-          th.getingUnit = false;
+          th.getingTaxCodes = false;
         });
       }
 
       return th.allTaxesCodesFromServer;
-    },
-    allExtraFields: function allExtraFields() {
-      var forced = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-      var url = this.msData.path['get.allExtra'];
-      var th = this;
-
-      if (th.allExtraFieldsFromServer == null && !th.getingExtra || forced) {
-        th.getingExtra = true;
-        axios.post(url).then(function (res) {
-          th.allExtraFieldsFromServer = res.data.ResponseData;
-        })["catch"]().then(function () {
-          th.getingExtra = false;
-        });
-      }
-
-      return th.allExtraFieldsFromServer;
-    },
-    allCategory: function allCategory() {
-      var forced = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-      var fromPlaace = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      var url = this.msData.path['get.allCat'];
-      var th = this;
-      var rootAp = window.VueApp;
-
-      if (th.allCategoryFromServer == null && !th.getingCat || forced) {
-        th.getingCat = true;
-        axios.post(url).then(function (res) {
-          th.allCategoryFromServer = res.data.ResponseData;
-        })["catch"](function (e) {}).then(function () {
-          th.getingCat = false; //   console.log( window.VueApp.getGlob('allCategories'));
-        });
-      }
-
-      return th.allCategoryFromServer;
-    },
-    allSubCategory: function allSubCategory(parentId) {
-      var forced = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-      var url = this.msData.path['get.allSCat'];
-      var th = this;
-      var data = {
-        id: parentId
-      };
-
-      if (!th.getingSubCat && th.allSubCategoryFromServer == null && this.input2.hasOwnProperty('cat') && (this.input2.cat != null || this.input2.cat != 0) || forced) {
-        th.getingSubCat = true;
-        axios.post(url, data).then(function (res) {
-          console.log('Api Call');
-          th.allSubCategoryFromServer = res.data.ResponseData;
-        })["catch"](function (e) {
-          th.allSubCategoryFromServer = [];
-        }).then(function () {
-          th.getingSubCat = false;
-        });
-      }
-
-      return th.allSubCategoryFromServer;
     }
   },
   watch: {
@@ -27767,8 +27606,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.input.status,
-                                  expression: "input.status"
+                                  value: _vm.input1.status,
+                                  expression: "input1.status"
                                 }
                               ],
                               attrs: {
@@ -27777,11 +27616,11 @@ var render = function() {
                                 value: "0"
                               },
                               domProps: {
-                                checked: _vm._q(_vm.input.status, "0")
+                                checked: _vm._q(_vm.input1.status, "0")
                               },
                               on: {
                                 change: function($event) {
-                                  return _vm.$set(_vm.input, "status", "0")
+                                  return _vm.$set(_vm.input1, "status", "0")
                                 }
                               }
                             }),
