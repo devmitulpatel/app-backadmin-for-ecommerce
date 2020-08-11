@@ -142,7 +142,268 @@
 
                                 </div>
 
+                                <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <label for="cat">Category </label>
+                                    <select v-on:change="allSubCategory(input.cat,true)" v-model="input.cat" name="cat" class="form-control"  id="cat" :class="{
+                                                'is-valid':validateInputs.includes('cat') && !validateInputCheck('cat'),
+                                                'is-invalid':validateInputs.includes('cat') && validateInputCheck('cat')
+                                                }">
 
+                                        <option v-for="unit in allCategory(false,'From Line 540')" :value="unit.id">{{unit.name}}</option>
+
+                                    </select>
+
+
+
+                                    <div v-if="inputError.hasOwnProperty('cat')">
+
+                                        <div class="alert alert-danger" role="alert" v-for="er in inputError.cat">
+                                            {{er}}
+                                        </div>
+
+
+                                    </div>
+
+
+
+
+                                </div>
+
+                                <div  v-show="checkisValidSelect('cat','scat',input)" class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <label for="scat">Sub Category </label>
+                                    <select v-on:change="updateInput('scat')" v-model="input.scat" name="scat" class="form-control"  id="scat" :class="{
+                                                'is-valid':validateInputs.includes('scat') && !validateInputCheck('scat'),
+                                                'is-invalid':validateInputs.includes('scat') && validateInputCheck('scat')
+                                                }">
+
+                                        <option v-for="unit in allSubCategory(input.cat)" :value="unit.id">{{unit.name}}</option>
+
+                                    </select>
+                                    <div v-if="inputError.hasOwnProperty('scat')">
+
+                                        <div class="alert alert-danger" role="alert" v-for="er in inputError.scat">
+                                            {{er}}
+                                        </div>
+
+
+                                    </div>
+
+
+
+
+                                </div>
+
+
+                                <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <label for="unit">Unit</label>
+                                    <select id="unit" v-on:change="updateInput()" v-model="input.unit" class="form-control"  :class="{
+                                                'is-valid':validateInputs.includes('unit') && !validateInputCheck('unit'),
+                                                'is-invalid':validateInputs.includes('unit') && validateInputCheck('unit')
+                                                }">
+
+                                        <option v-for="unit in allUnits()" :value="unit.id">{{unit.name}}</option>
+
+                                    </select>
+
+
+
+                                    <div v-if="inputError.hasOwnProperty('unit')">
+
+                                        <div class="alert alert-danger" role="alert" v-for="er in inputError.unit">
+                                            {{er}}
+                                        </div>
+
+
+                                    </div>
+
+
+
+
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <label for="urate">Unit Rate </label>
+
+
+                                    <div class="input-group">
+                                        <input ref="urate"
+
+                                               :class="{
+                                                'is-valid':validateInputs.includes('urate') && !validateInputCheck('urate'),
+                                                'is-invalid':validateInputs.includes('urate') && validateInputCheck('urate')
+                                                }"
+
+                                               type="number" v-model="input.urate" name="urate" class="form-control" id="urate">
+
+                                        <div class="input-group-append" v-if="input.hasOwnProperty('unit')  && input.unit && allUnits().some(el => el.id === input.unit) ">
+                                            <span class="input-group-text" id="basic-addon2"> <sub>/ {{ allUnits()[allUnits().findIndex(i => i.id === input.unit)]['shortname']}}</sub></span>
+                                        </div>
+                                    </div>
+
+
+
+
+
+                                    <div v-if="inputError.hasOwnProperty('urate')">
+
+                                        <div class="alert alert-danger" role="alert" v-for="er in inputError.urate">
+                                            {{er}}
+                                        </div>
+
+
+                                    </div>
+
+
+
+
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <label for="keepStock">Maintain Stock </label>
+                                    <div class="form-control ">
+
+                                        <label class="radio"><input  v-model="input.keepStock" id="keepStock" name="keepStock" type="radio" value="1" ><span class="pl-2">Yes </span></label>
+                                        <label class="radio pl-2 "><input  v-model="input.keepStock" name="keepStock" type="radio" value="0"><span class="pl-2">No</span></label>
+
+                                    </div>
+
+
+
+
+
+
+                                    <div v-if="inputError.hasOwnProperty('keepStock')">
+
+                                        <div class="alert alert-danger" role="alert" v-for="er in inputError.keepStock">
+                                            {{er}}
+                                        </div>
+
+
+                                    </div>
+
+
+
+
+                                </div>
+
+                                <div v-if="checkisValidSelect('keepStock','ostock',input)" class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <label for="ostock">Open Stock</label>
+                                    <input ref="ostock"
+
+                                           :class="{
+                                                'is-valid':validateInputs.includes('ostock') && !validateInputCheck('ostock'),
+                                                'is-invalid':validateInputs.includes('ostock') && validateInputCheck('ostock')
+                                                }"
+
+                                           type="number" v-model="input.ostock" name="ostock" class="form-control" id="ostock">
+
+                                    <div v-if="inputError.hasOwnProperty('ostock')">
+
+                                        <div class="alert alert-danger" role="alert" v-for="er in inputError.ostock">
+                                            {{er}}
+                                        </div>
+
+
+                                    </div>
+
+
+
+
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <label for="featrue">Feature Product</label>
+                                    <div class="form-control ">
+
+                                        <label class="radio"><input  v-model="input.featrue" id="featrue" name="featrue" type="radio" value="1" ><span class="pl-2">Yes </span></label>
+                                        <label class="radio pl-2 "><input  v-model="input.featrue" name="featrue" type="radio" value="0"><span class="pl-2">No</span></label>
+
+                                    </div>
+
+
+
+
+
+
+                                    <div v-if="inputError.hasOwnProperty('featrue')">
+
+                                        <div class="alert alert-danger" role="alert" v-for="er in inputError.featrue">
+                                            {{er}}
+                                        </div>
+
+
+                                    </div>
+
+
+
+
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <label for="new">New Product Badge</label>
+                                    <div class="form-control ">
+
+                                        <label class="radio"><input  v-model="input.new" id="new" name="new" type="radio" value="1" ><span class="pl-2">Yes </span></label>
+                                        <label class="radio pl-2 "><input  v-model="input.new" name="new" type="radio" value="0"><span class="pl-2">No</span></label>
+
+                                    </div>
+
+
+
+
+
+
+                                    <div v-if="inputError.hasOwnProperty('new')">
+
+                                        <div class="alert alert-danger" role="alert" v-for="er in inputError.new">
+                                            {{er}}
+                                        </div>
+
+
+                                    </div>
+
+
+
+
+                                </div>
+
+
+
+                            </div>
+
+                            <div class="row">
+                                <div class=" col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                                    <hr>
+                                        <h5 class="pl-1">
+                                            Custom Fields
+                                        </h5>
+                                    <hr>
+
+                                </div>
+
+                                <div v-for="inpt in allExtraFields()" class=" col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <label :for="inpt.name">{{ inpt.dname  }} </label>
+                                    <input :ref="inpt.name"
+
+                                           :class="{
+                                                'is-valid':validateInputs.includes(inpt.name) && !validateInputCheck(inpt.name),
+                                                'is-invalid':validateInputs.includes('name') && validateInputCheck(inpt.name)
+                                                }"
+
+                                           type="text" v-model="input[inpt.name]" name="name" class="form-control" :id="inpt.name">
+
+                                    <div v-if="inputError.hasOwnProperty(inpt.name)">
+
+                                        <div class="alert alert-danger" role="alert" v-for="er in inputError[inpt.name]">
+                                            {{er}}
+                                        </div>
+
+
+                                    </div>
+
+
+
+                                </div>
 
 
 
@@ -228,13 +489,15 @@
                     'CompanyName':{ presence: {allowEmpty: false}}
                 },
                 currentFormTab:0,
-                allUnitsFromServer:{},
+                allUnitsFromServer:null,
                 editCatDataPost:false,
                 allExtraFieldsFromServer:null,
                 allCategoryFromServer:null,
                 allSubCategoryFromServer:null,
                 editFielsDataPost:false,
-                getingCat:false
+                getingCat:false,
+                getingSubCat:false,
+                getingExtra:false
 
             }
 
@@ -242,11 +505,79 @@
         },
         beforeMount() {
             this.allCategory();
+            this.input.cat=0;
+            this.input.scat=0;
+            this.allExtraFields();
+
+        },
+        mounted(){
+            this.updateInput();
         },
         methods:{
 
+            allExtraFields(forced=false){
+                var url=this.msData.path['get.allExtra']+"?cat="+this.input.cat+"&scat="+this.input.scat;
+                var th=this;
 
 
+
+                if((th.allExtraFieldsFromServer==null && !th.getingExtra && (this.input.hasOwnProperty('cat')&&this.input.hasOwnProperty('scat'))&&( this.input.cat!=0 &&this.input.scat!=0 )) ||  forced){
+
+                    th.getingExtra=true;
+                    axios.post(url).then(function (res) {
+
+                        th.allExtraFieldsFromServer=res.data.ResponseData;
+
+
+                    }).catch().then(function () {
+                        th.getingExtra=false;
+                    });
+                }
+
+                return th.allExtraFieldsFromServer;
+
+
+
+            },
+
+            checkisValidSelect(type,current,input=this.input){
+
+                var check=input[type] == 0;
+                if(check && input.hasOwnProperty(current)){
+                    input[current]="";
+                }
+
+                return (check)? false:true;
+            },
+            allSubCategory(parentId,forced=false){
+                var url=this.msData.path['get.allSCat'];
+                var th=this;
+
+                var data={
+                    id:parentId,
+                };
+
+                if(( !th.getingSubCat &&th.allSubCategoryFromServer==null && this.input.hasOwnProperty('cat') && (this.input.cat!=null||this.input.cat!=0 )) ||  forced){
+                    th.getingSubCat=true;
+                    axios.post(url,data).then(function (res) {
+
+                        th.allSubCategoryFromServer =res.data.ResponseData;
+                        if(th.input.hasOwnProperty('scat'))th.input.scat=0;
+                      //  th.updateInput('cat');
+
+
+
+                    }).catch(function (e) {
+                        th.allSubCategoryFromServer=[];
+                    }).then(function () {
+                        th.getingSubCat=false;
+                    });
+                }
+
+
+                return th.allSubCategoryFromServer;
+
+            },
             removeAllInputData(input,inputName){
                 //console.log(this.hasOwnProperty(input)&& this[input].hasOwnProperty(inputName));
                 if(this.hasOwnProperty(input)&& this[input].hasOwnProperty(inputName)){
@@ -338,7 +669,23 @@
 
 
             },
-            allUnits(){
+            allUnits(forced=false){
+                var url=this.msData.path['get.allUnits'];
+                var th=this;
+
+
+
+                if((th.allUnitsFromServer==null && !th.getingUnit) ||  forced){
+                    th.getingUnit=true;
+                    axios.post(url).then(function (res) {
+
+                        th.allUnitsFromServer=res.data.ResponseData;
+
+                    }).catch().then(function () {
+                        th.getingUnit=false;
+                    });
+                }
+
                 return this.allUnitsFromServer;
             },
             validateInputCheck(name, data = null) {
@@ -378,7 +725,20 @@
 
                 return th.allCategoryFromServer;
 
-            }, updateInput() {
+            },
+            updateInput(fromInput=null) {
+                if(fromInput!=null){
+
+                    switch (fromInput) {
+                        case 'scat':
+                            this.allExtraFields(true);
+                            break;
+                        case 'cat':
+                            this.allExtraFields(true);
+                            break;
+                    }
+
+                }
                 var oldInput = this.input;
                 this.input = null;
                 this.input = oldInput;

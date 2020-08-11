@@ -26,8 +26,8 @@ class SaveFields extends FormRequest
         return [
             'name'=>'required|unique:extra__fields',
             'dname'=>'required',
-            'cat'=>'required',
-            'scat'=>'required',
+            //'cat'=>'required',
+          //  'scat'=>'required',
             'type'=>'required',
             'dvalue'=>'required',
             'required'=>'required',

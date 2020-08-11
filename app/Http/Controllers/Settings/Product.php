@@ -311,17 +311,30 @@ class Product extends Controller
     }
 
 
-    public function getAllExtra(){
+    public function getAllExtra(Request $r){
+
+
+        $input=$r->all();
 
         $masterModel1=getModel(Extra_Field::class);
         $masterModel2=getModel(ProductCategory::class);
-
-        $model=$masterModel1::orderBy('id','desc')->get();
-
+        $modelAllData=[];
 
         $m2=$masterModel2;
 
         $produvctCategory=$m2->all();
+
+
+        if(count($input)>0 && array_key_exists('cat',$input) && array_key_exists('scat',$input)){
+            $model=$masterModel1::orderBy('id','desc')->where('cat',$input['cat'])->where('scat',$input['scat'])->get();
+            $modelAll=$masterModel1::orderBy('id','desc')->where('cat',0)->where('scat',0)->get();
+            $modelAllData=$modelAll->toArray();
+
+        }else{
+            $model=$masterModel1::orderBy('id','desc')->get();
+        }
+
+
 
 
         $model->map(function ($ar)use($produvctCategory){
@@ -338,7 +351,7 @@ class Product extends Controller
         });
 
 
-        return throwData(['All Extra Fields fetched successfully'],$model->toArray());
+        return throwData(['All Extra Fields fetched successfully'],array_merge($modelAllData,$model->toArray()));
     }
 
     public function saveExtra (SaveFields $r){
@@ -348,6 +361,12 @@ class Product extends Controller
         $response=[];
         $input=$r->all();
         $m=new Extra_Field();
+
+        $default=['scat','cat'];
+        foreach ($default as $c){
+            if(!array_key_exists($c,$input))$input[$c]='0';
+        }
+
 
         try {
 

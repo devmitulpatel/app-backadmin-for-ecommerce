@@ -17,8 +17,8 @@ class CreateExtraFieldsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('dname')->default("");
-            $table->string('cat')->default(0);
-            $table->string('scat')->default(0);
+            $table->string('cat')->default('0');
+            $table->string('scat')->default('0');
             $table->string('type')->default('text');
             $table->string('dvalue')->default("");
             $table->boolean('required')->default(0);

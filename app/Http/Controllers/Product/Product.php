@@ -40,10 +40,10 @@ class Product extends Controller
 
                 'edit.extraFields'=>route('settings.Product.Extra.edit'),
                 'get.allUnits'=>route('settings.Product.Units.all'),
+
                 'get.allExtra'=>route('settings.Product.Extra.all'),
-
                 'get.allCat'=>route('settings.Product.Category.all'),
-
+                'get.allSCat'=>route('settings.Product.SubCategory.all'),
                 'upload.img'=>route('product.img.upload')
 
 
