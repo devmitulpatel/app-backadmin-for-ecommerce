@@ -661,7 +661,6 @@
 
 <script>
     import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-
     export default {
         name: "product",
         data() {
@@ -882,6 +881,7 @@
                 }
 
                 return th.allUnitsFromServer;
+
 
 
 
