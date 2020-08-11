@@ -779,6 +779,13 @@
                 //  alert(url)
 
             },
+        },
+        watch:{
+            allExtraFieldsFromServer(newVal,oldVal){
+                for (var i in  oldVal){
+                    if (this.input.hasOwnProperty(oldVal[i].name))delete this.input[oldVal[i].name];
+                }
+            }
         }
     }
 </script>

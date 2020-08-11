@@ -769,6 +769,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         th.restForm();
       }); //  alert(url)
     }
+  },
+  watch: {
+    allExtraFieldsFromServer: function allExtraFieldsFromServer(newVal, oldVal) {
+      for (var i in oldVal) {
+        if (this.input.hasOwnProperty(oldVal[i].name)) delete this.input[oldVal[i].name];
+      }
+    }
   }
 });
 

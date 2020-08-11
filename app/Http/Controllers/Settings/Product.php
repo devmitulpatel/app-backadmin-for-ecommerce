@@ -331,8 +331,14 @@ class Product extends Controller
             $model=$masterModel1::orderBy('id','desc')->where('cat',$input['cat'])->where('scat',$input['scat'])->get();
 
             $modelAll=$masterModel1::orderBy('id','desc')->where('cat',0)->where('scat',0)->get();
-            $modelMatserCat=$masterModel1::orderBy('id','desc')->where('cat',$input['cat'])->where('scat',0)->get();
-            $modelMatserCatData=$modelMatserCat->toArray();
+
+            if($input['cat']!=0){
+
+                $modelMatserCat=$masterModel1::orderBy('id','desc')->where('cat',$input['cat'])->where('scat',0)->get();
+                $modelMatserCatData=$modelMatserCat->toArray();
+
+
+            }
             $modelAllData=$modelAll->toArray();
 
         }else{
