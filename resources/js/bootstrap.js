@@ -29,8 +29,8 @@ $.ajaxSetup({
     }
 });
 
-
-
+window.CSRF=$('meta[name="csrf-token"]');
+window.APP_DOMAIN=process.env.MIX_APP_DOMAIN;
 
 
 /**

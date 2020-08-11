@@ -43,6 +43,12 @@ return [
 
     'disks' => [
 
+        'product' => [
+            'driver' => 'local',
+            'root' => storage_path(implode('/',['upload','products'])),
+        ],
+
+
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),

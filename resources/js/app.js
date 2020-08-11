@@ -10,10 +10,12 @@ window.Vue = require('vue');
 
 import Vue from 'vue';
 import CKEditor from '@ckeditor/ckeditor5-vue';
+
 import Toasted from 'vue-toasted';
 
+window.CKEditor=CKEditor;
 Vue.use( CKEditor );
-Vue.use(Toasted)
+Vue.use(Toasted);
 
 /**
  * The following block of code may be used to automatically register your
@@ -240,3 +242,7 @@ const app = new Vue({
 
 });
 window.VueApp=app;
+
+function popup() {
+console.log('trigeres');
+}

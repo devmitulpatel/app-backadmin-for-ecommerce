@@ -23,7 +23,7 @@ Auth::routes();
 Route::get('/',function (){
    return view('layouts.front');
 });
-Route::get('/test',function (){
+Route::any('/test',function (){
    $setin=settings('general');
    $setin2=settings('website');
    $setin3=settings('product');
@@ -31,14 +31,47 @@ Route::get('/test',function (){
     \Debugbar::info($setin2);
     \Debugbar::info($setin3);
 
+    return response()->json(['fileName'=>'test.jpg','uploaded'=> 1,'url'=>asset('img/test.jpg')]);
+
     return view('layouts.app');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::match(['get'],'product/img/get/{code}',"Product\\Product@getImage")->name('product.img.get');
 
 Route::middleware('auth')->group(function () {
 
+
+
+    Route::prefix('admin')->group(function () {
+
+        Route::prefix('product')->group(function () {
+
+            Route::match(['get','post'],'/',"Product\\Product@index")->name('product.add');
+            Route::match(['post'],'/img/upload',"Product\\Product@uploadImage")->name('product.img.upload');
+
+
+
+            Route::match(['get','post'],'/category',"Product\\Category@index")->name('product.category.manage');
+            Route::match(['post'],'/category/save',"Product\\Category@save")->name('product.category.save');
+            Route::match(['post'],'/category/delete',"Product\\Category@delete")->name('product.category.delete');
+            Route::match(['post'],'/category/edit',"Product\\Category@edit")->name('product.category.edit');
+
+            Route::match(['get','post'],'/product/subcategory',"Product\\Category@indexForSub")->name('product.subcategory.manage');
+            Route::match(['post'],'/subcategory/save',"Product\\Category@Subsave")->name('product.subcategory.save');
+            Route::match(['post'],'/subcategory/delete',"Product\\Category@Subdelete")->name('product.subcategory.delete');
+            Route::match(['post'],'/subcategory/edit',"Product\\Category@Subedit")->name('product.subcategory.edit');
+
+
+
+
+        });
+
+
+
+
+    });
 
 
     Route::prefix('profile')->group(function () {
@@ -50,25 +83,6 @@ Route::middleware('auth')->group(function () {
 
     });
 
-    Route::prefix('product')->group(function () {
-
-        Route::match(['get','post'],'/product',"Product\\Product@index")->name('product.add');
-
-
-        Route::match(['get','post'],'/product/category',"Product\\Category@index")->name('product.category.manage');
-        Route::match(['post'],'/category/save',"Product\\Category@save")->name('product.category.save');
-        Route::match(['post'],'/category/delete',"Product\\Category@delete")->name('product.category.delete');
-        Route::match(['post'],'/category/edit',"Product\\Category@edit")->name('product.category.edit');
-
-        Route::match(['get','post'],'/product/subcategory',"Product\\Category@indexForSub")->name('product.subcategory.manage');
-        Route::match(['post'],'/subcategory/save',"Product\\Category@Subsave")->name('product.subcategory.save');
-        Route::match(['post'],'/subcategory/delete',"Product\\Category@Subdelete")->name('product.subcategory.delete');
-        Route::match(['post'],'/subcategory/edit',"Product\\Category@Subedit")->name('product.subcategory.edit');
-
-
-
-
-    });
 
 
 

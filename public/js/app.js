@@ -219,31 +219,31 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 //
 //
 //
+ //  import SimpleUploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/simpleuploadadapter';
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "addproduct",
   props: ['msData'],
+  components: {
+    // Use the <ckeditor> component in this view.
+    ckeditor: CKEditor.component
+  },
   data: function data() {
     return {
       editor: _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0___default.a,
       editorConfig: {
+        plugin: [],
         toolbar: {
-          items: ['heading', '|', 'bold', 'italic', '|', 'bulletedList', 'numberedList', '|', 'insertTable', '|', //    'imageUpload',
-          // '|',
-          'undo', 'redo']
+          items: ['heading', '|', 'bold', 'italic', '|', 'bulletedList', 'numberedList', '|', 'insertTable', '|', 'imageUpload', '|', 'undo', 'redo']
         },
-        // image: {
-        //     toolbar: [
-        //      //   'imageStyle:full',
-        //   //      'imageStyle:side',
-        //    //     '|',
-        //     //    'imageTextAlternative'
-        //     ]
-        // },
         table: {
           contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells']
         },
-        language: 'en'
+        language: 'en',
+        ckfinder: {
+          // The URL that the images are uploaded to.
+          uploadUrl: this.msData.path['upload.img']
+        }
       },
       input: {},
       inputError: {},
@@ -285,7 +285,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       var file = e.target.files;
       if (!this.input.hasOwnProperty(inputName)) this.input[inputName] = [];
 
-      if (file.length > limit || this.input[inputName] != null && this.input[inputName].length > limit - 1) {
+      if (file.length > limit || this.input[inputName] != null && this.input[inputName].length + file.length > limit) {
         alert('Only ' + limit + ' image allowed to upload, and You selected more ' + limit + ' images');
 
         if (file.length > limit) {
@@ -28782,6 +28782,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 
 
+window.CKEditor = _ckeditor_ckeditor5_vue__WEBPACK_IMPORTED_MODULE_1___default.a;
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(_ckeditor_ckeditor5_vue__WEBPACK_IMPORTED_MODULE_1___default.a);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_toasted__WEBPACK_IMPORTED_MODULE_2___default.a);
 /**
@@ -28987,6 +28988,10 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
 });
 window.VueApp = app;
 
+function popup() {
+  console.log('trigeres');
+}
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -29023,6 +29028,8 @@ $.ajaxSetup({
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
   }
 });
+window.CSRF = $('meta[name="csrf-token"]');
+window.APP_DOMAIN = "http://127.0.0.1:8000";
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

@@ -51,6 +51,7 @@
     <script src="{{ mix('js/manifest.js')."?".date('Ydmis') }}" defer></script>
     <script src="{{ mix('js/vendor.js')."?".date('Ydmis') }}" defer></script>
     <script src="{{ mix('js/app.js')."?".date('Ydmis') }}" defer></script>
+{{--    <script src="https://ckeditor.com/apps/ckfinder/3.5.0/ckfinder.js"></script>--}}
 
 {{--    <script src="https://kit.fontawesome.com/613c299ae6.js" crossorigin="anonymous"></script>--}}
 </body>

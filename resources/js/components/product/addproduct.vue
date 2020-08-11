@@ -173,16 +173,24 @@
 </template>
 
 <script>
+
     import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+  //  import SimpleUploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/simpleuploadadapter';
     export default {
 
         name: "addproduct",
         props: ['msData'],
+        components: {
+            // Use the <ckeditor> component in this view.
+            ckeditor: CKEditor.component
+        },
         data(){
             return {
 
                 editor: ClassicEditor,
+
                 editorConfig: {
+                    plugin:[],
                     toolbar: {
                         items: [
                             'heading',
@@ -195,24 +203,21 @@
                             '|',
                             'insertTable',
                             '|',
-                            //    'imageUpload',
-                            // '|',
+                            'imageUpload',
+                            '|',
                             'undo',
                             'redo'
                         ]
                     },
-                    // image: {
-                    //     toolbar: [
-                    //      //   'imageStyle:full',
-                    //   //      'imageStyle:side',
-                    //    //     '|',
-                    //     //    'imageTextAlternative'
-                    //     ]
-                    // },
                     table: {
                         contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells' ]
                     },
-                    language: 'en'
+                    language: 'en',
+                    ckfinder: {
+                        // The URL that the images are uploaded to.
+                        uploadUrl: this.msData.path['upload.img'],
+
+                    },
 
                 },
                 input: {},
@@ -240,6 +245,8 @@
         },
         methods:{
 
+
+
             removeAllInputData(input,inputName){
                 //console.log(this.hasOwnProperty(input)&& this[input].hasOwnProperty(inputName));
                 if(this.hasOwnProperty(input)&& this[input].hasOwnProperty(inputName)){
@@ -256,7 +263,7 @@
 
                if(!this.input.hasOwnProperty(inputName))this.input[inputName]=[];
 
-                if(file.length >limit || (this.input[inputName]!=null && this.input[inputName].length>limit-1)){
+                if(file.length >limit || (this.input[inputName]!=null && this.input[inputName].length+file.length>limit)){
                     alert('Only '+limit+' image allowed to upload, and You selected more '+limit+' images');
                    if(file.length >limit){
                        e.target.value=''
