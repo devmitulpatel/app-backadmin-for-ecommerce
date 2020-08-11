@@ -144,7 +144,7 @@
 
                                 <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                     <label for="cat">Category </label>
-                                    <select v-on:change="allSubCategory(input.cat,true)" v-model="input.cat" name="cat" class="form-control"  id="cat" :class="{
+                                    <select v-on:change="allSubCategory(input.cat,true,true)" v-model="input.cat" name="cat" class="form-control"  id="cat" :class="{
                                                 'is-valid':validateInputs.includes('cat') && !validateInputCheck('cat'),
                                                 'is-invalid':validateInputs.includes('cat') && validateInputCheck('cat')
                                                 }">
@@ -549,7 +549,7 @@
 
                 return (check)? false:true;
             },
-            allSubCategory(parentId,forced=false){
+            allSubCategory(parentId,forced=false,fromChange=false){
                 var url=this.msData.path['get.allSCat'];
                 var th=this;
 
@@ -562,8 +562,11 @@
                     axios.post(url,data).then(function (res) {
 
                         th.allSubCategoryFromServer =res.data.ResponseData;
-                        if(th.input.hasOwnProperty('scat'))th.input.scat=0;
-                      //  th.updateInput('cat');
+                      if(fromChange){
+                          if(th.input.hasOwnProperty('scat'))th.input.scat=0;
+                          th.updateInput('cat');
+                      }
+
 
 
 
@@ -701,8 +704,8 @@
                 this.input1={};
                 this.inputError1={};
                 this.allCategory(true);
-            }
-            ,restForm(){
+            },
+            restForm(){
 
             },
             allCategory(forced=false){

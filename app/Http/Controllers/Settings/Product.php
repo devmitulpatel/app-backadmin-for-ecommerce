@@ -319,6 +319,7 @@ class Product extends Controller
         $masterModel1=getModel(Extra_Field::class);
         $masterModel2=getModel(ProductCategory::class);
         $modelAllData=[];
+        $modelMatserCatData=[];
 
         $m2=$masterModel2;
 
@@ -326,8 +327,12 @@ class Product extends Controller
 
 
         if(count($input)>0 && array_key_exists('cat',$input) && array_key_exists('scat',$input)){
+            if($input['scat']=='undefined' || $input['scat']=='')$input['scat'];
             $model=$masterModel1::orderBy('id','desc')->where('cat',$input['cat'])->where('scat',$input['scat'])->get();
+
             $modelAll=$masterModel1::orderBy('id','desc')->where('cat',0)->where('scat',0)->get();
+            $modelMatserCat=$masterModel1::orderBy('id','desc')->where('cat',$input['cat'])->where('scat',0)->get();
+            $modelMatserCatData=$modelMatserCat->toArray();
             $modelAllData=$modelAll->toArray();
 
         }else{
@@ -351,7 +356,7 @@ class Product extends Controller
         });
 
 
-        return throwData(['All Extra Fields fetched successfully'],array_merge($modelAllData,$model->toArray()));
+        return throwData(['All Extra Fields fetched successfully'],array_merge($modelAllData,$modelMatserCatData,$model->toArray()));
     }
 
     public function saveExtra (SaveFields $r){

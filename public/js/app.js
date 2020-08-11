@@ -566,6 +566,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     },
     allSubCategory: function allSubCategory(parentId) {
       var forced = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+      var fromChange = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
       var url = this.msData.path['get.allSCat'];
       var th = this;
       var data = {
@@ -576,7 +577,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         th.getingSubCat = true;
         axios.post(url, data).then(function (res) {
           th.allSubCategoryFromServer = res.data.ResponseData;
-          if (th.input.hasOwnProperty('scat')) th.input.scat = 0; //  th.updateInput('cat');
+
+          if (fromChange) {
+            if (th.input.hasOwnProperty('scat')) th.input.scat = 0;
+            th.updateInput('cat');
+          }
         })["catch"](function (e) {
           th.allSubCategoryFromServer = [];
         }).then(function () {
@@ -24325,7 +24330,11 @@ var render = function() {
                                   )
                                 },
                                 function($event) {
-                                  return _vm.allSubCategory(_vm.input.cat, true)
+                                  return _vm.allSubCategory(
+                                    _vm.input.cat,
+                                    true,
+                                    true
+                                  )
                                 }
                               ]
                             }
