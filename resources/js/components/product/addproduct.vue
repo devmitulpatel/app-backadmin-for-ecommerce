@@ -21,11 +21,38 @@
 
 
 
-                        <form @submit.prevent="processForm((editCatDataPost)?msData.path['edit.cat']:msData.path['save.cat'],input,'inputError1','updateAllcategory')">
+                        <form @submit.prevent="processForm((editCatDataPost)?msData.path['edit.cat']:msData.path['save.product'],input,'inputError')">
 
                             <div class="row">
 
-                                <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4">
+
+                                <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <label for="barcode">Barcode </label>
+                                    <input ref="barcode"
+
+                                           :class="{
+                                                'is-valid':validateInputs.includes('barcode') && !validateInputCheck('barcode'),
+                                                'is-invalid':validateInputs.includes('barcode') && validateInputCheck('barcode')
+                                                }"
+
+                                           type="text" v-model="input.barcode" name="barcode" class="form-control" id="barcode">
+
+                                    <div v-if="inputError.hasOwnProperty('barcode')">
+
+                                        <div class="alert alert-danger" role="alert" v-for="er in inputError.barcode">
+                                            {{er}}
+                                        </div>
+
+
+                                    </div>
+
+
+
+
+                                </div>
+
+
+                                <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                     <label for="name">Name </label>
                                     <input ref="name"
 
@@ -49,6 +76,57 @@
 
 
                                 </div>
+
+                                <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <label for="sname">Company </label>
+                                    <input ref="sname"
+
+                                           :class="{
+                                                'is-valid':validateInputs.includes('sname') && !validateInputCheck('sname'),
+                                                'is-invalid':validateInputs.includes('sname') && validateInputCheck('sname')
+                                                }"
+
+                                           type="text" v-model="input.sname" name="sname" class="form-control" id="sname">
+
+                                    <div v-if="inputError.hasOwnProperty('sname')">
+
+                                        <div class="alert alert-danger" role="alert" v-for="er in inputError.sname">
+                                            {{er}}
+                                        </div>
+
+
+                                    </div>
+
+
+
+
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <label for="version">Model/Version </label>
+                                    <input ref="version"
+
+                                           :class="{
+                                                'is-valid':validateInputs.includes('version') && !validateInputCheck('version'),
+                                                'is-invalid':validateInputs.includes('version') && validateInputCheck('version')
+                                                }"
+
+                                           type="text" v-model="input.version" name="version" class="form-control" id="version">
+
+                                    <div v-if="inputError.hasOwnProperty('version')">
+
+                                        <div class="alert alert-danger" role="alert" v-for="er in inputError.version">
+                                            {{er}}
+                                        </div>
+
+
+                                    </div>
+
+
+
+
+                                </div>
+
+
                                 <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                     <label for="productLogo"> Product Image </label>
                                     <div class="row">
@@ -78,28 +156,28 @@
 
                                     </div>
                                 </div>
-                                <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-5">
-                                    <label for="productLogoOther"> Product Other Images </label>
+                                <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-9">
+                                    <label for="pimgs"> Product Other Images </label>
 
                                     <div class="row">
                                         <div class="col-4">
                                             <input
                                                 multiple
                                                 :class="{
-                                                'is-valid':validateInputs.includes('productLogoOther') && !validateInputCheck('productLogoOther'),
-                                                'is-invalid':validateInputs.includes('productLogoOther') && validateInputCheck('productLogoOther')
+                                                'is-valid':validateInputs.includes('pimgs') && !validateInputCheck('pimgs'),
+                                                'is-invalid':validateInputs.includes('pimgs') && validateInputCheck('pimgs')
                                                 }"
-                                                type="file"  v-on:change="fileInputs($event,'productLogoOther')"name="productLogoOther" class="form-control-file" id="productLogoOther" aria-describedby="productLogoOtherHelp">
+                                                type="file"  v-on:change="fileInputs($event,'pimgs')"name="pimgs" class="form-control-file" id="pimgs" aria-describedby="pimgsHelp">
 
                                             <span class="text-muted"> Max 6 Image File  </span><br>
                                             <span class="text-muted"> png, jpg, jpeg  allowed </span>
                                         </div>
-                                        <div class="col-8 inputLogo "> <small id="productLogoOtherHelp" class="form-text text-muted text-center">Preview </small>
+                                        <div class="col-8 inputLogo "> <small id="pimgsHelp" class="form-text text-muted text-center">Preview </small>
 
                                             <div class="row">
 
-                                                <img  v-for="img in input.productLogoOther" v-if="input.hasOwnProperty('productLogoOther')"  :src="img" class="zoomOut-img mt-1 col-3 border shadow-sm bg-white">
-                                                <div v-on:click="removeAllInputData('input','productLogoOther')"  v-if="input.hasOwnProperty('productLogoOther') && input.productLogoOther.length>0"  class="btn btn-sm btn-outline-danger col-12">X Remove All Images</div>
+                                                <img  v-for="img in input.pimgs" v-if="input.hasOwnProperty('pimgs')"  :src="img" class="zoomOut-img mt-1 col-3 border shadow-sm bg-white">
+                                                <div v-on:click="removeAllInputData('input','pimgs')"  v-if="input.hasOwnProperty('pimgs') && input.pimgs.length>0"  class="btn btn-sm btn-outline-danger col-12">X Remove All Images</div>
                                             </div>
 
 
@@ -312,11 +390,11 @@
                                 </div>
 
                                 <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                                    <label for="featrue">Feature Product</label>
+                                    <label for="feature">Feature Product</label>
                                     <div class="form-control ">
 
-                                        <label class="radio"><input  v-model="input.featrue" id="featrue" name="featrue" type="radio" value="1" ><span class="pl-2">Yes </span></label>
-                                        <label class="radio pl-2 "><input  v-model="input.featrue" name="featrue" type="radio" value="0"><span class="pl-2">No</span></label>
+                                        <label class="radio"><input  v-model="input.feature" id="feature" name="feature" type="radio" value="1" ><span class="pl-2">Yes </span></label>
+                                        <label class="radio pl-2 "><input  v-model="input.feature" name="feature" type="radio" value="0"><span class="pl-2">No</span></label>
 
                                     </div>
 
@@ -325,9 +403,9 @@
 
 
 
-                                    <div v-if="inputError.hasOwnProperty('featrue')">
+                                    <div v-if="inputError.hasOwnProperty('feature')">
 
-                                        <div class="alert alert-danger" role="alert" v-for="er in inputError.featrue">
+                                        <div class="alert alert-danger" role="alert" v-for="er in inputError.feature">
                                             {{er}}
                                         </div>
 
@@ -484,9 +562,11 @@
                 input: {},
                 inputError: {},
 
-                validateInputs: ['CompanyName'],
+                validateInputs: ['name','cat','scat'],
                 validationRules:{
-                    'CompanyName':{ presence: {allowEmpty: false}}
+                    'name':{ presence: {allowEmpty: false}},
+                    'cat':{ presence: {allowEmpty: false} ,isNotEqualTo:0},
+                    'scat':{ presence: {allowEmpty: false} ,isNotEqualTo:0}
                 },
                 currentFormTab:0,
                 allUnitsFromServer:null,
@@ -693,10 +773,39 @@
             },
             validateInputCheck(name, data = null) {
                 var er = true;
+                var customRule=false;
+                var customData={};
+                var customError=[];
+                let defineData={...this.validationRules[name]};
+
+
+                if(defineData.hasOwnProperty('isNotEqualTo')){
+                    if(!customData.hasOwnProperty('isNotEqualTo')){
+                        customData.isNotEqualTo=defineData.isNotEqualTo;
+                        delete defineData.isNotEqualTo;
+                    }
+                }
+
+               // console.log(defineData);
+
 
                 var input = (data == null) ? this.input : data;
-                var validatedData = window.validate.single(input[name],this.validationRules[name]);
-                if (er && validatedData === undefined) er = false;
+                var validatedData = window.validate.single(input[name],defineData);
+
+                if(er && validatedData === undefined ){
+
+                    for (var i in customData){
+                        switch (i) {
+                                case 'isNotEqualTo':
+                                    if(customData.isNotEqualTo==input[name])customError.push(name+' should not be equal to '+customData.isNotEqualTo);
+                                 //    console.log(input[name])
+                                    break;
+                        }
+                    }
+                }
+
+
+                if (er && validatedData === undefined && customError.length<1) er = false;
                 //   console.log(er);
                 return er;
             },

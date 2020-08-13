@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Product\SaveProduct;
 use App\Model\Product\ProductImages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -44,7 +45,9 @@ class Product extends Controller
                 'get.allExtra'=>route('settings.Product.Extra.all'),
                 'get.allCat'=>route('settings.Product.Category.all'),
                 'get.allSCat'=>route('settings.Product.SubCategory.all'),
-                'upload.img'=>route('product.img.upload')
+                'upload.img'=>route('product.img.upload'),
+
+                'save.product'=>route('product.save')
 
 
 
@@ -61,6 +64,22 @@ class Product extends Controller
 
         return view('product.addproduct')->with('data',$data)->with('Vuedata',$Vuedata);
     }
+
+    public function save(SaveProduct $r){
+
+
+        $input=$r->all();
+
+        dd($input);
+
+
+        return saveToModel(\App\Model\Product\Product::class,$r,'Product');
+
+
+
+
+    }
+
 
     public function uploadImage(Request $r){
 

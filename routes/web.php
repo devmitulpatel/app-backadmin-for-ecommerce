@@ -49,6 +49,7 @@ Route::middleware('auth')->group(function () {
         Route::prefix('product')->group(function () {
 
             Route::match(['get','post'],'/',"Product\\Product@index")->name('product.add');
+            Route::match(['post'],'/save',"Product\\Product@save")->name('product.save');
             Route::match(['post'],'/img/upload',"Product\\Product@uploadImage")->name('product.img.upload');
 
 

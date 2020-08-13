@@ -13,23 +13,27 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
-//        Schema::create('products', function (Blueprint $table) {
-//            $table->id();
-//            $table->string('name');
-//            $table->string('description');
-//            $table->string('unit');
-//            $table->string('unitRate');
-//            $table->string('sname');
-//            $table->string('discount');
-//            $table->string('new');
-//            $table->string('pcat');
-//            $table->string('pimg');
-//            $table->string('inStock');
-//            $table->string('stock');
-//            $table->json('extraFields');
-//            $table->boolean('status');
-//            $table->timestamps();
-//        });
+        Schema::create('products', function (Blueprint $table) {
+            $table->id();
+            $table->string('barcode')->nullable();
+            $table->string('name');
+            $table->string('sname')->nullable();
+            $table->string('version')->nullable();
+            $table->longText('pimg')->nullable();
+            $table->longText('pimgs')->nullable();
+            $table->string('description')->default('')->nullable();
+            $table->integer('cat')->default(0);
+            $table->integer('scat')->default(0);
+            $table->integer('unit')->default(0);
+            $table->integer('urate')->default(0);
+            $table->boolean('keepStock')->default(0);
+            $table->integer('ostock')->default(0)->nullable();
+            $table->boolean('feature')->default(0);
+            $table->boolean('new')->default(0);
+            $table->json('extraFields')->nullable();
+            $table->boolean('status')->default(1);
+            $table->timestamps();
+        });
     }
 
     /**

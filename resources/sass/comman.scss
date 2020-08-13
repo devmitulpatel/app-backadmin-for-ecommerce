@@ -7,6 +7,19 @@
 @import "~animate.css";
 
 
+
+
+select.form-control.is-valid{
+    background-position: right calc(0.4em + 1.1875rem) center;
+    transition: all 200ms ease-in;
+}
+.form-control.is-valid{
+    transition: all 200ms ease-in;
+}
+.form-control.is-invalid{
+    transition: all 200ms ease-in;
+}
+
 .collapsing,.show{
 
 
