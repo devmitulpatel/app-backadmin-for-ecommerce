@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('version')->nullable();
             $table->longText('pimg')->nullable();
             $table->longText('pimgs')->nullable();
-            $table->string('description')->default('')->nullable();
+            $table->longText('description')->default('')->nullable();
             $table->integer('cat')->default(0);
             $table->integer('scat')->default(0);
             $table->integer('unit')->default(0);

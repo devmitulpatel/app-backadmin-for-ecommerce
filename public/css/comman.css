@@ -10618,7 +10618,8 @@ readers do not read off random characters that represent icons */
   font-weight: 400;
 }
 
-select.form-control.is-valid {
+select.form-control.is-valid,
+select.form-control.is-invalid {
   background-position: right calc(0.4em + 1.1875rem) center;
   transition: all 200ms ease-in;
 }

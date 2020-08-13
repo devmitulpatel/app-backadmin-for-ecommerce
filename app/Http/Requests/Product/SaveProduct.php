@@ -24,6 +24,7 @@ class SaveProduct extends FormRequest
     public function rules()
     {
         return [
+          'barcode'=>['unique:products'],
           'name'=>['required','unique:products'],
           'cat'=>['required'],
           'scat'=>['required'],

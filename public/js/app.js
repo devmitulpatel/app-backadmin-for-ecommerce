@@ -621,7 +621,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       editFielsDataPost: false,
       getingCat: false,
       getingSubCat: false,
-      getingExtra: false
+      getingExtra: false,
+      allFiles: {},
+      multiFileinput: ['pimgs']
     };
   },
   beforeMount: function beforeMount() {
@@ -716,15 +718,19 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         var count = 1;
 
         for (var i in file) {
-          var reader = new FileReader();
+          if (_typeof(file[i]) == 'object') {
+            if (!this.allFiles.hasOwnProperty(inputName)) this.allFiles[inputName] = [];
+            this.allFiles[inputName].push(file[i]);
+            var reader = new FileReader();
 
-          reader.onload = function (e) {
-            if (!_this.input.hasOwnProperty(inputName)) _this.input[inputName] = [];
+            reader.onload = function (e) {
+              if (!_this.input.hasOwnProperty(inputName)) _this.input[inputName] = [];
 
-            _this.input[inputName].push(e.target.result);
+              _this.input[inputName].push(e.target.result);
 
-            _this.updateInput();
-          };
+              _this.updateInput();
+            };
+          }
 
           count = count + 1;
           if (_typeof(file[i]) == "object") reader.readAsDataURL(file[i]);
@@ -736,6 +742,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       var _this2 = this;
 
       var file = e.target.files;
+      this.allFiles[inputName] = file[0];
       var reader = new FileReader();
 
       reader.onload = function (e) {
@@ -795,6 +802,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           customData.isNotEqualTo = defineData.isNotEqualTo;
           delete defineData.isNotEqualTo;
         }
+
+        if (!customRule) customRule = true;
       } // console.log(defineData);
 
 
@@ -802,7 +811,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       var validatedData = window.validate.single(input[name], defineData);
 
       if (er && validatedData === undefined) {
-        for (var i in customData) {
+        if (customRule) for (var i in customData) {
           switch (i) {
             case 'isNotEqualTo':
               if (customData.isNotEqualTo == input[name]) customError.push(name + ' should not be equal to ' + customData.isNotEqualTo); //    console.log(input[name])
@@ -812,7 +821,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }
       }
 
-      if (er && validatedData === undefined && customError.length < 1) er = false; //   console.log(er);
+      if (er && validatedData === undefined && customError.length < 1) {
+        if (this.inputError.hasOwnProperty(name)) {//        delete this.inputError[name];
+        }
+
+        er = false;
+      } //   console.log(er);
+
 
       return er;
     },
@@ -821,7 +836,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       this.inputError1 = {};
       this.allCategory(true);
     },
-    restForm: function restForm() {},
+    restForm: function restForm() {
+      var valid = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      this.input = {};
+
+      if (valid) {
+        this.input = {};
+        this.inputError = {};
+      }
+    },
     allCategory: function allCategory() {
       var forced = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
       var url = this.msData.path['get.allCat'];
@@ -868,12 +891,24 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       var callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
       var th = this;
       this[error] = {};
-      axios.post(url, input).then(function (res) {
+      var formInputData = new FormData();
+
+      for (var i in input) {
+        if (this.multiFileinput.includes(i)) {
+          for (var x in this.input[i]) {
+            formInputData.append(i + '[' + x + ']', this.allFiles.hasOwnProperty(i) && this.allFiles[i].hasOwnProperty(x) ? this.allFiles[i][x] : this.input[i][x]);
+          }
+        } else {
+          formInputData.append(i, this.allFiles.hasOwnProperty(i) ? this.allFiles[i] : this.input[i]);
+        }
+      }
+
+      axios.post(url, formInputData).then(function (res) {
         var data = res.data;
         Vue.toasted.success(data.msg, {
           duration: 1000
         });
-        if (data.hasOwnProperty('ResponseMessage') && typeof data.ResponseMessage == "array") Vue.toasted.success(data.ResponseMessage[0], {
+        if (data.hasOwnProperty('ResponseMessage') && _typeof(data.ResponseMessage) == "object") Vue.toasted.success(data.ResponseMessage[0], {
           duration: 1000
         });
         if (callback != null) th[callback]();
@@ -881,15 +916,18 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         if (data.hasOwnProperty('nextUrl')) {
           window.VueApp.clickEventFromSideBar(data.nextUrl);
         }
+
+        th.restForm(1);
       })["catch"](function (e) {
         th[error] = e.response.data.errors;
         Vue.toasted.error(e.response.data.message, {
           duration: 1000
         });
+        if (data.hasOwnProperty('ResponseMessage') && _typeof(data.ResponseMessage) == "object") Vue.toasted.success(data.ResponseMessage[0], {
+          duration: 1000
+        });
         th.updateError();
-      }).then(function () {
-        th.restForm();
-      }); //  alert(url)
+      }).then(function () {}); //  alert(url)
     }
   },
   watch: {
@@ -897,6 +935,16 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       for (var i in oldVal) {
         if (this.input.hasOwnProperty(oldVal[i].name)) delete this.input[oldVal[i].name];
       }
+    },
+    input: function input(newVal) {
+      // console.log('input changes');
+      for (var k in newVal) {
+        if (this.inputError.hasOwnProperty(k) && (this.validateInputs.includes(k) && this.validateInputCheck(k, newVal[k]) || !this.validateInputs.includes(k))) {
+          delete this.inputError[k];
+        }
+      }
+
+      this.updateError();
     }
   }
 });
@@ -24355,7 +24403,7 @@ var render = function() {
                           "form-group col-xs-12 col-sm-12 col-md-3 col-lg-3"
                       },
                       [
-                        _c("label", { attrs: { for: "productLogo" } }, [
+                        _c("label", { attrs: { for: "pimg" } }, [
                           _vm._v(" Product Image ")
                         ]),
                         _vm._v(" "),
@@ -24365,21 +24413,21 @@ var render = function() {
                               staticClass: "form-control-file",
                               class: {
                                 "is-valid":
-                                  _vm.validateInputs.includes("productLogo") &&
-                                  !_vm.validateInputCheck("productLogo"),
+                                  _vm.validateInputs.includes("pimg") &&
+                                  !_vm.validateInputCheck("pimg"),
                                 "is-invalid":
-                                  _vm.validateInputs.includes("productLogo") &&
-                                  _vm.validateInputCheck("productLogo")
+                                  _vm.validateInputs.includes("pimg") &&
+                                  _vm.validateInputCheck("pimg")
                               },
                               attrs: {
                                 type: "file",
-                                name: "productLogo",
-                                id: "productLogo",
-                                "aria-describedby": "productLogoHelp"
+                                name: "pimg",
+                                id: "pimg",
+                                "aria-describedby": "pimgHelp"
                               },
                               on: {
                                 change: function($event) {
-                                  return _vm.fileInput($event, "productLogo")
+                                  return _vm.fileInput($event, "pimg")
                                 }
                               }
                             }),
@@ -24399,11 +24447,11 @@ var render = function() {
                               [_vm._v("Preview")]
                             ),
                             _vm._v(" "),
-                            _vm.input.hasOwnProperty("productLogo")
+                            _vm.input.hasOwnProperty("pimg")
                               ? _c("img", {
                                   staticClass:
                                     "logoSample border shadow-sm bg-white",
-                                  attrs: { src: _vm.input.productLogo }
+                                  attrs: { src: _vm.input.pimg }
                                 })
                               : _c("img", {
                                   staticClass: "logoSample",
@@ -24412,11 +24460,11 @@ var render = function() {
                           ])
                         ]),
                         _vm._v(" "),
-                        _vm.inputError.hasOwnProperty("invoiceLogo")
+                        _vm.inputError.hasOwnProperty("pimg")
                           ? _c(
                               "div",
                               { staticClass: "error-file" },
-                              _vm._l(_vm.inputError.invoiceLogo, function(er) {
+                              _vm._l(_vm.inputError.pimg, function(er) {
                                 return _c(
                                   "div",
                                   {
@@ -31186,15 +31234,27 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/sass/front_app.scss":
+/*!***************************************!*\
+  !*** ./resources/sass/front_app.scss ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ 0:
-/*!*********************************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/dark.scss ./resources/sass/comman.scss ***!
-  \*********************************************************************************************************************/
+/*!*****************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/front_app.scss ./resources/sass/dark.scss ./resources/sass/comman.scss ***!
+  \*****************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! F:\xamp\htdocs\mitul\app-backadmin-for-ecommerce\resources\js\app.js */"./resources/js/app.js");
 __webpack_require__(/*! F:\xamp\htdocs\mitul\app-backadmin-for-ecommerce\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! F:\xamp\htdocs\mitul\app-backadmin-for-ecommerce\resources\sass\front_app.scss */"./resources/sass/front_app.scss");
 __webpack_require__(/*! F:\xamp\htdocs\mitul\app-backadmin-for-ecommerce\resources\sass\dark.scss */"./resources/sass/dark.scss");
 module.exports = __webpack_require__(/*! F:\xamp\htdocs\mitul\app-backadmin-for-ecommerce\resources\sass\comman.scss */"./resources/sass/comman.scss");
 

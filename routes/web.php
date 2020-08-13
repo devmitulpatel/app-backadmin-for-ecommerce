@@ -24,6 +24,22 @@ Route::get('/',function (){
    return view('layouts.front');
 });
 Route::any('/test',function (){
+
+
+    $m=getModel(\App\Model\Product\Product::class);
+
+
+    $pdata=[
+        'review'=>424,
+        'totalOrders'=>55,
+        'rating'=>3
+    ];
+    $product=$m->where('id',1)->get()->first()->toArray();
+
+    $product['pimgs']=json_decode($product['pimgs']);
+
+   // dd($product);
+    return view('front.Product.ProductPage')->with('p',$product)->with('pD',$pdata);
    $setin=settings('general');
    $setin2=settings('website');
    $setin3=settings('product');

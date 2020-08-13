@@ -128,28 +128,28 @@
 
 
                                 <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                                    <label for="productLogo"> Product Image </label>
+                                    <label for="pimg"> Product Image </label>
                                     <div class="row">
                                         <div class="col-8">
                                             <input
                                                 :class="{
-                                                'is-valid':validateInputs.includes('productLogo') && !validateInputCheck('productLogo'),
-                                                'is-invalid':validateInputs.includes('productLogo') && validateInputCheck('productLogo')
+                                                'is-valid':validateInputs.includes('pimg') && !validateInputCheck('pimg'),
+                                                'is-invalid':validateInputs.includes('pimg') && validateInputCheck('pimg')
                                                 }"
-                                                type="file"  v-on:change="fileInput($event,'productLogo')"name="productLogo" class="form-control-file" id="productLogo" aria-describedby="productLogoHelp">
+                                                type="file"  v-on:change="fileInput($event,'pimg')"name="pimg" class="form-control-file" id="pimg" aria-describedby="pimgHelp">
                                             <span class="text-muted"> png, jpg, jpeg  allowed </span>
                                         </div>
                                         <div class="col-4 inputLogo"> <small id="productLogoHelp" class="form-text text-muted text-center">Preview</small>
-                                            <img  v-if="input.hasOwnProperty('productLogo')"  :src="input.productLogo" class="logoSample border shadow-sm bg-white">
+                                            <img  v-if="input.hasOwnProperty('pimg')"  :src="input.pimg" class="logoSample border shadow-sm bg-white">
                                             <img  v-else :src="msData.img.productLogo" class="logoSample">
 
 
                                         </div>
                                     </div>
 
-                                    <div v-if="inputError.hasOwnProperty('invoiceLogo')" class="error-file">
+                                    <div v-if="inputError.hasOwnProperty('pimg')" class="error-file">
 
-                                        <div class="alert alert-danger" role="alert" v-for="er in inputError.invoiceLogo">
+                                        <div class="alert alert-danger" role="alert" v-for="er in inputError.pimg">
                                             {{er}}
                                         </div>
 
@@ -577,7 +577,9 @@
                 editFielsDataPost:false,
                 getingCat:false,
                 getingSubCat:false,
-                getingExtra:false
+                getingExtra:false,
+                allFiles:{},
+                multiFileinput:['pimgs']
 
             }
 
@@ -683,19 +685,24 @@
                        e.target.value=''
                        //this.input[inputName]=[];
                    }
-                    e.target.value=''
+                    e.target.value='';
                     this.updateInput();
                 }else{
 
                     var count =1;
                     for (var i in file){
 
-                        var reader = new FileReader;
-                        reader.onload = e => {
-                            if(!this.input.hasOwnProperty(inputName))this.input[inputName]=[];
+                        if(typeof file[i]=='object'){
+                            if(!this.allFiles.hasOwnProperty(inputName))this.allFiles[inputName]=[];
+                            this.allFiles[inputName].push(file[i]);
+                            var reader = new FileReader;
+                            reader.onload = e => {
+                                if(!this.input.hasOwnProperty(inputName))this.input[inputName]=[];
 
-                            this.input[inputName].push(e.target.result)
-                            this.updateInput();
+                                this.input[inputName].push(e.target.result)
+                                this.updateInput();
+                            }
+
                         }
 
                         count=count+1;
@@ -717,6 +724,9 @@
             fileInput(e, inputName) {
 
                 const file = e.target.files;
+
+                this.allFiles[inputName]=file[0];
+
                 let reader = new FileReader;
                 reader.onload = e => {
                     this.input[inputName] = e.target.result
@@ -784,6 +794,7 @@
                         customData.isNotEqualTo=defineData.isNotEqualTo;
                         delete defineData.isNotEqualTo;
                     }
+                   if(!customRule)customRule=true;
                 }
 
                // console.log(defineData);
@@ -794,7 +805,7 @@
 
                 if(er && validatedData === undefined ){
 
-                    for (var i in customData){
+                   if(customRule) for (var i in customData){
                         switch (i) {
                                 case 'isNotEqualTo':
                                     if(customData.isNotEqualTo==input[name])customError.push(name+' should not be equal to '+customData.isNotEqualTo);
@@ -804,8 +815,15 @@
                     }
                 }
 
+                if (er && validatedData === undefined && customError.length<1) {
+                    if(this.inputError.hasOwnProperty(name)){
+                //        delete this.inputError[name];
+                    }
+                    er = false;
+                }
 
-                if (er && validatedData === undefined && customError.length<1) er = false;
+
+
                 //   console.log(er);
                 return er;
             },
@@ -814,9 +832,12 @@
                 this.inputError1={};
                 this.allCategory(true);
             },
-            restForm(){
-
-            },
+            restForm(valid=false){
+                this.input={};
+                if(valid){
+                    this.input={};
+                    this.inputError={};
+                }            },
             allCategory(forced=false){
                 var url=this.msData.path['get.allCat'];
                 var th=this;
@@ -859,31 +880,50 @@
                 var oldInput = this.inputError1;
                 this.inputError1 = null;
                 this.inputError1 = oldInput;
-            }
-            ,
+            },
             processForm(url,input=this.input,error='inputError',callback=null) {
                 var th = this;
                 this[error] = {};
+                const formInputData= new FormData();
+                for(var i in input){
 
-                axios.post(url, input).then(function (res) {
+                    if(this.multiFileinput.includes(i)){
+
+                        for (var x in this.input[i]){
+                            formInputData.append(i+'['+x+']',(this.allFiles.hasOwnProperty(i) && this.allFiles[i].hasOwnProperty(x))?this.allFiles[i][x]:this.input[i][x]);
+                        }
+
+                    }else {
+                        formInputData.append(i,(this.allFiles.hasOwnProperty(i))?this.allFiles[i]:this.input[i]);
+                    }
+
+
+                }
+
+
+
+                axios.post(url, formInputData).then(function (res) {
                     var data = res.data;
 
                     Vue.toasted.success(data.msg,{duration:1000});
 
-                    if(data.hasOwnProperty('ResponseMessage') && typeof data.ResponseMessage == "array")Vue.toasted.success(data.ResponseMessage[0],{duration:1000});
+                    if(data.hasOwnProperty('ResponseMessage') && typeof data.ResponseMessage == "object")Vue.toasted.success(data.ResponseMessage[0],{duration:1000});
                     if(callback!=null)th[callback]();
                     if(data.hasOwnProperty('nextUrl')){
                         window.VueApp.clickEventFromSideBar(data.nextUrl);
                     }
+                    th.restForm(1);
+
                 }).catch(
                     function (e) {
 
                         th[error] = e.response.data.errors;
                         Vue.toasted.error(e.response.data.message,{duration:1000});
+                        if(data.hasOwnProperty('ResponseMessage') && typeof data.ResponseMessage == "object")Vue.toasted.success(data.ResponseMessage[0],{duration:1000});
                         th.updateError();
                     }
                 ).then(function(){
-                    th.restForm();
+
                 });
                 //  alert(url)
 
@@ -894,8 +934,21 @@
                 for (var i in  oldVal){
                     if (this.input.hasOwnProperty(oldVal[i].name))delete this.input[oldVal[i].name];
                 }
+            },
+            input(newVal) {
+                // console.log('input changes');
+
+                for (var k in newVal) {
+
+                    if (this.inputError.hasOwnProperty(k) && (this.validateInputs.includes(k)&& this.validateInputCheck(k, newVal[k]) || !this.validateInputs.includes(k)) ) {
+                            delete this.inputError[k];
+                    }
+                }
+                this.updateError()
             }
         }
+
+
     }
 </script>
 
