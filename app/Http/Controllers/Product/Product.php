@@ -63,6 +63,7 @@ class Product extends Controller
         ];
 
 
+
         return view('product.addproduct')->with('data',$data)->with('Vuedata',$Vuedata);
     }
 

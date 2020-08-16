@@ -18,7 +18,7 @@ use \App\Model\Settings\Product\Units;
 //    return view('welcome');
 //});
 
-Auth::routes();
+
 
 Route::get('/',function (){
    return view('layouts.front');
@@ -26,20 +26,40 @@ Route::get('/',function (){
 Route::any('/test',function (){
 
 
+
     $m=getModel(\App\Model\Product\Product::class);
-
-
     $pdata=[
         'review'=>424,
         'totalOrders'=>55,
         'rating'=>3
     ];
-    $product=$m->where('id',1)->get()->first()->toArray();
-
+    $product=$m->first()->toArray();
     $product['pimgs']=json_decode($product['pimgs']);
-
-   // dd($product);
+    $product['pimgs']=array_map(function ($v){
+        return url($v);
+    },$product['pimgs']);
     return view('front.Product.ProductPage')->with('p',$product)->with('pD',$pdata);
+
+   // $m=\App\Model\Settings\General::_();
+    //$m=\App\Model\Settings\General::_()->_update(['id'=>'1'],['CompanyName'=>\Illuminate\Support\Str::random(4)]);
+
+    $m=getModel(\App\Model\Product\Product::class);
+   // dd($m->_()->_add(['name'=>\Illuminate\Support\Str::random(4)]));
+
+
+    $process1=$m->_()->_add(['name'=>\Illuminate\Support\Str::random(4)])->_2A();
+    $process2=$m->_()->_update(['id'=>$process1['data']['id']],['name'=>\Illuminate\Support\Str::random(4)])->_2A();
+    $process3=$m->_()->_delete(['id'=>$process1['data']['id']])->_2A();
+    \Debugbar::info($process1);
+    \Debugbar::info($process2);
+    \Debugbar::info($process3);
+
+  //  $setin=settings('general');
+
+    return response('hello');
+
+
+
    $setin=settings('general');
    $setin2=settings('website');
    $setin3=settings('product');
@@ -52,15 +72,25 @@ Route::any('/test',function (){
     return view('layouts.app');
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::match(['get'],'product/img/get/{code}',"Product\\Product@getImage")->name('product.img.get');
+
+
+Route::prefix('admin')->group(function () {
+    Auth::routes();
+});
+
+
 
 Route::middleware('auth')->group(function () {
 
 
 
     Route::prefix('admin')->group(function () {
+
+        Route::get('/', 'HomeController@index')->name('home');
+
+
 
         Route::prefix('product')->group(function () {
 

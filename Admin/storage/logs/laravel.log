@@ -1,0 +1,123 @@
+[2020-08-14 19:54:29] laravel.EMERGENCY: Unable to create configured logger. Using emergency logger. {"exception":"[object] (InvalidArgumentException(code: 0): Log [] is not defined. at E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php:192)
+[stacktrace]
+#0 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php(118): Illuminate\\Log\\LogManager->resolve(NULL)
+#1 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php(98): Illuminate\\Log\\LogManager->get(NULL)
+#2 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php(547): Illuminate\\Log\\LogManager->driver()
+#3 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(122): Illuminate\\Log\\LogManager->error('Directory name ...', Array)
+#4 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\app\\Exceptions\\Handler.php(39): Illuminate\\Foundation\\Exceptions\\Handler->report(Object(RuntimeException))
+#5 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(403): App\\Exceptions\\Handler->report(Object(RuntimeException))
+#6 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->reportException(Object(RuntimeException))
+#7 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#8 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\server.php(21): require_once('E:\\\\Pojects\\\\Live...')
+#9 {main}
+"} 
+[2020-08-14 19:54:29] laravel.ERROR: Directory name must not be empty. {"exception":"[object] (RuntimeException(code: 0): Directory name must not be empty. at E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\symfony\\finder\\Iterator\\RecursiveDirectoryIterator.php:48)
+[stacktrace]
+#0 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\symfony\\finder\\Iterator\\RecursiveDirectoryIterator.php(48): RecursiveDirectoryIterator->__construct('', 4096)
+#1 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\symfony\\finder\\Finder.php(730): Symfony\\Component\\Finder\\Iterator\\RecursiveDirectoryIterator->__construct('', 4096, false)
+#2 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\symfony\\finder\\Finder.php(614): Symfony\\Component\\Finder\\Finder->searchInDirectory('')
+#3 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\LoadConfiguration.php(88): Symfony\\Component\\Finder\\Finder->getIterator()
+#4 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\LoadConfiguration.php(65): Illuminate\\Foundation\\Bootstrap\\LoadConfiguration->getConfigurationFiles(Object(Illuminate\\Foundation\\Application))
+#5 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\LoadConfiguration.php(39): Illuminate\\Foundation\\Bootstrap\\LoadConfiguration->loadConfigurationFiles(Object(Illuminate\\Foundation\\Application), Object(Illuminate\\Config\\Repository))
+#6 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(230): Illuminate\\Foundation\\Bootstrap\\LoadConfiguration->bootstrap(Object(Illuminate\\Foundation\\Application))
+#7 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(151): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#8 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(135): Illuminate\\Foundation\\Http\\Kernel->bootstrap()
+#9 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(109): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#10 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#11 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\server.php(21): require_once('E:\\\\Pojects\\\\Live...')
+#12 {main}
+"} 
+[2020-08-14 17:54:47] local.ERROR: Target class [config] does not exist. {"exception":"[object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Target class [config] does not exist. at E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php:811)
+[stacktrace]
+#0 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(691): Illuminate\\Container\\Container->build('config')
+#1 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(796): Illuminate\\Container\\Container->resolve('config', Array, true)
+#2 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(637): Illuminate\\Foundation\\Application->resolve('config', Array)
+#3 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(781): Illuminate\\Container\\Container->make('config', Array)
+#4 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\helpers.php(119): Illuminate\\Foundation\\Application->make('config', Array)
+#5 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\helpers.php(275): app('config')
+#6 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\facade\\ignition\\src\\IgnitionServiceProvider.php(110): config('flare.reporting...')
+#7 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(627): Facade\\Ignition\\IgnitionServiceProvider->register()
+#8 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register(Object(Facade\\Ignition\\IgnitionServiceProvider))
+#9 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(604): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#10 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#11 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(230): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#12 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(151): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#13 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(135): Illuminate\\Foundation\\Http\\Kernel->bootstrap()
+#14 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(109): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#15 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#16 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\server.php(21): require_once('E:\\\\Pojects\\\\Live...')
+#17 {main}
+
+[previous exception] [object] (ReflectionException(code: -1): Class config does not exist at E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php:809)
+[stacktrace]
+#0 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(809): ReflectionClass->__construct('config')
+#1 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(691): Illuminate\\Container\\Container->build('config')
+#2 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(796): Illuminate\\Container\\Container->resolve('config', Array, true)
+#3 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(637): Illuminate\\Foundation\\Application->resolve('config', Array)
+#4 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(781): Illuminate\\Container\\Container->make('config', Array)
+#5 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\helpers.php(119): Illuminate\\Foundation\\Application->make('config', Array)
+#6 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\helpers.php(275): app('config')
+#7 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\facade\\ignition\\src\\IgnitionServiceProvider.php(110): config('flare.reporting...')
+#8 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(627): Facade\\Ignition\\IgnitionServiceProvider->register()
+#9 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register(Object(Facade\\Ignition\\IgnitionServiceProvider))
+#10 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(604): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#11 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#12 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(230): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#13 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(151): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#14 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(135): Illuminate\\Foundation\\Http\\Kernel->bootstrap()
+#15 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(109): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#16 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#17 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\server.php(21): require_once('E:\\\\Pojects\\\\Live...')
+#18 {main}
+"} 
+[2020-08-14 17:54:47] local.ERROR: Target class [config] does not exist. {"exception":"[object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Target class [config] does not exist. at E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php:811)
+[stacktrace]
+#0 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(691): Illuminate\\Container\\Container->build('config')
+#1 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(796): Illuminate\\Container\\Container->resolve('config', Array, true)
+#2 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(637): Illuminate\\Foundation\\Application->resolve('config', Array)
+#3 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(781): Illuminate\\Container\\Container->make('config', Array)
+#4 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\helpers.php(119): Illuminate\\Foundation\\Application->make('config', Array)
+#5 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\helpers.php(275): app('config')
+#6 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(304): config('app.debug')
+#7 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(210): Illuminate\\Foundation\\Exceptions\\Handler->prepareResponse(Object(Illuminate\\Http\\Request), Object(Illuminate\\Contracts\\Container\\BindingResolutionException))
+#8 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\app\\Exceptions\\Handler.php(53): Illuminate\\Foundation\\Exceptions\\Handler->render(Object(Illuminate\\Http\\Request), Object(Illuminate\\Contracts\\Container\\BindingResolutionException))
+#9 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(415): App\\Exceptions\\Handler->render(Object(Illuminate\\Http\\Request), Object(Illuminate\\Contracts\\Container\\BindingResolutionException))
+#10 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(113): Illuminate\\Foundation\\Http\\Kernel->renderException(Object(Illuminate\\Http\\Request), Object(Illuminate\\Contracts\\Container\\BindingResolutionException))
+#11 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#12 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\server.php(21): require_once('E:\\\\Pojects\\\\Live...')
+#13 {main}
+
+[previous exception] [object] (ReflectionException(code: -1): Class config does not exist at E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php:809)
+[stacktrace]
+#0 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(809): ReflectionClass->__construct('config')
+#1 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(691): Illuminate\\Container\\Container->build('config')
+#2 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(796): Illuminate\\Container\\Container->resolve('config', Array, true)
+#3 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(637): Illuminate\\Foundation\\Application->resolve('config', Array)
+#4 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(781): Illuminate\\Container\\Container->make('config', Array)
+#5 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\helpers.php(119): Illuminate\\Foundation\\Application->make('config', Array)
+#6 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\helpers.php(275): app('config')
+#7 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(304): config('app.debug')
+#8 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(210): Illuminate\\Foundation\\Exceptions\\Handler->prepareResponse(Object(Illuminate\\Http\\Request), Object(Illuminate\\Contracts\\Container\\BindingResolutionException))
+#9 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\app\\Exceptions\\Handler.php(53): Illuminate\\Foundation\\Exceptions\\Handler->render(Object(Illuminate\\Http\\Request), Object(Illuminate\\Contracts\\Container\\BindingResolutionException))
+#10 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(415): App\\Exceptions\\Handler->render(Object(Illuminate\\Http\\Request), Object(Illuminate\\Contracts\\Container\\BindingResolutionException))
+#11 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(113): Illuminate\\Foundation\\Http\\Kernel->renderException(Object(Illuminate\\Http\\Request), Object(Illuminate\\Contracts\\Container\\BindingResolutionException))
+#12 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#13 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\server.php(21): require_once('E:\\\\Pojects\\\\Live...')
+#14 {main}
+"} 
+[2020-08-14 17:54:47] local.ERROR: Uncaught ReflectionException: Class config does not exist in E:\Pojects\Live\app-backadmin-for-ecommerce\vendor\laravel\framework\src\Illuminate\Container\Container.php:809
+Stack trace:
+#0 E:\Pojects\Live\app-backadmin-for-ecommerce\vendor\laravel\framework\src\Illuminate\Container\Container.php(809): ReflectionClass->__construct('config')
+#1 E:\Pojects\Live\app-backadmin-for-ecommerce\vendor\laravel\framework\src\Illuminate\Container\Container.php(691): Illuminate\Container\Container->build('config')
+#2 E:\Pojects\Live\app-backadmin-for-ecommerce\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(796): Illuminate\Container\Container->resolve('config', Array, true)
+#3 E:\Pojects\Live\app-backadmin-for-ecommerce\vendor\laravel\framework\src\Illuminate\Container\Container.php(637): Illuminate\Foundation\Application->resolve('config', Array)
+#4 E:\Pojects\Live\app-backadmin-for-ecommerce\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(781): Illuminate\Container\Container->make( {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught ReflectionException: Class config does not exist in E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php:809
+Stack trace:
+#0 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(809): ReflectionClass->__construct('config')
+#1 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(691): Illuminate\\Container\\Container->build('config')
+#2 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(796): Illuminate\\Container\\Container->resolve('config', Array, true)
+#3 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(637): Illuminate\\Foundation\\Application->resolve('config', Array)
+#4 E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(781): Illuminate\\Container\\Container->make( at E:\\Pojects\\Live\\app-backadmin-for-ecommerce\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php:811)
+[stacktrace]
+#0 {main}
+"} 

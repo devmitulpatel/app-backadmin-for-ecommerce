@@ -8,9 +8,9 @@
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="{{ settings('website')->get('description') }}">
     <meta name="keyword" content="{{ settings('website')->get('keywords') }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ settings('website')->get('favico') }}">
     <link rel="icon"
           type="image/png"
           href="{{ settings('website')->get('favico') }}">
@@ -53,13 +53,15 @@
 
     @include('layouts.static.front_footer')
 
-
+<div id="chatid-001" style="">
+    <chatbox></chatbox>
+</div>
 
 </div>
 
 <!-- All JS is here
 ============================================ -->
-<script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
+<!-- <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
 <script src="assets/js/vendor/jquery-3.5.1.min.js"></script>
 <script src="assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
 <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
@@ -78,12 +80,14 @@
 <script src="assets/js/plugins/easyzoom.js"></script>
 <script src="assets/js/plugins/scrollup.js"></script>
 <script src="assets/js/plugins/ajax-mail.js"></script>
+-->
 
-<!-- Use the minified version files listed below for better performance and remove the files listed above
 <script src="assets/js/vendor/vendor.min.js"></script>
-<script src="assets/js/plugins/plugins.min.js"></script> -->
+<script src="assets/js/plugins/plugins.min.js"></script>
+<script src="{{url(mix('js/app-portable.js'))}}"></script>
 <!-- Main JS -->
 <script src="assets/js/main.js"></script>
+
 
 </body>
 

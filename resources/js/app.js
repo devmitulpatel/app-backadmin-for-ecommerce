@@ -83,9 +83,9 @@ const app = new Vue({
     methods:{
                 autoHideNotification(){
                     var th=this;
-                    setTimeout(function() {
-                        th.notificationDrawer=false;
-                    }, 5000);
+                    // setTimeout(function() {
+                    //     th.notificationDrawer=false;
+                    // }, 5000);
 
                 },
 

@@ -18,9 +18,9 @@
                                 @for($x=1;$x<=5;$x++)
                                     @if($x>$pD['rating'])
                                         <i class="icon-star-empty"></i>
-                                        @else
+                                    @else
                                         <i class="icon-rating"></i>
-                                        @endif
+                                    @endif
                                 @endfor
                             </div>
                             <div class="product-digit">
@@ -39,172 +39,138 @@
                     <div class="product-details-tab">
                         <div class="product-dec-left">
                             <div class="pro-dec-big-img-slider-2 product-big-img-style slick-initialized slick-slider">
-                                <div class="slick-list"><div class="slick-track" style="opacity: 1; width: 9248px; transform: translate3d(-544px, 0px, 0px);"><div class="easyzoom-style slick-slide slick-cloned" data-slick-index="-1" id="" aria-hidden="true" tabindex="-1" style="width: 544px;">
+                                <div class="slick-list">
+                                    <div class="slick-track"
+                                         style="opacity: 1; width: 9248px; transform: translate3d(-544px, 0px, 0px);">
+                                        <div class="easyzoom-style slick-slide slick-cloned" data-slick-index="-1" id=""
+                                             aria-hidden="true" tabindex="-1" style="width: 544px;">
                                             <div class="easyzoom easyzoom--overlay">
                                                 <a href="assets/images/product-details/b-large-5.jpg" tabindex="-1">
                                                     <img src="assets/images/product-details/large-5.jpg" alt="">
                                                 </a>
                                             </div>
-                                        </div><div class="easyzoom-style slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" tabindex="0" style="width: 544px;">
-                                            <div class="easyzoom easyzoom--overlay is-ready">
-                                                <a href="assets/images/product-details/b-large-1.jpg" tabindex="0">
-                                                    <img src="assets/images/product-details/large-1.jpg" alt="">
-                                                </a>
+                                        </div>
+
+                                         @foreach($p['pimgs'] as $l)
+
+                                            <div class="easyzoom-style slick-slide slick-current slick-active"
+                                                 data-slick-index="{{$loop->index}}" aria-hidden="false" tabindex="{{$loop->index}}"
+                                                 style="width: 544px;">
+                                                <div class="easyzoom easyzoom--overlay is-ready">
+                                                    <a href="{{$l}}" tabindex="{{$loop->index}}">
+                                                        <img src="{{$l}}" alt="">
+                                                    </a>
+                                                </div>
                                             </div>
-                                        </div><div class="easyzoom-style slick-slide" data-slick-index="1" aria-hidden="true" tabindex="-1" style="width: 544px;">
+
+                                        @endforeach
+
+                                        @foreach($p['pimgs'] as $l)
+
+                                        <div class="easyzoom-style slick-slide" data-slick-index="{{$loop->iteration}}" aria-hidden="true"
+                                             tabindex="-{{$loop->iteration}}" style="width: 544px;">
                                             <div class="easyzoom easyzoom--overlay">
-                                                <a href="assets/images/product-details/b-large-2.jpg" tabindex="-1">
-                                                    <img src="assets/images/product-details/large-2.jpg" alt="">
-                                                </a>
+                                                <a href="{{$l}}" tabindex="-{{$loop->iteration}}">
+                                                    <img src="{{$l}}" alt="">
+                                            </a>
                                             </div>
-                                        </div><div class="easyzoom-style slick-slide" data-slick-index="2" aria-hidden="true" tabindex="-1" style="width: 544px;">
-                                            <div class="easyzoom easyzoom--overlay">
-                                                <a href="assets/images/product-details/b-large-3.jpg" tabindex="-1">
-                                                    <img src="assets/images/product-details/large-3.jpg" alt="">
-                                                </a>
-                                            </div>
-                                        </div><div class="easyzoom-style slick-slide" data-slick-index="3" aria-hidden="true" tabindex="-1" style="width: 544px;">
-                                            <div class="easyzoom easyzoom--overlay">
-                                                <a href="assets/images/product-details/b-large-4.jpg" tabindex="-1">
-                                                    <img src="assets/images/product-details/large-4.jpg" alt="">
-                                                </a>
-                                            </div>
-                                        </div><div class="easyzoom-style slick-slide" data-slick-index="4" aria-hidden="true" tabindex="-1" style="width: 544px;">
-                                            <div class="easyzoom easyzoom--overlay">
-                                                <a href="assets/images/product-details/b-large-5.jpg" tabindex="-1">
-                                                    <img src="assets/images/product-details/large-5.jpg" alt="">
-                                                </a>
-                                            </div>
-                                        </div><div class="easyzoom-style slick-slide" data-slick-index="5" aria-hidden="true" tabindex="-1" style="width: 544px;">
-                                            <div class="easyzoom easyzoom--overlay">
-                                                <a href="assets/images/product-details/b-large-6.jpg" tabindex="-1">
-                                                    <img src="assets/images/product-details/large-6.jpg" alt="">
-                                                </a>
-                                            </div>
-                                        </div><div class="easyzoom-style slick-slide" data-slick-index="6" aria-hidden="true" tabindex="-1" style="width: 544px;">
-                                            <div class="easyzoom easyzoom--overlay">
-                                                <a href="assets/images/product-details/b-large-4.jpg" tabindex="-1">
-                                                    <img src="assets/images/product-details/large-4.jpg" alt="">
-                                                </a>
-                                            </div>
-                                        </div><div class="easyzoom-style slick-slide" data-slick-index="7" aria-hidden="true" tabindex="-1" style="width: 544px;">
-                                            <div class="easyzoom easyzoom--overlay">
-                                                <a href="assets/images/product-details/b-large-5.jpg" tabindex="-1">
-                                                    <img src="assets/images/product-details/large-5.jpg" alt="">
-                                                </a>
-                                            </div>
-                                        </div><div class="easyzoom-style slick-slide slick-cloned" data-slick-index="8" id="" aria-hidden="true" tabindex="-1" style="width: 544px;">
-                                            <div class="easyzoom easyzoom--overlay">
-                                                <a href="assets/images/product-details/b-large-1.jpg" tabindex="-1">
-                                                    <img src="assets/images/product-details/large-1.jpg" alt="">
-                                                </a>
-                                            </div>
-                                        </div><div class="easyzoom-style slick-slide slick-cloned" data-slick-index="9" id="" aria-hidden="true" tabindex="-1" style="width: 544px;">
-                                            <div class="easyzoom easyzoom--overlay">
-                                                <a href="assets/images/product-details/b-large-2.jpg" tabindex="-1">
-                                                    <img src="assets/images/product-details/large-2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                        </div><div class="easyzoom-style slick-slide slick-cloned" data-slick-index="10" id="" aria-hidden="true" tabindex="-1" style="width: 544px;">
-                                            <div class="easyzoom easyzoom--overlay">
-                                                <a href="assets/images/product-details/b-large-3.jpg" tabindex="-1">
-                                                    <img src="assets/images/product-details/large-3.jpg" alt="">
-                                                </a>
-                                            </div>
-                                        </div><div class="easyzoom-style slick-slide slick-cloned" data-slick-index="11" id="" aria-hidden="true" tabindex="-1" style="width: 544px;">
-                                            <div class="easyzoom easyzoom--overlay">
-                                                <a href="assets/images/product-details/b-large-4.jpg" tabindex="-1">
-                                                    <img src="assets/images/product-details/large-4.jpg" alt="">
-                                                </a>
-                                            </div>
-                                        </div><div class="easyzoom-style slick-slide slick-cloned" data-slick-index="12" id="" aria-hidden="true" tabindex="-1" style="width: 544px;">
-                                            <div class="easyzoom easyzoom--overlay">
-                                                <a href="assets/images/product-details/b-large-5.jpg" tabindex="-1">
-                                                    <img src="assets/images/product-details/large-5.jpg" alt="">
-                                                </a>
-                                            </div>
-                                        </div><div class="easyzoom-style slick-slide slick-cloned" data-slick-index="13" id="" aria-hidden="true" tabindex="-1" style="width: 544px;">
-                                            <div class="easyzoom easyzoom--overlay">
-                                                <a href="assets/images/product-details/b-large-6.jpg" tabindex="-1">
-                                                    <img src="assets/images/product-details/large-6.jpg" alt="">
-                                                </a>
-                                            </div>
-                                        </div><div class="easyzoom-style slick-slide slick-cloned" data-slick-index="14" id="" aria-hidden="true" tabindex="-1" style="width: 544px;">
-                                            <div class="easyzoom easyzoom--overlay">
-                                                <a href="assets/images/product-details/b-large-4.jpg" tabindex="-1">
-                                                    <img src="assets/images/product-details/large-4.jpg" alt="">
-                                                </a>
-                                            </div>
-                                        </div><div class="easyzoom-style slick-slide slick-cloned" data-slick-index="15" id="" aria-hidden="true" tabindex="-1" style="width: 544px;">
-                                            <div class="easyzoom easyzoom--overlay">
-                                                <a href="assets/images/product-details/b-large-5.jpg" tabindex="-1">
-                                                    <img src="assets/images/product-details/large-5.jpg" alt="">
-                                                </a>
-                                            </div>
-                                        </div></div></div>
+                                        </div>
+
+                                        @endforeach
 
 
+{{--                                        <div class="easyzoom-style slick-slide" data-slick-index="1" aria-hidden="true"--}}
+{{--                                             tabindex="-1" style="width: 544px;">--}}
+{{--                                            <div class="easyzoom easyzoom--overlay">--}}
+{{--                                                <a href="assets/images/product-details/b-large-2.jpg" tabindex="-1">--}}
+{{--                                                    <img src="assets/images/product-details/large-2.jpg" alt="">--}}
+{{--                                                </a>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
 
-
-
+{{--                                        <div class="easyzoom-style slick-slide slick-cloned" data-slick-index="15" id=""--}}
+{{--                                             aria-hidden="true" tabindex="-1" style="width: 544px;">--}}
+{{--                                            <div class="easyzoom easyzoom--overlay">--}}
+{{--                                                <a href="assets/images/product-details/b-large-5.jpg" tabindex="-1">--}}
+{{--                                                    <img src="assets/images/product-details/large-5.jpg" alt="">--}}
+{{--                                                </a>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+                                    </div>
+                                </div>
 
 
                             </div>
                         </div>
                         <div class="product-dec-right">
-                            <div class="product-dec-slider-2 product-small-img-style slick-initialized slick-slider slick-vertical">
-                                <div class="slick-list draggable" style="height: 679px;"><div class="slick-track" style="opacity: 1; height: 2231px; transform: translate3d(0px, -679px, 0px);"><div class="product-dec-small slick-slide slick-cloned" data-slick-index="-7" id="" aria-hidden="true" tabindex="-1" style="width: 101px;">
-                                            <img src="assets/images/product-details/small-2.jpg" alt="">
-                                        </div><div class="product-dec-small slick-slide slick-cloned" data-slick-index="-6" id="" aria-hidden="true" tabindex="-1" style="width: 101px;">
-                                            <img src="assets/images/product-details/small-3.jpg" alt="">
-                                        </div><div class="product-dec-small slick-slide slick-cloned" data-slick-index="-5" id="" aria-hidden="true" tabindex="-1" style="width: 101px;">
+                            <div
+                                class="product-dec-slider-2 product-small-img-style slick-initialized slick-slider slick-vertical">
+                                <div class="slick-list draggable" style="height: 679px;">
+                                    <div class="slick-track"
+                                         style="opacity: 1; height: 2231px; transform: translate3d(0px, -679px, 0px);">
+
+                                        @foreach($p['pimgs'] as $l)
+
+                                        <div class="product-dec-small slick-slide slick-cloned" data-slick-index="-{{$loop->remaining}}"
+                                             id="" aria-hidden="true" tabindex="-1" style="width: 101px;">
+                                            <img src="{{$l}}" alt="">
+                                        </div>
+
+                                        @endforeach
+
+
+                                        @foreach($p['pimgs'] as $l)
+                                        <div class="product-dec-small active slick-slide slick-current slick-active"
+                                             data-slick-index="{{$loop->index}}" aria-hidden="false" tabindex="{{$loop->index}}"
+                                             style="width: 101px;">
+                                            <img src="{{$l}}" alt="">
+                                        </div>
+                                        @endforeach
+
+
+                                   <div class="product-dec-small slick-slide slick-active" data-slick-index="6"
+                                             aria-hidden="false" tabindex="0" style="width: 101px;">
                                             <img src="assets/images/product-details/small-4.jpg" alt="">
-                                        </div><div class="product-dec-small slick-slide slick-cloned" data-slick-index="-4" id="" aria-hidden="true" tabindex="-1" style="width: 101px;">
+                                        </div>
+                                        <div class="product-dec-small slick-slide" data-slick-index="7"
+                                             aria-hidden="true" tabindex="-1" style="width: 101px;">
                                             <img src="assets/images/product-details/small-5.jpg" alt="">
-                                        </div><div class="product-dec-small slick-slide slick-cloned" data-slick-index="-3" id="" aria-hidden="true" tabindex="-1" style="width: 101px;">
-                                            <img src="assets/images/product-details/small-6.jpg" alt="">
-                                        </div><div class="product-dec-small slick-slide slick-cloned" data-slick-index="-2" id="" aria-hidden="true" tabindex="-1" style="width: 101px;">
-                                            <img src="assets/images/product-details/small-4.jpg" alt="">
-                                        </div><div class="product-dec-small slick-slide slick-cloned" data-slick-index="-1" id="" aria-hidden="true" tabindex="-1" style="width: 101px;">
-                                            <img src="assets/images/product-details/small-5.jpg" alt="">
-                                        </div><div class="product-dec-small active slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" tabindex="0" style="width: 101px;">
+                                        </div>
+                                        <div class="product-dec-small active slick-slide slick-cloned"
+                                             data-slick-index="8" id="" aria-hidden="true" tabindex="-1"
+                                             style="width: 101px;">
                                             <img src="assets/images/product-details/small-1.jpg" alt="">
-                                        </div><div class="product-dec-small slick-slide slick-active" data-slick-index="1" aria-hidden="false" tabindex="0" style="width: 101px;">
+                                        </div>
+                                        <div class="product-dec-small slick-slide slick-cloned" data-slick-index="9"
+                                             id="" aria-hidden="true" tabindex="-1" style="width: 101px;">
                                             <img src="assets/images/product-details/small-2.jpg" alt="">
-                                        </div><div class="product-dec-small slick-slide slick-active" data-slick-index="2" aria-hidden="false" tabindex="0" style="width: 101px;">
+                                        </div>
+                                        <div class="product-dec-small slick-slide slick-cloned" data-slick-index="10"
+                                             id="" aria-hidden="true" tabindex="-1" style="width: 101px;">
                                             <img src="assets/images/product-details/small-3.jpg" alt="">
-                                        </div><div class="product-dec-small slick-slide slick-active" data-slick-index="3" aria-hidden="false" tabindex="0" style="width: 101px;">
+                                        </div>
+                                        <div class="product-dec-small slick-slide slick-cloned" data-slick-index="11"
+                                             id="" aria-hidden="true" tabindex="-1" style="width: 101px;">
                                             <img src="assets/images/product-details/small-4.jpg" alt="">
-                                        </div><div class="product-dec-small slick-slide slick-active" data-slick-index="4" aria-hidden="false" tabindex="0" style="width: 101px;">
+                                        </div>
+                                        <div class="product-dec-small slick-slide slick-cloned" data-slick-index="12"
+                                             id="" aria-hidden="true" tabindex="-1" style="width: 101px;">
                                             <img src="assets/images/product-details/small-5.jpg" alt="">
-                                        </div><div class="product-dec-small slick-slide slick-active" data-slick-index="5" aria-hidden="false" tabindex="0" style="width: 101px;">
+                                        </div>
+                                        <div class="product-dec-small slick-slide slick-cloned" data-slick-index="13"
+                                             id="" aria-hidden="true" tabindex="-1" style="width: 101px;">
                                             <img src="assets/images/product-details/small-6.jpg" alt="">
-                                        </div><div class="product-dec-small slick-slide slick-active" data-slick-index="6" aria-hidden="false" tabindex="0" style="width: 101px;">
+                                        </div>
+                                        <div class="product-dec-small slick-slide slick-cloned" data-slick-index="14"
+                                             id="" aria-hidden="true" tabindex="-1" style="width: 101px;">
                                             <img src="assets/images/product-details/small-4.jpg" alt="">
-                                        </div><div class="product-dec-small slick-slide" data-slick-index="7" aria-hidden="true" tabindex="-1" style="width: 101px;">
+                                        </div>
+                                        <div class="product-dec-small slick-slide slick-cloned" data-slick-index="15"
+                                             id="" aria-hidden="true" tabindex="-1" style="width: 101px;">
                                             <img src="assets/images/product-details/small-5.jpg" alt="">
-                                        </div><div class="product-dec-small active slick-slide slick-cloned" data-slick-index="8" id="" aria-hidden="true" tabindex="-1" style="width: 101px;">
-                                            <img src="assets/images/product-details/small-1.jpg" alt="">
-                                        </div><div class="product-dec-small slick-slide slick-cloned" data-slick-index="9" id="" aria-hidden="true" tabindex="-1" style="width: 101px;">
-                                            <img src="assets/images/product-details/small-2.jpg" alt="">
-                                        </div><div class="product-dec-small slick-slide slick-cloned" data-slick-index="10" id="" aria-hidden="true" tabindex="-1" style="width: 101px;">
-                                            <img src="assets/images/product-details/small-3.jpg" alt="">
-                                        </div><div class="product-dec-small slick-slide slick-cloned" data-slick-index="11" id="" aria-hidden="true" tabindex="-1" style="width: 101px;">
-                                            <img src="assets/images/product-details/small-4.jpg" alt="">
-                                        </div><div class="product-dec-small slick-slide slick-cloned" data-slick-index="12" id="" aria-hidden="true" tabindex="-1" style="width: 101px;">
-                                            <img src="assets/images/product-details/small-5.jpg" alt="">
-                                        </div><div class="product-dec-small slick-slide slick-cloned" data-slick-index="13" id="" aria-hidden="true" tabindex="-1" style="width: 101px;">
-                                            <img src="assets/images/product-details/small-6.jpg" alt="">
-                                        </div><div class="product-dec-small slick-slide slick-cloned" data-slick-index="14" id="" aria-hidden="true" tabindex="-1" style="width: 101px;">
-                                            <img src="assets/images/product-details/small-4.jpg" alt="">
-                                        </div><div class="product-dec-small slick-slide slick-cloned" data-slick-index="15" id="" aria-hidden="true" tabindex="-1" style="width: 101px;">
-                                            <img src="assets/images/product-details/small-5.jpg" alt="">
-                                        </div></div></div>
-
-
-
-
-
+                                        </div>
+                                    </div>
+                                </div>
 
 
                             </div>
@@ -245,14 +211,17 @@
                         </div>
                         <div class="pro-details-quality">
                             <span>Quantity:</span>
-                            <div class="cart-plus-minus"><div class="dec qtybutton">-</div>
+                            <div class="cart-plus-minus">
+                                <div class="dec qtybutton">-</div>
                                 <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1">
-                                <div class="inc qtybutton">+</div></div>
+                                <div class="inc qtybutton">+</div>
+                            </div>
                         </div>
                         <div class="product-details-meta">
                             <ul>
                                 <li><span>Model:</span> <a href="#">Odsy-1000</a></li>
-                                <li><span>Ship To</span> <a href="#">2834 Laurel Lane</a>, <a href="#">Mentone</a> , <a href="#">Texas</a></li>
+                                <li><span>Ship To</span> <a href="#">2834 Laurel Lane</a>, <a href="#">Mentone</a> , <a
+                                        href="#">Texas</a></li>
                             </ul>
                         </div>
                         <div class="pro-details-action-wrap">
@@ -264,10 +233,13 @@
                                 <a title="Add to Wishlist" href="#"><i class="icon-heart"></i></a>
                                 <a class="social" title="Social" href="#"><i class="icon-share"></i></a>
                                 <div class="product-dec-social">
-                                    <a class="facebook" title="Facebook" href="#"><i class="icon-social-facebook-square"></i></a>
+                                    <a class="facebook" title="Facebook" href="#"><i
+                                            class="icon-social-facebook-square"></i></a>
                                     <a class="twitter" title="Twitter" href="#"><i class="icon-social-twitter"></i></a>
-                                    <a class="instagram" title="Instagram" href="#"><i class="icon-social-instagram"></i></a>
-                                    <a class="pinterest" title="Pinterest" href="#"><i class="icon-social-pinterest"></i></a>
+                                    <a class="instagram" title="Instagram" href="#"><i
+                                            class="icon-social-instagram"></i></a>
+                                    <a class="pinterest" title="Pinterest" href="#"><i
+                                            class="icon-social-pinterest"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -290,7 +262,7 @@
                     <div class="tab-content dec-review-bottom">
                         <div id="des-details1" class="tab-pane active">
                             <div class="description-wrap">
-                               {!! $p['description'] !!}
+                                {!! $p['description'] !!}
                             </div>
                         </div>
                         <div id="des-details2" class="tab-pane">
@@ -318,7 +290,7 @@
                                         <td>60’’ x 40’’</td>
                                     </tr>
                                     <tr>
-                                        <td class="width1">Brand </td>
+                                        <td class="width1">Brand</td>
                                         <td>Individual Collections</td>
                                     </tr>
                                     <tr>
@@ -369,13 +341,16 @@
                                                 <i class="yellow icon-rating"></i>
                                             </div>
                                         </div>
-                                        <p>Donec accumsan auctor iaculis. Sed suscipit arcu ligula, at egestas magna molestie a. Proin ac ex maximus, ultrices justo eget, sodales orci. Aliquam egestas libero ac turpis pharetra, in vehicula lacus scelerisque</p>
+                                        <p>Donec accumsan auctor iaculis. Sed suscipit arcu ligula, at egestas magna
+                                            molestie a. Proin ac ex maximus, ultrices justo eget, sodales orci. Aliquam
+                                            egestas libero ac turpis pharetra, in vehicula lacus scelerisque</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="ratting-form-wrapper">
                                 <span>Add a Review</span>
-                                <p>Your email address will not be published. Required fields are marked <span>*</span></p>
+                                <p>Your email address will not be published. Required fields are marked <span>*</span>
+                                </p>
                                 <div class="ratting-form">
                                     <form action="#">
                                         <div class="row">
@@ -448,7 +423,11 @@
                 <h2>You May Like Also</h2>
             </div>
             <div class="product-slider-active-4 slick-initialized slick-slider">
-                <div class="slick-list draggable"><div class="slick-track" style="opacity: 1; width: 4200px; transform: translate3d(-1200px, 0px, 0px);"><div class="product-wrap-plr-1 slick-slide slick-cloned" data-slick-index="-4" id="" aria-hidden="true" tabindex="-1" style="width: 300px;">
+                <div class="slick-list draggable">
+                    <div class="slick-track"
+                         style="opacity: 1; width: 4200px; transform: translate3d(-1200px, 0px, 0px);">
+                        <div class="product-wrap-plr-1 slick-slide slick-cloned" data-slick-index="-4" id=""
+                             aria-hidden="true" tabindex="-1" style="width: 300px;">
                             <div class="product-wrap">
                                 <div class="product-img product-img-zoom mb-25">
                                     <a href="product-details.html" tabindex="-1">
@@ -474,13 +453,18 @@
                                         <div class="product-action-cart">
                                             <button title="Add to Cart" tabindex="-1">Add to cart</button>
                                         </div>
-                                        <button data-toggle="modal" data-target="#exampleModal" tabindex="-1"><i class="icon-zoom"></i></button>
-                                        <button title="Add to Compare" tabindex="-1"><i class="icon-compare"></i></button>
-                                        <button title="Add to Wishlist" tabindex="-1"><i class="icon-heart-empty"></i></button>
+                                        <button data-toggle="modal" data-target="#exampleModal" tabindex="-1"><i
+                                                class="icon-zoom"></i></button>
+                                        <button title="Add to Compare" tabindex="-1"><i class="icon-compare"></i>
+                                        </button>
+                                        <button title="Add to Wishlist" tabindex="-1"><i class="icon-heart-empty"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        </div><div class="product-wrap-plr-1 slick-slide slick-cloned" data-slick-index="-3" id="" aria-hidden="true" tabindex="-1" style="width: 300px;">
+                        </div>
+                        <div class="product-wrap-plr-1 slick-slide slick-cloned" data-slick-index="-3" id=""
+                             aria-hidden="true" tabindex="-1" style="width: 300px;">
                             <div class="product-wrap">
                                 <div class="product-img product-img-zoom mb-25">
                                     <a href="product-details.html" tabindex="-1">
@@ -506,13 +490,18 @@
                                         <div class="product-action-cart">
                                             <button title="Add to Cart" tabindex="-1">Add to cart</button>
                                         </div>
-                                        <button data-toggle="modal" data-target="#exampleModal" tabindex="-1"><i class="icon-zoom"></i></button>
-                                        <button title="Add to Compare" tabindex="-1"><i class="icon-compare"></i></button>
-                                        <button title="Add to Wishlist" tabindex="-1"><i class="icon-heart-empty"></i></button>
+                                        <button data-toggle="modal" data-target="#exampleModal" tabindex="-1"><i
+                                                class="icon-zoom"></i></button>
+                                        <button title="Add to Compare" tabindex="-1"><i class="icon-compare"></i>
+                                        </button>
+                                        <button title="Add to Wishlist" tabindex="-1"><i class="icon-heart-empty"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        </div><div class="product-wrap-plr-1 slick-slide slick-cloned" data-slick-index="-2" id="" aria-hidden="true" tabindex="-1" style="width: 300px;">
+                        </div>
+                        <div class="product-wrap-plr-1 slick-slide slick-cloned" data-slick-index="-2" id=""
+                             aria-hidden="true" tabindex="-1" style="width: 300px;">
                             <div class="product-wrap">
                                 <div class="product-img product-img-zoom mb-25">
                                     <a href="product-details.html" tabindex="-1">
@@ -538,13 +527,18 @@
                                         <div class="product-action-cart">
                                             <button title="Add to Cart" tabindex="-1">Add to cart</button>
                                         </div>
-                                        <button data-toggle="modal" data-target="#exampleModal" tabindex="-1"><i class="icon-zoom"></i></button>
-                                        <button title="Add to Compare" tabindex="-1"><i class="icon-compare"></i></button>
-                                        <button title="Add to Wishlist" tabindex="-1"><i class="icon-heart-empty"></i></button>
+                                        <button data-toggle="modal" data-target="#exampleModal" tabindex="-1"><i
+                                                class="icon-zoom"></i></button>
+                                        <button title="Add to Compare" tabindex="-1"><i class="icon-compare"></i>
+                                        </button>
+                                        <button title="Add to Wishlist" tabindex="-1"><i class="icon-heart-empty"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        </div><div class="product-wrap-plr-1 slick-slide slick-cloned" data-slick-index="-1" id="" aria-hidden="true" tabindex="-1" style="width: 300px;">
+                        </div>
+                        <div class="product-wrap-plr-1 slick-slide slick-cloned" data-slick-index="-1" id=""
+                             aria-hidden="true" tabindex="-1" style="width: 300px;">
                             <div class="product-wrap">
                                 <div class="product-img product-img-zoom mb-25">
                                     <a href="product-details.html" tabindex="-1">
@@ -570,13 +564,18 @@
                                         <div class="product-action-cart">
                                             <button title="Add to Cart" tabindex="-1">Add to cart</button>
                                         </div>
-                                        <button data-toggle="modal" data-target="#exampleModal" tabindex="-1"><i class="icon-zoom"></i></button>
-                                        <button title="Add to Compare" tabindex="-1"><i class="icon-compare"></i></button>
-                                        <button title="Add to Wishlist" tabindex="-1"><i class="icon-heart-empty"></i></button>
+                                        <button data-toggle="modal" data-target="#exampleModal" tabindex="-1"><i
+                                                class="icon-zoom"></i></button>
+                                        <button title="Add to Compare" tabindex="-1"><i class="icon-compare"></i>
+                                        </button>
+                                        <button title="Add to Wishlist" tabindex="-1"><i class="icon-heart-empty"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        </div><div class="product-wrap-plr-1 slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" tabindex="0" style="width: 300px;">
+                        </div>
+                        <div class="product-wrap-plr-1 slick-slide slick-current slick-active" data-slick-index="0"
+                             aria-hidden="false" tabindex="0" style="width: 300px;">
                             <div class="product-wrap">
                                 <div class="product-img product-img-zoom mb-25">
                                     <a href="product-details.html" tabindex="0">
@@ -602,13 +601,18 @@
                                         <div class="product-action-cart">
                                             <button title="Add to Cart" tabindex="0">Add to cart</button>
                                         </div>
-                                        <button data-toggle="modal" data-target="#exampleModal" tabindex="0"><i class="icon-zoom"></i></button>
-                                        <button title="Add to Compare" tabindex="0"><i class="icon-compare"></i></button>
-                                        <button title="Add to Wishlist" tabindex="0"><i class="icon-heart-empty"></i></button>
+                                        <button data-toggle="modal" data-target="#exampleModal" tabindex="0"><i
+                                                class="icon-zoom"></i></button>
+                                        <button title="Add to Compare" tabindex="0"><i class="icon-compare"></i>
+                                        </button>
+                                        <button title="Add to Wishlist" tabindex="0"><i class="icon-heart-empty"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        </div><div class="product-wrap-plr-1 slick-slide slick-active" data-slick-index="1" aria-hidden="false" tabindex="0" style="width: 300px;">
+                        </div>
+                        <div class="product-wrap-plr-1 slick-slide slick-active" data-slick-index="1"
+                             aria-hidden="false" tabindex="0" style="width: 300px;">
                             <div class="product-wrap">
                                 <div class="product-img product-img-zoom mb-25">
                                     <a href="product-details.html" tabindex="0">
@@ -634,13 +638,18 @@
                                         <div class="product-action-cart">
                                             <button title="Add to Cart" tabindex="0">Add to cart</button>
                                         </div>
-                                        <button data-toggle="modal" data-target="#exampleModal" tabindex="0"><i class="icon-zoom"></i></button>
-                                        <button title="Add to Compare" tabindex="0"><i class="icon-compare"></i></button>
-                                        <button title="Add to Wishlist" tabindex="0"><i class="icon-heart-empty"></i></button>
+                                        <button data-toggle="modal" data-target="#exampleModal" tabindex="0"><i
+                                                class="icon-zoom"></i></button>
+                                        <button title="Add to Compare" tabindex="0"><i class="icon-compare"></i>
+                                        </button>
+                                        <button title="Add to Wishlist" tabindex="0"><i class="icon-heart-empty"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        </div><div class="product-wrap-plr-1 slick-slide slick-active" data-slick-index="2" aria-hidden="false" tabindex="0" style="width: 300px;">
+                        </div>
+                        <div class="product-wrap-plr-1 slick-slide slick-active" data-slick-index="2"
+                             aria-hidden="false" tabindex="0" style="width: 300px;">
                             <div class="product-wrap">
                                 <div class="product-img product-img-zoom mb-25">
                                     <a href="product-details.html" tabindex="0">
@@ -666,13 +675,18 @@
                                         <div class="product-action-cart">
                                             <button title="Add to Cart" tabindex="0">Add to cart</button>
                                         </div>
-                                        <button data-toggle="modal" data-target="#exampleModal" tabindex="0"><i class="icon-zoom"></i></button>
-                                        <button title="Add to Compare" tabindex="0"><i class="icon-compare"></i></button>
-                                        <button title="Add to Wishlist" tabindex="0"><i class="icon-heart-empty"></i></button>
+                                        <button data-toggle="modal" data-target="#exampleModal" tabindex="0"><i
+                                                class="icon-zoom"></i></button>
+                                        <button title="Add to Compare" tabindex="0"><i class="icon-compare"></i>
+                                        </button>
+                                        <button title="Add to Wishlist" tabindex="0"><i class="icon-heart-empty"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        </div><div class="product-wrap-plr-1 slick-slide slick-active" data-slick-index="3" aria-hidden="false" tabindex="0" style="width: 300px;">
+                        </div>
+                        <div class="product-wrap-plr-1 slick-slide slick-active" data-slick-index="3"
+                             aria-hidden="false" tabindex="0" style="width: 300px;">
                             <div class="product-wrap">
                                 <div class="product-img product-img-zoom mb-25">
                                     <a href="product-details.html" tabindex="0">
@@ -698,13 +712,18 @@
                                         <div class="product-action-cart">
                                             <button title="Add to Cart" tabindex="0">Add to cart</button>
                                         </div>
-                                        <button data-toggle="modal" data-target="#exampleModal" tabindex="0"><i class="icon-zoom"></i></button>
-                                        <button title="Add to Compare" tabindex="0"><i class="icon-compare"></i></button>
-                                        <button title="Add to Wishlist" tabindex="0"><i class="icon-heart-empty"></i></button>
+                                        <button data-toggle="modal" data-target="#exampleModal" tabindex="0"><i
+                                                class="icon-zoom"></i></button>
+                                        <button title="Add to Compare" tabindex="0"><i class="icon-compare"></i>
+                                        </button>
+                                        <button title="Add to Wishlist" tabindex="0"><i class="icon-heart-empty"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        </div><div class="product-wrap-plr-1 slick-slide" data-slick-index="4" aria-hidden="true" tabindex="-1" style="width: 300px;">
+                        </div>
+                        <div class="product-wrap-plr-1 slick-slide" data-slick-index="4" aria-hidden="true"
+                             tabindex="-1" style="width: 300px;">
                             <div class="product-wrap">
                                 <div class="product-img product-img-zoom mb-25">
                                     <a href="product-details.html" tabindex="-1">
@@ -730,13 +749,18 @@
                                         <div class="product-action-cart">
                                             <button title="Add to Cart" tabindex="-1">Add to cart</button>
                                         </div>
-                                        <button data-toggle="modal" data-target="#exampleModal" tabindex="-1"><i class="icon-zoom"></i></button>
-                                        <button title="Add to Compare" tabindex="-1"><i class="icon-compare"></i></button>
-                                        <button title="Add to Wishlist" tabindex="-1"><i class="icon-heart-empty"></i></button>
+                                        <button data-toggle="modal" data-target="#exampleModal" tabindex="-1"><i
+                                                class="icon-zoom"></i></button>
+                                        <button title="Add to Compare" tabindex="-1"><i class="icon-compare"></i>
+                                        </button>
+                                        <button title="Add to Wishlist" tabindex="-1"><i class="icon-heart-empty"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        </div><div class="product-wrap-plr-1 slick-slide slick-cloned" data-slick-index="5" id="" aria-hidden="true" tabindex="-1" style="width: 300px;">
+                        </div>
+                        <div class="product-wrap-plr-1 slick-slide slick-cloned" data-slick-index="5" id=""
+                             aria-hidden="true" tabindex="-1" style="width: 300px;">
                             <div class="product-wrap">
                                 <div class="product-img product-img-zoom mb-25">
                                     <a href="product-details.html" tabindex="-1">
@@ -762,13 +786,18 @@
                                         <div class="product-action-cart">
                                             <button title="Add to Cart" tabindex="-1">Add to cart</button>
                                         </div>
-                                        <button data-toggle="modal" data-target="#exampleModal" tabindex="-1"><i class="icon-zoom"></i></button>
-                                        <button title="Add to Compare" tabindex="-1"><i class="icon-compare"></i></button>
-                                        <button title="Add to Wishlist" tabindex="-1"><i class="icon-heart-empty"></i></button>
+                                        <button data-toggle="modal" data-target="#exampleModal" tabindex="-1"><i
+                                                class="icon-zoom"></i></button>
+                                        <button title="Add to Compare" tabindex="-1"><i class="icon-compare"></i>
+                                        </button>
+                                        <button title="Add to Wishlist" tabindex="-1"><i class="icon-heart-empty"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        </div><div class="product-wrap-plr-1 slick-slide slick-cloned" data-slick-index="6" id="" aria-hidden="true" tabindex="-1" style="width: 300px;">
+                        </div>
+                        <div class="product-wrap-plr-1 slick-slide slick-cloned" data-slick-index="6" id=""
+                             aria-hidden="true" tabindex="-1" style="width: 300px;">
                             <div class="product-wrap">
                                 <div class="product-img product-img-zoom mb-25">
                                     <a href="product-details.html" tabindex="-1">
@@ -794,13 +823,18 @@
                                         <div class="product-action-cart">
                                             <button title="Add to Cart" tabindex="-1">Add to cart</button>
                                         </div>
-                                        <button data-toggle="modal" data-target="#exampleModal" tabindex="-1"><i class="icon-zoom"></i></button>
-                                        <button title="Add to Compare" tabindex="-1"><i class="icon-compare"></i></button>
-                                        <button title="Add to Wishlist" tabindex="-1"><i class="icon-heart-empty"></i></button>
+                                        <button data-toggle="modal" data-target="#exampleModal" tabindex="-1"><i
+                                                class="icon-zoom"></i></button>
+                                        <button title="Add to Compare" tabindex="-1"><i class="icon-compare"></i>
+                                        </button>
+                                        <button title="Add to Wishlist" tabindex="-1"><i class="icon-heart-empty"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        </div><div class="product-wrap-plr-1 slick-slide slick-cloned" data-slick-index="7" id="" aria-hidden="true" tabindex="-1" style="width: 300px;">
+                        </div>
+                        <div class="product-wrap-plr-1 slick-slide slick-cloned" data-slick-index="7" id=""
+                             aria-hidden="true" tabindex="-1" style="width: 300px;">
                             <div class="product-wrap">
                                 <div class="product-img product-img-zoom mb-25">
                                     <a href="product-details.html" tabindex="-1">
@@ -826,13 +860,18 @@
                                         <div class="product-action-cart">
                                             <button title="Add to Cart" tabindex="-1">Add to cart</button>
                                         </div>
-                                        <button data-toggle="modal" data-target="#exampleModal" tabindex="-1"><i class="icon-zoom"></i></button>
-                                        <button title="Add to Compare" tabindex="-1"><i class="icon-compare"></i></button>
-                                        <button title="Add to Wishlist" tabindex="-1"><i class="icon-heart-empty"></i></button>
+                                        <button data-toggle="modal" data-target="#exampleModal" tabindex="-1"><i
+                                                class="icon-zoom"></i></button>
+                                        <button title="Add to Compare" tabindex="-1"><i class="icon-compare"></i>
+                                        </button>
+                                        <button title="Add to Wishlist" tabindex="-1"><i class="icon-heart-empty"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        </div><div class="product-wrap-plr-1 slick-slide slick-cloned" data-slick-index="8" id="" aria-hidden="true" tabindex="-1" style="width: 300px;">
+                        </div>
+                        <div class="product-wrap-plr-1 slick-slide slick-cloned" data-slick-index="8" id=""
+                             aria-hidden="true" tabindex="-1" style="width: 300px;">
                             <div class="product-wrap">
                                 <div class="product-img product-img-zoom mb-25">
                                     <a href="product-details.html" tabindex="-1">
@@ -858,13 +897,18 @@
                                         <div class="product-action-cart">
                                             <button title="Add to Cart" tabindex="-1">Add to cart</button>
                                         </div>
-                                        <button data-toggle="modal" data-target="#exampleModal" tabindex="-1"><i class="icon-zoom"></i></button>
-                                        <button title="Add to Compare" tabindex="-1"><i class="icon-compare"></i></button>
-                                        <button title="Add to Wishlist" tabindex="-1"><i class="icon-heart-empty"></i></button>
+                                        <button data-toggle="modal" data-target="#exampleModal" tabindex="-1"><i
+                                                class="icon-zoom"></i></button>
+                                        <button title="Add to Compare" tabindex="-1"><i class="icon-compare"></i>
+                                        </button>
+                                        <button title="Add to Wishlist" tabindex="-1"><i class="icon-heart-empty"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        </div><div class="product-wrap-plr-1 slick-slide slick-cloned" data-slick-index="9" id="" aria-hidden="true" tabindex="-1" style="width: 300px;">
+                        </div>
+                        <div class="product-wrap-plr-1 slick-slide slick-cloned" data-slick-index="9" id=""
+                             aria-hidden="true" tabindex="-1" style="width: 300px;">
                             <div class="product-wrap">
                                 <div class="product-img product-img-zoom mb-25">
                                     <a href="product-details.html" tabindex="-1">
@@ -890,18 +934,21 @@
                                         <div class="product-action-cart">
                                             <button title="Add to Cart" tabindex="-1">Add to cart</button>
                                         </div>
-                                        <button data-toggle="modal" data-target="#exampleModal" tabindex="-1"><i class="icon-zoom"></i></button>
-                                        <button title="Add to Compare" tabindex="-1"><i class="icon-compare"></i></button>
-                                        <button title="Add to Wishlist" tabindex="-1"><i class="icon-heart-empty"></i></button>
+                                        <button data-toggle="modal" data-target="#exampleModal" tabindex="-1"><i
+                                                class="icon-zoom"></i></button>
+                                        <button title="Add to Compare" tabindex="-1"><i class="icon-compare"></i>
+                                        </button>
+                                        <button title="Add to Wishlist" tabindex="-1"><i class="icon-heart-empty"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        </div></div></div>
-
-
+                        </div>
+                    </div>
+                </div>
 
 
             </div>
         </div>
     </div>
-    @endsection
+@endsection

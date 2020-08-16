@@ -19,9 +19,6 @@ if(!function_exists ('settings')){
 
                 }else{
 
-
-
-
                     $model=(!\Config::has('settings.general.model'))?getModel(\App\Model\Settings\General::class):\Config::get('settings.general.model');
                     if(!\Config::has('settings.general.model'))
                     {

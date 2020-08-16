@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('version')->nullable();
             $table->longText('pimg')->nullable();
             $table->longText('pimgs')->nullable();
-            $table->longText('description')->default('')->nullable();
+            $table->longText('description')->nullable();
             $table->integer('cat')->default(0);
             $table->integer('scat')->default(0);
             $table->integer('unit')->default(0);
@@ -30,8 +30,8 @@ class CreateProductsTable extends Migration
             $table->integer('ostock')->default(0)->nullable();
             $table->boolean('feature')->default(0);
             $table->boolean('new')->default(0);
-            $table->json('extraFields')->nullable();
-            $table->boolean('status')->default(1);
+            $table->longText('extraFields')->nullable();
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }
