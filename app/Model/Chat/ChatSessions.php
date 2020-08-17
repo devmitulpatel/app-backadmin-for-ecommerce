@@ -62,7 +62,7 @@ class ChatSessions extends Model
             'from'=>'0',
             'fromName'=>'user',
             'created_at'=>now(),
-            'created_at'=>now(),
+            'updated_at'=>now(),
         ]);
      }
 
@@ -77,7 +77,7 @@ class ChatSessions extends Model
              'from'=>$type,
              'fromName'=>($type)?'bot':'user',
              'created_at'=>now(),
-             'created_at'=>now(),
+             'updated_at'=>now(),
          ]);
 
 

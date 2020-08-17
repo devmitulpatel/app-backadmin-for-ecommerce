@@ -72,19 +72,17 @@
                 errorStr:null,
                 chatInput:'',
                 chatArray:[
-                    {
-                        type:'text',
-                        data:'Hello I am Bot',
-                        from:1,
-                        fromName:'Mitul'
-                    },
-                    {
-                        type:'text',
-                        data:'I am mitul',
-                        from:0,
-                        fromName:'User'
-                    },
+
                 ],
+                currentUserRaw:{
+
+                },
+                notificationsRaw:null,
+                isConnectedRaw:null,
+                sessionId:null,
+                echo:null,
+                isBinded:false
+
             }
         },
         methods:{
@@ -96,7 +94,13 @@
                 if(this.chatboxOpen)this.chatboxOpen=false;
             },
             addMsgFromServer(data){
-              this.chatArray.push(data)
+                if(data.hasOwnProperty('sessionId'))this.sessionId=data.sessionId;
+               if(!this.isConnected) {
+                 //  this.connect(data.sessionId);
+
+               }
+              if(!this.isBinded){ this.bindChannels(data.sessionId);this.isBinded=true}
+             // this.chatArray.push(data)
             },
             addUserData(){
 
@@ -137,11 +141,56 @@ if(str!="" && str!=null && str!=" " ){
                 var url=domain+'api/v1/front/chat/send/msg/toServer';
                 var th=this;
                 axios.post(url,{msg:str,clientData:th.clientData,clientIp:th.clientIp}).then(res=>th.addMsgFromServer(res.data.ResponseData)).catch(e=>console.log(e));
-            }
+            },
+            connect(){
+
+            var th=this;
+                if(this.sessionId!=null || true){this.echo = new window.EchoRaw({
+                    broadcaster: 'pusher',
+                    key: process.env.MIX_PUSHER_APP_KEY,
+                    cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+                    wsHost:'127.0.0.1',
+                    wssHost:'127.0.0.1',
+                    httpHost:'127.0.0.1',
+                    httpsHost:'127.0.0.1',
+                    wsPort:'6001',
+                    wssPort:'6001',
+                    disableStats: true,
+                    enabledTransports: ['ws','wss'],
+                    disabledTransports: ['sockjs', 'xhr_polling', 'xhr_streaming'],
+                    forceTLS: false,
+
+                });}
+
+
+             //  this.bindChannels(id);
+
+            },
+            bindChannels(id){
+                var th=this;
+                var channelName="randomchat_"+id;
+                this.echo.channel(channelName)
+                   .listen(".incomingmsg", function(e) {
+
+                       th.chatArray.push(e.msg)
+
+                    })
+
+            },
+
+            disconnect(){
+                if(!this.echo) return
+                this.echo.disconnect()
+            },
 
         },
         mounted() {
+
+
             this.getIp();
+            this.connect();
+         //
+           // this.bindChannels();
         },
         watch:{
             chatArray(){
@@ -150,7 +199,20 @@ if(str!="" && str!=null && str!=" " ){
 
                 setTimeout(() => {    var div =th.$el.querySelector(".main-chat-box-div-chat-div-section");
                     div.scrollTop=div.scrollHeight; }, 5);
+            },
+            sessionId(newVal){
+               // console.log(newVal);
+
             }
+        },
+        computed:{
+
+            isConnected: {
+                cache: false,
+                get(){
+                    return (this.echo &&   this.echo.connector.pusher.connection.connection !== null)
+                }
+            },
         }
     }
 </script>

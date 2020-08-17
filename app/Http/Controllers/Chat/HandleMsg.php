@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Chat;
 
+use App\Events\Chat\SendMsg;
 use App\Helper\Chat;
 use App\Http\Controllers\Controller;
 use App\Model\Chat\ChatSessions;

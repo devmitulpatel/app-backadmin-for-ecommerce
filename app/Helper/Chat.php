@@ -4,6 +4,7 @@
 namespace App\Helper;
 
 
+use App\Events\Chat\SendMsg;
 use App\Model\Chat\ChatSessions;
 use App\Model\Product\ProductCategory;
 
@@ -25,19 +26,23 @@ public $dynData=[];
         $text=implode(' ',array_merge($text));
         ChatSessions::addMsgToChatSession($text,1);
 
+        $out=$c->makeOut($text,'From Websocket');
+        broadcast(new SendMsg(1,$out));
+
         return $c->makeOut($text);
 
 
 
     }
 
-    private function makeOut($text){
+    private function makeOut($text,$extra=""){
         return [
             "type"=>'text',
-            "data"=>$text,
+            "data"=>$text.$extra,
             "from"=>1,
             "fromName"=>'Bot',
-            'dynamicData'=>$this->dynData
+            'dynamicData'=>$this->dynData,
+            'sessionId'=>session()->get('current_chat_session')
         ];
     }
 
