@@ -84,7 +84,7 @@
 
 <script src="assets/js/vendor/vendor.min.js"></script>
 <script src="assets/js/plugins/plugins.min.js"></script>
-<script src="{{url(mix('js/app-portable.js'))}}"></script>
+<script src="{{url(asset('js/app-portable.js'))}}"></script>
 <!-- Main JS -->
 <script src="assets/js/main.js"></script>
 

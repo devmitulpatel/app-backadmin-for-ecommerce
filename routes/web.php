@@ -194,3 +194,36 @@ Route::middleware('auth')->group(function () {
 
 });
 
+
+
+Route::prefix('api')->group(function () {
+
+
+    Route::prefix('v1')->group(function () {
+
+
+        Route::prefix('front')->group(function () {
+
+            Route::prefix('chat')->group(function () {
+
+                Route::match(['post'],'send/msg/toServer',"Chat\\HandleMsg@hasMsg")->name('api.v1.front.chat.hasMsg');
+
+            });
+        });
+
+
+
+
+
+
+
+
+    });
+
+
+
+
+
+
+});
+

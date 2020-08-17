@@ -14,7 +14,7 @@
             'deactive':!chatboxOpen
         }" >
             <span class="main-chat-box-div-chat-div-header">Company Name</span>
-            <span class="main-chat-box-div-chat-div-close">x</span>
+            <span class="main-chat-box-div-chat-div-close" v-on:click="closeChatbox()">x</span>
 
 
             <div class="main-chat-box-div-chat-div-section">
@@ -25,7 +25,17 @@
                           'main-chat-box-div-chat-div-admin':  row.from
                         }">
                             <div class="main-chat-box-div-chat-div-section-user" >{{row.fromName}}</div>
-                            <div>{{row.data}}</div>
+                            <div>{{row.data}} </div>
+                            <div v-if="row.hasOwnProperty('dynamicData')">
+
+                                <ul>
+                                    <li v-for="d in row.dynamicData">
+                                        <button>{{d}} </button>
+
+                                        </li>
+                                </ul>
+
+                            </div>
 
                         </div>
 
@@ -81,6 +91,13 @@
             toggleChatBox(){
                 this.chatboxOpen=(this.chatboxOpen)?false:true;
             },
+
+            closeChatbox(){
+                if(this.chatboxOpen)this.chatboxOpen=false;
+            },
+            addMsgFromServer(data){
+              this.chatArray.push(data)
+            },
             addUserData(){
 
     var str=this.chatInput.trim();
@@ -93,7 +110,7 @@ if(str!="" && str!=null && str!=" " ){
             fromName:'User'
         }
     );
-
+    this.sendMsg(str);
     this.chatInput="";
 
 }
@@ -114,10 +131,14 @@ if(str!="" && str!=null && str!=" " ){
                                 th.clientData = res;
                             });
                     });
+ },
+            sendMsg(str){
+                var domain="http://127.0.0.1:8000/";
+                var url=domain+'api/v1/front/chat/send/msg/toServer';
+                var th=this;
+                axios.post(url,{msg:str,clientData:th.clientData,clientIp:th.clientIp}).then(res=>th.addMsgFromServer(res.data.ResponseData)).catch(e=>console.log(e));
+            }
 
-
-
-            },
         },
         mounted() {
             this.getIp();
@@ -175,25 +196,30 @@ if(str!="" && str!=null && str!=" " ){
     }
     .main-chat-box-div-chat-div-input{
         position: relative;
-        top:1px;
+        top:0px;
         left: 4px;
-        margin: 2px;
-        width: 70%;
+
+        display: flex;
+        flex: 11;
 
         background: #eceff8;
-        border: 2px solid #eceff8;
-        height: 34px;
+        border: 1px solid #eceff8;
+        height: 30px;
         -webkit-box-shadow: none;
         box-shadow: none;
-        padding-left: 10px;
+        padding:0px;
+
         font-size: 14px;
         color: #737373;
     }
     .main-chat-box-div-chat-div-btn{
         position: relative;
         right: 0;
-        margin: 8px;
-
+        margin: 0px;
+        display: flex;
+        flex: 1;
+        margin-left: 5px;
+        text0akign:center;
     }
 
     .main-chat-box-div-chat-div-footer{
@@ -202,8 +228,10 @@ if(str!="" && str!=null && str!=" " ){
         border-bottom-left-radius: 5px;
         left: 0;
         bottom: 0;
+        padding: 5px;
         background: #addaf0;
-
+        width:100%;
+        display: flex;
     }
     .main-chat-box-div-chat-div-close{
         cursor: pointer;
