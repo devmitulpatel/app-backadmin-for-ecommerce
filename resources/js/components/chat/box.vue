@@ -310,6 +310,12 @@ if(str!="" && str!=null && str!=" " ){
         text-align: center;
         height: 37px;
         padding: 5px;
+        color:white;
+    }   .main-chat-box-div-chat-div-close:hover{
+                transition: all 100ms ease-in;
+        background-color:darkred;
+                box-shadow: 1px 1px 2px rgba(0,0,0,0.75);
+        font-weight: 600;
     }
     .main-chat-box-div-chat-div-header{
         margin-left: 5px;
