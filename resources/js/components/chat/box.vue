@@ -13,7 +13,9 @@
             'active':chatboxOpen,
             'deactive':!chatboxOpen
         }" >
+            <span class="main-chat-box-div-chat-div-header">Company Name</span>
             <span class="main-chat-box-div-chat-div-close">x</span>
+
 
             <div class="main-chat-box-div-chat-div-section">
                 <ul>
@@ -32,7 +34,7 @@
                 </ul>
 
             </div>
-<div class="main-chat-box-div-chat-div-footer" v-on:keyup.enter="addUserData()">
+<div class="main-chat-box-div-chat-div-footer" v-on:keyup.enter="addUserData()" >
     <input v-model="chatInput" class="main-chat-box-div-chat-div-input"><button v-on:click="addUserData()" class="main-chat-box-div-chat-div-btn" type="submit">send</button>
 
 </div>
@@ -81,16 +83,22 @@
             },
             addUserData(){
 
-                this.chatArray.push(
-                {
-                    type:'text',
-                    data:this.chatInput,
-                    from:0,
-                    fromName:'User'
-                }
-                );
+    var str=this.chatInput.trim();
+if(str!="" && str!=null && str!=" " ){
+    this.chatArray.push(
+        {
+            type:'text',
+            data:str,
+            from:0,
+            fromName:'User'
+        }
+    );
 
-                this.chatInput="";
+    this.chatInput="";
+
+}
+
+
             },
             getIp(){
                 var url='https://api.ipify.org?format=json';
@@ -113,6 +121,15 @@
         },
         mounted() {
             this.getIp();
+        },
+        watch:{
+            chatArray(){
+            var th =this;
+
+
+                setTimeout(() => {    var div =th.$el.querySelector(".main-chat-box-div-chat-div-section");
+                    div.scrollTop=div.scrollHeight; }, 5);
+            }
         }
     }
 </script>
@@ -196,6 +213,11 @@
         margin: 8px;
         padding: 4px 10px;
         background-color: #885643;
+    }
+    .main-chat-box-div-chat-div-header{
+        margin-left: 5px;
+        padding: 13px;
+        position: absolute;
     }
     .active{
         box-shadow: 3px 2px 5px rgba(0,0,0,0.75);
