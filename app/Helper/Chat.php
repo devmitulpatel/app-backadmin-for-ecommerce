@@ -26,10 +26,10 @@ public $dynData=[];
         $text=implode(' ',array_merge($text));
         ChatSessions::addMsgToChatSession($text,1);
 
-        $out=$c->makeOut($text,'From Websocket');
+        $out=$c->makeOut($text);
         broadcast(new SendMsg(1,$out));
 
-        return $c->makeOut($text);
+        return $out;
 
 
 

@@ -44,6 +44,8 @@
                 </ul>
 
             </div>
+
+
 <div class="main-chat-box-div-chat-div-footer" v-on:keyup.enter="addUserData()" >
     <input v-model="chatInput" class="main-chat-box-div-chat-div-input"><button v-on:click="addUserData()" class="main-chat-box-div-chat-div-btn" type="submit">send</button>
 
@@ -298,11 +300,16 @@ if(str!="" && str!=null && str!=" " ){
     .main-chat-box-div-chat-div-close{
         cursor: pointer;
         position: absolute;
-        top:0;
+        top: 0;
         right: 0;
         margin: 8px;
-        padding: 4px 10px;
-        background-color: #885643;
+        padding: 0px 0px;
+        background-color: red;
+        border-radius: 100%;
+        width: 37px;
+        text-align: center;
+        height: 37px;
+        padding: 5px;
     }
     .main-chat-box-div-chat-div-header{
         margin-left: 5px;
