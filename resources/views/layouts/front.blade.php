@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="assets/css/vendor/vendor.min.css">
     <link rel="stylesheet" href="assets/css/plugins/plugins.min.css">
     <link rel="stylesheet" href="assets/css/style.min.css"> -->
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>

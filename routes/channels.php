@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Broadcast;
 Broadcast::channel('randomchat_{id}', function ($id) {
     return true;
 });
+
+Broadcast::channel('commona_user', function ($user) {
+
+    return true;
+});

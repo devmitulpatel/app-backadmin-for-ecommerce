@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Route;
 use \App\Model\Settings\Product\Units;
 
@@ -19,13 +20,17 @@ use \App\Model\Settings\Product\Units;
 //});
 
 
+Broadcast::routes();
 
 Route::get('/',function (){
    return view('layouts.front');
 });
-Route::any('/test',function (){
+Route::any('/test',function (\Illuminate\Http\Request $r){
 
 
+
+
+    return true;
 
     $m=getModel(\App\Model\Product\Product::class);
     $pdata=[
@@ -90,6 +95,16 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/', 'HomeController@index')->name('home');
 
+
+
+        //query.live
+
+        Route::prefix('query')->group(function () {
+
+            Route::match(['get','post'],'/',"Query\\HandleLiveClients@index")->name('query.live');
+
+
+        });
 
 
         Route::prefix('product')->group(function () {

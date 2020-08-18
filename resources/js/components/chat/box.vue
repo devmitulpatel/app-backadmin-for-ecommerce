@@ -83,7 +83,8 @@
                 isConnectedRaw:null,
                 sessionId:null,
                 echo:null,
-                isBinded:false
+                isBinded:false,
+                isPublicJoined:false
 
             }
         },
@@ -161,8 +162,11 @@ if(str!="" && str!=null && str!=" " ){
                     enabledTransports: ['ws','wss'],
                     disabledTransports: ['sockjs', 'xhr_polling', 'xhr_streaming'],
                     forceTLS: false,
+                 //   authEndpoint:'/broadcasting/auth'
 
-                });}
+                });
+
+                }
 
 
              //  this.bindChannels(id);
@@ -179,6 +183,13 @@ if(str!="" && str!=null && str!=" " ){
                     })
 
             },
+            bindPublicChannel(){
+
+                var ec=this.echo;
+
+
+                ec.join('commona_user').listen('*',(e)=>console.log(e));
+            },
 
             disconnect(){
                 if(!this.echo) return
@@ -191,8 +202,7 @@ if(str!="" && str!=null && str!=" " ){
 
             this.getIp();
             this.connect();
-         //
-           // this.bindChannels();
+if(!this.isPublicJoined)this.bindPublicChannel();
         },
         watch:{
             chatArray(){

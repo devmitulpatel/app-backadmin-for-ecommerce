@@ -1988,7 +1988,8 @@ __webpack_require__.r(__webpack_exports__);
       isConnectedRaw: null,
       sessionId: null,
       echo: null,
-      isBinded: false
+      isBinded: false,
+      isPublicJoined: false
     };
   },
   methods: {
@@ -2071,7 +2072,8 @@ __webpack_require__.r(__webpack_exports__);
           disableStats: true,
           enabledTransports: ['ws', 'wss'],
           disabledTransports: ['sockjs', 'xhr_polling', 'xhr_streaming'],
-          forceTLS: false
+          forceTLS: false //   authEndpoint:'/broadcasting/auth'
+
         });
       } //  this.bindChannels(id);
 
@@ -2083,6 +2085,12 @@ __webpack_require__.r(__webpack_exports__);
         th.chatArray.push(e.msg);
       });
     },
+    bindPublicChannel: function bindPublicChannel() {
+      var ec = this.echo;
+      ec.join('commona_user').listen('*', function (e) {
+        return console.log(e);
+      });
+    },
     disconnect: function disconnect() {
       if (!this.echo) return;
       this.echo.disconnect();
@@ -2090,8 +2098,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.getIp();
-    this.connect(); //
-    // this.bindChannels();
+    this.connect();
+    if (!this.isPublicJoined) this.bindPublicChannel();
   },
   watch: {
     chatArray: function chatArray() {

@@ -31,7 +31,11 @@ $.ajaxSetup({
 
 window.CSRF=$('meta[name="csrf-token"]');
 window.APP_DOMAIN=process.env.MIX_APP_DOMAIN;
+import Echo from 'laravel-echo';
 
+window.Pusher = require('pusher-js');
+
+window.EchoRaw=Echo;
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

@@ -4,7 +4,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+require('./bootstrap');require('./bootstrap');
 
 
 window.Vue = require('vue');
@@ -37,6 +37,7 @@ Vue.component('product-category', require('./components/product/category').defau
 Vue.component('product-subcategory', require('./components/product/subcategory').default);
 Vue.component('product-addproduct', require('./components/product/addproduct').default);
 Vue.component('profile', require('./components/profile').default);
+Vue.component('liveconnect', require('./components/query/liveConnect').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -91,9 +92,9 @@ const app = new Vue({
 
         autoHideSideBar(){
             var th=this;
-            setTimeout(function() {
-                th.closeNav();
-            }, 5000);
+            // setTimeout(function() {
+            //     th.closeNav();
+            // }, 5000);
         },
         registerExitNotificationDriver(){
                     var th=this;

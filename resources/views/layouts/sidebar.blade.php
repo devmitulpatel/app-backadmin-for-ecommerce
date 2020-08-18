@@ -1,7 +1,7 @@
 <div id="mySidenav" class="sidenav " style="z-index: 1990" @mouseleave="autoHideSideBar()" >
 
 
-    <section  class="container-fluid sidenav-company-details " >
+    <section  class="container-fluid sidenav-company-details text-white" >
 
         <div >
             <div >
@@ -31,26 +31,45 @@
     </div>
 
 
-    <a class="btn btn-link btn-block text-left" >
+    <a class="btn-block sidebarbtn text-left" >
         <i class="fas fa-bars"></i>  Dashboard
     </a>
 
 
 
-    <a class="btn btn-link btn-block text-left"  data-toggle="collapse" data-target="#sales">
+    <a class="sidebarbtn  btn-block text-left"  data-toggle="collapse" data-target="#query">
+        <i class="fas fa-headset"></i> Query <i class="fas fa-chevron-right right p-fix"></i>
+    </a>
+    <div class="collapse sidebarsub " id="query">
+
+        <a class="btn  btn-block text-left " v-on:click="clickEventFromSideBar('{{route('query.live',['compact'=>true])}}')">
+            <i class="fas fa-level-up-alt fa-rotate-90"></i>  Live Connects
+        </a>
+
+        <a class="btn  btn-block text-left" >
+            <i class="fas fa-level-up-alt fa-rotate-90"></i>  Messages
+        </a>
+
+
+    </div>
+
+
+
+
+    <a class="sidebarbtn btn-block text-left"  data-toggle="collapse" data-target="#sales">
         <i class="fas fa-store"></i>  Sales <i class="fas fa-chevron-right right p-fix"></i>
     </a>
     <div class="collapse sidebarsub" id="sales">
 
-        <a class="btn btn-link btn-block text-left" >
+        <a class="btn  btn-block text-left" >
             <i class="fas fa-level-up-alt fa-rotate-90"></i>  Add Order
         </a>
 
-        <a class="btn btn-link btn-block text-left" >
+        <a class="btn btn-block text-left" >
             <i class="fas fa-level-up-alt fa-rotate-90"></i>  Pending Orders
         </a>
 
-        <a class="btn btn-link btn-block text-left" >
+        <a class="btn btn-block text-left" >
             <i class="fas fa-level-up-alt fa-rotate-90"></i>  Completed Orders
 
         </a>
@@ -68,7 +87,7 @@
 
 
 
-    <a class="btn btn-link btn-block text-left"  data-toggle="collapse" data-target="#product">
+    <a class="sidebarbtn btn-block text-left"  data-toggle="collapse" data-target="#product">
         <i class="fas fa-tags"></i>  Product <i class="fas fa-chevron-right right p-fix"></i>
     </a>
     <div class="collapse sidebarsub" id="product">
@@ -104,7 +123,7 @@
 
 
 
-    <a class="btn btn-link btn-block text-left"  data-toggle="collapse" data-target="#services">
+    <a class="sidebarbtn btn-block text-left"  data-toggle="collapse" data-target="#services">
         <i class="fas fa-map-marked"></i>  Services <i class="fas fa-chevron-right right p-fix"></i>
     </a>
     <div class="collapse sidebarsub" id="services">
@@ -138,7 +157,7 @@
 
 
 
-    <a class="btn btn-link btn-block text-left"  data-toggle="collapse" data-target="#customer">
+    <a class="sidebarbtn btn-block text-left"  data-toggle="collapse" data-target="#customer">
         <i class="fas fa-users"></i>  Customer <i class="fas fa-chevron-right right p-fix"></i>
     </a>
     <div class="collapse sidebarsub" id="customer">
@@ -175,10 +194,10 @@
 
 
 
-    <a class="btn btn-link btn-block text-left" v-on:click="clickEventFromSideBar('{{route('profile',['compact'=>true])}}')">
+    <a class="sidebarbtn btn-block text-left" v-on:click="clickEventFromSideBar('{{route('profile',['compact'=>true])}}')">
         <i class="far fa-address-card"></i>  Profile
     </a>
-    <a class="btn btn-link btn-block text-left"  data-toggle="collapse" data-target="#settings">
+    <a class="sidebarbtn btn-block text-left"  data-toggle="collapse" data-target="#settings">
         <i class="fas fa-cogs"></i>  Settings <i class="fas fa-chevron-right right p-fix"></i>
     </a>
     <div class="collapse sidebarsub" id="settings">
