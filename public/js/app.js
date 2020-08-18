@@ -1884,66 +1884,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "liveConnect",
   data: function data() {
@@ -1955,7 +1895,7 @@ __webpack_require__.r(__webpack_exports__);
         iconValue: 'fas fa-users',
         value: 'currentLiveUser'
       }, {
-        title: 'Open Chats',
+        title: 'Active Chats',
         color: 'primary',
         icon: 'far fa-comments',
         iconValue: 'fas fa-comment',
@@ -32963,337 +32903,163 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6 " }, [
-      _c("div", { staticClass: "card" }, [
-        _c("div", { staticClass: "card-header" }, [_vm._v("Live Users List")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          _c(
-            "table",
-            {
-              staticClass: "table table-bordered dataTable",
-              staticStyle: { width: "100%" },
-              attrs: {
-                id: "dataTable",
-                width: "100%",
-                cellspacing: "0",
-                role: "grid",
-                "aria-describedby": "dataTable_info"
-              }
-            },
-            [
-              _c("thead", [
-                _c("tr", [
-                  _c("th", { attrs: { rowspan: "1", colspan: "1" } }, [
-                    _vm._v("Location")
-                  ]),
-                  _c("th", { attrs: { rowspan: "1", colspan: "1" } }, [
-                    _vm._v("IP")
-                  ]),
-                  _c("th", { attrs: { rowspan: "1", colspan: "1" } }, [
-                    _vm._v("Browser")
+    return _c(
+      "div",
+      { staticClass: "col-xs-12 col-xs-12 col-sm-12 col-lg-6 col-xl-6 " },
+      [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-header" }, [
+            _vm._v("Live Users List")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c(
+              "table",
+              {
+                staticClass: "table table-bordered dataTable",
+                staticStyle: { width: "100%" },
+                attrs: {
+                  id: "dataTable",
+                  width: "100%",
+                  cellspacing: "0",
+                  role: "grid",
+                  "aria-describedby": "dataTable_info"
+                }
+              },
+              [
+                _c("thead", [
+                  _c("tr", [
+                    _c("th", { attrs: { rowspan: "1", colspan: "1" } }, [
+                      _vm._v("Location")
+                    ]),
+                    _c("th", { attrs: { rowspan: "1", colspan: "1" } }, [
+                      _vm._v("IP")
+                    ]),
+                    _c("th", { attrs: { rowspan: "1", colspan: "1" } }, [
+                      _vm._v("Browser")
+                    ])
                   ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("tbody")
-            ]
-          )
+                ]),
+                _vm._v(" "),
+                _c("tbody")
+              ]
+            )
+          ])
         ])
-      ])
-    ])
+      ]
+    )
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6 " }, [
-      _c("div", { staticClass: "row" }, [
-        _c(
-          "table",
-          {
-            staticClass: "table table-bordered dataTable",
-            staticStyle: { width: "100%" },
-            attrs: {
-              id: "dataTable",
-              width: "100%",
-              cellspacing: "0",
-              role: "grid",
-              "aria-describedby": "dataTable_info"
-            }
-          },
-          [
-            _c("thead", [
-              _c("tr", { attrs: { role: "row" } }, [
-                _c(
-                  "th",
-                  {
-                    staticClass: "sorting_asc",
-                    staticStyle: { width: "270px" },
-                    attrs: {
-                      tabindex: "0",
-                      "aria-controls": "dataTable",
-                      rowspan: "1",
-                      colspan: "1",
-                      "aria-sort": "ascending",
-                      "aria-label": "Name: activate to sort column descending"
-                    }
-                  },
-                  [_vm._v("Name")]
-                ),
-                _c(
-                  "th",
-                  {
-                    staticClass: "sorting",
-                    staticStyle: { width: "401px" },
-                    attrs: {
-                      tabindex: "0",
-                      "aria-controls": "dataTable",
-                      rowspan: "1",
-                      colspan: "1",
-                      "aria-label":
-                        "Position: activate to sort column ascending"
-                    }
-                  },
-                  [_vm._v("Position")]
-                ),
-                _c(
-                  "th",
-                  {
-                    staticClass: "sorting",
-                    staticStyle: { width: "200px" },
-                    attrs: {
-                      tabindex: "0",
-                      "aria-controls": "dataTable",
-                      rowspan: "1",
-                      colspan: "1",
-                      "aria-label": "Office: activate to sort column ascending"
-                    }
-                  },
-                  [_vm._v("Office")]
-                ),
-                _c(
-                  "th",
-                  {
-                    staticClass: "sorting",
-                    staticStyle: { width: "101px" },
-                    attrs: {
-                      tabindex: "0",
-                      "aria-controls": "dataTable",
-                      rowspan: "1",
-                      colspan: "1",
-                      "aria-label": "Age: activate to sort column ascending"
-                    }
-                  },
-                  [_vm._v("Age")]
-                ),
-                _c(
-                  "th",
-                  {
-                    staticClass: "sorting",
-                    staticStyle: { width: "187px" },
-                    attrs: {
-                      tabindex: "0",
-                      "aria-controls": "dataTable",
-                      rowspan: "1",
-                      colspan: "1",
-                      "aria-label":
-                        "Start date: activate to sort column ascending"
-                    }
-                  },
-                  [_vm._v("Start date")]
-                ),
-                _c(
-                  "th",
-                  {
-                    staticClass: "sorting",
-                    staticStyle: { width: "172px" },
-                    attrs: {
-                      tabindex: "0",
-                      "aria-controls": "dataTable",
-                      rowspan: "1",
-                      colspan: "1",
-                      "aria-label": "Salary: activate to sort column ascending"
-                    }
-                  },
-                  [_vm._v("Salary")]
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tfoot", [
-              _c("tr", [
-                _c("th", { attrs: { rowspan: "1", colspan: "1" } }, [
-                  _vm._v("Name")
-                ]),
-                _c("th", { attrs: { rowspan: "1", colspan: "1" } }, [
-                  _vm._v("Position")
-                ]),
-                _c("th", { attrs: { rowspan: "1", colspan: "1" } }, [
-                  _vm._v("Office")
-                ]),
-                _c("th", { attrs: { rowspan: "1", colspan: "1" } }, [
-                  _vm._v("Age")
-                ]),
-                _c("th", { attrs: { rowspan: "1", colspan: "1" } }, [
-                  _vm._v("Start date")
-                ]),
-                _c("th", { attrs: { rowspan: "1", colspan: "1" } }, [
-                  _vm._v("Salary")
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tbody", [
-              _c("tr", { staticClass: "odd", attrs: { role: "row" } }, [
-                _c("td", { staticClass: "sorting_1" }, [_vm._v("Airi Satou")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Accountant")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Tokyo")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("33")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("2008/11/28")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("$162,700")])
-              ]),
-              _c("tr", { staticClass: "even", attrs: { role: "row" } }, [
-                _c("td", { staticClass: "sorting_1" }, [
-                  _vm._v("Angelica Ramos")
+    return _c(
+      "div",
+      { staticClass: "col-xs-12 col-xs-12 col-sm-12 col-lg-6 col-xl-6 " },
+      [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-header" }, [
+            _vm._v("Active Chats List")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c(
+              "table",
+              {
+                staticClass: "table table-bordered dataTable",
+                staticStyle: { width: "100%" },
+                attrs: {
+                  id: "dataTable",
+                  width: "100%",
+                  cellspacing: "0",
+                  role: "grid",
+                  "aria-describedby": "dataTable_info"
+                }
+              },
+              [
+                _c("thead", [
+                  _c("tr", { attrs: { role: "row" } }, [
+                    _c(
+                      "th",
+                      {
+                        staticClass: "sorting_asc",
+                        staticStyle: { width: "270px" },
+                        attrs: {
+                          tabindex: "0",
+                          "aria-controls": "dataTable",
+                          rowspan: "1",
+                          colspan: "1",
+                          "aria-sort": "ascending",
+                          "aria-label":
+                            "Name: activate to sort column descending"
+                        }
+                      },
+                      [_vm._v("ID")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "th",
+                      {
+                        staticClass: "sorting_asc",
+                        staticStyle: { width: "270px" },
+                        attrs: {
+                          tabindex: "0",
+                          "aria-controls": "dataTable",
+                          rowspan: "1",
+                          colspan: "1",
+                          "aria-sort": "ascending",
+                          "aria-label":
+                            "Name: activate to sort column descending"
+                        }
+                      },
+                      [_vm._v("Name")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "th",
+                      {
+                        staticClass: "sorting_asc",
+                        staticStyle: { width: "270px" },
+                        attrs: {
+                          tabindex: "0",
+                          "aria-controls": "dataTable",
+                          rowspan: "1",
+                          colspan: "1",
+                          "aria-sort": "ascending",
+                          "aria-label":
+                            "Name: activate to sort column descending"
+                        }
+                      },
+                      [_vm._v("Location")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "th",
+                      {
+                        staticClass: "sorting_asc",
+                        staticStyle: { width: "270px" },
+                        attrs: {
+                          tabindex: "0",
+                          "aria-controls": "dataTable",
+                          rowspan: "1",
+                          colspan: "1",
+                          "aria-sort": "ascending",
+                          "aria-label":
+                            "Name: activate to sort column descending"
+                        }
+                      },
+                      [_vm._v("Last Message")]
+                    )
+                  ])
                 ]),
                 _vm._v(" "),
-                _c("td", [_vm._v("Chief Executive Officer (CEO)")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("London")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("47")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("2009/10/09")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("$1,200,000")])
-              ]),
-              _c("tr", { staticClass: "odd", attrs: { role: "row" } }, [
-                _c("td", { staticClass: "sorting_1" }, [_vm._v("Ashton Cox")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Junior Technical Author")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("San Francisco")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("66")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("2009/01/12")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("$86,000")])
-              ]),
-              _c("tr", { staticClass: "even", attrs: { role: "row" } }, [
-                _c("td", { staticClass: "sorting_1" }, [
-                  _vm._v("Bradley Greer")
-                ]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Software Engineer")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("London")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("41")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("2012/10/13")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("$132,000")])
-              ]),
-              _c("tr", { staticClass: "odd", attrs: { role: "row" } }, [
-                _c("td", { staticClass: "sorting_1" }, [
-                  _vm._v("Brenden Wagner")
-                ]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Software Engineer")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("San Francisco")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("28")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("2011/06/07")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("$206,850")])
-              ]),
-              _c("tr", { staticClass: "even", attrs: { role: "row" } }, [
-                _c("td", { staticClass: "sorting_1" }, [
-                  _vm._v("Brielle Williamson")
-                ]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Integration Specialist")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("New York")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("61")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("2012/12/02")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("$372,000")])
-              ]),
-              _c("tr", { staticClass: "odd", attrs: { role: "row" } }, [
-                _c("td", { staticClass: "sorting_1" }, [_vm._v("Bruno Nash")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Software Engineer")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("London")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("38")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("2011/05/03")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("$163,500")])
-              ]),
-              _c("tr", { staticClass: "even", attrs: { role: "row" } }, [
-                _c("td", { staticClass: "sorting_1" }, [
-                  _vm._v("Caesar Vance")
-                ]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Pre-Sales Support")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("New York")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("21")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("2011/12/12")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("$106,450")])
-              ]),
-              _c("tr", { staticClass: "odd", attrs: { role: "row" } }, [
-                _c("td", { staticClass: "sorting_1" }, [
-                  _vm._v("Cara Stevens")
-                ]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Sales Assistant")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("New York")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("46")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("2011/12/06")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("$145,600")])
-              ]),
-              _c("tr", { staticClass: "even", attrs: { role: "row" } }, [
-                _c("td", { staticClass: "sorting_1" }, [
-                  _vm._v("Cedric Kelly")
-                ]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Senior Javascript Developer")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Edinburgh")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("22")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("2012/03/29")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("$433,060")])
-              ])
-            ])
-          ]
-        )
-      ])
-    ])
+                _c("tbody")
+              ]
+            )
+          ])
+        ])
+      ]
+    )
   }
 ]
 render._withStripped = true
