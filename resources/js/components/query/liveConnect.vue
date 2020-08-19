@@ -43,7 +43,7 @@
                                     <div class="card-header">Live Users List</div>
                                     <div class="card-body">
 
-                                        <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                        <table v-if="false" class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                             <thead>
                                             <tr><th rowspan="1" colspan="1">Location</th><th rowspan="1" colspan="1">IP</th><th rowspan="1" colspan="1">Browser</th></tr>
                                             </thead>
@@ -52,6 +52,18 @@
 
                                             </tbody>
                                         </table>
+
+
+
+                                        <div class="card shadow mb-4">
+                                            <div class="card-header py-3">
+                                                <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <chartforliveuser ref= "chart" :chartdata="finalData" :options="chartOptions"/>
+
+                                            </div>
+                                        </div>
 
 
                                     </div>
@@ -71,9 +83,7 @@
                                             <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 270px;">ID</th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 270px;">Name</th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 270px;">Location</th>
-                                            <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 270px;">Last Message</th>
-
-                                               </tr>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 270px;">Last Message</th>                                               </tr>
                                         </thead>
 
                                         <tbody>
@@ -102,10 +112,23 @@
 </template>
 
 <script>
+
     export default {
         name: "liveConnect",
         data(){
             return {
+                finalData:[],
+                chartData: {
+                    datasets: [{
+                        label: 'Bar Dataset',
+                        data: [1]
+                    }],
+                    labels: ['Live']
+                },
+                chartOptions:{
+                    responsive: true
+
+                },
 
                 cards:[
                     {
@@ -120,12 +143,13 @@
                         color:'primary',
                         icon:'far fa-comments',
                         iconValue:'fas fa-comment',
-                        value:'currentLiveUser'
+                        value:'currentLiveChatOngoing'
                     }
                 ],
 
                 cardData:{
                     currentLiveUser:0,
+                    currentLiveChatOngoing:0
                 },
 
                 channelCount:{
@@ -133,9 +157,17 @@
                 },
                 echo:null,
                 channel:null
+
             }
         },
         methods:{
+            updateChartData(){
+                var old=this.finalData;
+                this.finalData=[];
+                this.finalData=old;
+               // this.refs['chart'][0].updateData(old);
+            this.$refs['chart'].updateData(old);
+            },
             connect(){
 
                 var th=this;
@@ -172,25 +204,31 @@
                     })
                     .joining(function(members){
                         th.cardData.currentLiveUser=th.channel.subscription.members.count;
-
+                        th.finalData.push(th.channel.subscription.members.count);
+                        th.updateChartData()
+                        console.log('New User Added');
+                        console.log(members)
                         // th.cardData.currentLiveUser=th.cardData.currentLiveUser+1;
                         // th.channel.whisper('NewUserJoined',th.cardData.currentLiveUser);
                         //th.cardData.currentLiveUser=th.channel.subscription.members.count;
                     })
                     .leaving(function(members){
                        // console.log('exit');
+                        th.cardData.currentLiveUser=th.channel.subscription.members.count;
+                        th.finalData.push(th.channel.subscription.members.count);
+                        th.updateChartData();
+                        console.log('User Removed');
+                        console.log(members)
 
-                        if(th.cardData.currentLiveUser>0){
-                            th.cardData.currentLiveUser=th.channel.subscription.members.count;
-                            // th.cardData.currentLiveUser=th.cardData.currentLiveUser-1;
-                            // th.channel.whisper('UserRemoved',th.cardData.currentLiveUser);
-                        }
 
                     }).here(function(members) {
                         // for example
 
                         th.cardData.currentLiveUser=th.channel.subscription.members.count;
-
+                        th.finalData.push(th.channel.subscription.members.count);
+                        th.updateChartData();
+                        console.log('User here');
+                        console.log(members);
 
                     })
                 //     .listen('pusher:ping',function(){
@@ -224,9 +262,10 @@
         mounted(){
             var th=this;
 
-            setTimeout(function(){ th.cardData.currentLiveUser=th.channel.subscription.members.count;; }, 3000);
 
-
+            setInterval(function() {
+                th.cardData.currentLiveUser=th.channel.subscription.members.count;
+            }, 1500);
         },
         watch:{
             isConnected(newVal){
@@ -242,6 +281,8 @@
             },
         }
     }
+
+
 </script>
 
 <style scoped>

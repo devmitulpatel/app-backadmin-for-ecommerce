@@ -38,6 +38,7 @@ Vue.component('product-subcategory', require('./components/product/subcategory')
 Vue.component('product-addproduct', require('./components/product/addproduct').default);
 Vue.component('profile', require('./components/profile').default);
 Vue.component('liveconnect', require('./components/query/liveConnect').default);
+Vue.component('chartforliveuser', require('./components/query/chartForlIveUser').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

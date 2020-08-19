@@ -32,6 +32,7 @@
         "@ckeditor/ckeditor5-vue": "^1.0.1",
         "@fortawesome/fontawesome-free": "^5.14.0",
         "animate.css": "^4.1.0",
+        "chart.js": "^2.9.3",
         "laravel-echo": "^1.8.1",
         "postcss-loader": "^3.0.0",
         "pusher-js": "^7.0.0",
@@ -39,6 +40,7 @@
         "startbootstrap-sb-admin-2": "^4.1.1",
         "style-loader": "^1.2.1",
         "validate.js": "^0.13.1",
+        "vue-chartjs": "^3.5.0",
         "vue-toasted": "^1.1.28",
         "webpack": "^4.44.1",
         "webpack-cli": "^3.3.12"
