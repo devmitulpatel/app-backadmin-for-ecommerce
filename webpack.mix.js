@@ -20,7 +20,7 @@ module.exports = {
 let productionSourceMaps = true;
 //mix.js('resources/js/app-portable.js', 'public/js');
 // //
-mix.js('resources/js/app.js', 'public/js').extract(['vue','jquery','bootstrap','axios','validate.js'])
-      .sass('resources/sass/app.scss', 'public/css').sass('resources/sass/front_app.scss', 'public/css') .sass('resources/sass/dark.scss', 'public/css').sass('resources/sass/comman.scss', 'public/css').minify('public/js/app.js', 'public/js').version();
+ mix.js('resources/js/app.js', 'public/js').extract(['vue','jquery','bootstrap','axios','validate.js'])
+       .sass('resources/sass/app.scss', 'public/css').sass('resources/sass/front_app.scss', 'public/css') .sass('resources/sass/dark.scss', 'public/css').sass('resources/sass/comman.scss', 'public/css').minify('public/js/app.js', 'public/js').version();
 
 mix.disableNotifications();
