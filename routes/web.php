@@ -24,13 +24,94 @@ Broadcast::routes();
 
 Route::get('/',function (){
    return view('layouts.front');
+
+
 });
+
+
+Route::get('/test2', function (Request $request) {
+
+    session()->put('state', $state = Str::random(40));
+
+    $query = http_build_query([
+        'grant_type' => 'authaction_code',
+        'client_id' => '91566191-9189-4220-826e-b0f36e63a426',
+        'client_secret' => 'iVUpHnND2wGEBn4ct2LQiJjfj7iktpucMJ7AO4Jf',
+        'redirect_uri' => redirect('/test3'),
+        'response_type' => 200,
+        'scope' => '',
+        'state' => $state,
+    ]);
+
+  //  return redirect('/test?'.$query);
+    return redirect('/oauth/authorize?'.$query);
+});
+
+
+Route::any('/test4',function (\Illuminate\Http\Request $r) {
+    dd($r->all());
+});
+Route::any('/test3',function (\Illuminate\Http\Request $r) {
+    session()->put('state', $state = Str::random(40));
+
+    $query = http_build_query([
+        'client_id' => 'client-id',
+        'redirect_uri' => redirect('/test4'),
+        'response_type' => 'token',
+        'scope' => '',
+        'state' => $state,
+    ]);
+
+    return redirect('http://your-app.com/oauth/authorize?'.$query);
+
+});
+
 Route::any('/test',function (\Illuminate\Http\Request $r){
 
 
+    $request=$r;
+    $state = session()->pull('state');
+
+    $dData= [
+        'grant_type' => 'password',
+        'client_id' => '915691c5-d1ea-4a35-a3e2-b8a081618c73',
+        'client_secret' => 'YhgFGdCh3U3Jefp6w2jVj1Ky1ElvazgTcan1B4dG',
+        'username' => 'test@admin.ms',
+        'password' => '123456789',
+        'scope' => '',
+
+    ];
 
 
-    return true;
+//    throw_unless(
+//        strlen($state) > 0 && $state === $request->state,
+//        InvalidArgumentException::class
+//    );
+
+
+
+
+
+    $http = new GuzzleHttp\Client;
+
+    $response = $http->post(url('/oauth/token'), [
+        'form_params' =>$dData,
+    ]);
+
+    return json_decode((string) $response->getBody(), true);
+
+    return view('vendor.passport.authorize');
+   // $str=\Help\Secret::encode(\Illuminate\Support\Str::random(rand(1,100)));
+    $data['rawStr']=\Illuminate\Support\Str::random(256)."~!@#$%^&*()_+";
+    $data['rawStrCount']=strlen($data['rawStr']);
+
+    $data['encodedstr']=\Help\Secret::encode($data['rawStr']);
+    $data['encodedstrCount']=strlen($data['encodedstr']);
+    $data['decpdedstr']=\Help\Secret::decode($data['encodedstr']);
+    $data['decpdedstr']=\Help\Secret::decode($data['encodedstr']);
+    $data['decpdedstrCount']=strlen($data['decpdedstr']);
+    dd($data);
+       return true;
 
     $m=getModel(\App\Model\Product\Product::class);
     $pdata=[
@@ -75,7 +156,7 @@ Route::any('/test',function (\Illuminate\Http\Request $r){
     return response()->json(['fileName'=>'test.jpg','uploaded'=> 1,'url'=>asset('img/test.jpg')]);
 
     return view('layouts.app');
-});
+})->middleware('api');
 
 
 Route::match(['get'],'product/img/get/{code}',"Product\\Product@getImage")->name('product.img.get');
@@ -242,3 +323,58 @@ Route::prefix('api')->group(function () {
 
 });
 
+Route::get('/videoapp', function (Request $request) {
+
+
+    $data=[
+
+        'ParticleNew'=>[
+            'Frame'=>[
+
+                'imageUrl'=>'https://firebasestorage.googleapis.com/v0/b/mbitvideomaker.appspot.com/o/gif%2Fframe%2Fic_frame_0_png.png?alt=media&token=85cdc719-6daa-4bf0-8017-899b1180b283',
+                'name'=>1,
+                'thumbUrl'=>'https://firebasestorage.googleapis.com/v0/b/mbitvideomaker.appspot.com/o/gif%2Fframe%2Fic_frame_0.gif?alt=media&token=bff86b93-b0a4-496c-b02c-5eb7900a1069'
+            ],
+
+            'Image'=>[
+                [
+                    'thumbUrl'=>'https://firebasestorage.googleapis.com/v0/b/dfdfbit-8d9e7.appspot.com/o/AllVideoStatus1582117320882.null?alt=media&token=d0675f29-ee45-4914-a194-73f92e0715fe'
+                ]
+            ],
+            'Sticker'=>[
+                [
+                    'name'=>'sticker_21',
+                    'thumbUrl'=>'https://firebasestorage.googleapis.com/v0/b/dfdfbit-8d9e7.appspot.com/o/AllVideoStatus1582118239552.null?alt=media&token=96514257-1ba8-4c47-9f61-6d766657a890'
+                ]
+            ],
+
+        ],
+        'Ringtone'=>[
+            'Arabic'=>[
+                [
+                    'mp3Url'=>'https://firebasestorage.googleapis.com/v0/b/dfdfbit-8d9e7.appspot.com/o/AllVideoStatus1582111593976.null?alt=media&token=c75e56c9-563a-4d2d-b29f-b234c2d5c425',
+                    'name'=>'Ante_Mhma_Arebic',
+                    'thumbUrl'=>'https://firebasestorage.googleapis.com/v0/b/mbitvideomaker.appspot.com/o/gif%2Fframe%2Fic_frame_0.gif?alt=media&token=bff86b93-b0a4-496c-b02c-5eb7900a1069'
+                ]
+            ],
+            'Category'=>[
+                [
+                    'icon'=>'https://firebasestorage.googleapis.com/v0/b/mbitvideomaker.appspot.com/o/images%2FCategory%2FArabic.png?alt=media&token=2232b7af-b9f8-4f23-9f57-53dcee54b6d3',
+                    'name'=>'Arabic',
+                ]
+            ]
+
+
+        ]
+
+    ];
+
+
+
+    return response()->json($data);
+
+
+
+
+
+});

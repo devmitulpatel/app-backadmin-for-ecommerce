@@ -2,7 +2,9 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="card">
+
+
+                <div class="">
 
                     <div class="card-header"></div>
                     <div class="card-body">
@@ -36,47 +38,27 @@
 
 
                             <div class="col-xs-12 col-xs-12 col-sm-12 col-lg-6 col-xl-6 ">
-                                <div class="card">
 
-
-
-                                    <div class="card-header">Live Users List</div>
+                                <div class="card shadow  mb-4">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">Live Chart</h6>
+                                    </div>
                                     <div class="card-body">
-
-                                        <table v-if="false" class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
-                                            <thead>
-                                            <tr><th rowspan="1" colspan="1">Location</th><th rowspan="1" colspan="1">IP</th><th rowspan="1" colspan="1">Browser</th></tr>
-                                            </thead>
-
-                                            <tbody>
-
-                                            </tbody>
-                                        </table>
-
-
-
-                                        <div class="card shadow mb-4">
-                                            <div class="card-header py-3">
-                                                <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <chartforliveuser ref= "chart" :chartdata="finalData" :options="chartOptions"/>
-
-                                            </div>
-                                        </div>
-
+                                        <chartforliveuser ref= "chart" :chartdata="finalData" :options="chartOptions"/>
 
                                     </div>
-
                                 </div>
                             </div>
                             <div class="col-xs-12 col-xs-12 col-sm-12 col-lg-6 col-xl-6 ">
-                                <div class="card">
+                                <div class="card shadow">
 
 
                                     <div class="card-header">Active Chats List</div>
 
                                     <div class="card-body">
+
+
+
                                     <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                         <thead>
                                         <tr role="row">

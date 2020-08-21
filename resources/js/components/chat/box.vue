@@ -196,13 +196,25 @@ if(str!="" && str!=null && str!=" " ){
                 this.echo.disconnect()
             },
 
+            connectPublicChannel(){
+                console.log("ok1");
+                this.echo.join('allComman').listen('.pusher:test',function (e) {
+                console.log(e);
+                console.log("ok2");
+                });
+            }
+
         },
         mounted() {
 
 
             this.getIp();
             this.connect();
-if(!this.isPublicJoined)this.bindPublicChannel();
+            if(!this.isPublicJoined){
+                this.bindPublicChannel();
+                this.connectPublicChannel();
+            }
+
         },
         watch:{
             chatArray(){

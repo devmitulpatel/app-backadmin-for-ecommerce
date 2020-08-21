@@ -1,7 +1,7 @@
 
 <template>
 
-    <canvas id="myChart" width="400" height="400"></canvas>
+    <canvas id="myChart"    ></canvas>
 
 </template>
 
@@ -38,10 +38,17 @@
         mounted () {
             this.dataFinal=this.chartdata;
             var ctx = document.getElementById('myChart');
+            var currentdate = new Date();
             this.myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: ['Live'],
+                    labels: [currentdate.getDate() + "/"
+                    + (currentdate.getMonth()+1)  + "/"
+                    + currentdate.getFullYear() + " @ "
+                    + currentdate.getHours() + ":"
+                    + currentdate.getMinutes() + ":"
+                    + currentdate.getSeconds()
+                    ],
                     datasets: [{
                         label: '# of Users',
                         data: this.dataFinal,
@@ -70,7 +77,13 @@
         methods:{
 
             updateData(data){
-                var label='Live';
+                var currentdate = new Date();
+                var label=currentdate.getDate() + "/"
+                    + (currentdate.getMonth()+1)  + "/"
+                    + currentdate.getFullYear() + " @ "
+                    + currentdate.getHours() + ":"
+                    + currentdate.getMinutes() + ":"
+                    + currentdate.getSeconds();
                 var th =this;
                 this.dataFinal=data;
                 var dataset=[
@@ -92,7 +105,7 @@
                 // this.myChart.data.labels = [];
                 // this.myChart.data.datasets.label = null;
 
-                this.myChart.data.labels.push('live');
+                this.myChart.data.labels.push(label);
                 this.myChart.data.datasets=dataset;
                 console.log('Update called From Root ');
 

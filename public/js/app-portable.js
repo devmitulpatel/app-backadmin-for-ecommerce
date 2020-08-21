@@ -2094,12 +2094,23 @@ __webpack_require__.r(__webpack_exports__);
     disconnect: function disconnect() {
       if (!this.echo) return;
       this.echo.disconnect();
+    },
+    connectPublicChannel: function connectPublicChannel() {
+      console.log("ok1");
+      this.echo.join('allComman').listen('.pusher:test', function (e) {
+        console.log(e);
+        console.log("ok2");
+      });
     }
   },
   mounted: function mounted() {
     this.getIp();
     this.connect();
-    if (!this.isPublicJoined) this.bindPublicChannel();
+
+    if (!this.isPublicJoined) {
+      this.bindPublicChannel();
+      this.connectPublicChannel();
+    }
   },
   watch: {
     chatArray: function chatArray() {

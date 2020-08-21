@@ -21,3 +21,12 @@ Broadcast::channel('commona_user', function ($user) {
 
     return true;
 });
+
+
+Broadcast::channel('allComman', function ($user) {
+
+    dd($user);
+
+
+    return true;
+});

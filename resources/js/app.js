@@ -40,6 +40,11 @@ Vue.component('profile', require('./components/profile').default);
 Vue.component('liveconnect', require('./components/query/liveConnect').default);
 Vue.component('chartforliveuser', require('./components/query/chartForlIveUser').default);
 
+
+Vue.component('authclient', require('./components/passport/AuthorizedClients').default);
+Vue.component('client', require('./components/passport/Clients').default);
+Vue.component('accesstoken', require('./components/passport/PersonalAccessTokens').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
