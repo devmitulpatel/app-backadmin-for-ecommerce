@@ -19,14 +19,14 @@ class Doit
             'image'=>2,
             'sticker'=>3,
             'ringtone'=>4,
-            'ringtoneCat'=>5,
+            'ringtonecat'=>5,
         ];
         $input=$r->all();
         $type=$input['type']??false;
 
         if($type!=false && array_key_exists(strtolower($type),$typeMaster)){
 
-            switch ($typeMaster[$type]){
+            switch ($typeMaster[strtolower($type)]){
                 case 1:
                     $m=getModel(Frame::class);
                     return  throwData($m->all());

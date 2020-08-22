@@ -37,9 +37,362 @@
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/VideoApp/allForms.vue?vue&type=script&lang=js& ***!
   \****************************************************************************************************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\resources\\js\\components\\VideoApp\\allForms.vue: Unexpected token (347:12)\n\n\u001b[0m \u001b[90m 345 | \u001b[39m            data\u001b[33m=\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m 346 | \u001b[39m              type\u001b[33m:\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 347 | \u001b[39m            }\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m     | \u001b[39m            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 348 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 349 | \u001b[39m        }\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 350 | \u001b[39m        refreshInput(name){\u001b[0m\n    at Parser._raise (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:757:17)\n    at Parser.raiseWithData (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:750:17)\n    at Parser.raise (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:744:17)\n    at Parser.unexpected (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:8834:16)\n    at Parser.parseExprAtom (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:10176:20)\n    at Parser.parseExprSubscripts (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:9688:23)\n    at Parser.parseMaybeUnary (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:9668:21)\n    at Parser.parseExprOps (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:9538:23)\n    at Parser.parseMaybeConditional (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:9511:23)\n    at Parser.parseMaybeAssign (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:9466:21)\n    at Parser.parseObjectProperty (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:10636:101)\n    at Parser.parseObjPropValue (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:10661:101)\n    at Parser.parseObjectMember (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:10585:10)\n    at Parser.parseObj (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:10494:25)\n    at Parser.parseExprAtom (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:10090:28)\n    at Parser.parseExprSubscripts (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:9688:23)\n    at Parser.parseMaybeUnary (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:9668:21)\n    at Parser.parseExprOps (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:9538:23)\n    at Parser.parseMaybeConditional (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:9511:23)\n    at Parser.parseMaybeAssign (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:9466:21)\n    at Parser.parseMaybeAssign (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:9498:25)\n    at Parser.parseExpression (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:9418:23)\n    at Parser.parseStatementContent (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:11339:23)\n    at Parser.parseStatement (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:11210:17)\n    at Parser.parseBlockOrModuleBlockBody (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:11785:25)\n    at Parser.parseBlockBody (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:11771:10)\n    at Parser.parseBlock (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:11755:10)\n    at Parser.parseFunctionBody (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:10758:24)\n    at Parser.parseFunctionBodyAndFinish (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:10741:10)\n    at Parser.parseMethod (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:10703:10)\n    at Parser.parseObjectMethod (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:10619:19)\n    at Parser.parseObjPropValue (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:10661:23)\n    at Parser.parseObjectMember (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:10585:10)\n    at Parser.parseObj (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:10494:25)\n    at Parser.parseExprAtom (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:10090:28)\n    at Parser.parseExprSubscripts (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:9688:23)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "allForms",
+  props: ['msData'],
+  data: function data() {
+    return {
+      currentFormTab: 0,
+      input_frame: {},
+      input_image: {},
+      input_sticker: {},
+      input_ringtone: {},
+      input_ringtoneCat: {},
+      list_frame: [],
+      list_image: [],
+      list_sticker: [],
+      list_ringtone: [],
+      list_ringtoneCat: [],
+      tabs: [{
+        name: 'Frame',
+        model: 'frame',
+        path: '/test',
+        inputs: [{
+          name: 'Name',
+          model: 'name',
+          type: 'text'
+        }, {
+          name: 'Image',
+          model: 'imageUrl',
+          type: 'file'
+        }, {
+          name: 'Thumb Images',
+          model: 'thumnUrk',
+          type: 'file'
+        }, {
+          name: 'Status',
+          model: 'status',
+          type: 'radio'
+        }],
+        list: {
+          model: 'list_frame',
+          columns: ['name', 'Image', 'Thumb Image'],
+          path: this.msData.path.retriveListData
+        }
+      }, {
+        name: 'Image',
+        model: 'image',
+        path: '/test',
+        inputs: [{
+          name: 'Image',
+          model: 'imageUrl',
+          type: 'file'
+        }, {
+          name: 'Status',
+          model: 'status',
+          type: 'radio'
+        }],
+        list: {
+          model: 'list_image',
+          columns: ['name'],
+          path: this.msData.path.retriveListData
+        }
+      }, {
+        name: 'Sticker',
+        model: 'sticker',
+        path: '/test',
+        inputs: [{
+          name: 'Name',
+          model: 'name',
+          type: 'text'
+        }, {
+          name: 'Image',
+          model: 'imageUrl',
+          type: 'file'
+        }, {
+          name: 'Status',
+          model: 'status',
+          type: 'radio'
+        }]
+      }, {
+        name: 'Ringtone',
+        model: 'ringtone',
+        path: '/test',
+        inputs: [{
+          name: 'Name',
+          model: 'name',
+          type: 'text'
+        }, {
+          name: 'Music File',
+          model: 'mp3Url',
+          type: 'file'
+        }, {
+          name: 'Thumb Images',
+          model: 'thumbUrl',
+          type: 'file'
+        }, {
+          name: 'Status',
+          model: 'status',
+          type: 'radio'
+        }]
+      }, {
+        name: 'Ringtone Category',
+        model: 'ringtoneCat',
+        path: '/test',
+        inputs: [{
+          name: 'Name',
+          model: 'name',
+          type: 'text'
+        }, {
+          name: 'Thumb Images',
+          model: 'icon',
+          type: 'file'
+        }, {
+          name: 'Status',
+          model: 'status',
+          type: 'radio'
+        }]
+      }],
+      allFiles: {},
+      validateInputs: [],
+      inputError1: [],
+      allInputs: {},
+      getttingData: false
+    };
+  },
+  created: function created() {
+    for (var i in this.tabs) {
+      //   this.allInputs[this.makeModelName(this.tabs[i].model)]={};
+      if (this.tabs[i].hasOwnProperty('inputs')) for (var y in this.tabs[i]['inputs']) {//    console.log( this.tabs[i]['inputs'][y].model);
+        //     this.allInputs[this.makeModelName(this.tabs[i].model)][this.tabs[i]['inputs'][y].model]=null;
+        //   console.log( this.allInputs);
+      }
+      this.getDataFor(this.tabs[i].model);
+    }
+  },
+  methods: {
+    getDataFor: function getDataFor(type) {
+      var data = {
+        type: type
+      };
+      var url = this.msData.path.retriveListData;
+      var dataModel = ['list', type].join('_');
+      var th = this;
+      axios.post(url, data).then(function (res) {
+        var inData = res.data.ResponseMessage;
+        th[dataModel] = inData; //   th.getttingData=false;
+      })["catch"](function (e) {// th.getttingData=false;
+      });
+    },
+    retriveData: function retriveData(model, list) {
+      var force = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+      var data = {
+        type: model
+      };
+      var dataModel = list.model;
+      var url = list.path;
+      var th = this;
+
+      if (th.getttingData != true) {
+        th.getttingData = true;
+        axios.post(url, data).then(function (res) {
+          console.log(res);
+          var inData = res.data.ResponseMessage;
+          th[dataModel] = inData;
+          th.getttingData = false;
+        })["catch"](function (e) {
+          th.getttingData = false;
+        });
+      }
+
+      return this[dataModel];
+    },
+    refreshInput: function refreshInput(name) {
+      var old = this[name];
+      this[name] = {};
+      this[name] = old;
+    },
+    changeTab: function changeTab(tab) {
+      if (this.currentFormTab != tab) this.currentFormTab = tab;
+    },
+    validateInputCheck: function validateInputCheck() {
+      true;
+    },
+    makeModelName: function makeModelName() {
+      var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+      var subname = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+      return subname == false ? ['input', name].join('_') : ['input', name, subname].join('_');
+    },
+    updateInput: function updateInput(e, d, type, rootmodel, submodel) {
+      switch (type) {
+        case 'file':
+          this.handleFileInputUpdate(e, d, rootmodel, submodel);
+          break;
+      }
+    },
+    handleFileInputUpdate: function handleFileInputUpdate(e, d, rootmodel, submodel) {
+      var file = e.target.files;
+      var rootModelFinal = this.makeModelName(rootmodel);
+      if (!this.allFiles.hasOwnProperty(rootModelFinal)) this.allFiles[rootModelFinal] = {};
+      this.allFiles[rootModelFinal][submodel] = file[0];
+
+      if (!(rootmodel == 'ringtone' && submodel == 'mp3Url')) {
+        var th = this;
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          if (!d.hasOwnProperty(rootModelFinal)) d[rootModelFinal] = {};
+          d[rootModelFinal][submodel] = e.target.result;
+          th.refreshInput(rootModelFinal); // this.updateInput();
+        };
+
+        reader.readAsDataURL(file[0]);
+      }
+    }
+  }
+});
 
 /***/ }),
 
@@ -70112,9 +70465,7 @@ var render = function() {
                               0
                             ),
                             _vm._v(" "),
-                            _vm._l(_vm.retriveData(t.model, t.list), function(
-                              r
-                            ) {
+                            _vm._l(_vm.list_frame, function(r) {
                               return _c("tr")
                             })
                           ],

@@ -116,7 +116,7 @@
                                     <th v-for="c in t.list.columns">{{c}}</th>
                                 </tr>
 
-                                <tr v-for="r in retriveData(t.model,t.list)">
+                                <tr v-for="r in list_frame">
 
                                 </tr>
 
@@ -190,7 +190,7 @@
                         ],
                         list:{
                             model:'list_frame',
-                            columns:['name', 'Image','Thumn Image'],
+                            columns:['name', 'Image','Thumb Image'],
                             path:this.msData.path.retriveListData
 
                         }
@@ -218,8 +218,9 @@
 
                         ],
                         list:{
+                            model:'list_image',
                             columns:['name'],
-                            path:'/test'
+                            path:this.msData.path.retriveListData
                         }
                     },
 
@@ -321,6 +322,7 @@
                 validateInputs:[],
                 inputError1:[],
                 allInputs:{},
+                getttingData:false
 
 
             }
@@ -335,17 +337,72 @@
                //     this.allInputs[this.makeModelName(this.tabs[i].model)][this.tabs[i]['inputs'][y].model]=null;
                  //   console.log( this.allInputs);
                 }
+
+                this.getDataFor(this.tabs[i].model)
             }
 
 
 
         },
         methods:{
-            retriveData(model,list,force=false){
-                data= {
-                  type:
+
+
+            getDataFor(type){
+                var data={
+                    type:type
                 };
 
+                var url=this.msData.path.retriveListData;
+                var dataModel=['list',type].join('_');
+                var th=this;
+
+                    axios.post(url,data).then(function(res){
+
+
+                        var inData=res.data.ResponseMessage;
+
+                        th[dataModel]=inData;
+                     //   th.getttingData=false;
+
+                    }).catch(function(e){
+
+                       // th.getttingData=false;
+
+                    });
+
+
+
+
+            },
+
+
+            retriveData(model,list,force=false){
+                var data= {
+                  type:model
+                };
+
+                var dataModel=list.model;
+
+                var url=list.path;
+                var th=this;
+                if(th.getttingData!=true){
+                    th.getttingData=true;
+                    axios.post(url,data).then(function(res){
+
+                    console.log(res);
+                    var inData=res.data.ResponseMessage;
+
+                    th[dataModel]=inData;
+                    th.getttingData=false;
+
+                }).catch(function(e){
+
+                        th.getttingData=false;
+
+                });
+                }
+
+            return  this[dataModel];
             },
             refreshInput(name){
                 var old=this[name];
