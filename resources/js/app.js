@@ -44,6 +44,7 @@ Vue.component('chartforliveuser', require('./components/query/chartForlIveUser')
 Vue.component('authclient', require('./components/passport/AuthorizedClients').default);
 Vue.component('client', require('./components/passport/Clients').default);
 Vue.component('accesstoken', require('./components/passport/PersonalAccessTokens').default);
+Vue.component('allformforvideoapp', require('./components/VideoApp/allForms').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

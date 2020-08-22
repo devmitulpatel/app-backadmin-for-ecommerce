@@ -34,7 +34,9 @@
     <a class="btn-block sidebarbtn text-left" >
         <i class="fas fa-bars"></i>  Dashboard
     </a>
-
+    <a class="sidebarbtn btn-block text-left" v-on:click="clickEventFromSideBar('{{route('videoapp.allForms',['compact'=>true])}}')">
+        <i class="far fa-address-card"></i>  Video App
+    </a>
 
 
     <a class="sidebarbtn  btn-block text-left"  data-toggle="collapse" data-target="#query">

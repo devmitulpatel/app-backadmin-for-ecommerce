@@ -32,6 +32,17 @@
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VideoApp/allForms.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/VideoApp/allForms.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\resources\\js\\components\\VideoApp\\allForms.vue: Unexpected token (347:12)\n\n\u001b[0m \u001b[90m 345 | \u001b[39m            data\u001b[33m=\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m 346 | \u001b[39m              type\u001b[33m:\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 347 | \u001b[39m            }\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m     | \u001b[39m            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 348 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 349 | \u001b[39m        }\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 350 | \u001b[39m        refreshInput(name){\u001b[0m\n    at Parser._raise (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:757:17)\n    at Parser.raiseWithData (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:750:17)\n    at Parser.raise (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:744:17)\n    at Parser.unexpected (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:8834:16)\n    at Parser.parseExprAtom (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:10176:20)\n    at Parser.parseExprSubscripts (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:9688:23)\n    at Parser.parseMaybeUnary (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:9668:21)\n    at Parser.parseExprOps (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:9538:23)\n    at Parser.parseMaybeConditional (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:9511:23)\n    at Parser.parseMaybeAssign (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:9466:21)\n    at Parser.parseObjectProperty (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:10636:101)\n    at Parser.parseObjPropValue (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:10661:101)\n    at Parser.parseObjectMember (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:10585:10)\n    at Parser.parseObj (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:10494:25)\n    at Parser.parseExprAtom (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:10090:28)\n    at Parser.parseExprSubscripts (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:9688:23)\n    at Parser.parseMaybeUnary (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:9668:21)\n    at Parser.parseExprOps (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:9538:23)\n    at Parser.parseMaybeConditional (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:9511:23)\n    at Parser.parseMaybeAssign (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:9466:21)\n    at Parser.parseMaybeAssign (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:9498:25)\n    at Parser.parseExpression (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:9418:23)\n    at Parser.parseStatementContent (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:11339:23)\n    at Parser.parseStatement (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:11210:17)\n    at Parser.parseBlockOrModuleBlockBody (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:11785:25)\n    at Parser.parseBlockBody (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:11771:10)\n    at Parser.parseBlock (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:11755:10)\n    at Parser.parseFunctionBody (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:10758:24)\n    at Parser.parseFunctionBodyAndFinish (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:10741:10)\n    at Parser.parseMethod (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:10703:10)\n    at Parser.parseObjectMethod (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:10619:19)\n    at Parser.parseObjPropValue (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:10661:23)\n    at Parser.parseObjectMember (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:10585:10)\n    at Parser.parseObj (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:10494:25)\n    at Parser.parseExprAtom (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:10090:28)\n    at Parser.parseExprSubscripts (F:\\xamp\\htdocs\\mitul\\app-backadmin-for-ecommerce\\node_modules\\@babel\\parser\\lib\\index.js:9688:23)");
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/passport/AuthorizedClients.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/passport/AuthorizedClients.vue?vue&type=script&lang=js& ***!
@@ -21147,6 +21158,25 @@ core_controller.helpers.each(
 return src;
 
 })));
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VideoApp/allForms.vue?vue&type=style&index=0&id=706b8cfc&scoped=true&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--9-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--9-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/VideoApp/allForms.vue?vue&type=style&index=0&id=706b8cfc&scoped=true&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n[type=file][data-v-706b8cfc]{\n    padding:3px;\n}\nimg[data-v-706b8cfc]{\n    max-width:100px;\n    max-height:100px;\n}\ntable[data-v-706b8cfc]{\n    margin-top:20px;\n}\n\n", ""]);
+
+// exports
 
 
 /***/ }),
@@ -68743,6 +68773,35 @@ runtime.setup(pusher_Pusher);
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VideoApp/allForms.vue?vue&type=style&index=0&id=706b8cfc&scoped=true&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader??ref--9-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--9-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/VideoApp/allForms.vue?vue&type=style&index=0&id=706b8cfc&scoped=true&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+            var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--9-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--9-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./allForms.vue?vue&type=style&index=0&id=706b8cfc&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VideoApp/allForms.vue?vue&type=style&index=0&id=706b8cfc&scoped=true&lang=css&");
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = api(content, options);
+
+
+
+module.exports = content.locals || {};
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/passport/AuthorizedClients.vue?vue&type=style&index=0&id=397d14ca&scoped=true&lang=css&":
 /*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader??ref--9-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--9-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/passport/AuthorizedClients.vue?vue&type=style&index=0&id=397d14ca&scoped=true&lang=css& ***!
@@ -69466,6 +69525,629 @@ var reactiveProp = {
   reactiveData: reactiveData,
   reactiveProp: reactiveProp
 });
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VideoApp/allForms.vue?vue&type=template&id=706b8cfc&scoped=true&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/VideoApp/allForms.vue?vue&type=template&id=706b8cfc&scoped=true& ***!
+  \********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container-fluid" }, [
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c(
+          "div",
+          { staticClass: "card" },
+          [
+            _c("div", { staticClass: "card-header" }, [
+              _vm._v("Manage Video App\n\n\n\n\n\n                    "),
+              _c(
+                "ul",
+                {
+                  staticClass:
+                    "nav nav-tabs piflex-column flex-sm-row formtab-fixed"
+                },
+                _vm._l(_vm.tabs, function(t, k) {
+                  return _c(
+                    "li",
+                    {
+                      staticClass: "nav-item ",
+                      on: {
+                        click: function($event) {
+                          return _vm.changeTab(k)
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "nav-link ",
+                          class: {
+                            active: _vm.currentFormTab == k,
+                            "ml-1": k > 0
+                          }
+                        },
+                        [_vm._v(_vm._s(t.name))]
+                      )
+                    ]
+                  )
+                }),
+                0
+              )
+            ]),
+            _vm._v(" "),
+            _vm._l(_vm.tabs, function(t, k) {
+              return _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.currentFormTab == k,
+                      expression: "currentFormTab== k"
+                    }
+                  ],
+                  staticClass: "card-body"
+                },
+                [
+                  t.hasOwnProperty("inputs")
+                    ? _c(
+                        "form",
+                        {
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                              return _vm.processForm(t.path)
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "row" },
+                            _vm._l(t.inputs, function(input) {
+                              var _obj
+                              return _c(
+                                "div",
+                                {
+                                  staticClass: "form-group ",
+                                  class:
+                                    ((_obj = {
+                                      "col-xs-12 col-sm-12 col-md-3 col-lg-3": !input.hasOwnProperty(
+                                        "size"
+                                      )
+                                    }),
+                                    (_obj[input.size] = input.hasOwnProperty(
+                                      "size"
+                                    )),
+                                    _obj)
+                                },
+                                [
+                                  input.type == "text" ||
+                                  input.type == "file" ||
+                                  input.type == "number"
+                                    ? _c("div", [
+                                        _c(
+                                          "label",
+                                          {
+                                            attrs: {
+                                              for: _vm.makeModelName(
+                                                t.model,
+                                                input.model
+                                              )
+                                            }
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(input.name) +
+                                                " " +
+                                                _vm._s(
+                                                  [t.model.toString()]["name"]
+                                                ) +
+                                                " "
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        input.type == "file"
+                                          ? _c("input", {
+                                              ref: _vm.makeModelName(
+                                                t.model,
+                                                input.model
+                                              ),
+                                              refInFor: true,
+                                              staticClass: "form-control",
+                                              class: {
+                                                "is-valid":
+                                                  _vm.validateInputs.includes(
+                                                    _vm.makeModelName(t.model)[
+                                                      input.model
+                                                    ]
+                                                  ) &&
+                                                  !_vm.validateInputCheck(
+                                                    _vm.makeModelName(t.model)[
+                                                      input.model
+                                                    ]
+                                                  ),
+                                                "is-invalid":
+                                                  _vm.validateInputs.includes(
+                                                    _vm.makeModelName(t.model)[
+                                                      input.model
+                                                    ]
+                                                  ) &&
+                                                  _vm.validateInputCheck(
+                                                    _vm.makeModelName(t.model)[
+                                                      input.model
+                                                    ]
+                                                  )
+                                              },
+                                              attrs: {
+                                                type: input.type,
+                                                name: _vm.makeModelName(
+                                                  t.model,
+                                                  input.model
+                                                ),
+                                                id: _vm.makeModelName(
+                                                  t.model,
+                                                  input.model
+                                                )
+                                              },
+                                              on: {
+                                                change: function($event) {
+                                                  return _vm.updateInput(
+                                                    $event,
+                                                    _vm.$data,
+                                                    input.type,
+                                                    t.model,
+                                                    input.model
+                                                  )
+                                                }
+                                              }
+                                            })
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        input.type === "checkbox" &&
+                                        (input.type == "text" ||
+                                          input.type == "number")
+                                          ? _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value:
+                                                    _vm.$data[
+                                                      _vm.makeModelName(t.model)
+                                                    ][input.model],
+                                                  expression:
+                                                    "$data[makeModelName(t.model)][input.model]"
+                                                }
+                                              ],
+                                              ref: _vm.makeModelName(
+                                                t.model,
+                                                input.model
+                                              ),
+                                              refInFor: true,
+                                              staticClass: "form-control",
+                                              class: {
+                                                "is-valid":
+                                                  _vm.validateInputs.includes(
+                                                    _vm.makeModelName(t.model)[
+                                                      input.model
+                                                    ]
+                                                  ) &&
+                                                  !_vm.validateInputCheck(
+                                                    _vm.makeModelName(t.model)[
+                                                      input.model
+                                                    ]
+                                                  ),
+                                                "is-invalid":
+                                                  _vm.validateInputs.includes(
+                                                    _vm.makeModelName(t.model)[
+                                                      input.model
+                                                    ]
+                                                  ) &&
+                                                  _vm.validateInputCheck(
+                                                    _vm.makeModelName(t.model)[
+                                                      input.model
+                                                    ]
+                                                  )
+                                              },
+                                              attrs: {
+                                                name: _vm.makeModelName(
+                                                  t.model,
+                                                  input.model
+                                                ),
+                                                id: _vm.makeModelName(
+                                                  t.model,
+                                                  input.model
+                                                ),
+                                                type: "checkbox"
+                                              },
+                                              domProps: {
+                                                checked: Array.isArray(
+                                                  _vm.$data[
+                                                    _vm.makeModelName(t.model)
+                                                  ][input.model]
+                                                )
+                                                  ? _vm._i(
+                                                      _vm.$data[
+                                                        _vm.makeModelName(
+                                                          t.model
+                                                        )
+                                                      ][input.model],
+                                                      null
+                                                    ) > -1
+                                                  : _vm.$data[
+                                                      _vm.makeModelName(t.model)
+                                                    ][input.model]
+                                              },
+                                              on: {
+                                                change: [
+                                                  function($event) {
+                                                    var $$a =
+                                                        _vm.$data[
+                                                          _vm.makeModelName(
+                                                            t.model
+                                                          )
+                                                        ][input.model],
+                                                      $$el = $event.target,
+                                                      $$c = $$el.checked
+                                                        ? true
+                                                        : false
+                                                    if (Array.isArray($$a)) {
+                                                      var $$v = null,
+                                                        $$i = _vm._i($$a, $$v)
+                                                      if ($$el.checked) {
+                                                        $$i < 0 &&
+                                                          _vm.$set(
+                                                            _vm.$data[
+                                                              _vm.makeModelName(
+                                                                t.model
+                                                              )
+                                                            ],
+                                                            input.model,
+                                                            $$a.concat([$$v])
+                                                          )
+                                                      } else {
+                                                        $$i > -1 &&
+                                                          _vm.$set(
+                                                            _vm.$data[
+                                                              _vm.makeModelName(
+                                                                t.model
+                                                              )
+                                                            ],
+                                                            input.model,
+                                                            $$a
+                                                              .slice(0, $$i)
+                                                              .concat(
+                                                                $$a.slice(
+                                                                  $$i + 1
+                                                                )
+                                                              )
+                                                          )
+                                                      }
+                                                    } else {
+                                                      _vm.$set(
+                                                        _vm.$data[
+                                                          _vm.makeModelName(
+                                                            t.model
+                                                          )
+                                                        ],
+                                                        input.model,
+                                                        $$c
+                                                      )
+                                                    }
+                                                  },
+                                                  function($event) {
+                                                    return _vm.updateInput(
+                                                      $event,
+                                                      input.type,
+                                                      t.model,
+                                                      input.model
+                                                    )
+                                                  }
+                                                ]
+                                              }
+                                            })
+                                          : input.type === "radio" &&
+                                            (input.type == "text" ||
+                                              input.type == "number")
+                                          ? _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value:
+                                                    _vm.$data[
+                                                      _vm.makeModelName(t.model)
+                                                    ][input.model],
+                                                  expression:
+                                                    "$data[makeModelName(t.model)][input.model]"
+                                                }
+                                              ],
+                                              ref: _vm.makeModelName(
+                                                t.model,
+                                                input.model
+                                              ),
+                                              refInFor: true,
+                                              staticClass: "form-control",
+                                              class: {
+                                                "is-valid":
+                                                  _vm.validateInputs.includes(
+                                                    _vm.makeModelName(t.model)[
+                                                      input.model
+                                                    ]
+                                                  ) &&
+                                                  !_vm.validateInputCheck(
+                                                    _vm.makeModelName(t.model)[
+                                                      input.model
+                                                    ]
+                                                  ),
+                                                "is-invalid":
+                                                  _vm.validateInputs.includes(
+                                                    _vm.makeModelName(t.model)[
+                                                      input.model
+                                                    ]
+                                                  ) &&
+                                                  _vm.validateInputCheck(
+                                                    _vm.makeModelName(t.model)[
+                                                      input.model
+                                                    ]
+                                                  )
+                                              },
+                                              attrs: {
+                                                name: _vm.makeModelName(
+                                                  t.model,
+                                                  input.model
+                                                ),
+                                                id: _vm.makeModelName(
+                                                  t.model,
+                                                  input.model
+                                                ),
+                                                type: "radio"
+                                              },
+                                              domProps: {
+                                                checked: _vm._q(
+                                                  _vm.$data[
+                                                    _vm.makeModelName(t.model)
+                                                  ][input.model],
+                                                  null
+                                                )
+                                              },
+                                              on: {
+                                                change: [
+                                                  function($event) {
+                                                    _vm.$set(
+                                                      _vm.$data[
+                                                        _vm.makeModelName(
+                                                          t.model
+                                                        )
+                                                      ],
+                                                      input.model,
+                                                      null
+                                                    )
+                                                  },
+                                                  function($event) {
+                                                    return _vm.updateInput(
+                                                      $event,
+                                                      input.type,
+                                                      t.model,
+                                                      input.model
+                                                    )
+                                                  }
+                                                ]
+                                              }
+                                            })
+                                          : input.type == "text" ||
+                                            input.type == "number"
+                                          ? _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value:
+                                                    _vm.$data[
+                                                      _vm.makeModelName(t.model)
+                                                    ][input.model],
+                                                  expression:
+                                                    "$data[makeModelName(t.model)][input.model]"
+                                                }
+                                              ],
+                                              ref: _vm.makeModelName(
+                                                t.model,
+                                                input.model
+                                              ),
+                                              refInFor: true,
+                                              staticClass: "form-control",
+                                              class: {
+                                                "is-valid":
+                                                  _vm.validateInputs.includes(
+                                                    _vm.makeModelName(t.model)[
+                                                      input.model
+                                                    ]
+                                                  ) &&
+                                                  !_vm.validateInputCheck(
+                                                    _vm.makeModelName(t.model)[
+                                                      input.model
+                                                    ]
+                                                  ),
+                                                "is-invalid":
+                                                  _vm.validateInputs.includes(
+                                                    _vm.makeModelName(t.model)[
+                                                      input.model
+                                                    ]
+                                                  ) &&
+                                                  _vm.validateInputCheck(
+                                                    _vm.makeModelName(t.model)[
+                                                      input.model
+                                                    ]
+                                                  )
+                                              },
+                                              attrs: {
+                                                name: _vm.makeModelName(
+                                                  t.model,
+                                                  input.model
+                                                ),
+                                                id: _vm.makeModelName(
+                                                  t.model,
+                                                  input.model
+                                                ),
+                                                type: input.type
+                                              },
+                                              domProps: {
+                                                value:
+                                                  _vm.$data[
+                                                    _vm.makeModelName(t.model)
+                                                  ][input.model]
+                                              },
+                                              on: {
+                                                change: function($event) {
+                                                  return _vm.updateInput(
+                                                    $event,
+                                                    input.type,
+                                                    t.model,
+                                                    input.model
+                                                  )
+                                                },
+                                                input: function($event) {
+                                                  if ($event.target.composing) {
+                                                    return
+                                                  }
+                                                  _vm.$set(
+                                                    _vm.$data[
+                                                      _vm.makeModelName(t.model)
+                                                    ],
+                                                    input.model,
+                                                    $event.target.value
+                                                  )
+                                                }
+                                              }
+                                            })
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        _vm.$data[
+                                          _vm.makeModelName(t.model)
+                                        ].hasOwnProperty(input.model)
+                                          ? _c("div", [
+                                              _c("img", {
+                                                attrs: {
+                                                  src:
+                                                    _vm.$data[
+                                                      _vm.makeModelName(t.model)
+                                                    ][input.model]
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c("small", [_vm._v("Preview")])
+                                            ])
+                                          : _vm._e()
+                                      ])
+                                    : _vm._e(),
+                                  _vm._v(
+                                    "\n\n\n\n                                " +
+                                      _vm._s([t.model][input.model]) +
+                                      "\n\n                                "
+                                  ),
+                                  _vm.inputError1.hasOwnProperty(input.model)
+                                    ? _c(
+                                        "div",
+                                        _vm._l(
+                                          _vm.inputError1[input.model],
+                                          function(er) {
+                                            return _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "alert alert-danger",
+                                                attrs: { role: "alert" }
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                                        " +
+                                                    _vm._s(er) +
+                                                    "\n                                    "
+                                                )
+                                              ]
+                                            )
+                                          }
+                                        ),
+                                        0
+                                      )
+                                    : _vm._e()
+                                ]
+                              )
+                            }),
+                            0
+                          ),
+                          _vm._v(" "),
+                          _vm._m(0, true)
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  t.hasOwnProperty("list") && t.list.hasOwnProperty("columns")
+                    ? _c("div", [
+                        _c(
+                          "table",
+                          { staticClass: "table table-bordered" },
+                          [
+                            _c(
+                              "tr",
+                              _vm._l(t.list.columns, function(c) {
+                                return _c("th", [_vm._v(_vm._s(c))])
+                              }),
+                              0
+                            ),
+                            _vm._v(" "),
+                            _vm._l(_vm.retriveData(t.model, t.list), function(
+                              r
+                            ) {
+                              return _c("tr")
+                            })
+                          ],
+                          2
+                        )
+                      ])
+                    : _vm._e()
+                ]
+              )
+            })
+          ],
+          2
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mt-3" }, [
+      _c("input", {
+        staticClass: "btn btn-secondary col-12",
+        attrs: { type: "submit", name: "submit" }
+      })
+    ])
+  }
+]
+render._withStripped = true
+
+
 
 /***/ }),
 
@@ -77379,6 +78061,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('chartforliveuser', __webpa
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('authclient', __webpack_require__(/*! ./components/passport/AuthorizedClients */ "./resources/js/components/passport/AuthorizedClients.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('client', __webpack_require__(/*! ./components/passport/Clients */ "./resources/js/components/passport/Clients.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('accesstoken', __webpack_require__(/*! ./components/passport/PersonalAccessTokens */ "./resources/js/components/passport/PersonalAccessTokens.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('allformforvideoapp', __webpack_require__(/*! ./components/VideoApp/allForms */ "./resources/js/components/VideoApp/allForms.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -77623,6 +78306,93 @@ window.EchoRaw = laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"];
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/components/VideoApp/allForms.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/VideoApp/allForms.vue ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _allForms_vue_vue_type_template_id_706b8cfc_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./allForms.vue?vue&type=template&id=706b8cfc&scoped=true& */ "./resources/js/components/VideoApp/allForms.vue?vue&type=template&id=706b8cfc&scoped=true&");
+/* harmony import */ var _allForms_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./allForms.vue?vue&type=script&lang=js& */ "./resources/js/components/VideoApp/allForms.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _allForms_vue_vue_type_style_index_0_id_706b8cfc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./allForms.vue?vue&type=style&index=0&id=706b8cfc&scoped=true&lang=css& */ "./resources/js/components/VideoApp/allForms.vue?vue&type=style&index=0&id=706b8cfc&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _allForms_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _allForms_vue_vue_type_template_id_706b8cfc_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _allForms_vue_vue_type_template_id_706b8cfc_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "706b8cfc",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/VideoApp/allForms.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/VideoApp/allForms.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/VideoApp/allForms.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_allForms_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./allForms.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VideoApp/allForms.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_allForms_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/VideoApp/allForms.vue?vue&type=style&index=0&id=706b8cfc&scoped=true&lang=css&":
+/*!****************************************************************************************************************!*\
+  !*** ./resources/js/components/VideoApp/allForms.vue?vue&type=style&index=0&id=706b8cfc&scoped=true&lang=css& ***!
+  \****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_index_js_ref_9_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_vue_loader_lib_index_js_vue_loader_options_allForms_vue_vue_type_style_index_0_id_706b8cfc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader??ref--9-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--9-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./allForms.vue?vue&type=style&index=0&id=706b8cfc&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VideoApp/allForms.vue?vue&type=style&index=0&id=706b8cfc&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_index_js_ref_9_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_vue_loader_lib_index_js_vue_loader_options_allForms_vue_vue_type_style_index_0_id_706b8cfc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_index_js_ref_9_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_vue_loader_lib_index_js_vue_loader_options_allForms_vue_vue_type_style_index_0_id_706b8cfc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_index_js_ref_9_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_vue_loader_lib_index_js_vue_loader_options_allForms_vue_vue_type_style_index_0_id_706b8cfc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_index_js_ref_9_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_vue_loader_lib_index_js_vue_loader_options_allForms_vue_vue_type_style_index_0_id_706b8cfc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_index_js_ref_9_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_vue_loader_lib_index_js_vue_loader_options_allForms_vue_vue_type_style_index_0_id_706b8cfc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/VideoApp/allForms.vue?vue&type=template&id=706b8cfc&scoped=true&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/components/VideoApp/allForms.vue?vue&type=template&id=706b8cfc&scoped=true& ***!
+  \**************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_allForms_vue_vue_type_template_id_706b8cfc_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./allForms.vue?vue&type=template&id=706b8cfc&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VideoApp/allForms.vue?vue&type=template&id=706b8cfc&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_allForms_vue_vue_type_template_id_706b8cfc_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_allForms_vue_vue_type_template_id_706b8cfc_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 

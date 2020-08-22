@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Broadcast;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 use \App\Model\Settings\Product\Units;
 
@@ -29,6 +30,15 @@ Route::get('/',function (){
 });
 
 
+Route::get('/test5', function (Request $request) {
+
+dd( \Illuminate\Support\Facades\Auth::user()->getRememberToken());
+return view('vendor.passport.authorize')->with('client',[]);
+
+
+
+
+});
 Route::get('/test2', function (Request $request) {
 
     session()->put('state', $state = Str::random(40));
@@ -55,14 +65,15 @@ Route::any('/test3',function (\Illuminate\Http\Request $r) {
     session()->put('state', $state = Str::random(40));
 
     $query = http_build_query([
-        'client_id' => 'client-id',
+        'client_id' => '91566191-9189-4220-826e-b0f36e63a426',
         'redirect_uri' => redirect('/test4'),
         'response_type' => 'token',
+        'client_secret' => 'iVUpHnND2wGEBn4ct2LQiJjfj7iktpucMJ7AO4Jf',
         'scope' => '',
         'state' => $state,
     ]);
 
-    return redirect('http://your-app.com/oauth/authorize?'.$query);
+    return redirect('oauth/authorize?'.$query);
 
 });
 
@@ -323,6 +334,15 @@ Route::prefix('api')->group(function () {
 
 });
 
+
+Route::prefix('videoapp')->group(function () {
+    Route::match(['get','post'],'/feedData', 'VideoApp\MainController@allForms')->name('videoapp.allForms');
+
+    Route::match(['post'],'/getData', 'VideoApp\MainController@getData')->name('videoapp.getData');
+
+});
+
+
 Route::get('/videoapp', function (Request $request) {
 
 
@@ -354,17 +374,24 @@ Route::get('/videoapp', function (Request $request) {
                 [
                     'mp3Url'=>'https://firebasestorage.googleapis.com/v0/b/dfdfbit-8d9e7.appspot.com/o/AllVideoStatus1582111593976.null?alt=media&token=c75e56c9-563a-4d2d-b29f-b234c2d5c425',
                     'name'=>'Ante_Mhma_Arebic',
-                    'thumbUrl'=>'https://firebasestorage.googleapis.com/v0/b/mbitvideomaker.appspot.com/o/gif%2Fframe%2Fic_frame_0.gif?alt=media&token=bff86b93-b0a4-496c-b02c-5eb7900a1069'
+                    'thumbUrl'=>'https://firebasestorage.googleapis.com/v0/b/mbitvideomaker.appspot.com/o/gif%2Fframe%2Fic_frame_0.gif?alt=media&token=bff86b93-b0a4-496c-b02c-5eb7900a1069',
+                    'type'=>'new'
                 ]
             ],
-            'Category'=>[
-                [
-                    'icon'=>'https://firebasestorage.googleapis.com/v0/b/mbitvideomaker.appspot.com/o/images%2FCategory%2FArabic.png?alt=media&token=2232b7af-b9f8-4f23-9f57-53dcee54b6d3',
-                    'name'=>'Arabic',
-                ]
+//            'Category'=>[
+//                [
+//                    'icon'=>'https://firebasestorage.googleapis.com/v0/b/mbitvideomaker.appspot.com/o/images%2FCategory%2FArabic.png?alt=media&token=2232b7af-b9f8-4f23-9f57-53dcee54b6d3',
+//                    'name'=>'Arabic',
+//                ]
+//            ]
+
+
+        ],
+        'Category'=>[
+            [
+                'icon'=>'https://firebasestorage.googleapis.com/v0/b/mbitvideomaker.appspot.com/o/images%2FCategory%2FArabic.png?alt=media&token=2232b7af-b9f8-4f23-9f57-53dcee54b6d3',
+                'name'=>'Arabic',
             ]
-
-
         ]
 
     ];
