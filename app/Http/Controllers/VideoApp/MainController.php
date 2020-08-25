@@ -23,7 +23,11 @@ class MainController extends Controller
         $Vuedata=[
 
             'path'=>[
-                'retriveListData'=>route('videoapp.getData')
+                'retriveListData'=>route('videoapp.getData'),
+                'feedDatatoDB'=>route('videoapp.feedDataToDB'),
+                'frame_url'=>route('videoapp.getFile'),
+                'delete'=>route('videoapp.deleteData'),
+                'edit'=>route('videoapp.editDataToDB')
 
             ]
         ];
@@ -36,5 +40,27 @@ class MainController extends Controller
 
     public function getData(Request $r){
         return Doit::getData($r);
+    }
+    public function getFile(Request $r){
+        return Doit::getFile($r);
+    }
+   public function deleteData(Request $r){
+        return Doit::deleteData($r);
+    }
+
+    public function feedDataIntToDb(Request $r){
+
+        return Doit::ProcessFormData($r);
+
+
+
+
+    } public function editDataIntToDb(Request $r){
+
+        return Doit::editDataIntToDb($r);
+
+
+
+
     }
 }

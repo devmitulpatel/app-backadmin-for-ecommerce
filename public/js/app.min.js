@@ -41,6 +41,61 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -198,7 +253,8 @@ __webpack_require__.r(__webpack_exports__);
       tabs: [{
         name: 'Frame',
         model: 'frame',
-        path: '/test',
+        path: this.msData.path.feedDatatoDB,
+        editpath: this.msData.path.edit,
         inputs: [{
           name: 'Name',
           model: 'name',
@@ -206,67 +262,6 @@ __webpack_require__.r(__webpack_exports__);
         }, {
           name: 'Image',
           model: 'imageUrl',
-          type: 'file'
-        }, {
-          name: 'Thumb Images',
-          model: 'thumnUrk',
-          type: 'file'
-        }, {
-          name: 'Status',
-          model: 'status',
-          type: 'radio'
-        }],
-        list: {
-          model: 'list_frame',
-          columns: ['name', 'Image', 'Thumb Image'],
-          path: this.msData.path.retriveListData
-        }
-      }, {
-        name: 'Image',
-        model: 'image',
-        path: '/test',
-        inputs: [{
-          name: 'Image',
-          model: 'imageUrl',
-          type: 'file'
-        }, {
-          name: 'Status',
-          model: 'status',
-          type: 'radio'
-        }],
-        list: {
-          model: 'list_image',
-          columns: ['name'],
-          path: this.msData.path.retriveListData
-        }
-      }, {
-        name: 'Sticker',
-        model: 'sticker',
-        path: '/test',
-        inputs: [{
-          name: 'Name',
-          model: 'name',
-          type: 'text'
-        }, {
-          name: 'Image',
-          model: 'imageUrl',
-          type: 'file'
-        }, {
-          name: 'Status',
-          model: 'status',
-          type: 'radio'
-        }]
-      }, {
-        name: 'Ringtone',
-        model: 'ringtone',
-        path: '/test',
-        inputs: [{
-          name: 'Name',
-          model: 'name',
-          type: 'text'
-        }, {
-          name: 'Music File',
-          model: 'mp3Url',
           type: 'file'
         }, {
           name: 'Thumb Images',
@@ -276,25 +271,148 @@ __webpack_require__.r(__webpack_exports__);
           name: 'Status',
           model: 'status',
           type: 'radio'
-        }]
+        }],
+        list: {
+          model: 'list_frame',
+          columns: [{
+            'text': 'Name',
+            'model': 'name',
+            'type': 'text'
+          }, {
+            'text': 'Image',
+            'model': 'imageUrl',
+            'type': 'image'
+          }, {
+            'text': 'Thumbnail',
+            'model': 'thumbUrl',
+            'type': 'image'
+          }],
+          path: this.msData.path.retriveListData
+        }
       }, {
-        name: 'Ringtone Category',
-        model: 'ringtoneCat',
-        path: '/test',
+        name: 'Image',
+        model: 'image',
+        path: this.msData.path.feedDatatoDB,
+        editpath: this.msData.path.edit,
         inputs: [{
-          name: 'Name',
-          model: 'name',
-          type: 'text'
-        }, {
-          name: 'Thumb Images',
-          model: 'icon',
+          name: 'Image',
+          model: 'thumbUrl',
           type: 'file'
         }, {
           name: 'Status',
           model: 'status',
           type: 'radio'
-        }]
+        }],
+        list: {
+          model: 'list_image',
+          columns: [{
+            'text': 'Image',
+            'model': 'thumbUrl',
+            'type': 'image'
+          }],
+          path: this.msData.path.retriveListData
+        }
+      }, {
+        name: 'Sticker',
+        model: 'sticker',
+        path: this.msData.path.feedDatatoDB,
+        editpath: this.msData.path.edit,
+        inputs: [{
+          name: 'Name',
+          model: 'name',
+          type: 'text'
+        }, {
+          name: 'Image',
+          model: 'thumbUrl',
+          type: 'file'
+        }],
+        list: {
+          model: 'list_sticker',
+          columns: [{
+            text: 'Name',
+            model: 'name',
+            type: 'text'
+          }, {
+            text: 'Thumb Image',
+            model: 'thumbUrl',
+            type: 'image'
+          }],
+          path: this.msData.path.retriveListData
+        }
+      }, {
+        name: 'Ringtone',
+        model: 'ringtone',
+        path: this.msData.path.feedDatatoDB,
+        editpath: this.msData.path.edit,
+        inputs: [{
+          name: 'Name',
+          model: 'name',
+          type: 'text'
+        }, {
+          name: 'Type',
+          model: 'type',
+          type: 'option',
+          data: 'list_ringtoneCat'
+        }, {
+          name: 'Music File',
+          model: 'mp3Url',
+          type: 'file'
+        }, {
+          name: 'Thumb Image',
+          model: 'thumbUrl',
+          type: 'file'
+        }],
+        list: {
+          model: 'list_ringtone',
+          columns: [{
+            text: 'Name',
+            model: 'name',
+            type: 'text'
+          }, {
+            text: 'Music file',
+            model: 'mp3Url',
+            type: 'music'
+          }, {
+            text: 'Thumb Image',
+            model: 'thumbUrl',
+            type: 'image'
+          }, {
+            text: 'Type',
+            model: 'type',
+            type: 'option',
+            data: 'list_ringtoneCat'
+          }],
+          path: this.msData.path.retriveListData
+        }
+      }, {
+        name: 'Ringtone Category',
+        model: 'ringtoneCat',
+        path: this.msData.path.feedDatatoDB,
+        editpath: this.msData.path.edit,
+        inputs: [{
+          name: 'Name',
+          model: 'name',
+          type: 'text'
+        }, {
+          name: 'Thumb Image',
+          model: 'icon',
+          type: 'file'
+        }],
+        list: {
+          model: 'list_ringtoneCat',
+          columns: [{
+            text: 'Name',
+            model: 'name',
+            type: 'text'
+          }, {
+            text: 'Icon Image',
+            model: 'icon',
+            type: 'image'
+          }],
+          path: this.msData.path.retriveListData
+        }
       }],
+      editOn: false,
       allFiles: {},
       validateInputs: [],
       inputError1: [],
@@ -313,16 +431,181 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    getDynamicFromId: function getDynamicFromId(id, data) {
+      id = id.toString();
+      var mData = this[data];
+      var foundKey = false;
+
+      for (var i in mData) {
+        console.log("--Start---");
+        console.log(mData[i]);
+        if (mData[i].id == id) foundKey = i;
+
+        if (foundKey == false) {
+          console.log(id);
+          console.log(mData[i].id);
+          console.log(mData[i].id == id);
+          console.log("---End--");
+        }
+      }
+
+      return foundKey === false ? "No Ringtone Category Found" : mData[foundKey].name;
+    },
+    editRow: function editRow(model, d) {
+      var n = this.makeModelName(model);
+      this[n] = d;
+      this.editOn = true;
+    },
+    deleteRow: function deleteRow(model, d) {
+      var data = {
+        id: d.id,
+        type: model
+      };
+      var url = this.msData.path["delete"];
+      var th = this;
+      axios.post(url, data).then(function (res) {
+        var data = res.data;
+        if (data.hasOwnProperty('ResponseMessage') && _typeof(data.ResponseMessage) == "object") Vue.toasted.success(data.ResponseMessage[0], {
+          duration: 1000
+        });
+        th.getDataFor(model); //  th.resetForm(baseData.model);
+      })["catch"](function (e) {
+        var data = e.response;
+        if (data.hasOwnProperty('ResponseMessage') && _typeof(data.ResponseMessage) == "object") Vue.toasted.error(data.ResponseMessage[0], {
+          duration: 1000
+        });
+      });
+      console.log(d.id);
+    },
+    processForm: function processForm(e, url, formType) {
+      //console.log(e);
+      switch (formType) {
+        case 0:
+          var inputData = this.input_frame;
+          var baseData = this.tabs[formType];
+          var files = this.allFiles.hasOwnProperty(['input', this.tabs[formType].model].join('_')) ? this.allFiles[['input', this.tabs[formType].model].join('_')] : {};
+          var fData = new FormData();
+
+          for (var i in inputData) {
+            if (files.hasOwnProperty(i)) {
+              fData.append(i, files[i], files[i].name);
+            } else {
+              fData.append(i, inputData[i]);
+            }
+          }
+
+          fData.append('formtype', formType);
+          break;
+
+        case 1:
+          var inputData = this.input_image;
+          var baseData = this.tabs[formType];
+          var files = this.allFiles.hasOwnProperty(['input', this.tabs[formType].model].join('_')) ? this.allFiles[['input', this.tabs[formType].model].join('_')] : {};
+          var fData = new FormData();
+
+          for (var i in inputData) {
+            if (files.hasOwnProperty(i)) {
+              fData.append(i, files[i], files[i].name);
+            } else {
+              fData.append(i, inputData[i]);
+            }
+          }
+
+          fData.append('formtype', formType);
+          break;
+
+        case 2:
+          var inputData = this.input_sticker;
+          var baseData = this.tabs[formType];
+          var files = this.allFiles.hasOwnProperty(['input', this.tabs[formType].model].join('_')) ? this.allFiles[['input', this.tabs[formType].model].join('_')] : {};
+          var fData = new FormData();
+
+          for (var i in inputData) {
+            if (files.hasOwnProperty(i)) {
+              fData.append(i, files[i], files[i].name);
+            } else {
+              fData.append(i, inputData[i]);
+            }
+          }
+
+          fData.append('formtype', formType);
+          break;
+
+        case 3:
+          var inputData = this.input_ringtone;
+          var baseData = this.tabs[formType];
+          var files = this.allFiles.hasOwnProperty(['input', this.tabs[formType].model].join('_')) ? this.allFiles[['input', this.tabs[formType].model].join('_')] : {};
+          var fData = new FormData();
+
+          for (var i in inputData) {
+            if (files.hasOwnProperty(i)) {
+              fData.append(i, files[i], files[i].name);
+            } else {
+              fData.append(i, inputData[i]);
+            }
+          }
+
+          fData.append('formtype', formType);
+          break;
+
+        case 4:
+          var inputData = this.input_ringtoneCat;
+          var baseData = this.tabs[formType];
+          var files = this.allFiles.hasOwnProperty(['input', this.tabs[formType].model].join('_')) ? this.allFiles[['input', this.tabs[formType].model].join('_')] : {};
+          var fData = new FormData();
+
+          for (var i in inputData) {
+            if (files.hasOwnProperty(i)) {
+              fData.append(i, files[i], files[i].name);
+            } else {
+              fData.append(i, inputData[i]);
+            }
+          }
+
+          fData.append('formtype', formType);
+          break;
+      }
+
+      var th = this;
+      axios.post(url, fData).then(function (res) {
+        var data = res.data;
+        if (data.hasOwnProperty('ResponseMessage') && _typeof(data.ResponseMessage) == "object") Vue.toasted.success(data.ResponseMessage[0], {
+          duration: 1000
+        });
+        th.getDataFor(baseData.model);
+        th.resetForm(baseData.model);
+      })["catch"](function (e) {
+        var data = e.response;
+        if (data.hasOwnProperty('ResponseMessage') && _typeof(data.ResponseMessage) == "object") Vue.toasted.error(data.ResponseMessage[0], {
+          duration: 1000
+        });
+      });
+    },
+    resetForm: function resetForm(model) {
+      if (this.editOn) this.editOn = false;
+      var n = this.makeModelName(model);
+      this.allFiles[n] = {};
+      this[n] = {};
+    },
+    validateDataForm: function validateDataForm(inputData, baseData) {
+      var inputs = baseData.inputs;
+
+      for (var i in inputs) {
+        if (inputs[i].hasOwnProperty('model') && inputData.hasOwnProperty(inputs[i].model) && inputData[inputs[i].model].hasOwnProperty('validate')) {}
+      }
+    },
     getDataFor: function getDataFor(type) {
       var data = {
         type: type
-      };
+      }; //Vue.toasted.success('Waiting For New Data',{duration:500});
+
       var url = this.msData.path.retriveListData;
       var dataModel = ['list', type].join('_');
       var th = this;
       axios.post(url, data).then(function (res) {
         var inData = res.data.ResponseMessage;
-        th[dataModel] = inData; //   th.getttingData=false;
+        th[dataModel] = inData; //  Vue.toasted.success('New Data Loaded',{duration:500});
+        //   th.getttingData=false;
       })["catch"](function (e) {// th.getttingData=false;
       });
     },
@@ -377,9 +660,9 @@ __webpack_require__.r(__webpack_exports__);
       var rootModelFinal = this.makeModelName(rootmodel);
       if (!this.allFiles.hasOwnProperty(rootModelFinal)) this.allFiles[rootModelFinal] = {};
       this.allFiles[rootModelFinal][submodel] = file[0];
+      var th = this;
 
       if (!(rootmodel == 'ringtone' && submodel == 'mp3Url')) {
-        var th = this;
         var reader = new FileReader();
 
         reader.onload = function (e) {
@@ -389,6 +672,9 @@ __webpack_require__.r(__webpack_exports__);
         };
 
         reader.readAsDataURL(file[0]);
+      } else {
+        d[rootModelFinal][submodel] = 'musicfile';
+        th.refreshInput(rootModelFinal);
       }
     }
   }
@@ -69963,7 +70249,11 @@ var render = function() {
                           on: {
                             submit: function($event) {
                               $event.preventDefault()
-                              return _vm.processForm(t.path)
+                              _vm.processForm(
+                                $event,
+                                !_vm.editOn ? t.path : t.editpath,
+                                k
+                              )
                             }
                           }
                         },
@@ -69991,7 +70281,8 @@ var render = function() {
                                 [
                                   input.type == "text" ||
                                   input.type == "file" ||
-                                  input.type == "number"
+                                  input.type == "number" ||
+                                  input.type == "option"
                                     ? _c("div", [
                                         _c(
                                           "label",
@@ -70048,6 +70339,7 @@ var render = function() {
                                                   )
                                               },
                                               attrs: {
+                                                required: !_vm.editOn,
                                                 type: input.type,
                                                 name: _vm.makeModelName(
                                                   t.model,
@@ -70119,6 +70411,7 @@ var render = function() {
                                                   )
                                               },
                                               attrs: {
+                                                required: !_vm.editOn,
                                                 name: _vm.makeModelName(
                                                   t.model,
                                                   input.model
@@ -70262,6 +70555,7 @@ var render = function() {
                                                   )
                                               },
                                               attrs: {
+                                                required: !_vm.editOn,
                                                 name: _vm.makeModelName(
                                                   t.model,
                                                   input.model
@@ -70350,6 +70644,7 @@ var render = function() {
                                                   )
                                               },
                                               attrs: {
+                                                required: !_vm.editOn,
                                                 name: _vm.makeModelName(
                                                   t.model,
                                                   input.model
@@ -70391,6 +70686,122 @@ var render = function() {
                                             })
                                           : _vm._e(),
                                         _vm._v(" "),
+                                        input.type == "option"
+                                          ? _c("div", [
+                                              _c(
+                                                "select",
+                                                {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value:
+                                                        _vm.$data[
+                                                          _vm.makeModelName(
+                                                            t.model
+                                                          )
+                                                        ][input.model],
+                                                      expression:
+                                                        "$data[makeModelName(t.model)][input.model]"
+                                                    }
+                                                  ],
+                                                  staticClass: "form-control",
+                                                  class: {
+                                                    "is-valid":
+                                                      _vm.validateInputs.includes(
+                                                        _vm.makeModelName(
+                                                          t.model
+                                                        )[input.model]
+                                                      ) &&
+                                                      !_vm.validateInputCheck(
+                                                        _vm.makeModelName(
+                                                          t.model
+                                                        )[input.model]
+                                                      ),
+                                                    "is-invalid":
+                                                      _vm.validateInputs.includes(
+                                                        _vm.makeModelName(
+                                                          t.model
+                                                        )[input.model]
+                                                      ) &&
+                                                      _vm.validateInputCheck(
+                                                        _vm.makeModelName(
+                                                          t.model
+                                                        )[input.model]
+                                                      )
+                                                  },
+                                                  attrs: {
+                                                    type: input.type,
+                                                    name: _vm.makeModelName(
+                                                      t.model,
+                                                      input.model
+                                                    ),
+                                                    id: _vm.makeModelName(
+                                                      t.model,
+                                                      input.model
+                                                    )
+                                                  },
+                                                  on: {
+                                                    change: [
+                                                      function($event) {
+                                                        var $$selectedVal = Array.prototype.filter
+                                                          .call(
+                                                            $event.target
+                                                              .options,
+                                                            function(o) {
+                                                              return o.selected
+                                                            }
+                                                          )
+                                                          .map(function(o) {
+                                                            var val =
+                                                              "_value" in o
+                                                                ? o._value
+                                                                : o.value
+                                                            return val
+                                                          })
+                                                        _vm.$set(
+                                                          _vm.$data[
+                                                            _vm.makeModelName(
+                                                              t.model
+                                                            )
+                                                          ],
+                                                          input.model,
+                                                          $event.target.multiple
+                                                            ? $$selectedVal
+                                                            : $$selectedVal[0]
+                                                        )
+                                                      },
+                                                      function($event) {
+                                                        return _vm.updateInput(
+                                                          $event,
+                                                          input.type,
+                                                          t.model,
+                                                          input.model
+                                                        )
+                                                      }
+                                                    ]
+                                                  }
+                                                },
+                                                _vm._l(
+                                                  _vm.$data[input.data],
+                                                  function(v) {
+                                                    return _c(
+                                                      "option",
+                                                      {
+                                                        domProps: {
+                                                          value: v.id
+                                                        }
+                                                      },
+                                                      [_vm._v(_vm._s(v.name))]
+                                                    )
+                                                  }
+                                                ),
+                                                0
+                                              )
+                                            ])
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        input.type == "file" &&
                                         _vm.$data[
                                           _vm.makeModelName(t.model)
                                         ].hasOwnProperty(input.model)
@@ -70459,14 +70870,137 @@ var render = function() {
                           [
                             _c(
                               "tr",
-                              _vm._l(t.list.columns, function(c) {
-                                return _c("th", [_vm._v(_vm._s(c))])
-                              }),
-                              0
+                              [
+                                _vm._l(t.list.columns, function(c) {
+                                  return _c("th", [_vm._v(_vm._s(c.text))])
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "th",
+                                  { staticStyle: { "text-align": "center" } },
+                                  [_vm._v("Action")]
+                                )
+                              ],
+                              2
                             ),
                             _vm._v(" "),
-                            _vm._l(_vm.list_frame, function(r) {
-                              return _c("tr")
+                            _vm._l(_vm.$data[t.list.model], function(r, k) {
+                              return _c(
+                                "tr",
+                                [
+                                  _vm._l(t.list.columns, function(c) {
+                                    return _c("td", [
+                                      c.type == "text"
+                                        ? _c("div", [
+                                            _vm._v(
+                                              "\n                                    " +
+                                                _vm._s(r[c.model]) +
+                                                "\n                                    "
+                                            )
+                                          ])
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      c.type == "image"
+                                        ? _c("div", [
+                                            _c("img", {
+                                              staticStyle: {
+                                                "max-height": "100px"
+                                              },
+                                              attrs: { src: r[c.model] }
+                                            })
+                                          ])
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      c.type == "music"
+                                        ? _c("div", [
+                                            _c(
+                                              "audio",
+                                              { attrs: { controls: "" } },
+                                              [
+                                                _c("source", {
+                                                  attrs: {
+                                                    src: r[c.model],
+                                                    type: "audio/mpeg"
+                                                  }
+                                                }),
+                                                _vm._v(
+                                                  "\n                                            Your browser does not support the audio element.\n                                        "
+                                                )
+                                              ]
+                                            )
+                                          ])
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      c.type == "option"
+                                        ? _c("div", [
+                                            _vm._v(
+                                              "\n\n                                              " +
+                                                _vm._s(
+                                                  _vm.getDynamicFromId(
+                                                    r[c.model],
+                                                    c.data
+                                                  )
+                                                ) +
+                                                "\n\n                                    "
+                                            )
+                                          ])
+                                        : _vm._e()
+                                    ])
+                                  }),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "btn-group col-12",
+                                        attrs: {
+                                          role: "group",
+                                          "aria-label": "Basic example"
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-outline-info",
+                                            attrs: { type: "button" },
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.editRow(t.model, r)
+                                              }
+                                            }
+                                          },
+                                          [
+                                            _c("i", {
+                                              staticClass: "fas fa-pencil-alt"
+                                            })
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass:
+                                              "btn btn-outline-danger",
+                                            attrs: { type: "button" },
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.deleteRow(t.model, r)
+                                              }
+                                            }
+                                          },
+                                          [
+                                            _c("i", {
+                                              staticClass: "fas fa-trash-alt"
+                                            })
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ],
+                                2
+                              )
                             })
                           ],
                           2

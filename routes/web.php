@@ -339,60 +339,30 @@ Route::prefix('videoapp')->group(function () {
     Route::match(['get','post'],'/feedData', 'VideoApp\MainController@allForms')->name('videoapp.allForms');
 
     Route::match(['post'],'/getData', 'VideoApp\MainController@getData')->name('videoapp.getData');
+    Route::match(['get'],'/getFile', 'VideoApp\MainController@getFile')->name('videoapp.getFile');
+    Route::match(['post'],'/feedDataIntoToDb', 'VideoApp\MainController@feedDataIntToDb')->name('videoapp.feedDataToDB');
+    Route::match(['post'],'/editDataIntoToDb', 'VideoApp\MainController@editDataIntToDb')->name('videoapp.editDataToDB');
+
+    Route::match(['post'],'/delete', 'VideoApp\MainController@deleteData')->name('videoapp.deleteData');
 
 });
 
 
-Route::get('/videoapp', function (Request $request) {
+Route::get('/videoapp/getDataForApp', function (Request $request) {
 
 
     $data=[
 
         'ParticleNew'=>[
-            'Frame'=>[
+            'Frame'=>\App\Model\VideoApp\Frame::select(['name','thumbUrl','imageUrl'])->get(),
 
-                'imageUrl'=>'https://firebasestorage.googleapis.com/v0/b/mbitvideomaker.appspot.com/o/gif%2Fframe%2Fic_frame_0_png.png?alt=media&token=85cdc719-6daa-4bf0-8017-899b1180b283',
-                'name'=>1,
-                'thumbUrl'=>'https://firebasestorage.googleapis.com/v0/b/mbitvideomaker.appspot.com/o/gif%2Fframe%2Fic_frame_0.gif?alt=media&token=bff86b93-b0a4-496c-b02c-5eb7900a1069'
-            ],
-
-            'Image'=>[
-                [
-                    'thumbUrl'=>'https://firebasestorage.googleapis.com/v0/b/dfdfbit-8d9e7.appspot.com/o/AllVideoStatus1582117320882.null?alt=media&token=d0675f29-ee45-4914-a194-73f92e0715fe'
-                ]
-            ],
-            'Sticker'=>[
-                [
-                    'name'=>'sticker_21',
-                    'thumbUrl'=>'https://firebasestorage.googleapis.com/v0/b/dfdfbit-8d9e7.appspot.com/o/AllVideoStatus1582118239552.null?alt=media&token=96514257-1ba8-4c47-9f61-6d766657a890'
-                ]
-            ],
+            'Image'=>\App\Model\VideoApp\Image::select(['thumbUrl'])->get(),
+            'Sticker'=>\App\Model\VideoApp\Sticker::select(['name','thumbUrl'])->get(),
 
         ],
-        'Ringtone'=>[
-            'Arabic'=>[
-                [
-                    'mp3Url'=>'https://firebasestorage.googleapis.com/v0/b/dfdfbit-8d9e7.appspot.com/o/AllVideoStatus1582111593976.null?alt=media&token=c75e56c9-563a-4d2d-b29f-b234c2d5c425',
-                    'name'=>'Ante_Mhma_Arebic',
-                    'thumbUrl'=>'https://firebasestorage.googleapis.com/v0/b/mbitvideomaker.appspot.com/o/gif%2Fframe%2Fic_frame_0.gif?alt=media&token=bff86b93-b0a4-496c-b02c-5eb7900a1069',
-                    'type'=>'new'
-                ]
-            ],
-//            'Category'=>[
-//                [
-//                    'icon'=>'https://firebasestorage.googleapis.com/v0/b/mbitvideomaker.appspot.com/o/images%2FCategory%2FArabic.png?alt=media&token=2232b7af-b9f8-4f23-9f57-53dcee54b6d3',
-//                    'name'=>'Arabic',
-//                ]
-//            ]
+        'Ringtone'=>\Help\VideoApp\Doit::responseRingtone(),
+        'Category'=>\App\Model\VideoApp\RingtoneCat::select(['name','icon'])->get()
 
-
-        ],
-        'Category'=>[
-            [
-                'icon'=>'https://firebasestorage.googleapis.com/v0/b/mbitvideomaker.appspot.com/o/images%2FCategory%2FArabic.png?alt=media&token=2232b7af-b9f8-4f23-9f57-53dcee54b6d3',
-                'name'=>'Arabic',
-            ]
-        ]
 
     ];
 

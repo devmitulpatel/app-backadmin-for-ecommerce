@@ -49,6 +49,17 @@ return [
         ],
 
 
+        'videoapp_frame' => [
+            'driver' => 'local',
+            'root' => storage_path(implode('/',['videoapp','upload','frames'])),
+        ],
+        'videoapp' => [
+            'driver' => 'local',
+            'root' => storage_path(implode('/',['videoapp','upload'])),
+        ],
+
+
+
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
