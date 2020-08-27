@@ -19,7 +19,7 @@ class publicUrl implements CastsAttributes
      */
     public function get($model, $key, $value, $attributes)
     {
-       return route('videoapp.getFile',['file'=>$value,'driver'=>'videoapp']);
+       return  ($value!=""&& $value!=null&& $value!=" ")?route('videoapp.getFile',['file'=>$value,'driver'=>'videoapp']):'';
     }
 
     /**

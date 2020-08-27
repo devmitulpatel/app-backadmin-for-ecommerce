@@ -77,6 +77,20 @@ if(!function_exists ('settings')){
 }
 
 
+if(!function_exists ('checkCurrentApp')){
+
+    function checkCurrentApp($name="laravel"):bool{
+
+        if(env('CURRENT_APP','laravel')==$name)return true;
+
+
+        return false;
+
+
+    }
+}
+
+
 
 
 if(!function_exists ('throwError')){

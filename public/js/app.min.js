@@ -234,22 +234,162 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "allForms",
   props: ['msData'],
   data: function data() {
     return {
+      perPage: 5,
       currentFormTab: 0,
       input_frame: {},
       input_image: {},
       input_sticker: {},
       input_ringtone: {},
       input_ringtoneCat: {},
+      search_frame: {},
+      search_image: {},
+      search_sticker: {},
+      search_ringtone: {},
+      search_ringtoneCat: {},
       list_frame: [],
       list_image: [],
       list_sticker: [],
       list_ringtone: [],
       list_ringtoneCat: [],
+      list_frame_data: {},
+      list_image_data: {},
+      list_sticker_data: {},
+      list_ringtone_data: {},
+      list_ringtoneCat_data: {},
       tabs: [{
         name: 'Frame',
         model: 'frame',
@@ -349,8 +489,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           model: 'name',
           type: 'text'
         }, {
-          name: 'Type',
+          name: 'Tag',
           model: 'type',
+          type: 'text'
+        }, {
+          name: 'Category',
+          model: 'catId',
           type: 'option',
           data: 'list_ringtoneCat'
         }, {
@@ -377,8 +521,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             model: 'thumbUrl',
             type: 'image'
           }, {
-            text: 'Type',
+            text: 'Tag',
             model: 'type',
+            type: 'text'
+          }, {
+            text: 'Category',
+            model: 'catId',
             type: 'option',
             data: 'list_ringtoneCat'
           }],
@@ -397,6 +545,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           name: 'Thumb Image',
           model: 'icon',
           type: 'file'
+        }, {
+          name: 'Sort No',
+          model: 'sortno',
+          type: 'number'
         }],
         list: {
           model: 'list_ringtoneCat',
@@ -408,6 +560,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             text: 'Icon Image',
             model: 'icon',
             type: 'image'
+          }, {
+            text: 'Sort No.',
+            model: 'sortno',
+            type: 'text'
           }],
           path: this.msData.path.retriveListData
         }
@@ -427,25 +583,66 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         //     this.allInputs[this.makeModelName(this.tabs[i].model)][this.tabs[i]['inputs'][y].model]=null;
         //   console.log( this.allInputs);
       }
+      this[['search', this.tabs[i].model].join('_')].per_page = this.perPage;
+      this[['search', this.tabs[i].model].join('_')].current_page = this[['list', this.tabs[i].model, 'data'].join('_')].current_page;
       this.getDataFor(this.tabs[i].model);
     }
   },
   methods: {
+    sendDataToServer: function sendDataToServer(t) {
+      var dataModel = ['list', t.model].join('_');
+      var dataConfig = ['list', t.model, 'data'].join('_');
+      var pagedata = this[dataConfig];
+      var searchData = this[['search', t.model].join('_')];
+      var url = pagedata.path;
+      var pData = {
+        type: t.model,
+        page: pagedata.current_page,
+        searchQuery: searchData
+      };
+      var th = this;
+      axios.post(url, pData).then(function (res) {
+        var inData = res.data.ResponseMessage;
+        var config = {
+          current_page: inData.current_page,
+          last_page: inData.last_page,
+          from: inData.from,
+          to: inData.to,
+          first_page_url: inData.first_page_url,
+          next_page_url: inData.next_page_url,
+          last_page_url: inData.last_page_url,
+          path: inData.path,
+          per_page: inData.per_page,
+          prev_page_url: inData.prev_page_url,
+          total: inData.total
+        };
+        th[dataModel] = []; // console.log(inData.data);
+
+        th[dataModel] = inData.data;
+        th[dataConfig] = config;
+      });
+    },
+    changepage: function changepage(t) {
+      this.sendDataToServer(t);
+    },
+    refreshData: function refreshData() {},
+    searchForTable: function searchForTable(t) {
+      this.sendDataToServer(t);
+    },
     getDynamicFromId: function getDynamicFromId(id, data) {
       id = id.toString();
       var mData = this[data];
       var foundKey = false;
 
       for (var i in mData) {
-        console.log("--Start---");
-        console.log(mData[i]);
+        // console.log("--Start---");
+        // console.log(mData[i] );
         if (mData[i].id == id) foundKey = i;
 
-        if (foundKey == false) {
-          console.log(id);
-          console.log(mData[i].id);
-          console.log(mData[i].id == id);
-          console.log("---End--");
+        if (foundKey == false) {//   console.log(id);
+          //  console.log(mData[i].id);
+          //  console.log(mData[i].id==id);
+          // console.log("---End--");
         }
       }
 
@@ -601,10 +798,25 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
       var url = this.msData.path.retriveListData;
       var dataModel = ['list', type].join('_');
+      var dataConfig = ['list', type, 'data'].join('_');
       var th = this;
       axios.post(url, data).then(function (res) {
         var inData = res.data.ResponseMessage;
-        th[dataModel] = inData; //  Vue.toasted.success('New Data Loaded',{duration:500});
+        var config = {
+          current_page: inData.current_page,
+          last_page: inData.last_page,
+          from: inData.from,
+          to: inData.to,
+          first_page_url: inData.first_page_url,
+          next_page_url: inData.next_page_url,
+          last_page_url: inData.last_page_url,
+          path: inData.path,
+          per_page: inData.per_page,
+          prev_page_url: inData.prev_page_url,
+          total: inData.total
+        };
+        th[dataModel] = inData.data;
+        th[dataConfig] = config; //  Vue.toasted.success('New Data Loaded',{duration:500});
         //   th.getttingData=false;
       })["catch"](function (e) {// th.getttingData=false;
       });
@@ -70868,6 +71080,328 @@ var render = function() {
                           "table",
                           { staticClass: "table table-bordered" },
                           [
+                            _c("tr", [
+                              _c(
+                                "td",
+                                {
+                                  attrs: { colspan: t.list.columns.length + 1 }
+                                },
+                                [
+                                  _c("div", { staticClass: "row" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "col-xs-12 col-sm-12 col-md-8 col-lg-8"
+                                      },
+                                      [
+                                        t.list.columns.filter(function(v) {
+                                          return v.type == "text"
+                                        }).length > 0
+                                          ? _c(
+                                              "div",
+                                              {
+                                                staticClass: "input-group mb-3"
+                                              },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "input-group-prepend"
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "select",
+                                                      {
+                                                        directives: [
+                                                          {
+                                                            name: "model",
+                                                            rawName: "v-model",
+                                                            value:
+                                                              _vm.$data[
+                                                                [
+                                                                  "search",
+                                                                  t.model
+                                                                ].join("_")
+                                                              ]
+                                                                .selectedColumnToSearch,
+                                                            expression:
+                                                              "$data[['search',t.model].join('_')].selectedColumnToSearch"
+                                                          }
+                                                        ],
+                                                        on: {
+                                                          change: function(
+                                                            $event
+                                                          ) {
+                                                            var $$selectedVal = Array.prototype.filter
+                                                              .call(
+                                                                $event.target
+                                                                  .options,
+                                                                function(o) {
+                                                                  return o.selected
+                                                                }
+                                                              )
+                                                              .map(function(o) {
+                                                                var val =
+                                                                  "_value" in o
+                                                                    ? o._value
+                                                                    : o.value
+                                                                return val
+                                                              })
+                                                            _vm.$set(
+                                                              _vm.$data[
+                                                                [
+                                                                  "search",
+                                                                  t.model
+                                                                ].join("_")
+                                                              ],
+                                                              "selectedColumnToSearch",
+                                                              $event.target
+                                                                .multiple
+                                                                ? $$selectedVal
+                                                                : $$selectedVal[0]
+                                                            )
+                                                          }
+                                                        }
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "optgroup",
+                                                          {
+                                                            attrs: {
+                                                              label:
+                                                                "Select Column to Search"
+                                                            }
+                                                          },
+                                                          _vm._l(
+                                                            t.list.columns,
+                                                            function(c) {
+                                                              return c.type ==
+                                                                "text"
+                                                                ? _c(
+                                                                    "option",
+                                                                    {
+                                                                      domProps: {
+                                                                        value:
+                                                                          c.model
+                                                                      }
+                                                                    },
+                                                                    [
+                                                                      _vm._v(
+                                                                        _vm._s(
+                                                                          c.text
+                                                                        )
+                                                                      )
+                                                                    ]
+                                                                  )
+                                                                : _vm._e()
+                                                            }
+                                                          ),
+                                                          0
+                                                        )
+                                                      ]
+                                                    )
+                                                  ]
+                                                ),
+                                                _vm._v(" "),
+                                                _c("input", {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value:
+                                                        _vm.$data[
+                                                          [
+                                                            "search",
+                                                            t.model
+                                                          ].join("_")
+                                                        ].query,
+                                                      expression:
+                                                        "$data[['search',t.model].join('_')].query"
+                                                    }
+                                                  ],
+                                                  staticClass: "form-control",
+                                                  attrs: { type: "text" },
+                                                  domProps: {
+                                                    value:
+                                                      _vm.$data[
+                                                        [
+                                                          "search",
+                                                          t.model
+                                                        ].join("_")
+                                                      ].query
+                                                  },
+                                                  on: {
+                                                    keyup: function($event) {
+                                                      if (
+                                                        !$event.type.indexOf(
+                                                          "key"
+                                                        ) &&
+                                                        _vm._k(
+                                                          $event.keyCode,
+                                                          "enter",
+                                                          13,
+                                                          $event.key,
+                                                          "Enter"
+                                                        )
+                                                      ) {
+                                                        return null
+                                                      }
+                                                      return _vm.searchForTable(
+                                                        t
+                                                      )
+                                                    },
+                                                    input: function($event) {
+                                                      if (
+                                                        $event.target.composing
+                                                      ) {
+                                                        return
+                                                      }
+                                                      _vm.$set(
+                                                        _vm.$data[
+                                                          [
+                                                            "search",
+                                                            t.model
+                                                          ].join("_")
+                                                        ],
+                                                        "query",
+                                                        $event.target.value
+                                                      )
+                                                    }
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "input-group-append"
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "button",
+                                                      {
+                                                        attrs: {
+                                                          type: "search"
+                                                        },
+                                                        on: {
+                                                          click: function(
+                                                            $event
+                                                          ) {
+                                                            return _vm.searchForTable(
+                                                              t
+                                                            )
+                                                          }
+                                                        }
+                                                      },
+                                                      [_vm._v(" Search ")]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          : _c(
+                                              "div",
+                                              {
+                                                staticClass: "input-group mb-3"
+                                              },
+                                              [
+                                                _c("input", {
+                                                  staticClass: "form-control",
+                                                  attrs: {
+                                                    disabled: "",
+                                                    value: "Nothing to Search"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _vm._m(1, true)
+                                              ]
+                                            )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "col-xs-12 col-sm-12 col-md-4 col-lg-4"
+                                      },
+                                      [
+                                        _c(
+                                          "div",
+                                          { staticClass: "input-group mb-3" },
+                                          [
+                                            _vm._m(2, true),
+                                            _vm._v(" "),
+                                            _c(
+                                              "select",
+                                              {
+                                                directives: [
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value:
+                                                      _vm.$data[
+                                                        [
+                                                          "search",
+                                                          t.model
+                                                        ].join("_")
+                                                      ].per_page,
+                                                    expression:
+                                                      "$data[['search',t.model].join('_')].per_page"
+                                                  }
+                                                ],
+                                                staticClass: "form-control",
+                                                on: {
+                                                  change: [
+                                                    function($event) {
+                                                      var $$selectedVal = Array.prototype.filter
+                                                        .call(
+                                                          $event.target.options,
+                                                          function(o) {
+                                                            return o.selected
+                                                          }
+                                                        )
+                                                        .map(function(o) {
+                                                          var val =
+                                                            "_value" in o
+                                                              ? o._value
+                                                              : o.value
+                                                          return val
+                                                        })
+                                                      _vm.$set(
+                                                        _vm.$data[
+                                                          [
+                                                            "search",
+                                                            t.model
+                                                          ].join("_")
+                                                        ],
+                                                        "per_page",
+                                                        $event.target.multiple
+                                                          ? $$selectedVal
+                                                          : $$selectedVal[0]
+                                                      )
+                                                    },
+                                                    function($event) {
+                                                      return _vm.changepage(t)
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              [_vm._m(3, true)]
+                                            ),
+                                            _vm._v(" "),
+                                            _vm._m(4, true)
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
                             _c(
                               "tr",
                               [
@@ -70885,123 +71419,280 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _vm._l(_vm.$data[t.list.model], function(r, k) {
-                              return _c(
-                                "tr",
-                                [
-                                  _vm._l(t.list.columns, function(c) {
-                                    return _c("td", [
-                                      c.type == "text"
-                                        ? _c("div", [
-                                            _vm._v(
-                                              "\n                                    " +
-                                                _vm._s(r[c.model]) +
-                                                "\n                                    "
-                                            )
-                                          ])
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      c.type == "image"
-                                        ? _c("div", [
-                                            _c("img", {
-                                              staticStyle: {
-                                                "max-height": "100px"
-                                              },
-                                              attrs: { src: r[c.model] }
-                                            })
-                                          ])
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      c.type == "music"
-                                        ? _c("div", [
-                                            _c(
-                                              "audio",
-                                              { attrs: { controls: "" } },
-                                              [
-                                                _c("source", {
-                                                  attrs: {
-                                                    src: r[c.model],
-                                                    type: "audio/mpeg"
-                                                  }
-                                                }),
+                              return true
+                                ? _c(
+                                    "tr",
+                                    [
+                                      _vm._l(t.list.columns, function(c) {
+                                        return _c("td", [
+                                          c.type == "text"
+                                            ? _c("div", [
                                                 _vm._v(
-                                                  "\n                                            Your browser does not support the audio element.\n                                        "
+                                                  "\n                                    " +
+                                                    _vm._s(r[c.model]) +
+                                                    "\n                                    "
                                                 )
+                                              ])
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          c.type == "image"
+                                            ? _c("div", [
+                                                _c("img", {
+                                                  staticStyle: {
+                                                    "max-height": "100px"
+                                                  },
+                                                  attrs: {
+                                                    loading: "lazy",
+                                                    src: r[c.model]
+                                                  }
+                                                })
+                                              ])
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          c.type == "music"
+                                            ? _c("div", [
+                                                _c(
+                                                  "audio",
+                                                  { attrs: { controls: "" } },
+                                                  [
+                                                    _c("source", {
+                                                      attrs: {
+                                                        src: r[c.model],
+                                                        type: "audio/mpeg"
+                                                      }
+                                                    }),
+                                                    _vm._v(
+                                                      "\n                                            Your browser does not support the audio element.\n                                        "
+                                                    )
+                                                  ]
+                                                )
+                                              ])
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          c.type == "option"
+                                            ? _c("div", [
+                                                _vm._v(
+                                                  "\n\n                                              " +
+                                                    _vm._s(
+                                                      _vm.getDynamicFromId(
+                                                        r[c.model],
+                                                        c.data
+                                                      )
+                                                    ) +
+                                                    "\n\n                                    "
+                                                )
+                                              ])
+                                            : _vm._e()
+                                        ])
+                                      }),
+                                      _vm._v(" "),
+                                      _c("td", [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass: "btn-group col-12",
+                                            attrs: {
+                                              role: "group",
+                                              "aria-label": "Basic example"
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "button",
+                                              {
+                                                staticClass:
+                                                  "btn btn-outline-info",
+                                                attrs: { type: "button" },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.editRow(
+                                                      t.model,
+                                                      r
+                                                    )
+                                                  }
+                                                }
+                                              },
+                                              [
+                                                _c("i", {
+                                                  staticClass:
+                                                    "fas fa-pencil-alt"
+                                                })
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "button",
+                                              {
+                                                staticClass:
+                                                  "btn btn-outline-danger",
+                                                attrs: { type: "button" },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.deleteRow(
+                                                      t.model,
+                                                      r
+                                                    )
+                                                  }
+                                                }
+                                              },
+                                              [
+                                                _c("i", {
+                                                  staticClass:
+                                                    "fas fa-trash-alt"
+                                                })
                                               ]
                                             )
-                                          ])
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      c.type == "option"
-                                        ? _c("div", [
-                                            _vm._v(
-                                              "\n\n                                              " +
-                                                _vm._s(
-                                                  _vm.getDynamicFromId(
-                                                    r[c.model],
-                                                    c.data
-                                                  )
-                                                ) +
-                                                "\n\n                                    "
-                                            )
-                                          ])
-                                        : _vm._e()
-                                    ])
-                                  }),
-                                  _vm._v(" "),
-                                  _c("td", [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass: "btn-group col-12",
-                                        attrs: {
-                                          role: "group",
-                                          "aria-label": "Basic example"
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "button",
-                                          {
-                                            staticClass: "btn btn-outline-info",
-                                            attrs: { type: "button" },
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.editRow(t.model, r)
-                                              }
-                                            }
-                                          },
-                                          [
-                                            _c("i", {
-                                              staticClass: "fas fa-pencil-alt"
-                                            })
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "button",
-                                          {
-                                            staticClass:
-                                              "btn btn-outline-danger",
-                                            attrs: { type: "button" },
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.deleteRow(t.model, r)
-                                              }
-                                            }
-                                          },
-                                          [
-                                            _c("i", {
-                                              staticClass: "fas fa-trash-alt"
-                                            })
                                           ]
                                         )
-                                      ]
-                                    )
+                                      ])
+                                    ],
+                                    2
+                                  )
+                                : undefined
+                            }),
+                            _vm._v(" "),
+                            _c("tr", [
+                              _c(
+                                "td",
+                                {
+                                  attrs: { colspan: t.list.columns.length + 1 }
+                                },
+                                [
+                                  _c("div", { staticClass: "row" }, [
+                                    false
+                                      ? undefined
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.$data[
+                                      ["list", t.model, "data"].join("_")
+                                    ].last_page > 1
+                                      ? _c(
+                                          "div",
+                                          {
+                                            staticClass: "col-12 ",
+                                            attrs: {
+                                              role: "group",
+                                              "aria-label": "Basic example"
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "div",
+                                              { staticClass: "input-group" },
+                                              [
+                                                _vm._m(5, true),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "select",
+                                                  {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value:
+                                                          _vm.$data[
+                                                            [
+                                                              "list",
+                                                              t.model,
+                                                              "data"
+                                                            ].join("_")
+                                                          ].current_page,
+                                                        expression:
+                                                          "$data[['list',t.model,'data'].join('_')].current_page"
+                                                      }
+                                                    ],
+                                                    staticClass: "form-control",
+                                                    staticStyle: {
+                                                      "padding-top": "0px",
+                                                      "padding-bottom": "0px"
+                                                    },
+                                                    on: {
+                                                      change: [
+                                                        function($event) {
+                                                          var $$selectedVal = Array.prototype.filter
+                                                            .call(
+                                                              $event.target
+                                                                .options,
+                                                              function(o) {
+                                                                return o.selected
+                                                              }
+                                                            )
+                                                            .map(function(o) {
+                                                              var val =
+                                                                "_value" in o
+                                                                  ? o._value
+                                                                  : o.value
+                                                              return val
+                                                            })
+                                                          _vm.$set(
+                                                            _vm.$data[
+                                                              [
+                                                                "list",
+                                                                t.model,
+                                                                "data"
+                                                              ].join("_")
+                                                            ],
+                                                            "current_page",
+                                                            $event.target
+                                                              .multiple
+                                                              ? $$selectedVal
+                                                              : $$selectedVal[0]
+                                                          )
+                                                        },
+                                                        function($event) {
+                                                          return _vm.changepage(
+                                                            t
+                                                          )
+                                                        }
+                                                      ]
+                                                    }
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "optgroup",
+                                                      {
+                                                        attrs: {
+                                                          label:
+                                                            "Select Page to display page"
+                                                        }
+                                                      },
+                                                      _vm._l(
+                                                        parseInt(
+                                                          _vm.$data[
+                                                            [
+                                                              "list",
+                                                              t.model,
+                                                              "data"
+                                                            ].join("_")
+                                                          ].last_page
+                                                        ),
+                                                        function(i) {
+                                                          return _c(
+                                                            "option",
+                                                            {
+                                                              domProps: {
+                                                                value: i
+                                                              }
+                                                            },
+                                                            [_vm._v(_vm._s(i))]
+                                                          )
+                                                        }
+                                                      ),
+                                                      0
+                                                    )
+                                                  ]
+                                                ),
+                                                _vm._v(" "),
+                                                _vm._m(6, true)
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      : _vm._e()
                                   ])
-                                ],
-                                2
+                                ]
                               )
-                            })
+                            ])
                           ],
                           2
                         )
@@ -71028,6 +71719,78 @@ var staticRenderFns = [
         attrs: { type: "submit", name: "submit" }
       })
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("button", { attrs: { type: "search", disabled: "" } }, [
+        _vm._v(" Search ")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("span", { staticClass: "input-group-text" }, [_vm._v("Rows")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "optgroup",
+      { attrs: { label: "Select Rows to display per page" } },
+      [
+        _c("option", { attrs: { value: "5" } }, [_vm._v("5")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "10" } }, [_vm._v("10")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "20" } }, [_vm._v("20")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "50" } }, [_vm._v("50")])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("span", { staticClass: "input-group-text" }, [_vm._v("Per Page")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c(
+        "span",
+        {
+          staticClass: "input-group-text",
+          staticStyle: { "padding-top": "0px", "padding-bottom": "0px" }
+        },
+        [_vm._v("jump to")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "input-group-append",
+        staticStyle: { "padding-top": "0px", "padding-bottom": "0px" }
+      },
+      [_c("span", { staticClass: "input-group-text" }, [_vm._v("Page")])]
+    )
   }
 ]
 render._withStripped = true

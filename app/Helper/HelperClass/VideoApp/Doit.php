@@ -8,9 +8,12 @@ use App\Model\VideoApp\Image;
 use App\Model\VideoApp\Ringtone;
 use App\Model\VideoApp\RingtoneCat;
 use App\Model\VideoApp\Sticker;
+use foo\Foo;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use phpDocumentor\Reflection\Types\False_;
+use function GuzzleHttp\json_decode;
 
 
 class Doit
@@ -96,6 +99,7 @@ class Doit
                     'id'=>$allInput['id'],
                     'name'=>$allInput['name'],
                     'icon'=>$allInput['icon'],
+                    'sortno'=>$allInput['sortno'],
                     'updated_at'=>now()
                 ];
                 $prcess[self::editRingtoneCat($data,$r)][]='Ringtone Category update to DB';
@@ -231,31 +235,35 @@ class Doit
         $input=$r->all();
         $type=$input['type']??false;
 
+        $perPager=$input['searchQuery']['per_page']??5;
+
         if($type!=false && array_key_exists(strtolower($type),$typeMaster)){
 
             switch ($typeMaster[strtolower($type)]){
                 case 1:
                     $m=getModel(Frame::class);
-                    return  throwData($m->all());
                     break;
                 case 2:
+
+                  //  dd($input);
                     $m=getModel(Image::class);
-                    return  throwData($m->all());
                     break;
                 case 3:
                     $m=getModel(Sticker::class);
-                    return  throwData($m->all());
                     break;
                 case 4:
                     $m=getModel(Ringtone::class);
-                    return  throwData($m->all());
                     break;
                 case 5:
                     $m=getModel(RingtoneCat::class);
-                    return  throwData($m->all());
                     break;
             }
-
+            if(array_key_exists('searchQuery',$input) && array_key_exists('query',$input['searchQuery']) && mb_strlen($input['searchQuery']['query'])>0 &&  array_key_exists('selectedColumnToSearch',$input['searchQuery'])&& mb_strlen($input['searchQuery']['selectedColumnToSearch'])>1 ){
+                $k=$input['searchQuery']['selectedColumnToSearch'];
+                $v=$input['searchQuery']['query'];
+                $m=$m->where($k,'like',implode('%',['',$v,'']));
+            }
+            return  throwData($m->paginate($perPager,['*'],'page',$input['page']??1));
         }
         return throwError(['Invalid Request']);
 
@@ -354,6 +362,7 @@ class Doit
                     'mp3Url'=>$allInput['mp3Url'],
                     'thumbUrl'=>$allInput['thumbUrl'],
                     'type'=>$allInput['type'],
+                    'catId'=>$allInput['catId'],
                     'status'=>1,
                     'created_at'=>now(),
                     'updated_at'=>now()
@@ -370,6 +379,7 @@ class Doit
                 $data=[
                     'name'=>$allInput['name'],
                     'icon'=>$allInput['icon'],
+                    'sortno'=>$allInput['sortno'],
                     'status'=>1,
                     'created_at'=>now(),
                     'updated_at'=>now()
@@ -929,9 +939,16 @@ class Doit
 
     public static function responseRingtone(){
         $m=getModel(Ringtone::class);
-        $md=$m->select(['name','thumbUrl','type','mp3Url'])->get()->groupBy('type')->toArray();
+        $md=$m->select(['name','thumbUrl','type','mp3Url','catId'])->get()->groupBy('catId')->toArray();
+
+
 
         $m2=getModel(RingtoneCat::class)->all();
+
+
+        $sort=getModel(RingtoneCat::class)->orderBy('sortno','ASC')->pluck('name','sortno');
+
+
     //    dd($m2->where('id',));
         $findalData=[];
        // dd($md);
@@ -943,11 +960,178 @@ class Doit
          //   dd($catName);
         };
 
-        $arrayMap=array_walk($md,$mapFunction);
+        array_walk($md,$mapFunction);
+//        $sortedData=[];
+//        foreach ($sort as $c){
+//            $sortedData[$c]=$findalData[$c];
+//        }
+//        foreach ($findalData as $c=>$v){
+//            if(!array_key_exists($c,$sortedData)){
+//                $sortedData[$c]=$v;
+//            }
+//        }
+
        return $findalData;
 
 
     }
+
+    public static function getFileExt($url){
+        $u=parse_url ($url);
+
+        $uExplode=explode('/',$u['path']);
+        $uExplode=explode('.',end($uExplode));
+        return end($uExplode);
+    }
+
+
+    public static function importData(){
+        set_time_limit(0);
+
+        $path=app_path(implode('\\',['Helper','HelperClass','VideoApp','import.json']));
+        $file=json_decode(file_get_contents($path),true);
+        $importData=$file;
+
+        $cat=$importData['Category'];
+        $cm=getModel(RingtoneCat::class);
+        $po=[];
+        $debug=false;
+        if(!$debug)foreach ($cat as $c){
+          //  dd($c);
+            $rowData=[];
+
+
+            $code=Str::uuid();
+            $fileExtetion=self::getFileExt($c['icon']);
+            $filename=implode('.',[$code,$fileExtetion]);
+            //dd($filename);
+
+            $fileCat=file_get_contents($c['icon']);
+            $rowData['name']=$c['name'];
+
+            $rowData['icon']=(Storage::disk('videoapp')->put(implode('/',['category',$filename]), $fileCat))? implode('/',['category',$filename]) :"";
+            $rowData['status']=1;
+            $po['ringcat'][$c['name']]=$cm->insert($rowData);
+        }
+
+
+
+        $frame=$importData['ParticleNew']['Frame'];
+        $fm=getModel(Frame::class);
+        $sticker=$importData['ParticleNew']['Sticker'];
+        $sm=getModel(Sticker::class);
+        $images=$importData['ParticleNew']['Image'];
+        $im=getModel(Image::class);
+
+        $frmFile=[
+            'imageUrl','thumbUrl'
+        ];
+        $iFile=[
+            'thumbUrl'
+        ];
+        $sFile=[
+            'thumbUrl'
+        ];
+
+        if(!$debug) foreach ($frame as $c){
+
+            $rowData=[];
+            $rowData['name']=$c['name'];
+            foreach ($frmFile as $f){
+                if(array_key_exists($f,$c)){
+                    $code=Str::uuid();
+                    $fileExtetion=self::getFileExt($c[$f]);
+                    $fileCat=file_get_contents($c[$f]);
+                    $filename=implode('.',[$code,$fileExtetion]);
+                    $rowData[$f]=(Storage::disk('videoapp')->put(implode('/',['frames',$filename]), $fileCat))? implode('/',['frames',$filename]) :"";
+                }
+
+            }
+            $rowData['status']=1;
+
+
+
+            $po['frame'][$c['name']]=$fm->insert($rowData);
+        }
+        if(!$debug) foreach ($images as $c){
+            $rowData=[];
+           // $rowData['name']=$c['name'];
+            foreach ($iFile as $f){
+                if(array_key_exists($f,$c)){
+                    $code=Str::uuid();
+                    $fileExtetion=self::getFileExt($c[$f]);
+                    $fileCat=file_get_contents($c[$f]);
+                    $filename=implode('.',[$code,$fileExtetion]);
+                    $rowData[$f]=(Storage::disk('videoapp')->put(implode('/',['images',$filename]), $fileCat))? implode('/',['images',$filename]) :"";
+                }
+
+            }
+            $rowData['status']=1;
+
+
+
+            $po['images'][]=$im->insert($rowData);
+        }
+        if(!$debug) foreach ($sticker as $c){
+            $rowData=[];
+            $rowData['name']=$c['name'];
+            foreach ($sFile as $f){
+                if(array_key_exists($f,$c)){
+                    $code=Str::uuid();
+                    $fileExtetion=self::getFileExt($c[$f]);
+                    $fileCat=file_get_contents($c[$f]);
+                    $filename=implode('.',[$code,$fileExtetion]);
+                    $rowData[$f]=(Storage::disk('videoapp')->put(implode('/',['stickers',$filename]), $fileCat))? implode('/',['stickers',$filename]) :"";
+                }
+
+            }
+            $rowData['status']=1;
+
+
+
+            $po['sticker'][]=$sm->insert($rowData);
+        }
+
+        $ringtone=$importData['Ringtone'];
+        $rm=getModel(Ringtone::class);
+
+        $allCat=$cm->get();
+
+        $rFiles=[
+            'mp3Url','thumbUrl'
+        ];
+
+        if(!$debug) foreach ($ringtone as $c=>$r){
+            $foundCat=$allCat->where('name',$c)->first()->toArray()['id'];
+
+            foreach ($r as $c){
+                $rowData=[];
+                $rowData['name']=$c['name'];
+                $rowData['catId']=$foundCat;
+
+                foreach ($rFiles as $f){
+                    if(array_key_exists($f,$c)){
+                        $code=Str::uuid();
+                        $fileExtetion=self::getFileExt($c[$f]);
+                        $fileCat=file_get_contents($c[$f]);
+                        $filename=implode('.',[$code,$fileExtetion]);
+                        $rowData[$f]=(Storage::disk('videoapp')->put(implode('/',['ringtones',$filename]), $fileCat))? implode('/',['ringtones',$filename]) :"";
+                    }
+
+                }
+                $rowData['type']=(array_key_exists('type',$c))?$c['type']:"";
+                $rowData['status']=1;
+                $po['ringtones'][$c['name']]=$rm->insert($rowData);
+            }
+
+
+
+        }
+
+       return true;
+
+    }
+
 
 
 

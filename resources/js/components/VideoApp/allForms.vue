@@ -23,6 +23,8 @@
 
 
                     </div>
+
+
                     <div v-for="(t,k) in tabs" v-show="currentFormTab== k" class="card-body">
 
                         <form @submit.prevent="processForm($event,(!editOn)?t.path:t.editpath,k)" v-if="t.hasOwnProperty('inputs')" >
@@ -128,13 +130,87 @@
 
                         <div v-if="t.hasOwnProperty('list') && t.list.hasOwnProperty('columns')">
 
+
+
+
                             <table class="table table-bordered">
+                                <tr>
+                                    <td :colspan="t.list.columns.length+1">
+                                        <div class="row">
+
+                                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+
+
+
+                                                <div class="input-group mb-3" v-if="t.list.columns.filter(function (v){
+                                                    return v.type=='text'
+                                                }).length>0">
+                                                    <div class="input-group-prepend">
+                                                        <select v-model="$data[['search',t.model].join('_')].selectedColumnToSearch">
+                                                            <optgroup label="Select Column to Search">
+                                                                <option v-for="c in t.list.columns" v-if="c.type=='text'" :value="c.model">{{c.text}}</option>
+                                                            </optgroup>
+
+
+                                                        </select>
+                                                    </div>
+                                                    <input v-on:keyup.enter="searchForTable(t)" type="text" class="form-control"  v-model="$data[['search',t.model].join('_')].query">
+
+                                                    <div class="input-group-append">
+                                                        <button type="search" v-on:click="searchForTable(t)"> Search </button>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="input-group mb-3" v-else>
+
+                                                    <input disabled  class="form-control" value="Nothing to Search">
+                                                    <div class="input-group-append">
+                                                        <button type="search" disabled> Search </button>
+                                                    </div>
+                                                </div>
+
+
+
+
+
+
+                                            </div>
+
+                                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+
+
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">Rows</span>
+                                                    </div>
+                                                    <select  v-on:change="changepage(t)"  class="form-control" v-model="$data[['search',t.model].join('_')].per_page">
+                                                        <optgroup label="Select Rows to display per page">
+                                                            <option value="5">5</option>
+                                                            <option value="10">10</option>
+                                                            <option value="20">20</option>
+                                                            <option value="50">50</option>
+                                                        </optgroup>
+                                                    </select>
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">Per Page</span>
+                                                    </div>
+                                                </div>
+
+
+
+                                            </div>
+
+                                        </div>
+                                    </td>
+                                </tr>
+
                                 <tr>
                                     <th v-for="c in t.list.columns">{{c.text}}</th>
                                     <th style="text-align:center;">Action</th>
                                 </tr>
 
-                                <tr v-for="(r,k) in  $data[t.list.model]">
+                                <tr v-for="(r,k) in  $data[t.list.model]" v-if="true"   >
 
                                     <td v-for="c in t.list.columns">
 
@@ -143,7 +219,7 @@
                                         </div>
 
                                         <div v-if="c.type=='image'">
-                                            <img :src="r[c.model]" style="max-height: 100px;">
+                                            <img loading="lazy" :src="r[c.model]" style="max-height: 100px;">
                                         </div>
                                         <div v-if="c.type=='music'">
 
@@ -173,6 +249,59 @@
 
                                 </tr>
 
+
+                                <tr >
+                                    <td :colspan="t.list.columns.length+1">
+
+
+                                        <div class="row">
+                                            <div class="btn-group col-12 mb-3" role="group" aria-label="Basic example" v-if="false">
+
+
+                                                <button type="button" class="btn btn-outline-secondary" v-if="$data[['list',t.model,'data'].join('_')].last_page > 0 && $data[['list',t.model,'data'].join('_')].last_page < 10" v-for="i in $data[['list',t.model,'data'].join('_')].last_page">{{ i }}</button>
+
+
+                                                <button type="button" class="btn btn-outline-secondary" v-if="$data[['list',t.model,'data'].join('_')].last_page > 9 && parseInt($data[['list',t.model,'data'].join('_')].current_page)>5" v-for="i in Array.apply(null, Array(5)).map(x=>0)">{{($data[['list',t.model,'data'].join('_')].current_page-6)+i}}    </button>
+                                                <button type="button" class="btn btn-outline-secondary" v-if="$data[['list',t.model,'data'].join('_')].current_page>5  ">...</button>
+                                                <button type="button" class="btn btn-outline-secondary" v-if="Array.apply(null, Array(5)).map(x=>0)&&$data[['list',t.model,'data'].join('_')].last_page > 9  && $data[['list',t.model,'data'].join('_')].current_page+i<=$data[['list',t.model,'data'].join('_')].last_page" v-for="i in Array.apply(null, Array(5)).map(x=>0)">{{ (parseInt($data[['list',t.model,'data'].join('_')].current_page)==i)?i:parseInt($data[['list',t.model,'data'].join('_')].current_page)+i }}</button>
+
+
+
+                                            </div>
+
+                                            <div class="col-12 " role="group" aria-label="Basic example" v-if="$data[['list',t.model,'data'].join('_')].last_page>1">
+
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" style="padding-top: 0px;padding-bottom: 0px;">jump to</span>
+                                                        </div>
+                                                        <select v-on:change="changepage(t)" class="form-control" v-model="$data[['list',t.model,'data'].join('_')].current_page" style="padding-top: 0px;padding-bottom: 0px;">
+                                                            <optgroup label="Select Page to display page">
+                                                                <option
+
+                                                                    v-for="i in parseInt($data[['list',t.model,'data'].join('_')].last_page)"
+
+                                                                    :value="i">{{ i}}</option>
+
+                                                            </optgroup>
+                                                        </select>
+                                                        <div class="input-group-append"  style="padding-top: 0px;padding-bottom: 0px;">
+                                                            <span class="input-group-text">Page</span>
+                                                        </div>
+                                                    </div>
+
+
+
+                                            </div>
+
+                                        </div>
+
+
+                                    </td>
+                                </tr>
+
+
+
                             </table>
 
                         </div>
@@ -190,11 +319,14 @@
 </template>
 
 <script>
+
+
     export default {
         name: "allForms",
         props: ['msData'],
         data(){
             return{
+                perPage:5,
                 currentFormTab:0,
                 input_frame:{},
                 input_image:{},
@@ -202,11 +334,22 @@
                 input_ringtone:{},
                 input_ringtoneCat:{},
 
+                search_frame:{},
+                search_image:{},
+                search_sticker:{},
+                search_ringtone:{},
+                search_ringtoneCat:{},
+
                 list_frame:[],
                 list_image:[],
                 list_sticker:[],
                 list_ringtone:[],
                 list_ringtoneCat:[],
+                list_frame_data:{},
+                list_image_data:{},
+                list_sticker_data:{},
+                list_ringtone_data:{},
+                list_ringtoneCat_data:{},
                 tabs:[
 
                     {
@@ -373,8 +516,14 @@
 
                             } ,
                             {
-                                name:'Type',
+                                name:'Tag',
                                 model:'type',
+                                type:'text',
+
+                            } ,
+                            {
+                                name:'Category',
+                                model:'catId',
                                 type:'option',
                                 data:'list_ringtoneCat',
 
@@ -417,8 +566,14 @@
 
                                 },
                                 {
-                                    text:'Type',
+                                    text:'Tag',
                                     model:'type',
+                                    type:'text',
+
+                                },
+                                {
+                                    text:'Category',
+                                    model:'catId',
                                     type:'option',
                                     data:'list_ringtoneCat'
 
@@ -449,6 +604,12 @@
                                 model:'icon',
                                 type:'file',
 
+                            },
+                            {
+                                name:'Sort No',
+                                model:'sortno',
+                                type:'number',
+
                             }
 
                         ],
@@ -466,6 +627,12 @@
                                     text:'Icon Image',
                                     model:'icon',
                                     type:'image',
+
+                                },
+                                {
+                                    text:'Sort No.',
+                                    model:'sortno',
+                                    type:'text',
 
                                 }
 
@@ -501,27 +668,92 @@
                  //   console.log( this.allInputs);
                 }
 
+                this[['search',this.tabs[i].model].join('_')].per_page=this.perPage;
+                this[['search',this.tabs[i].model].join('_')].current_page=this[['list',this.tabs[i].model,'data'].join('_')].current_page;
+
                 this.getDataFor(this.tabs[i].model)
             }
 
 
 
+
+
         },
         methods:{
+
+            sendDataToServer(t){
+
+                var dataModel=['list',t.model].join('_');
+                var dataConfig=['list',t.model,'data'].join('_');
+                var pagedata=this[dataConfig];
+                var searchData=this[['search',t.model].join('_')];
+
+
+
+
+                var url=pagedata.path;
+
+                var pData={
+                    type:t.model,
+                    page:pagedata.current_page,
+                    searchQuery:searchData
+                }
+                var th = this;
+                axios.post(url,pData).then(function (res){
+                    var inData=res.data.ResponseMessage;
+                    var config={
+                        current_page:inData.current_page,
+                        last_page:inData.last_page,
+                        from:inData.from,
+                        to:inData.to,
+                        first_page_url:inData.first_page_url,
+                        next_page_url:inData.next_page_url,
+                        last_page_url:inData.last_page_url,
+                        path:inData.path,
+                        per_page:inData.per_page,
+                        prev_page_url:inData.prev_page_url,
+                        total:inData.total,
+                    };
+                    th[dataModel]=[];
+                    // console.log(inData.data);
+                    th[dataModel]=inData.data;
+                    th[dataConfig]=config;
+                });
+
+
+            },
+
+            changepage(t){
+
+               this.sendDataToServer(t);
+
+            },
+
+            refreshData(){
+
+
+
+            },
+
+            searchForTable(t){
+                this.sendDataToServer(t);
+
+
+            },
             getDynamicFromId(id,data){
 
                 id=id.toString();
                 var mData=this[data];
                 var foundKey=false;
                 for (var i in mData){
-                    console.log("--Start---");
-                    console.log(mData[i] );
+                   // console.log("--Start---");
+                   // console.log(mData[i] );
                     if(mData[i].id==id)foundKey=i;
                     if(foundKey==false){
-                        console.log(id);
-                        console.log(mData[i].id);
-                        console.log(mData[i].id==id);
-                        console.log("---End--");
+                     //   console.log(id);
+                      //  console.log(mData[i].id);
+                      //  console.log(mData[i].id==id);
+                       // console.log("---End--");
                     }
                 }
 
@@ -707,14 +939,29 @@
                 //Vue.toasted.success('Waiting For New Data',{duration:500});
                 var url=this.msData.path.retriveListData;
                 var dataModel=['list',type].join('_');
+                var dataConfig=['list',type,'data'].join('_');
                 var th=this;
 
                     axios.post(url,data).then(function(res){
 
 
                         var inData=res.data.ResponseMessage;
+                        var config={
+                            current_page:inData.current_page,
+                            last_page:inData.last_page,
+                            from:inData.from,
+                            to:inData.to,
+                            first_page_url:inData.first_page_url,
+                            next_page_url:inData.next_page_url,
+                            last_page_url:inData.last_page_url,
+                            path:inData.path,
+                            per_page:inData.per_page,
+                            prev_page_url:inData.prev_page_url,
+                            total:inData.total,
+                        };
+                        th[dataModel]=inData.data;
+                        th[dataConfig]=config;
 
-                        th[dataModel]=inData;
                       //  Vue.toasted.success('New Data Loaded',{duration:500});
                      //   th.getttingData=false;
 
