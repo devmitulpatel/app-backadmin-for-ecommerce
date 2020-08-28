@@ -301,8 +301,19 @@
                                 </tr>
 
 
+                                <tr>
+                                    <td colspan="4">
+                                        <table id="table_id" class="table table-bordered dataTable col-12">
+
+
+                                        </table>
+                                    </td>
+                                </tr>
+
+
 
                             </table>
+
 
                         </div>
                     </div>
@@ -319,6 +330,9 @@
 </template>
 
 <script>
+
+
+
 
 
     export default {
@@ -658,8 +672,64 @@
             }
 
         },
-        created(){
+        mounted() {
 
+            $('#table_id').DataTable(
+                {
+
+                    columns: [
+                        { title: "name" , },
+                        { title: "image",render : function ( data, type, row, meta ) {
+                                console.log(data);
+                                return "<img src='"+data+"' style='max-height: 100px;background-color: gray' loading='lazy'>" ;
+                            }
+                        },
+                        { title: "thumbnail" ,
+
+                            render : function ( data, type, row, meta ) {
+
+                                return "<img src='"+data+"' style='max-height: 100px;' loading='lazy'>" ;
+                            }
+
+
+
+                        },
+                        { title: "action" ,
+
+                            render : function ( data, type, row, meta ) {
+
+                            var str='' +
+                                '<div role="group" aria-label="Basic example" class="btn-group col-12" >' +
+                                '   <button  type="button" class="btn btn-outline-info" @click="editRow(t.model,r)">' +
+                                '       <i  class="fas fa-pencil-alt"></i>' +
+                                '    </button> ' +
+                                '   <button  type="button" class="btn btn-outline-danger">' +
+                                '       <i data-v-706b8cfc="" class="fas fa-trash-alt"></i>' +
+                                '   </button>' +
+                                '</div>';
+
+                                return str ;
+                            }
+
+
+
+                        },
+
+
+                    ],
+
+
+
+                    scrollX: true,
+                    "ajax": 'test',
+
+                }
+
+            );
+
+
+        },
+        created(){
             for (var i in this.tabs){
              //   this.allInputs[this.makeModelName(this.tabs[i].model)]={};
                 if(this.tabs[i].hasOwnProperty('inputs'))for (var y in this.tabs[i]['inputs']){

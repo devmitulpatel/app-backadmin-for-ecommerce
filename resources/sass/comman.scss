@@ -7,7 +7,8 @@
 @import "~startbootstrap-sb-admin-2/scss/sb-admin-2";
 
 @import "~animate.css";
-
+@import "~datatables.net-bs4/css/dataTables.bootstrap4.css";
+@import "~datatables.net-buttons-bs4/css/buttons.bootstrap4.css";
 
 select.form-control.is-valid,select.form-control.is-invalid{
     background-position: right calc(0.4em + 1.1875rem) center;

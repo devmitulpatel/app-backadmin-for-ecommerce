@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Helper\HelperClass\Routes\RouteBox;
 use App\Model\Settings\Tax as Taxes;
 
 if(!function_exists ('settings')){
@@ -275,4 +276,12 @@ if(!function_exists ('editToModel')){
 
 }
 
+if(!function_exists ('r')){
 
+    function r($t=false,$r=false,$a=[]){
+        Debugbar::startMeasure('render','Time for Route');
+
+        return  new RouteBox($t,$r,$a);
+        Debugbar::stopMeasure('render');
+    }
+}
