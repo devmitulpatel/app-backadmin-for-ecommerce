@@ -56,6 +56,7 @@ window.validate = require("validate.js");
 const app = new Vue({
     el: '#app',
     data:{
+        currentUser:{},
         sideBar:false,
         shortSideBar:false,
         fullSidenar:false,
@@ -89,6 +90,30 @@ const app = new Vue({
        // ckeditor: CKEditor.component
     },
     methods:{
+
+
+
+        loginFormEvent(url){
+            var currentUser= this.currentUser;
+            var data={
+                email:currentUser.email,
+                password:currentUser.password,
+            };
+            axios.post(url,data).then(function (r){
+                var data=r.data.ResponseData;
+                var msg=r.data.ResponseData[0];
+                Vue.toasted.success(msg,{duration:1000});
+
+            }).catch(function (e){
+
+
+
+            });
+
+
+
+        },
+
                 autoHideNotification(){
                     var th=this;
                     // setTimeout(function() {
@@ -245,6 +270,7 @@ const app = new Vue({
     },
     mounted(){
         window.addEventListener('scroll', this.updateScroll);
+        this.
     }
 
 

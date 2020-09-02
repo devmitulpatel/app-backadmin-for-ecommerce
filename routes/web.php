@@ -26,6 +26,7 @@ use Yajra\DataTables\Facades\DataTables;
 
 r('p','zdemo',[\App\Http\Controllers\Product\Product::class,'index']);
 
+
 if(false){
     Broadcast::routes();
 

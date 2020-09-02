@@ -14,6 +14,8 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         '/test',
         '/admin/product/img/upload',
-        '/videoapp/*'
+        '/videoapp/*',
+       // '/api/v1/front/auth/login/web',
+
     ];
 }

@@ -4,6 +4,7 @@
 namespace App\Helper\HelperClass;
 
 
+use App\Http\Controllers\Auth\LoginApiController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,7 @@ class AppScopedRoutes
         self::comman();
         self::app();
         if(true)self::videoapp();
+        self::api();
     }
 
     public static function app(){
@@ -198,6 +200,37 @@ class AppScopedRoutes
 
 
         });
+    }
+
+    public static function api(){
+        Route::prefix('api')->group(function () {
+
+
+            Route::prefix('v1')->group(function () {
+
+
+                Route::prefix('front')->group(function () {
+
+                    Route::prefix('chat')->group(function () {
+
+                        Route::match(['post'], 'send/msg/toServer', "Chat\\HandleMsg@hasMsg")->name('api.v1.front.chat.hasMsg');
+
+                    });
+
+                    Route::prefix('auth')->group(function () {
+                        r('p','login/{type}',[LoginApiController::class,'login','api.login']);
+                        r('p','login/process/{type}',[LoginApiController::class,'loginProcess','api.loginProcess']);
+                    });
+
+
+                });
+
+
+            });
+
+
+        });
+
     }
 
 }

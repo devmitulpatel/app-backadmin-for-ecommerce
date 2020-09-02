@@ -9,7 +9,8 @@
         <div class="limiter">
             <div class="container-login100" >
                 <div class="wrap-login100 p-l-15 p-r-15 p-t-10 p-b-15 ">
-                    <form class="login100-form validate-form flex-sb flex-w"  action="{{ route('login') }}">
+                    <form v-on:submit.prevent="loginFormEvent('{{ route('api.login',['type'=>'web']) }}')" class="login100-form validate-form flex-sb flex-w" method="post"  action="{{ route('login') }}">
+                        @csrf
 					<span class="login100-form-title p-b-7">
                     <div style="width: 100%;max-height: 120px;">
                         <img id="sidebarlogo"  src="{{ settings()->get('websiteLogo') }}" style="max-height: 100px;" >
@@ -25,7 +26,7 @@
 
                         <div class="form-group input-group p-t-13 p-b-1" >
                             <label class="has-float-label" style="width: 100%;" >
-                                <input class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus type="email" placeholder=" "  style="width: 100%;"  />
+                                <input v-model="currentUser.email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus type="email" placeholder=" "  style="width: 100%;"  />
                                 <span class="txt1">{{ __('E-Mail Address') }}</span>
                             </label>
 
@@ -38,7 +39,7 @@
 
                         <div class="form-group input-group p-t-1 p-b-2" >
                             <label class="has-float-label" style="width: 100%;" >
-                                <input class="form-control" type="password" name="password" placeholder="   "  value="{{ old('password') }}" style="width: 100%;" />
+                                <input v-model="currentUser.password" class="form-control" type="password" name="password" placeholder="   "  value="{{ old('password') }}" style="width: 100%;" />
                                 <span class="txt1">{{ __('Password') }} </span>
                             </label>
 

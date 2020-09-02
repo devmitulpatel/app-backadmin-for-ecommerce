@@ -153,6 +153,8 @@ if(!function_exists ('toArray')){
 
 if(!function_exists ('encode')){
     function encode($str){
+
+        return encrypt($str);
         return \App\Helper\Encrypter::encode($str);
     }
 
