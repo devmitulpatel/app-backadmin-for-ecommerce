@@ -4,12 +4,15 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');require('./bootstrap');
-
 
 window.Vue = require('vue');
 
+//window.CoreUi=require('./vendor/coreui/main.js');
+
+//require('@coreui/coreui');
 import Vue from 'vue';
+import VueRouter from 'vue-router';
+Vue.use(VueRouter);
 import CKEditor from '@ckeditor/ckeditor5-vue';
 
 import Toasted from 'vue-toasted';
@@ -45,6 +48,8 @@ Vue.component('authclient', require('./components/passport/AuthorizedClients').d
 Vue.component('client', require('./components/passport/Clients').default);
 Vue.component('accesstoken', require('./components/passport/PersonalAccessTokens').default);
 Vue.component('allformforvideoapp', require('./components/VideoApp/allForms').default);
+//Vue.component('alert', require('./vendor/coreui/components/alert/CAlert').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -53,6 +58,9 @@ Vue.component('allformforvideoapp', require('./components/VideoApp/allForms').de
  */
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 window.validate = require("validate.js");
+// const router = new VueRouter({
+//     routes: Routes
+// });
 const app = new Vue({
     el: '#app',
     data:{
@@ -257,7 +265,7 @@ const app = new Vue({
                     }
 
     },
-
+   // router: router,
     watch:{
         sideBar(NewVal,OldVal){
             (NewVal)?this.openNav():this.closeNav();
@@ -270,7 +278,7 @@ const app = new Vue({
     },
     mounted(){
         window.addEventListener('scroll', this.updateScroll);
-        this.
+
     }
 
 

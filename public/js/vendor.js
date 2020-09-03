@@ -33560,4 +33560,4 @@ module.exports = __webpack_require__(/*! validate.js */"./node_modules/validate.
 
 /***/ })
 
-},[[1,"/js/manifest"]]]);
+}]);

@@ -26,7 +26,12 @@ use Yajra\DataTables\Facades\DataTables;
 
 r('p','zdemo',[\App\Http\Controllers\Product\Product::class,'index']);
 
+Route::get('/test_lvp',function (){
 
+dd(\App\Helper\HelperClass\Lvp\Doit::importData());
+    return view('layouts.coreui-app');
+
+});
 if(false){
     Broadcast::routes();
 

@@ -4,6 +4,14 @@
 use App\Helper\HelperClass\Routes\RouteBox;
 use App\Model\Settings\Tax as Taxes;
 
+
+
+
+
+define('DS',DIRECTORY_SEPARATOR);
+
+
+
 if(!function_exists ('settings')){
 
     function settings($type="general"){

@@ -58,6 +58,11 @@ return [
             'root' => storage_path(implode('/',['videoapp','upload'])),
         ],
 
+        'lvp' => [
+            'driver' => 'local',
+            'root' => storage_path(implode('/',['lvp','upload'])),
+        ],
+
 
 
         'local' => [

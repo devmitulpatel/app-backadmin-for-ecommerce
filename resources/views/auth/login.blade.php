@@ -4,9 +4,10 @@
 
     <div>
 
+        <app></app>
 
 
-        <div class="limiter">
+        <div v-if="false" class="limiter">
             <div class="container-login100" >
                 <div class="wrap-login100 p-l-15 p-r-15 p-t-10 p-b-15 ">
                     <form v-on:submit.prevent="loginFormEvent('{{ route('api.login',['type'=>'web']) }}')" class="login100-form validate-form flex-sb flex-w" method="post"  action="{{ route('login') }}">
@@ -19,7 +20,8 @@
 						{{ __('Login') }}
 
 
-					</span>
+</alert>
+				</span>
 
 
 
@@ -93,7 +95,7 @@
         </div>
 
 
-        <div id="dropDownSelect1"></div>
+        <div v-if="false" id="dropDownSelect1"></div>
 
 
 
