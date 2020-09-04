@@ -16,24 +16,24 @@ class CreateCategoriesTable extends Migration
         Schema::create('lvp_videos', function (Blueprint $table) {
             $table->id();
             $table->integer('cat_id');
-            $table->string('video_name');
-            $table->string('demo_video_url');
-            $table->string('video_url');
-            $table->string('video_upload_time');
-            $table->string('video_view');
-            $table->string('video_like');
-            $table->string('overlay_gg');
-            $table->string('video_share');
-            $table->string('watermark');
+            $table->string('title');
+            $table->string('height');
+            $table->string('width');
+            $table->string('zip');
+            $table->string('is_hot');
+            $table->longText('video_url');
+            $table->longText('thumb_url');
+            $table->longText('zip_url');
+            $table->boolean('is_new')->default(false);
             $table->timestamps();
         });
 
 
         Schema::create('lvp_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('category_name');
-            $table->string('category_image');
-            $table->string('status');
+            $table->string('name');
+            $table->string('sort_by');
+            $table->longText('image_url');
             $table->timestamps();
         });
     }

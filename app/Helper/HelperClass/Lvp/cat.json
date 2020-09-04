@@ -1,1 +1,152 @@
-{"result":[{"category_id":"14","category_name":"Trending","category_image":"http://skyinfotechdeveloper.com/musicbit_video/category/trending.png","status ":"no"},{"category_id":"1","category_name":"love","category_image":"http://skyinfotechdeveloper.com/musicbit_video/category/love.png","status ":"yes"},{"category_id":"3","category_name":"punjabi","category_image":"http://skyinfotechdeveloper.com/musicbit_video/category/Punjabi.png","status ":"yes"},{"category_id":"2","category_name":"birthday","category_image":"http://skyinfotechdeveloper.com/musicbit_video/category/birthdayw.png","status ":"no"},{"category_id":"4","category_name":"sad","category_image":"http://skyinfotechdeveloper.com/musicbit_video/category/sad.png","status ":"yes"},{"category_id":"8","category_name":"Gujarati","category_image":"http://skyinfotechdeveloper.com/musicbit_video/category/gujarati.png","status ":"yes"},{"category_id":"9","category_name":"Anniversary","category_image":"http://skyinfotechdeveloper.com/musicbit_video/category/anniversary.png","status ":"yes"},{"category_id":"10","category_name":"God","category_image":"http://skyinfotechdeveloper.com/musicbit_video/category/God.png","status ":"yes"},{"category_id":"12","category_name":"Motivational","category_image":"http://skyinfotechdeveloper.com/musicbit_video/category/motivationl.png","status ":"no"},{"category_id":"11","category_name":"telugu","category_image":"http://skyinfotechdeveloper.com/musicbit_video/category/telugu.png","status ":"no"},{"category_id":"13","category_name":"Attitude","category_image":"http://skyinfotechdeveloper.com/musicbit_video/category/attitude.png","status ":"no"},{"category_id":"15","category_name":"Bebay","category_image":"http://skyinfotechdeveloper.com/musicbit_video/category/Bebay.png","status ":"yes"},{"category_id":"16","category_name":"Bangoli","category_image":"http://skyinfotechdeveloper.com/musicbit_video/category/Bangoli.png","status ":"yes"},{"category_id":"17","category_name":"Bhojpuri","category_image":"http://skyinfotechdeveloper.com/musicbit_video/category/Bhojpuri.png","status ":"yes"},{"category_id":"18","category_name":"Dialougue","category_image":"http://skyinfotechdeveloper.com/musicbit_video/category/Dialogues.png","status ":"yes"},{"category_id":"19","category_name":"English","category_image":"http://skyinfotechdeveloper.com/musicbit_video/category/English.png","status ":"yes"},{"category_id":"20","category_name":"Hindi","category_image":"http://skyinfotechdeveloper.com/musicbit_video/category/Hindi.png","status ":"yes"},{"category_id":"21","category_name":"Arbic","category_image":"http://skyinfotechdeveloper.com/musicbit_video/category/Arbic.png","status ":"yes"},{"category_id":"23","category_name":"islamic","category_image":"http://skyinfotechdeveloper.com/musicbit_video/category/Islamic.png","status ":"yes"},{"category_id":"24","category_name":"Kannada","category_image":"http://skyinfotechdeveloper.com/musicbit_video/category/Kannada.png","status ":"yes"},{"category_id":"25","category_name":"Malayalam","category_image":"http://skyinfotechdeveloper.com/musicbit_video/category/Malayalam.png","status ":"yes"},{"category_id":"26","category_name":"Marathi","category_image":"http://skyinfotechdeveloper.com/musicbit_video/category/Marathi.png","status ":"yes"},{"category_id":"27","category_name":"Mix","category_image":"http://skyinfotechdeveloper.com/musicbit_video/category/Mix.png","status ":"yes"},{"category_id":"28","category_name":"Nepali","category_image":"http://skyinfotechdeveloper.com/musicbit_video/category/Nepali.png","status ":"yes"},{"category_id":"29","category_name":"Old Hit","category_image":"http://skyinfotechdeveloper.com/musicbit_video/category/Old Hit.png","status ":"yes"},{"category_id":"30","category_name":"Rajasthani","category_image":"http://skyinfotechdeveloper.com/musicbit_video/category/Rajasthani.png","status ":"yes"},{"category_id":"31","category_name":"Tamil","category_image":"http://skyinfotechdeveloper.com/musicbit_video/category/Tamil.png","status ":"yes"},{"category_id":"32","category_name":"Telugu","category_image":"http://skyinfotechdeveloper.com/musicbit_video/category/Telugu.png","status ":"yes"}]}
+[
+    {
+        "id": 14,
+        "name": "Latest",
+        "sort_by": "newest",
+        "image_url": "http://boo16.appearth.xyz:8091/images/categories/thumb/1568384055_medal.png"
+    },
+    {
+        "id": 13,
+        "name": "Popular",
+        "sort_by": "popular",
+        "image_url": "http://boo16.appearth.xyz:8091/images/categories/thumb/1568383127_trending.png"
+    },
+    {
+        "id": 12,
+        "name": "Ganesha",
+        "sort_by": "random",
+        "image_url": "http://boo16.appearth.xyz:8091/images/categories/thumb/1567231411_ganesha.png"
+    },
+    {
+        "id": 7,
+        "name": "Mahadev",
+        "sort_by": "random",
+        "image_url": "http://boo16.appearth.xyz:8091/images/categories/thumb/1564561254_shiva.png"
+    },
+    {
+        "id": 2,
+        "name": "News",
+        "sort_by": "random",
+        "image_url": "http://boo16.appearth.xyz:8091/images/categories/thumb/1556954243_journalism.png"
+    },
+    {
+        "id": 21,
+        "name": "Lyrical",
+        "sort_by": "random",
+        "image_url": "http://boo16.appearth.xyz:8091/images/categories/thumb/1579089089_music.png"
+    },
+    {
+        "id": 16,
+        "name": "Particle",
+        "sort_by": "random",
+        "image_url": "http://boo16.appearth.xyz:8091/images/categories/thumb/1570432863_icons8_particle_96.png"
+    },
+    {
+        "id": 3,
+        "name": "Magical",
+        "sort_by": "random",
+        "image_url": "http://boo16.appearth.xyz:8091/images/categories/thumb/1556954379_magic_wand.png"
+    },
+    {
+        "id": 6,
+        "name": "Love",
+        "sort_by": "random",
+        "image_url": "http://boo16.appearth.xyz:8091/images/categories/thumb/1556954641_like.png"
+    },
+    {
+        "id": 4,
+        "name": "Dialogue",
+        "sort_by": "random",
+        "image_url": "http://boo16.appearth.xyz:8091/images/categories/thumb/1556954463_files_and_folders.png"
+    },
+    {
+        "id": 1,
+        "name": "Birthday",
+        "sort_by": "random",
+        "image_url": "http://boo16.appearth.xyz:8091/images/categories/thumb/1556953953_birthday_cake.png"
+    },
+    {
+        "id": 5,
+        "name": "Annivarsary",
+        "sort_by": "random",
+        "image_url": "http://boo16.appearth.xyz:8091/images/categories/thumb/1556954570_gift.png"
+    },
+    {
+        "id": 25,
+        "name": "Wedding",
+        "sort_by": "random",
+        "image_url": "http://boo16.appearth.xyz:8091/images/categories/thumb/1587374786_bride.png"
+    },
+    {
+        "id": 8,
+        "name": "Friendship",
+        "sort_by": "random",
+        "image_url": "http://boo16.appearth.xyz:8091/images/categories/thumb/1564742950_friends.png"
+    },
+    {
+        "id": 10,
+        "name": "Indian",
+        "sort_by": "random",
+        "image_url": "http://boo16.appearth.xyz:8091/images/categories/thumb/1565590574_flag_flag.png"
+    },
+    {
+        "id": 15,
+        "name": "Navratri",
+        "sort_by": "random",
+        "image_url": "http://boo16.appearth.xyz:8091/images/categories/thumb/1568964221_khelaiya_white1.png"
+    },
+    {
+        "id": 17,
+        "name": "Diwali",
+        "sort_by": "random",
+        "image_url": "http://boo16.appearth.xyz:8091/images/categories/thumb/1571816223_happy_diwali_white.png"
+    },
+    {
+        "id": 18,
+        "name": "Christmas",
+        "sort_by": "random",
+        "image_url": "http://boo16.appearth.xyz:8091/images/categories/thumb/1576492293_santa_clause_white.png"
+    },
+    {
+        "id": 20,
+        "name": "Makar  Sankranti",
+        "sort_by": "random",
+        "image_url": "http://boo16.appearth.xyz:8091/images/categories/thumb/1578636073_flying_kites.png"
+    },
+    {
+        "id": 23,
+        "name": "Valentine Week",
+        "sort_by": "random",
+        "image_url": "http://boo16.appearth.xyz:8091/images/categories/thumb/1580814808_proposal_white.png"
+    },
+    {
+        "id": 24,
+        "name": "Holi",
+        "sort_by": "random",
+        "image_url": "http://boo16.appearth.xyz:8091/images/categories/thumb/1582885011_holi_boo___1_.png"
+    },
+    {
+        "id": 9,
+        "name": "Rakhi",
+        "sort_by": "random",
+        "image_url": "http://boo16.appearth.xyz:8091/images/categories/thumb/1565251192_rakhi.png"
+    },
+    {
+        "id": 11,
+        "name": "Janmashtami",
+        "sort_by": "random",
+        "image_url": "http://boo16.appearth.xyz:8091/images/categories/thumb/1566026892_krishna.png"
+    },
+    {
+        "id": 19,
+        "name": "2020",
+        "sort_by": "random",
+        "image_url": "http://boo16.appearth.xyz:8091/images/categories/thumb/1576756740_new_year_white.png"
+    },
+    {
+        "id": 26,
+        "name": "15 Aug",
+        "sort_by": "random",
+        "image_url": "http://boo16.appearth.xyz:8091/images/categories/thumb/1597378909_15_august_white.png"
+    }
+]
