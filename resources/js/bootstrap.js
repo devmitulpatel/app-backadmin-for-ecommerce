@@ -9,10 +9,9 @@ window._ = require('lodash');
 try {
     window.Popper = require('popper.js').default;
     window.$ = window.jQuery = require('jquery');
-
     require('bootstrap');
-    import 'coreui';
-    var dt = require( 'datatables.net' )();
+    // import 'coreui';
+    var dt = require('datatables.net')();
 
 } catch (e) {}
 
@@ -32,13 +31,13 @@ $.ajaxSetup({
     }
 });
 
-window.CSRF=$('meta[name="csrf-token"]');
-window.APP_DOMAIN=process.env.MIX_APP_DOMAIN;
+window.CSRF = $('meta[name="csrf-token"]');
+window.APP_DOMAIN = process.env.MIX_APP_DOMAIN;
 import Echo from 'laravel-echo';
 
 window.Pusher = require('pusher-js');
 
-window.EchoRaw=Echo;
+window.EchoRaw = Echo;
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

@@ -1,5 +1,8 @@
 <?php
 
+use App\Helper\HelperClass\Img\Doit as ImgDoit;
+use App\Helper\HelperClass\Lvp\Doit as LvpDoit;
+use App\Helper\Img\Doit;
 use App\User;
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Request;
@@ -31,11 +34,34 @@ r('p','zdemo',[\App\Http\Controllers\Product\Product::class,'index']);
 Route::get('/test_lvp',function (){
 
 
-    $path=storage_path(implode(DS,['lvp','upload','sample','1.jpg']));
-    $path2=storage_path(implode(DS,['lvp','upload','sample','2.png']));
+dd(App\Helper\HelperClass\Lvp\Doit::test());
+
+
+
+
+    $url='http://boo22.appearth.xyz:8091/videos/original/1561562804_output.mp4';
+    //$url='http://boo22.appearth.xyz/videos/original/1561562804_output.mp4';
+
+
+    dd(App\Helper\HelperClass\Lvp\Doit:: makeUrlSafe($url));
+
+
+    $path=storage_path(implode(DS,['lvp','upload','sample','b.png']));
+    $path2=storage_path(implode(DS,['lvp','upload','sample','p.jpeg']));
     $fontpath2=storage_path(implode(DS,['lvp','upload','sample','3.ttf']));
 
-    $scale=0.2;
+    $drname="Dr. Sample Name";
+    $phonenumber="+91 123456789";
+    $from="          From
+Classy Technosoft";
+
+    $baseClass=new ImgDoit(1,$path2,['name'=>$drname,'number'=>$phonenumber,'from'=>$from]);
+
+    return $baseClass->make()->save(storage_path(implode(DS,['lvp','upload','sample'])),'btest2.png');
+
+
+
+    $scale=1;
     $watermarkBorderWidth=10;
     // create an image manager instance with favored driver
     $manager = new ImageManager(array('driver' => 'gd'));
@@ -50,11 +76,11 @@ Route::get('/test_lvp',function (){
 
     $watermarkW=$watermark->width();
     $watermarkH=$watermark->height();
-    $baseImg=$manager->canvas($watermarkW*$scale,$watermarkH*$scale);
+    $baseImg=$manager->canvas(145,156);
 
     $fix=5;
 
-    $watermark->resize($watermarkW*$scale-($watermarkBorderWidth),$watermarkH*$scale-($watermarkBorderWidth));
+    $watermark->resize(145,156);
 
 
     $baseImg->rectangle(0, 0, $watermarkW*$scale, $watermarkH*$scale, function ($draw)use ($watermarkBorderWidth) {
@@ -62,37 +88,39 @@ Route::get('/test_lvp',function (){
         $draw->border($watermarkBorderWidth, 'rgba(0,0,0,0.5)');
     })->insert($watermark,'center');
 
-    $img->resize($baseW*$scale,$baseH*$scale)->insert($baseImg,'center-top',0,100*$scale);
-    $img->text('Dr Name Surname',($baseW*$scale)/2,($watermarkH*$scale)+30,function ($f)use($fontpath2){
+    $img->resize($baseW*$scale,$baseH*$scale)->insert($baseImg,'left-top',42,42);
+    $img->text($drname,58,220,function ($f)use($fontpath2){
         $f->file($fontpath2);
-        $f->align('center');
-        $f->size(36);
+        $f->size(18);
         $f->color('rgba(0,0,0,0.8)');
-        $f->align('center');
+        $f->align('left');
         $f->valign('top');
      //   $f->angle(45);
 
     });
 
-    $img->text('Happy Birthday',($baseW*$scale)/2,($watermarkH*$scale)+160,function ($f)use($fontpath2){
+    $img->text($from,$baseW/2,$baseH-20,function ($f)use($fontpath2){
         $f->file($fontpath2);
         $f->align('center');
-        $f->size(36);
+        $f->size(18);
         $f->color('rgba(0,0,0,0.8)');
-        $f->align('center');
-        $f->valign('top');
+        $f->valign('bottom');
         //   $f->angle(45);
 
-    });    $img->text('Dr.Name Surname',($baseW*$scale)/2+100,($watermarkH*$scale)+220,function ($f)use($fontpath2){
+    });
+
+
+    $img->text($phonenumber,58,248,function ($f)use($fontpath2){
         $f->file($fontpath2);
-        $f->align('center');
-        $f->size(36);
+        $f->align('left');
+        $f->size(18);
         $f->color('rgba(0,0,0,0.8)');
-        $f->align('center');
         $f->valign('top');
         //   $f->angle(45);
 
     });
+
+
 
 
 

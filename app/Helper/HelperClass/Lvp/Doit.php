@@ -11,6 +11,7 @@ use App\Model\VideoApp\Image;
 use App\Model\VideoApp\Ringtone;
 use App\Model\VideoApp\RingtoneCat;
 use App\Model\VideoApp\Sticker;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use PHPUnit\Exception;
@@ -18,12 +19,156 @@ use function GuzzleHttp\json_decode;
 
 class Doit
 {
+
+    public static function getFile($data){
+        $r=$data['r'];
+        $input=$r->all();
+
+        $imgData=[
+            'path'=>$input['file'],
+            'driver'=>$input['driver'],
+        ];
+
+
+        $img=Storage::disk($imgData['driver'])->get($imgData['path']);
+
+        $file =$img;
+        $type = Storage::disk($imgData['driver'])->mimeType($imgData['path']);
+        $response = Response::make($file, 200)->header("Content-Type", $type);
+
+        return $response;
+    }
+
     public static function getFileExt($url){
-        $u=parse_url ($url);
+        $u=parse_url($url);
 
         $uExplode=explode('/',$u['path']);
         $uExplode=explode('.',end($uExplode));
         return end($uExplode);
+
+    }
+
+    public static function getTemplateByCatId($data){
+        $input=$data['r']->all();
+
+        if(array_key_exists('cat_id',$input)){
+            $v=new Videos();
+
+            $founData=$v->select(['id','title','height','width','zip','is_hot','video_url','thumb_url','zip_url','is_new'])->where('cat_id',$input['cat_id'])->get();
+
+            if($founData->count()<1)goto mserror;
+
+            $data=[
+                'status'=>true,
+                "message"=> "Templates",
+                'data'=>[
+                    'templates'=>$founData->toArray(),
+                ]
+            ];
+
+        }else{
+            mserror:
+
+            $data=[
+                'status'=>false,
+                "message"=> "Templates",
+                'data'=>[
+                ]
+            ];
+
+        }
+
+
+        return response()->json($data);
+
+        dd($data['r']->all());
+
+    }
+
+    public static function getTemplate($data){
+        //dd($data);
+        $c=new Category();
+        $v=new Videos();
+        $data=[
+            'status'=>true,
+            "message"=> "Templates",
+            'data'=>[
+                'templates'=>$v->select(['id','title','height','width','zip','is_hot','video_url','thumb_url','zip_url','is_new'])->get()->toArray(),
+                'categories'=>$c->select(['id','name','sort_by','image_url'])->get()->toArray(),
+            ]
+        ];
+        return response()->json($data);
+
+    }
+    public static function test(){
+
+        $model=new Videos();
+        $m=$model->all();
+
+
+        $duplicateZip=[];
+
+        foreach ($m as $v) {
+                $count=$model->where('zip',$v->zip)->get()->count();
+            if($count>1){
+                $duplicateZip[$v->zip]['count']=$count;
+                $duplicateZip[$v->zip]['id'][]=$v->id;
+            }
+        }
+
+        $process=[];
+        foreach ($duplicateZip as $k=>$i){
+
+            unset($i['id'][0]);
+
+            foreach ($i['id'] as $v){
+
+                $foundRaw=$model->where('id',$v)->get()->first()->toArray();
+
+                $files=[
+                    'video_url','thumb_url','zip_url'
+                ];
+
+                foreach ($files as $f){
+
+                    $filePath=$foundRaw[$f];
+
+                    if(Storage::disk('lvp')->exists($filePath) ){
+                        $process[$k]['fileDeleted'][$f]=Storage::disk('lvp')->delete($filePath);
+                    }
+
+                }
+
+                $process[$k]['dbEntryDeleted'] = $model->where('id',$v)->delete();
+
+
+
+            }
+
+
+
+        }
+
+
+        dd($process);
+
+
+
+
+
+
+
+          //  dd($allFile);
+
+            dd(array_sum($allFile));
+
+
+            $file=json_decode(file_get_contents($file));
+
+            dd($file);
+
+
+
     }
 
     public static function makeUrlSafe($url){
@@ -31,9 +176,25 @@ class Doit
         $exUrl1=explode('//',$url);
         $onlyUrl=end($exUrl1);
         $exUrl2=explode('/',$onlyUrl);
+        $port=80;
+
+        $exUrl3=explode(':',reset($exUrl2));
+
+        if(count($exUrl3)==2){
+            $exUrl2[0]=reset($exUrl3);
+            if(end($exUrl3)!=$port)$port=end($exUrl3);
+        }
+
+
+
         foreach ($exUrl2 as $k=>$v){
             $exUrl2[$k]=rawurlencode($v);
         }
+
+        if($port!=80){
+            $exUrl2[0]=implode(':',[$exUrl2[0],$port]);
+        }
+
         $imUrl1=implode('/',$exUrl2);
         $imUrl2=implode('//',[reset($exUrl1),$imUrl1]);
        // var_dump($imUrl2);
@@ -76,7 +237,7 @@ class Doit
         curl_close($curl);
         $gotFile=($response)?$response:false;
         $try=1;
-        while(!$gotFile){
+        while(!$gotFile && $try>50){
 
             var_dump("tring to get ".$filename. " for ".$try."from method");
             //sleep(15);
@@ -90,6 +251,10 @@ class Doit
 
         }
 
+        if(!$gotFile && $try>50){
+            var_dump('manaully download file link: '.$url.' and save file name filename'. $filename);
+            $response=true;
+        }
 
         if($response===false) Storage::disk($disk)->delete(implode(DS,[$folder,$filename]));
         return $response;
@@ -158,7 +323,7 @@ class Doit
                 ];
                 self::saveFileFromUrl($url2, 'videoJson', $filename, false, true, 'post', $headers);
             }
-            if(true){
+            if(true && $c['name']!='Popular'&& $c['name']!='Latest'){
 
 
     $json=file_get_contents(storage_path(implode(DS,['lvp','upload','videoJson',$c['name'].".json"])) );
@@ -191,9 +356,9 @@ class Doit
 
 
 
-        self::saveFileFromUrl($v['thumb_url'],implode(DS,['videos','thumbnail']),$thumbFilename,true,true);
-        self::saveFileFromUrl($v['video_url'],implode(DS,['videos','videos']),$videoFilename,true,true);
-        self::saveFileFromUrl($v['zip_url'],implode(DS,['videos','zip']),$zipFilename,true,true);
+        self::saveFileFromUrl($v['thumb_url'],implode(DS,['videos','thumbnail']),$thumbFilename,false,true);
+        self::saveFileFromUrl($v['video_url'],implode(DS,['videos','videos']),$videoFilename,false,true);
+        self::saveFileFromUrl($v['zip_url'],implode(DS,['videos','zip']),$zipFilename,false,true);
 
         $vRawData=[
             'cat_id'=>$c['id'],

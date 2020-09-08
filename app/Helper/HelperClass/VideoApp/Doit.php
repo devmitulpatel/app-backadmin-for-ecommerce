@@ -7,6 +7,7 @@ use App\Model\VideoApp\Frame;
 use App\Model\VideoApp\Image;
 use App\Model\VideoApp\Ringtone;
 use App\Model\VideoApp\RingtoneCat;
+use App\Model\VideoApp\RingtoneCat2;
 use App\Model\VideoApp\Sticker;
 use foo\Foo;
 use Illuminate\Support\Facades\Response;
@@ -37,7 +38,7 @@ class Doit
                     'updated_at'=>now()
                 ];
                 $prcess[self::editFrame($data,$r)][]='Frame update to DB';
-                if(array_key_exists(0,$prcess) && count($prcess)>0){
+                if(array_key_exists(0,$prcess) && count($prcess[0])>0){
                     $er[]='Frame not Updated';
                 }else {
                     $msg[]='Frame Updated';
@@ -54,7 +55,7 @@ class Doit
                     'updated_at'=>now()
                 ];
                 $prcess[self::editImage($data,$r)][]='Images add to DB';
-                if(array_key_exists(0,$prcess) && count($prcess)>0){
+                if(array_key_exists(0,$prcess) && count($prcess[0])>0){
                     $er[]='Image not Updated';
                 }else {
                     $msg[]='Image Updated';
@@ -71,7 +72,7 @@ class Doit
                     'updated_at'=>now()
                 ];
                 $prcess[self::editSticker($data,$r)][]='Sticker update to DB';
-                if(array_key_exists(0,$prcess) && count($prcess)>0){
+                if(array_key_exists(0,$prcess) && count($prcess[0])>0){
                     $er[]='Sticker not Updated';
                 }else {
                     $msg[]='Sticker Updated';
@@ -87,7 +88,7 @@ class Doit
                     'updated_at'=>now()
                 ];
                 $prcess[self::editRingtone($data,$r)][]='Ringtone update to DB';
-                if(array_key_exists(0,$prcess) && count($prcess)>0){
+                if(array_key_exists(0,$prcess) && count($prcess[0])>0){
                     $er[]='Ringtone not Updated';
                 }else {
                     $msg[]='Ringtone Updated';
@@ -103,13 +104,31 @@ class Doit
                     'updated_at'=>now()
                 ];
                 $prcess[self::editRingtoneCat($data,$r)][]='Ringtone Category update to DB';
-                if(array_key_exists(0,$prcess) && count($prcess)>0){
+                if(array_key_exists(0,$prcess) && count($prcess[0])>0){
                     $er[]='Ringtone Category not Updated';
                 }else {
                     $msg[]='Ringtone Category Updated';
                 }
 
                 break;
+
+
+                case  5:
+                    $data=[
+                        'id'=>$allInput['id'],
+                        'name'=>$allInput['name'],
+                        'icon'=>$allInput['icon'],
+                        'sortno'=>$allInput['sortno'],
+                        'updated_at'=>now()
+                    ];
+                    $prcess[self::editRingtoneCat2($data,$r)][]='Ringtone Category update to DB';
+                    if(array_key_exists(0,$prcess) && count($prcess[0])>0){
+                        $er[]='Ringtone Category not Updated';
+                    }else {
+                        $msg[]='Ringtone Category Updated';
+                    }
+    
+                    break;
 
         }
 
@@ -133,6 +152,7 @@ class Doit
             'sticker'=>3,
             'ringtone'=>4,
             'ringtonecat'=>5,
+            'ringtonecat2'=>6,
         ];
 
 
@@ -151,7 +171,7 @@ class Doit
                         'id'=>$id
                     ];
                     $process[self::deleteFrame($data)][]='Frame add to DB';
-                    if(array_key_exists(0,$process) && count($process)>0){
+                    if(array_key_exists(0,$process) && count($process[0])>0){
                         $er[]='Frame not deleted';
                     }else {
                         $msg[]='Frame Deleted';
@@ -163,7 +183,7 @@ class Doit
                         'id'=>$id
                     ];
                     $process[self::deleteImage($data)][]='Image add to DB';
-                    if(array_key_exists(0,$process) && count($process)>0){
+                    if(array_key_exists(0,$process) && count($process[0])>0){
                         $er[]='Image not deleted';
                     }else {
                         $msg[]='Image Deleted';
@@ -174,7 +194,7 @@ class Doit
                         'id'=>$id
                     ];
                     $process[self::deleteSticker($data)][]='Sticker add to DB';
-                    if(array_key_exists(0,$process) && count($process)>0){
+                    if(array_key_exists(0,$process) && count($process[0])>0){
                         $er[]='Sticker not deleted';
                     }else {
                         $msg[]='Sticker Deleted';
@@ -186,7 +206,7 @@ class Doit
                         'id'=>$id
                     ];
                     $process[self::deleteRingtone($data)][]='Ringtone add to DB';
-                    if(array_key_exists(0,$process) && count($process)>0){
+                    if(array_key_exists(0,$process) && count($process[0])>0){
                         $er[]='Ringtone not deleted';
                     }else {
                         $msg[]='Ringtone Deleted';
@@ -197,14 +217,29 @@ class Doit
                     $data=[
                         'id'=>$id
                     ];
-                    $process[self::deleteRingtoneCat($data)][]='Ringtone Category add to DB';
-                    if(array_key_exists(0,$process) && count($process)>0){
+                    $process[self::deleteRingtoneCat($data)][]='Ringtone Category Deleted From DB';
+                    if(array_key_exists(0,$process) && count($process[0])>0){
                         $er[]='Ringtone Category not deleted';
                     }else {
                         $msg[]='Ringtone Category Deleted';
                     }
 
                     break;
+
+                case 6:
+                        $data=[
+                            'id'=>$id
+                        ];
+                        $process[self::deleteRingtoneCat2($data)][]='Ringtone Category 2 Deleted From DB';
+                        if(array_key_exists(0,$process) && count($process[0])>0){
+                            $er[]='Ringtone Category 2 not deleted';
+                        }else {
+                            $msg[]='Ringtone Category 2 Deleted';
+                        }
+    
+                        break;
+
+                    
 
 
             }
@@ -231,6 +266,7 @@ class Doit
             'sticker'=>3,
             'ringtone'=>4,
             'ringtonecat'=>5,
+            'ringtonecat2'=>6,
         ];
         $input=$r->all();
         $type=$input['type']??false;
@@ -256,6 +292,9 @@ class Doit
                     break;
                 case 5:
                     $m=getModel(RingtoneCat::class);
+                    break;
+                case 6:
+                    $m=getModel(RingtoneCat2::class);
                     break;
             }
             if(array_key_exists('searchQuery',$input) && array_key_exists('query',$input['searchQuery']) && mb_strlen($input['searchQuery']['query'])>0 &&  array_key_exists('selectedColumnToSearch',$input['searchQuery'])&& mb_strlen($input['searchQuery']['selectedColumnToSearch'])>1 ){
@@ -391,6 +430,24 @@ class Doit
                     $msg[]='Ringtone Category added';
                 }
                 break;
+
+                case 5:
+
+                    $data=[
+                        'name'=>$allInput['name'],
+                        'icon'=>$allInput['icon'],
+                        'sortno'=>$allInput['sortno'],
+                        'status'=>1,
+                        'created_at'=>now(),
+                        'updated_at'=>now()
+                    ];
+                    $prcess[self::addRingtoneCat2($data,$r)][]='Ringtone Category add to DB';
+                    if(array_key_exists(0,$prcess) && count($prcess)>0){
+                        $er[]='Ringtone Category not added';
+                    }else {
+                        $msg[]='Ringtone Category added';
+                    }
+                    break;
 
         }
 
@@ -909,6 +966,113 @@ class Doit
     public static function deleteRingtoneCat($identifier){
 
         $m=getModel(RingtoneCat::class);
+        $file=['icon'];
+        // dd($identifier);
+        $row=$m->where('id',$identifier['id'])->get();
+        $process=[];
+        if($row->count()>0){
+
+            $rawData=$row->first()->toArray();
+
+            foreach ($file as $f){
+
+                if(array_key_exists($f,$rawData)){
+                    $query=[];
+                    parse_str(parse_url($rawData[$f], PHP_URL_QUERY), $query);
+                    $process[Storage::disk($query['driver'])->delete($query['file'])][]='File Deleted';
+                }
+
+            }
+
+            $process[$row->first()->delete()]='DB Entry Deleted';
+
+            if(!array_key_exists(0,$process))return true;
+
+        }
+        return false;
+
+    }
+
+
+    
+    public static function addRingtoneCat2($data,$r){
+
+        $m=getModel(RingtoneCat2::class);
+        $file=['icon'];
+
+        $filepaths=[];
+
+        $fData=[];
+
+
+
+        foreach ($file as $f){
+
+
+            $code = Str::uuid();
+            $ext = $r->$f->extension();
+            $filename = implode('.', [$code, $ext]);
+            $driver = 'videoapp';
+            $filepaths[$f] = $r->$f->storeAs('ringtonesCat', $filename, $driver);
+
+        }
+
+        foreach ($data as $k=>$v){
+
+            if(array_key_exists($k,$filepaths)){
+                $fData[$k]=$filepaths[$k];
+            }else{
+                $fData[$k]=$v;
+            }
+
+        }
+        //  dd($fData);
+
+        return $m->insert($fData);
+    }
+    public static function editRingtoneCat2($identifier,$r){
+
+        $m = getModel(RingtoneCat2::class);
+        $file = ['icon'];
+        // dd($identifier);
+        $row = $m->where('id', $identifier['id'])->get();
+
+        $process = [];
+        if ($row->count() > 0) {
+
+            $rawData = $row->first()->toArray();
+
+            foreach ($file as $f) {
+                if (array_key_exists($f, $rawData)) {
+                    $query = [];
+                    parse_str(parse_url($rawData[$f], PHP_URL_QUERY), $query);
+
+                    if ($r->hasFile($f)) {
+                        $process[Storage::disk($query['driver'])->delete($query['file'])][] = 'File update';
+                        $code = Str::uuid();
+                        $ext = $r->$f->extension();
+                        $filename = implode('.', [$code, $ext]);
+                        $driver = $query['driver'];
+                        $filepaths[$f] = $r->$f->storeAs('category', $filename, $driver);
+                        $identifier[$f] = $filepaths[$f];
+                    }else{
+                        if(array_key_exists($f,$identifier))unset($identifier[$f]);
+                    }
+                }
+            }
+
+            if (array_key_exists('id', $identifier)) unset($identifier['id']);
+            if (array_key_exists('created_at', $identifier)) unset($identifier['created_at']);
+
+            $process[$row->first()->update($identifier)] = 'DB Entry Update';
+
+            if (!array_key_exists(0, $process)) return true;
+
+    }
+    }
+    public static function deleteRingtoneCat2($identifier){
+
+        $m=getModel(RingtoneCat2::class);
         $file=['icon'];
         // dd($identifier);
         $row=$m->where('id',$identifier['id'])->get();

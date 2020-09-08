@@ -215,7 +215,7 @@
                                     <td v-for="c in t.list.columns">
 
                                         <div v-if="c.type=='text'">
-                                        {{r[c.model]}}
+                                            {{r[c.model]}}
                                         </div>
 
                                         <div v-if="c.type=='image'">
@@ -233,7 +233,7 @@
 
                                         <div v-if="c.type=='option'">
 
-                                                  {{getDynamicFromId(r[c.model],c.data)}}
+                                            {{getDynamicFromId(r[c.model],c.data)}}
 
                                         </div>
 
@@ -271,24 +271,24 @@
 
                                             <div class="col-12 " role="group" aria-label="Basic example" v-if="$data[['list',t.model,'data'].join('_')].last_page>1">
 
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text" style="padding-top: 0px;padding-bottom: 0px;">jump to</span>
-                                                        </div>
-                                                        <select v-on:change="changepage(t)" class="form-control" v-model="$data[['list',t.model,'data'].join('_')].current_page" style="padding-top: 0px;padding-bottom: 0px;">
-                                                            <optgroup label="Select Page to display page">
-                                                                <option
-
-                                                                    v-for="i in parseInt($data[['list',t.model,'data'].join('_')].last_page)"
-
-                                                                    :value="i">{{ i}}</option>
-
-                                                            </optgroup>
-                                                        </select>
-                                                        <div class="input-group-append"  style="padding-top: 0px;padding-bottom: 0px;">
-                                                            <span class="input-group-text">Page</span>
-                                                        </div>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" style="padding-top: 0px;padding-bottom: 0px;">jump to</span>
                                                     </div>
+                                                    <select v-on:change="changepage(t)" class="form-control" v-model="$data[['list',t.model,'data'].join('_')].current_page" style="padding-top: 0px;padding-bottom: 0px;">
+                                                        <optgroup label="Select Page to display page">
+                                                            <option
+
+                                                                v-for="i in parseInt($data[['list',t.model,'data'].join('_')].last_page)"
+
+                                                                :value="i">{{ i}}</option>
+
+                                                        </optgroup>
+                                                    </select>
+                                                    <div class="input-group-append"  style="padding-top: 0px;padding-bottom: 0px;">
+                                                        <span class="input-group-text">Page</span>
+                                                    </div>
+                                                </div>
 
 
 
@@ -330,11 +330,6 @@
 </template>
 
 <script>
-
-
-
-
-
     export default {
         name: "allForms",
         props: ['msData'],
@@ -347,57 +342,52 @@
                 input_sticker:{},
                 input_ringtone:{},
                 input_ringtoneCat:{},
-
+                input_ringtoneCat2:{},
                 search_frame:{},
                 search_image:{},
                 search_sticker:{},
                 search_ringtone:{},
                 search_ringtoneCat:{},
-
+                search_ringtoneCat2:{},
                 list_frame:[],
                 list_image:[],
                 list_sticker:[],
                 list_ringtone:[],
                 list_ringtoneCat:[],
+                list_ringtoneCat2:[],
                 list_frame_data:{},
                 list_image_data:{},
                 list_sticker_data:{},
                 list_ringtone_data:{},
                 list_ringtoneCat_data:{},
+                list_ringtoneCat2_data:{},
                 tabs:[
-
                     {
                         name:'Frame',
                         model:'frame',
                         path:this.msData.path.feedDatatoDB,
                         editpath:this.msData.path.edit,
                         inputs:[
-
                             {
                                 name:'Name',
                                 model:'name',
                                 type:'text',
-
                             } ,
                             {
                                 name:'Image',
                                 model:'imageUrl',
                                 type:'file',
-
                             },
                             {
                                 name:'Thumb Images',
                                 model:'thumbUrl',
                                 type:'file',
-
                             },
                             {
                                 name:'Status',
                                 model:'status',
                                 type:'radio',
-
                             }
-
                         ],
                         list:{
                             model:'list_frame',
@@ -406,69 +396,50 @@
                                     'text':'Name',
                                     'model':'name',
                                     'type':'text',
-
                                 },
                                 {
                                     'text':'Image',
                                     'model':'imageUrl',
                                     'type':'image',
-
                                 },
                                 {
                                     'text':'Thumbnail',
                                     'model':'thumbUrl',
                                     'type':'image',
-
                                 }
-
                             ],
                             path:this.msData.path.retriveListData
-
-
-
                         }
                     },
-
                     {
                         name:'Image',
                         model:'image',
                         path:this.msData.path.feedDatatoDB,
                         editpath:this.msData.path.edit,
                         inputs:[
-
                             {
                                 name:'Image',
                                 model:'thumbUrl',
                                 type:'file',
-
                             },
-
                             {
                                 name:'Status',
                                 model:'status',
                                 type:'radio',
-
                             }
-
                         ],
                         list:{
                             model:'list_image',
                             columns:[
-
                                 {
                                     'text':'Image',
                                     'model':'thumbUrl',
                                     'type':'image',
-
                                 },
-
-
                             ],
                             path:this.msData.path.retriveListData
-
                         }
                     },
-
                     {
                         name:'Sticker',
                         model:'sticker',
@@ -479,204 +450,196 @@
                                 name:'Name',
                                 model:'name',
                                 type:'text',
-
                             } ,
-
                             {
                                 name:'Image',
                                 model:'thumbUrl',
                                 type:'file',
-
                             },
-
-
-
                         ],
                         list:{
                             model:'list_sticker',
                             columns:[
-
                                 {
                                     text:'Name',
                                     model:'name',
                                     type:'text',
-
                                 },
                                 {
                                     text:'Thumb Image',
                                     model:'thumbUrl',
                                     type:'image',
-
                                 }
-
-
                             ],
                             path:this.msData.path.retriveListData
-
                         }
                     },
-
                     {
                         name:'Ringtone',
                         model:'ringtone',
                         path:this.msData.path.feedDatatoDB,
                         editpath:this.msData.path.edit,
                         inputs:[
-
                             {
                                 name:'Name',
                                 model:'name',
                                 type:'text',
-
                             } ,
                             {
                                 name:'Tag',
                                 model:'type',
                                 type:'text',
-
                             } ,
                             {
                                 name:'Category',
                                 model:'catId',
                                 type:'option',
                                 data:'list_ringtoneCat',
-
                             } ,
-
                             {
                                 name:'Music File',
                                 model:'mp3Url',
                                 type:'file',
-
                             },
                             {
                                 name:'Thumb Image',
                                 model:'thumbUrl',
                                 type:'file',
-
                             }
-
                         ],
                         list:{
                             model:'list_ringtone',
                             columns:[
-
                                 {
                                     text:'Name',
                                     model:'name',
                                     type:'text',
-
                                 },
                                 {
                                     text:'Music file',
                                     model:'mp3Url',
                                     type:'music',
-
                                 },
                                 {
                                     text:'Thumb Image',
                                     model:'thumbUrl',
                                     type:'image',
-
                                 },
                                 {
                                     text:'Tag',
                                     model:'type',
                                     type:'text',
-
                                 },
                                 {
                                     text:'Category',
                                     model:'catId',
                                     type:'option',
                                     data:'list_ringtoneCat'
-
                                 }
-
-
                             ],
                             path:this.msData.path.retriveListData
-
                         }
                     },
-
                     {
                         name:'Ringtone Category',
                         model:'ringtoneCat',
                         path:this.msData.path.feedDatatoDB,
                         editpath:this.msData.path.edit,
                         inputs:[
-
                             {
                                 name:'Name',
                                 model:'name',
                                 type:'text',
-
                             } ,
                             {
                                 name:'Thumb Image',
                                 model:'icon',
                                 type:'file',
-
                             },
                             {
                                 name:'Sort No',
                                 model:'sortno',
                                 type:'number',
-
                             }
-
                         ],
                         list:{
                             model:'list_ringtoneCat',
                             columns:[
-
                                 {
                                     text:'Name',
                                     model:'name',
                                     type:'text',
-
                                 },
                                 {
                                     text:'Icon Image',
                                     model:'icon',
                                     type:'image',
-
                                 },
                                 {
                                     text:'Sort No.',
                                     model:'sortno',
                                     type:'text',
-
                                 }
-
-
                             ],
                             path:this.msData.path.retriveListData
-
+                        }
+                    },
+                    {
+                        name:'Ringtone Category 2',
+                        model:'ringtoneCat2',
+                        path:this.msData.path.feedDatatoDB,
+                        editpath:this.msData.path.edit,
+                        inputs:[
+                            {
+                                name:'Name',
+                                model:'name',
+                                type:'text',
+                            } ,
+                            {
+                                name:'Thumb Image',
+                                model:'icon',
+                                type:'file',
+                            },
+                            {
+                                name:'Sort No',
+                                model:'sortno',
+                                type:'number',
+                            }
+                        ],
+                        list:{
+                            model:'list_ringtoneCat2',
+                            columns:[
+                                {
+                                    text:'Name',
+                                    model:'name',
+                                    type:'text',
+                                },
+                                {
+                                    text:'Icon Image',
+                                    model:'icon',
+                                    type:'image',
+                                },
+                                {
+                                    text:'Sort No.',
+                                    model:'sortno',
+                                    type:'text',
+                                }
+                            ],
+                            path:this.msData.path.retriveListData
                         }
                     }
-
-
                 ],
-
                 editOn:false,
-
                 allFiles:{},
                 validateInputs:[],
                 inputError1:[],
                 allInputs:{},
                 getttingData:false
-
-
             }
-
         },
         mounted() {
-
             $('#table_id').DataTable(
                 {
-
                     columns: [
                         { title: "name" , },
                         { title: "image",render : function ( data, type, row, meta ) {
@@ -685,84 +648,50 @@
                             }
                         },
                         { title: "thumbnail" ,
-
                             render : function ( data, type, row, meta ) {
-
                                 return "<img src='"+data+"' style='max-height: 100px;' loading='lazy'>" ;
                             }
-
-
-
                         },
                         { title: "action" ,
-
                             render : function ( data, type, row, meta ) {
-
-                            var str='' +
-                                '<div role="group" aria-label="Basic example" class="btn-group col-12" >' +
-                                '   <button  type="button" class="btn btn-outline-info" @click="editRow(t.model,r)">' +
-                                '       <i  class="fas fa-pencil-alt"></i>' +
-                                '    </button> ' +
-                                '   <button  type="button" class="btn btn-outline-danger">' +
-                                '       <i data-v-706b8cfc="" class="fas fa-trash-alt"></i>' +
-                                '   </button>' +
-                                '</div>';
-
+                                var str='' +
+                                    '<div role="group" aria-label="Basic example" class="btn-group col-12" >' +
+                                    '   <button  type="button" class="btn btn-outline-info" @click="editRow(t.model,r)">' +
+                                    '       <i  class="fas fa-pencil-alt"></i>' +
+                                    '    </button> ' +
+                                    '   <button  type="button" class="btn btn-outline-danger">' +
+                                    '       <i data-v-706b8cfc="" class="fas fa-trash-alt"></i>' +
+                                    '   </button>' +
+                                    '</div>';
                                 return str ;
                             }
-
-
-
                         },
-
-
                     ],
-
-
-
                     scrollX: true,
                     "ajax": 'test',
-
                 }
-
             );
-
-
         },
         created(){
             for (var i in this.tabs){
-             //   this.allInputs[this.makeModelName(this.tabs[i].model)]={};
+                //   this.allInputs[this.makeModelName(this.tabs[i].model)]={};
                 if(this.tabs[i].hasOwnProperty('inputs'))for (var y in this.tabs[i]['inputs']){
-                //    console.log( this.tabs[i]['inputs'][y].model);
-               //     this.allInputs[this.makeModelName(this.tabs[i].model)][this.tabs[i]['inputs'][y].model]=null;
-                 //   console.log( this.allInputs);
+                    //    console.log( this.tabs[i]['inputs'][y].model);
+                    //     this.allInputs[this.makeModelName(this.tabs[i].model)][this.tabs[i]['inputs'][y].model]=null;
+                    //   console.log( this.allInputs);
                 }
-
                 this[['search',this.tabs[i].model].join('_')].per_page=this.perPage;
                 this[['search',this.tabs[i].model].join('_')].current_page=this[['list',this.tabs[i].model,'data'].join('_')].current_page;
-
                 this.getDataFor(this.tabs[i].model)
             }
-
-
-
-
-
         },
         methods:{
-
             sendDataToServer(t){
-
                 var dataModel=['list',t.model].join('_');
                 var dataConfig=['list',t.model,'data'].join('_');
                 var pagedata=this[dataConfig];
                 var searchData=this[['search',t.model].join('_')];
-
-
-
-
                 var url=pagedata.path;
-
                 var pData={
                     type:t.model,
                     page:pagedata.current_page,
@@ -789,57 +718,38 @@
                     th[dataModel]=inData.data;
                     th[dataConfig]=config;
                 });
-
-
             },
-
             changepage(t){
-
-               this.sendDataToServer(t);
-
+                this.sendDataToServer(t);
             },
-
             refreshData(){
-
-
-
             },
-
             searchForTable(t){
                 this.sendDataToServer(t);
-
-
             },
             getDynamicFromId(id,data){
-
                 id=id.toString();
                 var mData=this[data];
                 var foundKey=false;
                 for (var i in mData){
-                   // console.log("--Start---");
-                   // console.log(mData[i] );
+                    // console.log("--Start---");
+                    // console.log(mData[i] );
                     if(mData[i].id==id)foundKey=i;
                     if(foundKey==false){
-                     //   console.log(id);
-                      //  console.log(mData[i].id);
-                      //  console.log(mData[i].id==id);
-                       // console.log("---End--");
+                        //   console.log(id);
+                        //  console.log(mData[i].id);
+                        //  console.log(mData[i].id==id);
+                        // console.log("---End--");
                     }
                 }
-
                 return (foundKey===false)?"No Ringtone Category Found":mData[foundKey].name;
-
             },
             editRow(model,d){
-
                 var n= this.makeModelName(model);
                 this[n]=d;
                 this.editOn=true;
-
             },
-
             deleteRow(model,d){
-
                 var data={
                     id:d.id,
                     type:model
@@ -847,51 +757,24 @@
                 var url =this.msData.path.delete;
                 var th = this;
                 axios.post(url,data).then(function (res) {
-
                     var data=res.data;
                     if(data.hasOwnProperty('ResponseMessage') && typeof data.ResponseMessage == "object")Vue.toasted.success(data.ResponseMessage[0],{duration:1000});
                     th.getDataFor(model);
-                  //  th.resetForm(baseData.model);
-
+                    //  th.resetForm(baseData.model);
                 }).catch(function (e) {
                     var data=e.response;
                     if(data.hasOwnProperty('ResponseMessage') && typeof data.ResponseMessage == "object")Vue.toasted.error(data.ResponseMessage[0],{duration:1000});
                 });
-
-              console.log(d.id);
+                console.log(d.id);
             },
-
             processForm(e,url,formType){
-            //console.log(e);
+                //console.log(e);
                 switch(formType){
                     case 0:
                         var inputData=this.input_frame;
                         var baseData=this.tabs[formType];
-
                         var files=(this.allFiles.hasOwnProperty(['input',this.tabs[formType].model].join('_')))?this.allFiles[['input',this.tabs[formType].model].join('_')]:{};
-
                         var fData= new FormData();
-
-                        for(var i in inputData){
-                            if(files.hasOwnProperty(i)){
-                            fData.append(i,files[i],files[i].name);
-                            }else{
-                                fData.append(i,inputData[i]);
-                            }
-                        }
-
-                        fData.append('formtype',formType);
-
-                        break;
-
-                    case 1:
-                        var inputData=this.input_image;
-                        var baseData=this.tabs[formType];
-
-                        var files=(this.allFiles.hasOwnProperty(['input',this.tabs[formType].model].join('_')))?this.allFiles[['input',this.tabs[formType].model].join('_')]:{};
-
-                        var fData= new FormData();
-
                         for(var i in inputData){
                             if(files.hasOwnProperty(i)){
                                 fData.append(i,files[i],files[i].name);
@@ -899,17 +782,27 @@
                                 fData.append(i,inputData[i]);
                             }
                         }
-
+                        fData.append('formtype',formType);
+                        break;
+                    case 1:
+                        var inputData=this.input_image;
+                        var baseData=this.tabs[formType];
+                        var files=(this.allFiles.hasOwnProperty(['input',this.tabs[formType].model].join('_')))?this.allFiles[['input',this.tabs[formType].model].join('_')]:{};
+                        var fData= new FormData();
+                        for(var i in inputData){
+                            if(files.hasOwnProperty(i)){
+                                fData.append(i,files[i],files[i].name);
+                            }else{
+                                fData.append(i,inputData[i]);
+                            }
+                        }
                         fData.append('formtype',formType);
                         break;
                     case 2:
                         var inputData=this.input_sticker;
                         var baseData=this.tabs[formType];
-
                         var files=(this.allFiles.hasOwnProperty(['input',this.tabs[formType].model].join('_')))?this.allFiles[['input',this.tabs[formType].model].join('_')]:{};
-
                         var fData= new FormData();
-
                         for(var i in inputData){
                             if(files.hasOwnProperty(i)){
                                 fData.append(i,files[i],files[i].name);
@@ -917,17 +810,13 @@
                                 fData.append(i,inputData[i]);
                             }
                         }
-
                         fData.append('formtype',formType);
                         break;
                     case 3:
                         var inputData=this.input_ringtone;
                         var baseData=this.tabs[formType];
-
                         var files=(this.allFiles.hasOwnProperty(['input',this.tabs[formType].model].join('_')))?this.allFiles[['input',this.tabs[formType].model].join('_')]:{};
-
                         var fData= new FormData();
-
                         for(var i in inputData){
                             if(files.hasOwnProperty(i)){
                                 fData.append(i,files[i],files[i].name);
@@ -935,18 +824,13 @@
                                 fData.append(i,inputData[i]);
                             }
                         }
-
                         fData.append('formtype',formType);
                         break;
-
                     case 4:
                         var inputData=this.input_ringtoneCat;
                         var baseData=this.tabs[formType];
-
                         var files=(this.allFiles.hasOwnProperty(['input',this.tabs[formType].model].join('_')))?this.allFiles[['input',this.tabs[formType].model].join('_')]:{};
-
                         var fData= new FormData();
-
                         for(var i in inputData){
                             if(files.hasOwnProperty(i)){
                                 fData.append(i,files[i],files[i].name);
@@ -954,54 +838,48 @@
                                 fData.append(i,inputData[i]);
                             }
                         }
-
                         fData.append('formtype',formType);
                         break;
 
+                        case 5:
+                        var inputData=this.input_ringtoneCat2;
+                        var baseData=this.tabs[formType];
+                        var files=(this.allFiles.hasOwnProperty(['input',this.tabs[formType].model].join('_')))?this.allFiles[['input',this.tabs[formType].model].join('_')]:{};
+                        var fData= new FormData();
+                        for(var i in inputData){
+                            if(files.hasOwnProperty(i)){
+                                fData.append(i,files[i],files[i].name);
+                            }else{
+                                fData.append(i,inputData[i]);
+                            }
+                        }
+                        fData.append('formtype',formType);
+                        break;
                 }
-
                 var th =this;
                 axios.post(url,fData).then(function (res) {
-
                     var data=res.data;
                     if(data.hasOwnProperty('ResponseMessage') && typeof data.ResponseMessage == "object")Vue.toasted.success(data.ResponseMessage[0],{duration:1000});
                     th.getDataFor(baseData.model);
                     th.resetForm(baseData.model);
-
                 }).catch(function (e) {
                     var data=e.response;
                     if(data.hasOwnProperty('ResponseMessage') && typeof data.ResponseMessage == "object")Vue.toasted.error(data.ResponseMessage[0],{duration:1000});
                 });
-
-
             },
-
             resetForm(model){
                 if(this.editOn)this.editOn=false;
                 var n=this.makeModelName(model);
                 this.allFiles[n]={};
                 this[n]={};
-
             },
-
             validateDataForm(inputData,baseData){
-
-                    var inputs=baseData.inputs;
-
-                    for (var i in inputs){
-                        if(inputs[i].hasOwnProperty('model') && inputData.hasOwnProperty(inputs[i].model) && inputData[inputs[i].model].hasOwnProperty('validate')){
-
-
-
-
-
-
-                        }
+                var inputs=baseData.inputs;
+                for (var i in inputs){
+                    if(inputs[i].hasOwnProperty('model') && inputData.hasOwnProperty(inputs[i].model) && inputData[inputs[i].model].hasOwnProperty('validate')){
                     }
-
-
+                }
             },
-
             getDataFor(type){
                 var data={
                     type:type
@@ -1011,69 +889,48 @@
                 var dataModel=['list',type].join('_');
                 var dataConfig=['list',type,'data'].join('_');
                 var th=this;
-
-                    axios.post(url,data).then(function(res){
-
-
-                        var inData=res.data.ResponseMessage;
-                        var config={
-                            current_page:inData.current_page,
-                            last_page:inData.last_page,
-                            from:inData.from,
-                            to:inData.to,
-                            first_page_url:inData.first_page_url,
-                            next_page_url:inData.next_page_url,
-                            last_page_url:inData.last_page_url,
-                            path:inData.path,
-                            per_page:inData.per_page,
-                            prev_page_url:inData.prev_page_url,
-                            total:inData.total,
-                        };
-                        th[dataModel]=inData.data;
-                        th[dataConfig]=config;
-
-                      //  Vue.toasted.success('New Data Loaded',{duration:500});
-                     //   th.getttingData=false;
-
-                    }).catch(function(e){
-
-                       // th.getttingData=false;
-
-                    });
-
-
-
-
+                axios.post(url,data).then(function(res){
+                    var inData=res.data.ResponseMessage;
+                    var config={
+                        current_page:inData.current_page,
+                        last_page:inData.last_page,
+                        from:inData.from,
+                        to:inData.to,
+                        first_page_url:inData.first_page_url,
+                        next_page_url:inData.next_page_url,
+                        last_page_url:inData.last_page_url,
+                        path:inData.path,
+                        per_page:inData.per_page,
+                        prev_page_url:inData.prev_page_url,
+                        total:inData.total,
+                    };
+                    th[dataModel]=inData.data;
+                    th[dataConfig]=config;
+                    //  Vue.toasted.success('New Data Loaded',{duration:500});
+                    //   th.getttingData=false;
+                }).catch(function(e){
+                    // th.getttingData=false;
+                });
             },
-
-
             retriveData(model,list,force=false){
                 var data= {
-                  type:model
+                    type:model
                 };
-
                 var dataModel=list.model;
-
                 var url=list.path;
                 var th=this;
                 if(th.getttingData!=true){
                     th.getttingData=true;
                     axios.post(url,data).then(function(res){
-
-                    console.log(res);
-                    var inData=res.data.ResponseMessage;
-
-                    th[dataModel]=inData;
-                    th.getttingData=false;
-
-                }).catch(function(e){
-
+                        console.log(res);
+                        var inData=res.data.ResponseMessage;
+                        th[dataModel]=inData;
                         th.getttingData=false;
-
-                });
+                    }).catch(function(e){
+                        th.getttingData=false;
+                    });
                 }
-
-            return  this[dataModel];
+                return  this[dataModel];
             },
             refreshInput(name){
                 var old=this[name];
@@ -1089,34 +946,20 @@
             makeModelName(name='',subname=false){
                 return (subname==false)?['input',name].join('_'):['input',name,subname].join('_');
             },
-
             updateInput(e,d, type,rootmodel,submodel) {
-
                 switch (type) {
                     case 'file':
                         this.handleFileInputUpdate(e,d, rootmodel,submodel);
                         break;
                 }
-
-
-
             },
             handleFileInputUpdate(e,d,rootmodel,submodel){
-
-
-
-
                 const file = e.target.files;
                 var rootModelFinal=this.makeModelName(rootmodel);
-
-
                 if(!this.allFiles.hasOwnProperty(rootModelFinal))this.allFiles[rootModelFinal]={};
-
                 this.allFiles[rootModelFinal][submodel]=file[0];
                 var th=this;
                 if(!(rootmodel=='ringtone' && submodel=='mp3Url')){
-
-
                     let reader = new FileReader;
                     reader.onload = e => {
                         if(!d.hasOwnProperty(rootModelFinal))d[rootModelFinal]={};
@@ -1125,20 +968,16 @@
                         // this.updateInput();
                     }
                     reader.readAsDataURL(file[0]);
-
                 }else{
                     d[rootModelFinal][submodel] ='musicfile';
                     th.refreshInput(rootModelFinal);
                 }
-
-
             }
         },
     }
 </script>
 
 <style scoped>
-
     [type=file]{
         padding:3px;
     }
@@ -1149,5 +988,4 @@
     table{
         margin-top:20px;
     }
-
 </style>

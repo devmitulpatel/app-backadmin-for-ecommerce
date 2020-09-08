@@ -17,30 +17,38 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 </head>
-<body class="app sidebar-show aside-menu-show">
-<header class="app-header navbar">
-    <!-- Header content here -->
-</header>
-<div class="app-body">
-    <div class="sidebar">
-        <!-- Sidebar content here -->
+<body>
+
+
+
+
+    <div id="app" >
+@php
+@endphp
+        <div id="overlay"  v-on:click="toggleSidebar()">
+
+        </div>
+
+    @include('layouts.sidebar')
+ @include('layouts.static.panel_header')
+
+
+
+
+
+
+        <main class="py-4" id="main" >
+            <div id="vuemain" >
+                @yield('content')
+            </div>
+
+        </main>
     </div>
-    <main class="main">
-        <!-- Main content here -->
-    </main>
-    <aside class="aside-menu">
-        <!-- Aside menu content here -->
-    </aside>
-</div>
-<footer class="app-footer">
-    <!-- Footer content here -->
-</footer>
 
-    <script src="{{ mix('js/manifest.js')."?".date('Ydmis') }}" defer></script>
-    <script src="{{ mix('js/vendor.js')."?".date('Ydmis') }}" defer></script>
-    <script src="{{ mix('js/app.js')."?".date('Ydmis') }}" defer></script>
-{{--    <script src="https://ckeditor.com/apps/ckfinder/3.5.0/ckfinder.js"></script>--}}
+    <script src="{{ mix('js/manifest.js')."?".date('Ydmis') }}" ></script>
+    <script src="{{ mix('js/vendor.js')."?".date('Ydmis') }}" ></script>
+    <script src="{{ mix('js/app.js')."?".date('Ydmis') }}" ></script>
 
-{{--    <script src="https://kit.fontawesome.com/613c299ae6.js" crossorigin="anonymous"></script>--}}
+
 </body>
 </html>

@@ -5,8 +5,11 @@ namespace App\Helper\HelperClass;
 
 
 use App\Http\Controllers\Auth\LoginApiController;
+use App\Model\Lvp\Category;
+use App\Model\Lvp\Videos;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Request;
 
 class AppScopedRoutes
 {
@@ -15,8 +18,27 @@ class AppScopedRoutes
         self::comman();
         self::app();
         if(true)self::videoapp();
-        self::api();
+        if(true)self::lvp();
+   //     self::api();
     }
+
+
+    public static function lvp(){
+
+        Route::prefix('lvp')->group(function () {
+
+            Route::get('/get-templates','lvp\MainController@getTemplate')->name('lvp.get-templates');
+            Route::get('/get-cat-templates','lvp\MainController@getTemplateByCatId')->name('lvp.get-templates');
+            Route::get('/getFile','lvp\MainController@getFile')->name('lvp.get-file');
+
+
+
+        });
+
+
+
+
+        }
 
     public static function app(){
         Route::match(['get'], 'product/img/get/{code}', "Product\\Product@getImage")->name('product.img.get');
@@ -197,6 +219,37 @@ class AppScopedRoutes
 
 
             });
+
+
+
+            Route::any('/getDataForApp2.json', function (Request $request) {
+
+
+                $data=[
+
+                    'ParticleNew'=>[
+                        'Frame'=>\App\Model\VideoApp\Frame::select(['name','thumbUrl','imageUrl'])->get(),
+
+                        'Image'=>\App\Model\VideoApp\Image::select(['thumbUrl'])->get(),
+                        'Sticker'=>\App\Model\VideoApp\Sticker::select(['name','thumbUrl'])->get(),
+
+                    ],
+                    'Ringtone'=>\Help\VideoApp\Doit::responseRingtone(),
+                    'Category'=>\App\Model\VideoApp\RingtoneCat2::select(['name','icon','sortno'])->orderBy('sortno')->get()
+
+
+                ];
+
+
+
+                return response()->json($data);
+
+
+
+
+
+            });
+
 
 
         });
