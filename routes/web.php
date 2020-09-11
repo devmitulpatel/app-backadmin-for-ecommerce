@@ -29,21 +29,121 @@ use Intervention\Image\ImageManager;
 
 
 
-r('p','zdemo',[\App\Http\Controllers\Product\Product::class,'index']);
+
+Route::get('/test_dr',function (){
+
+
+    $allFiles=\Illuminate\Support\Facades\Storage::disk('dr')->allFiles('data');
+    $dataO=[];
+
+    foreach($allFiles as $fk=>$f){
+        $filepath=storage_path(implode('/',['dr',$f]));
+
+        $vData=[];
+        $data=Excel::import(new \App\Imports\DrImport($vData), $filepath);
+        //   dd(Excel::import(new \App\Imports\DrImport(), $filepath));
+        $clumn=[
+            'zone',
+            'region',
+            'place',
+            'name',
+            'speciality'
+        ];
+
+        foreach ($vData as $k=>$d){
+            if($k>0){
+                $dataO[$fk][$k]=[];
+                foreach ($clumn as $k2=>$c){
+                    if(!array_key_exists($k2,$d)){
+
+                        dd($f);
+                    }
+                    $dataO[$fk][$k][$c]=$d[$k2];
+                }
+            }
+        }
+
+
+
+    }
+
+    dd($dataO);
+
+    $path=storage_path(implode(DS,['lvp','upload','sample','b.png']));
+    $path2=storage_path(implode(DS,['lvp','upload','sample','p.jpeg']));
+    $fontpath2=storage_path(implode(DS,['lvp','upload','sample','3.ttf']));
+
+    $drname="Dr. Sample Name";
+    $phonenumber="+91 123456789";
+    $from="          From
+Classy Technosoft";
+
+    $baseClass=new ImgDoit(1,$path2,['name'=>$drname,'number'=>$phonenumber,'from'=>$from]);
+
+    return $baseClass->make()->save(storage_path(implode(DS,['dr','sample'])),'btest2.png');
+
+
+    //    $imgname=\Illuminate\Support\Facades\Storage::disk('lvp')->get('category/Anniversary.png');
+//
+//    $path=storage_path(implode(DS,['lvp','upload','sample','1.jpg']));
+//    $path2=storage_path(implode(DS,['lvp','upload','sample','2.png']));
+//
+//
+//   // dd($path);
+//
+//    header ('Content-Type: image/png');
+////    $im = imagecreatetruecolor(250, 250)
+////    or die('Cannot Initialize new GD image stream');
+//    $im = imagecreatefromjpeg($path)
+//    or die('Cannot Initialize new GD image stream');
+//
+//    imageAlphaBlending($im, true);
+//    imageSaveAlpha($im, true);
+//    imagescale ($im,450,120);
+//    $im2 = imagecreatefrompng($path2)
+//    or die('Cannot Initialize new GD image stream');
+//    imageAlphaBlending($im2, true);
+//    imageSaveAlpha($im2, true);
+//
+//    $baseW=imagesx ($im);
+//    $baseH=imagesy ($im);
+//
+//    $overlyW=imagesx ($im2);
+//    $overlyH=imagesy ($im2);
+//
+//
+//    $locationW=($baseW/2)+($overlyW/2);
+//    $locationH=($baseH/2)+($overlyH/2);
+//
+//    $scale=1;
+//
+//    imagecopymerge($im, $im2, $locationW, $locationH, 100, 0, $overlyW*$scale, $overlyH*$scale, 100);
+//    //$im3 = imagecreate(450,450);
+//
+//   // imagecopyresized($im3, $im, 100,100, 0, 0, 450, 450, $baseW, $baseH);
+//    //$background = imagecolorallocate($im, 255, 0, 0);
+//    //$text_color = imagecolorallocate($im, 233, 14, 91);
+//
+//    //$im  = imagecreatetruecolor(150, 30);
+////   s $bgc = imagecolorallocate($im, 255, 255, 255);
+////    $tc  = imagecolorallocate($im, 0, 0, 0);
+//
+//    //imagefilledrectangle($im, 0, 0, 150, 30, $bgc);
+//
+//   //imagestring($im, 1, 5, 5, 'Error loading ' . $path, $tc);
+//
+//
+//    $var=imagepng($im);
+//
+//    imagedestroy($im);
+//    dd($var);
+
+});
+
+
 
 Route::get('/test_lvp',function (){
 
-
-dd(App\Helper\HelperClass\Lvp\Doit::test());
-
-
-
-
-    $url='http://boo22.appearth.xyz:8091/videos/original/1561562804_output.mp4';
-    //$url='http://boo22.appearth.xyz/videos/original/1561562804_output.mp4';
-
-
-    dd(App\Helper\HelperClass\Lvp\Doit:: makeUrlSafe($url));
 
 
     $path=storage_path(implode(DS,['lvp','upload','sample','b.png']));
@@ -57,7 +157,7 @@ Classy Technosoft";
 
     $baseClass=new ImgDoit(1,$path2,['name'=>$drname,'number'=>$phonenumber,'from'=>$from]);
 
-    return $baseClass->make()->save(storage_path(implode(DS,['lvp','upload','sample'])),'btest2.png');
+    return $baseClass->make()->save(storage_path(implode(DS,['dr','sample'])),'btest2.png');
 
 
 
@@ -184,6 +284,10 @@ Classy Technosoft";
 //    dd($var);
 
 });
+
+
+
+
 if(false){
     Broadcast::routes();
 

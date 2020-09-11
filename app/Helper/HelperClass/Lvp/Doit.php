@@ -20,9 +20,9 @@ use function GuzzleHttp\json_decode;
 class Doit
 {
 
-    public static function getFile($data){
+    public static function getFile($data,$raw=true){
         $r=$data['r'];
-        $input=$r->all();
+        $input=($raw)?$r->all():$data;
 
         $imgData=[
             'path'=>$input['file'],
@@ -37,6 +37,94 @@ class Doit
         $response = Response::make($file, 200)->header("Content-Type", $type);
 
         return $response;
+    }
+
+    public static function test(){
+        set_time_limit(0);
+        $model=new Videos();
+        $m=$model->all();
+
+        $dFile=\json_decode(file_get_contents(app_path(implode(DS,['Helper','HelperClass','Lvp','d.json']))),true);
+
+        $videoRoot=collect($dFile['data']['templates']);
+
+
+
+        $duplicateZip=[];
+
+        $missingFile=[];
+
+        foreach ($m as $v){
+
+            $checkFiles=['video_url'=>parse_url($v->video_url),'zip_url'=>parse_url($v->zip_url)];
+
+
+            foreach ($checkFiles as $k=>$f){
+                $q=[];
+                parse_str( $f['query'],$q);
+
+                $d=[
+                    'file'=>$q['file'],
+                    'driver'=>$q['driver']
+                ];
+                if(!Storage::disk($d['driver'])->exists($d['file'])){
+                    $missingFile[$v->id][$k]=$v->$k;
+
+
+
+                    if(!array_key_exists('foundData',$missingFile[$v->id]))$missingFile[$v->id]['foundData']=$videoRoot->where('zip',$v->zip)->first();
+
+                    if(array_key_exists('foundData',$missingFile[$v->id])){
+                        $url=$missingFile[$v->id]['foundData'][$k];
+                        switch ($k){
+                            case 'video_url':
+                                $folder=implode(DS,['videos','newVideos']);
+                                $dbfolder=implode(DS,['videos','videos']);
+
+                                break;
+                            case 'zip_url':
+                                $folder=implode(DS,['videos','newZip']);
+                                $dbfolder=implode(DS,['videos','zip']);
+                                break;
+                        }
+                        $filename='';
+                        self::saveFileFromUrl($url,$folder,$filename);
+                        $dbUrl=implode('/',['videos','zip',$filename]);
+                        $missingFile[$v->id]['dbChange'][$k]=$dbUrl;
+                    }
+
+                    if(array_key_exists('dbChange',$missingFile[$v->id]) && count($missingFile[$v->id]['dbChange'])>0){
+                       $missingFile[$v->id]['dbProcess'] =$model->where('id',$v->id)->update($missingFile[$v->id]['dbChange']);
+
+                    }
+
+
+                }
+
+            }
+
+        }
+
+
+        dd($missingFile);
+
+
+
+
+
+
+
+        //  dd($allFile);
+
+        dd(array_sum($allFile));
+
+
+        $file=json_decode(file_get_contents($file));
+
+        dd($file);
+
+
+
     }
 
     public static function getFileExt($url){
@@ -100,76 +188,7 @@ class Doit
         return response()->json($data);
 
     }
-    public static function test(){
 
-        $model=new Videos();
-        $m=$model->all();
-
-
-        $duplicateZip=[];
-
-        foreach ($m as $v) {
-                $count=$model->where('zip',$v->zip)->get()->count();
-            if($count>1){
-                $duplicateZip[$v->zip]['count']=$count;
-                $duplicateZip[$v->zip]['id'][]=$v->id;
-            }
-        }
-
-        $process=[];
-        foreach ($duplicateZip as $k=>$i){
-
-            unset($i['id'][0]);
-
-            foreach ($i['id'] as $v){
-
-                $foundRaw=$model->where('id',$v)->get()->first()->toArray();
-
-                $files=[
-                    'video_url','thumb_url','zip_url'
-                ];
-
-                foreach ($files as $f){
-
-                    $filePath=$foundRaw[$f];
-
-                    if(Storage::disk('lvp')->exists($filePath) ){
-                        $process[$k]['fileDeleted'][$f]=Storage::disk('lvp')->delete($filePath);
-                    }
-
-                }
-
-                $process[$k]['dbEntryDeleted'] = $model->where('id',$v)->delete();
-
-
-
-            }
-
-
-
-        }
-
-
-        dd($process);
-
-
-
-
-
-
-
-          //  dd($allFile);
-
-            dd(array_sum($allFile));
-
-
-            $file=json_decode(file_get_contents($file));
-
-            dd($file);
-
-
-
-    }
 
     public static function makeUrlSafe($url){
       //  $url='http://skyinfotechdeveloper.com/musicbit_video/category/Old Hit.png';

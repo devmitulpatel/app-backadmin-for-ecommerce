@@ -22,6 +22,8 @@ public_html/hot
 storage/*.key
 storage/upload/
 
+storage/dr/*
+
 
 Homestead.yaml
 Homestead.json

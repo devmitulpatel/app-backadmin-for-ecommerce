@@ -48,6 +48,11 @@ return [
             'root' => storage_path(implode('/',['upload','products'])),
         ],
 
+        'dr' => [
+            'driver' => 'local',
+            'root' => storage_path(implode('/',['dr'])),
+        ],
+
 
         'videoapp_frame' => [
             'driver' => 'local',

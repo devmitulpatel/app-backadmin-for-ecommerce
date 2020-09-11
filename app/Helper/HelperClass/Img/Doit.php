@@ -15,14 +15,14 @@ class Doit{
     }
 
     public function make(){
-        
+
         $templateData=$this->templateData;
 
 
         $manager = new ImageManager(array('driver' => 'gd'));
-        
+
         $templateImg=$manager->make($templateData['path']);
-        
+
         $photoImg=$manager->make($this->photoUrl);
 
 
@@ -32,7 +32,7 @@ class Doit{
                 'w'=>$templateImg->width(),
                 'h'=>$templateImg->height(),
             ],
-            
+
             'photo'=>[
                 'w'=>$photoImg->width(),
                 'h'=>$photoImg->height(),
@@ -43,48 +43,34 @@ class Doit{
         foreach($templateData['photo'] as $p){
             if(array_key_exists('w',$p)&&array_key_exists('h',$p))$photoImg->resize($p['w'],$p['h']);
             if(array_key_exists('align',$p)&&(array_key_exists('left',$p)||array_key_exists('right',$p)))$templateImg->insert($photoImg,$p['align'],$p['top'],$p['left']);
-
-        
         }
-        
+
         foreach($templateData['text'] as $k=>$t){
             if(array_key_exists($k,$this->userData)){
 
                    $side=$t['left']?? $t['right'];
-                
+
                    if(array_key_exists('type',$t) && $t['type'] =='dynamic'){
                     $side=str_replace('tw',$this->templateCalculatedData['template']['w'],$side);
-                
+
                     $side=eval(implode(' ' ,['return '.$side,';' ]));
                     $t['top']=str_replace('th',$this->templateCalculatedData['template']['h'],$t['top']);
-                    
+
                     $t['top']=eval(implode(' ' ,['return '.$t['top'],';' ]));
 
-                    
-
-
-                    
-
-                    
-                    
                 }
-                   
+
             $templateImg->text($this->userData[$k],$side,$t['top'],function ($f)use($t){
                 if(array_key_exists('font',$t))$f->file($t['font']);
                 if(array_key_exists('size',$t))$f->size($t['size']);
                 if(array_key_exists('color',$t))$f->color($t['color']);
                 if(array_key_exists('align',$t))$f->align($t['align']);
                 if(array_key_exists('valign',$t))$f->valign($t['valign']);
-
-
-
-             //   $f->angle(45);
-        
             });
 
 
             }
-         
+
         }
 
         $this->rawImg=$templateImg->stream('jpg', 100);
@@ -104,7 +90,7 @@ class Doit{
 
         $allTemplate=[
             '1'=>[
-                
+
                 'path'=>storage_path(implode(DS,['lvp','upload','sample','b.png'])),
             'photo'=>[
                         [
@@ -114,7 +100,7 @@ class Doit{
                             'w'=>145,
                             'h'=>156
                         ]
-                ],
+                      ],
                 'text'=>[
                     'name'=>[
                         'left'=>58,
@@ -125,7 +111,6 @@ class Doit{
                         'valign'=>'center',
                         'font'=>storage_path(implode(DS,['lvp','upload','sample','3.ttf']))
                     ],
-
                     'number'=>[
                         'left'=>55,
                         'top'=>253,
@@ -134,10 +119,7 @@ class Doit{
                         'color'=>'rgba(0,0,0,0.8)',
                         'valign'=>'center',
                         'font'=>storage_path(implode(DS,['lvp','upload','sample','3.ttf']))
-                        ]
-
-                        ,
-
+                        ],
                     'from'=>[
                         'type'=>'dynamic',
                         'left'=>'tw/2',
@@ -147,7 +129,7 @@ class Doit{
                         'color'=>'rgba(0,0,0,0.8)',
                         'valign'=>'bottom',
                         'font'=>storage_path(implode(DS,['lvp','upload','sample','3.ttf']))
-                        ]
+                        ],
                 ]
             ],
         ];
