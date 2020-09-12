@@ -34,39 +34,119 @@ Route::get('/test_dr',function (){
 
 
     $allFiles=\Illuminate\Support\Facades\Storage::disk('dr')->allFiles('data');
+
+    unset($allFiles[0]);
+    unset($allFiles[1]);
+    unset($allFiles[2]);
     $dataO=[];
+    $manager = new ImageManager(array('driver' => 'gd'));
+    $baseImg=$manager->canvas(1440,1440);
 
     foreach($allFiles as $fk=>$f){
-        $filepath=storage_path(implode('/',['dr',$f]));
+        $filepath=storage_path(implode(DS,['dr',$f]));
+
+        $type=explode('/',$f);
+        $type=explode('.',end($type));
+        $type=reset($type);
 
         $vData=[];
         $data=Excel::import(new \App\Imports\DrImport($vData), $filepath);
         //   dd(Excel::import(new \App\Imports\DrImport(), $filepath));
         $clumn=[
-            'zone',
-            'region',
-            'place',
             'name',
+//            'zone',
+//            'region',
+            'place',
             'speciality'
         ];
 
         foreach ($vData as $k=>$d){
             if($k>0){
-                $dataO[$fk][$k]=[];
+                $dataO[$type][$k]=[];
                 foreach ($clumn as $k2=>$c){
-                    if(!array_key_exists($k2,$d)){
-
-                        dd($f);
-                    }
-                    $dataO[$fk][$k][$c]=$d[$k2];
+                    $dataO[$type][$k][$c]=$d[$k2];
                 }
+
+                $dataO[$type][$k]['photo']=implode(DS,['dr',$type,$dataO[$type][$k]['name'].".jpg"]);
             }
         }
 
 
 
+
+
     }
 
+
+
+    $path=storage_path(implode(DS,['dr','b.png']));
+
+    $fontpath2=storage_path(implode(DS,['dr','3.otf']));
+    $manager = new ImageManager(array('driver' => 'gd'));
+
+    $layer1=$manager->make($path);
+    //
+    foreach ($dataO as $mt=>$t){
+
+      //  dd($t);
+
+        foreach ($t as $dr){
+            $mainCanvas=$manager->canvas(1440,1440);
+            $photo=storage_path($dr['photo']);
+
+            $photoImage = $manager->make($photo);
+
+            $photoD['w']=$photoImage->getWidth();
+            $photoD['h']=$photoImage->getHeight();
+            $target=1348;
+
+            $v_fact = $target / $photoD['h'];
+            $h_fact = $target / $photoD['w'];
+
+
+
+            $photoImage->resize(null,$target,function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $mainCanvas->insert($photoImage,'center');
+            $mainCanvas->insert($layer1,'center');
+
+            $mainCanvas->text($dr['name'],720,1100,function ($f)use($fontpath2){
+                $f->file($fontpath2);
+                $f->size(48);
+                $f->color('rgba(255,255,255,0.8)');
+                $f->align('center');
+                $f->valign('center');
+                //   $f->angle(45);
+
+            });
+
+
+
+            $text2='';
+            if($dr['place']!==null)$text2.=$dr['place'];
+            if($dr['speciality']!==null)$text2.=", ".$dr['speciality'];
+
+            $mainCanvas->text($text2,720,1150,function ($f)use($fontpath2){
+                $f->file($fontpath2);
+                $f->size(38);
+                $f->color('rgba(255,255,255,0.8)');
+                $f->align('center');
+                $f->valign('center');
+           });
+            $filename=implode('.',[$dr['name'],'png']);
+
+            $savepath=storage_path(implode(DS,['dr','final',$mt,$filename]));
+            var_dump($filename);
+            $mainCanvas->save($savepath);
+
+
+        }
+
+
+    }
+    dd('allok');
+    return $mainCanvas->response();
     dd($dataO);
 
     $path=storage_path(implode(DS,['lvp','upload','sample','b.png']));
@@ -154,12 +234,17 @@ Route::get('/test_lvp',function (){
     $phonenumber="+91 123456789";
     $from="          From
 Classy Technosoft";
+    $path=storage_path(implode(DS,['dr','p.jpg']));
+    $path2=storage_path(implode(DS,['dr','b.png']));
+    $fontpath2=storage_path(implode(DS,['lvp','upload','sample','3.ttf']));
 
     $baseClass=new ImgDoit(1,$path2,['name'=>$drname,'number'=>$phonenumber,'from'=>$from]);
 
-    return $baseClass->make()->save(storage_path(implode(DS,['dr','sample'])),'btest2.png');
+  // return $baseClass->make()->save(storage_path(implode(DS,['dr','sample'])),'btest2.png');
 
-
+    $path=storage_path(implode(DS,['dr','p.jpg']));
+    $path2=storage_path(implode(DS,['dr','b.png']));
+    $fontpath2=storage_path(implode(DS,['dr','3.otf']));
 
     $scale=1;
     $watermarkBorderWidth=10;
@@ -172,60 +257,79 @@ Classy Technosoft";
     $baseW=$img->width();
     $baseH=$img->height();
 
-
-
-    $watermarkW=$watermark->width();
-    $watermarkH=$watermark->height();
-    $baseImg=$manager->canvas(145,156);
-
+    $baseImg=$manager->canvas(1440,1440);
+    $watermark->resize(1440,1440);
     $fix=5;
 
-    $watermark->resize(145,156);
+ //   $watermark->resize(145,156);
+    $img->resize(1048,1048);
+    $baseImg->insert($img,'center');
+    $baseImg->insert($path2,'center');
 
-
-    $baseImg->rectangle(0, 0, $watermarkW*$scale, $watermarkH*$scale, function ($draw)use ($watermarkBorderWidth) {
-        $draw->background('rgba(0,0,0,0.1)');
-        $draw->border($watermarkBorderWidth, 'rgba(0,0,0,0.5)');
-    })->insert($watermark,'center');
-
-    $img->resize($baseW*$scale,$baseH*$scale)->insert($baseImg,'left-top',42,42);
-    $img->text($drname,58,220,function ($f)use($fontpath2){
+    $baseImg->text($drname,720,1150,function ($f)use($fontpath2){
         $f->file($fontpath2);
-        $f->size(18);
-        $f->color('rgba(0,0,0,0.8)');
-        $f->align('left');
-        $f->valign('top');
+        $f->size(48);
+        $f->color('rgba(255,255,255,0.8)');
+        $f->align('center');
+        $f->valign('center');
      //   $f->angle(45);
 
     });
 
-    $img->text($from,$baseW/2,$baseH-20,function ($f)use($fontpath2){
+    $baseImg->text('speciality',720,1200,function ($f)use($fontpath2){
         $f->file($fontpath2);
+        $f->size(38);
+        $f->color('rgba(255,255,255,0.8)');
         $f->align('center');
-        $f->size(18);
-        $f->color('rgba(0,0,0,0.8)');
-        $f->valign('bottom');
+        $f->valign('center');
         //   $f->angle(45);
 
     });
 
 
-    $img->text($phonenumber,58,248,function ($f)use($fontpath2){
-        $f->file($fontpath2);
-        $f->align('left');
-        $f->size(18);
-        $f->color('rgba(0,0,0,0.8)');
-        $f->valign('top');
-        //   $f->angle(45);
+//    $baseImg->rectangle(0, 0, $watermarkW*$scale, $watermarkH*$scale, function ($draw)use ($watermarkBorderWidth) {
+//        $draw->background('rgba(0,0,0,0.1)');
+//        $draw->border($watermarkBorderWidth, 'rgba(0,0,0,0.5)');
+//    })->insert($watermark,'center');
 
-    });
-
+//    $img->resize($baseW*$scale,$baseH*$scale)->insert($baseImg,'left-top',42,42);
+//    $img->text($drname,58,220,function ($f)use($fontpath2){
+//        $f->file($fontpath2);
+//        $f->size(18);
+//        $f->color('rgba(0,0,0,0.8)');
+//        $f->align('left');
+//        $f->valign('top');
+//     //   $f->angle(45);
+//
+//    });
+//
+//    $img->text($from,$baseW/2,$baseH-20,function ($f)use($fontpath2){
+//        $f->file($fontpath2);
+//        $f->align('center');
+//        $f->size(18);
+//        $f->color('rgba(0,0,0,0.8)');
+//        $f->valign('bottom');
+//        //   $f->angle(45);
+//
+//    });
+//
+//
+//    $img->text($phonenumber,58,248,function ($f)use($fontpath2){
+//        $f->file($fontpath2);
+//        $f->align('left');
+//        $f->size(18);
+//        $f->color('rgba(0,0,0,0.8)');
+//        $f->valign('top');
+//        //   $f->angle(45);
+//
+//    });
+//
 
 
 
 
     header ('Content-Type: image/png');
-    return $img->response();
+    return $baseImg->response();
 
 
     //    $imgname=\Illuminate\Support\Facades\Storage::disk('lvp')->get('category/Anniversary.png');

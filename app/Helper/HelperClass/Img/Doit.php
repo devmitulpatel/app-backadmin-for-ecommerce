@@ -21,6 +21,8 @@ class Doit{
 
         $manager = new ImageManager(array('driver' => 'gd'));
 
+        $baseImg=$manager->canvas(1440,1440);
+
         $templateImg=$manager->make($templateData['path']);
 
         $photoImg=$manager->make($this->photoUrl);
